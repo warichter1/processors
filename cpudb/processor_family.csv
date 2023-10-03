@@ -1,0 +1,304 @@
+processor_family_id,manufacturer_id,name
+290,1,3000
+1,1,80386
+2,1,80486
+253,1,A-Series A10 APU
+254,1,A-Series A12 APU
+250,1,A-Series A4 APU
+251,1,A-Series A6 APU
+252,1,A-Series A8 APU
+298,1,A1-Series
+296,1,A10-Series APU
+297,1,A12-Series APU
+299,1,A2-Series
+300,1,A3-Series
+301,1,A4-Series
+292,1,A4-Series APU
+302,1,A5-Series
+303,1,A6-Series
+293,1,A6-Series APU
+304,1,A7-Series
+305,1,A8-Series
+294,1,A8-Series APU
+295,1,A9-Series APU
+3,1,Athlon
+4,1,Athlon 64
+5,1,Athlon 64 X2
+243,1,Athlon APU
+244,1,Athlon II X1
+245,1,Athlon II X2
+246,1,Athlon II X3
+6,1,Athlon II X4
+7,1,Athlon MP
+8,1,Athlon X2
+247,1,Athlon X3
+248,1,Athlon X4
+9,1,Athlon XP
+255,1,E1-Series APU
+256,1,E2-Series APU
+307,1,EPYC 7000
+308,1,EPYC 9000
+257,1,FX
+258,1,FX APU
+10,1,K5
+11,1,K6
+12,1,K6-2
+13,1,K6-III
+14,1,Opteron
+249,1,Opteron APU
+306,1,Phenom
+15,1,Phenom II X3
+16,1,Phenom II X4
+17,1,Phenom X3
+18,1,Phenom X4
+261,1,Ryzen 1000
+262,1,Ryzen 2000
+263,1,Ryzen 3000
+264,1,Ryzen 4000
+265,1,Ryzen 5000
+266,1,Ryzen 6000
+267,1,Ryzen 7000
+268,1,Ryzen PRO 1000
+269,1,Ryzen PRO 2000
+270,1,Ryzen PRO 3000
+271,1,Ryzen PRO 4000
+272,1,Ryzen PRO 5000
+273,1,Ryzen PRO 6000
+274,1,Ryzen PRO 7000
+275,1,Ryzen Threadripper 1000
+276,1,Ryzen Threadripper 2000
+277,1,Ryzen Threadripper 2000
+278,1,Ryzen Threadripper 4000
+279,1,Ryzen Threadripper 5000
+280,1,Ryzen Threadripper 6000
+281,1,Ryzen Threadripper 7000
+282,1,Ryzen Threadripper PRO 1000
+283,1,Ryzen Threadripper PRO 2000
+284,1,Ryzen Threadripper PRO 2000
+285,1,Ryzen Threadripper PRO 4000
+286,1,Ryzen Threadripper PRO 5000
+287,1,Ryzen Threadripper PRO 6000
+288,1,Ryzen Threadripper PRO 7000
+291,1,Ryzen with Radeon Graphics
+289,1,Ryzen Z1
+259,1,Sempron
+260,1,Sempron APU
+19,1,Turion 64
+20,1,Turion 64 X2
+22,2,Cypress
+28,3,Alpha 21064
+29,3,Alpha 21064A
+30,3,Alpha 21066A
+31,3,Alpha 21164
+32,3,Alpha 21164A
+33,3,Alpha 21164PC
+34,3,Alpha 21264
+35,3,Alpha 21264A
+36,3,Alpha 21264B
+37,3,Alpha 21264C
+38,3,Alpha 21364
+39,4,microSPARC II
+40,4,SPARC64 GP
+41,4,SPARC64 V
+42,4,SPARC64 VII
+43,4,TurboSPARC
+46,5,harp-1
+47,6,PA-7000
+48,6,PA-7100
+49,6,PA-7100LC
+50,6,PA-7150
+51,6,PA-7200
+52,6,PA-7300LC
+53,6,PA-8000
+54,6,PA-8200
+55,6,PA-8500
+56,6,PA-8600
+57,6,PA-8700
+58,6,PA-8700+
+59,7,Power2
+60,7,Power3
+61,7,Power3-II
+62,7,Power4+
+63,7,Power5
+64,7,Power6
+65,7,Power7
+72,7,PowerPC 601
+73,7,PowerPC 601v
+68,7,PowerPC 602
+69,7,PowerPC 603
+74,7,PowerPC 603e
+75,7,PowerPC 603ev
+76,7,PowerPC 604
+77,7,PowerPC 604e
+78,7,PowerPC 604ev
+70,7,PowerPC 620
+71,7,PowerPC 630
+66,7,PowerPC 7xx
+67,7,PowerPC 970
+79,7,RS64 IV
+80,7,RS64-II
+81,7,RS64-III
+82,9,4004
+83,9,8008
+84,9,8080
+85,9,8086
+86,9,8088
+87,9,80286
+216,9,10th Generation Core i5
+222,9,10th Generation Core i7
+235,9,10th Generation Core i9
+217,9,11th Generation Core i5
+223,9,11th Generation Core i7
+236,9,11th Generation Core i9
+218,9,12th Generation Core i5
+224,9,12th Generation Core i7
+231,9,12th Generation Core i9
+219,9,13th Generation Core i5
+225,9,13th Generation Core i7
+238,9,13th Generation Core i9
+182,9,2nd Generation Xeon
+193,9,3rd Generation Xeon
+211,9,4th Generation Core i5
+189,9,4th Generation Xeon
+212,9,5th Generation Core i5
+240,9,5th Generation Core M
+213,9,6th Generation Core i5
+170,9,6th Generation Core i7
+241,9,6th Generation Core m
+169,9,7th Generation Core i3
+214,9,7th Generation Core i5
+171,9,7th Generation Core i7
+242,9,7th Generation Core m
+88,9,80386 DX
+89,9,80486 DX
+90,9,80486 DX2
+91,9,80486 DX4
+215,9,8th Generation Core i5
+226,9,8th Generation Core i7
+232,9,8th Generation Core i9
+233,9,8th Generation Core m
+221,9,9th Generation Core i7
+234,9,9th Generation Core i9
+92,9,Atom
+151,9,Atom C
+154,9,Atom C
+152,9,Atom D
+153,9,Atom E
+155,9,Atom P
+156,9,Atom S
+157,9,Atom X
+158,9,Atom Z
+93,9,Celeron
+160,9,Celeron 1000
+161,9,Celeron 2000
+162,9,Celeron 3000
+163,9,Celeron 5000
+164,9,Celeron 6000
+165,9,Celeron 7000
+166,9,Celeron G
+167,9,Celeron J
+168,9,Celeron N
+94,9,Core 2 Duo
+95,9,Core 2 Extreme
+96,9,Core 2 Quad
+97,9,Core 2 Quad Extreme
+98,9,Core 2 Solo
+99,9,Core Duo
+100,9,Core i3
+101,9,Core i5
+102,9,Core i7
+210,9,Core X-series
+103,9,Itanium
+104,9,Itanium 2
+206,9,Itanium 9100
+207,9,Itanium 9300
+208,9,Itanium 9500
+209,9,Itanium 9700
+159,9,Legacy Atom
+228,9,Legacy Core
+181,9,Legacy Pentium
+188,9,Legacy Xeon
+229,9,N-series
+105,9,Pentium
+172,9,Pentium 1000
+173,9,Pentium 2000
+174,9,Pentium 3000
+106,9,Pentium 4
+107,9,Pentium 4 EE
+227,9,Pentium 4000
+179,9,Pentium 6800
+108,9,Pentium D
+175,9,Pentium D
+109,9,Pentium EE
+178,9,Pentium G
+177,9,Pentium Gold
+110,9,Pentium II
+111,9,Pentium III
+112,9,Pentium M
+113,9,Pentium MMX
+180,9,Pentium N
+114,9,Pentium Pro
+176,9,Pentium Silver
+230,9,U-series
+183,9,Xeon
+185,9,Xeon D
+190,9,Xeon E
+191,9,Xeon E3
+192,9,Xeon E3 v4
+196,9,Xeon E3 v5
+197,9,Xeon E3 v6
+199,9,Xeon E5
+195,9,Xeon E5 v2
+194,9,Xeon E5 v3
+186,9,Xeon E5 v4
+200,9,Xeon E7
+201,9,Xeon E7 v2
+202,9,Xeon E7 v4
+184,9,Xeon Max
+205,9,Xeon Phi 72x5
+203,9,Xeon Phi x100
+204,9,Xeon Phi x200
+198,9,Xeon W
+125,10,6800
+126,10,68000
+127,10,68010
+128,10,68020
+129,10,68030
+130,10,68040
+131,10,68060
+132,10,PowerPC
+124,17,74K
+116,17,R10000
+117,17,R2000
+118,17,R3000
+119,17,R4000
+120,17,R4400
+121,17,R4600
+122,17,R5000
+123,17,R8000
+135,18,R12000
+136,18,R12000A
+137,18,R14000
+138,18,R14000A
+139,19,microSPARC I
+140,19,SuperSPARC I
+141,19,SuperSPARC II
+142,19,UltraSPARC
+143,19,UltraSPARC II
+144,19,UltraSPARC IIe
+145,19,UltraSPARC IIi
+146,19,UltraSPARC III Cu
+147,19,UltraSPARC IIIi
+148,19,UltraSPARC T1
+149,19,UltraSPARC T2
+21,20,Broadcom
+23,21,486DX
+24,21,486SLC
+25,21,5x86
+26,21,6x86
+27,21,Cyrix III
+44,22,SPARC64
+45,22,SPARC64 II
+133,23,Nx586
+134,24,hyperSPARC
+150,25,Z80
