@@ -1,0 +1,130 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:11:56 PM
+ ,Intel® Celeron® Processor N4100 ,Intel® Celeron® Processor N4000 ,Intel® Celeron® Processor N3350E ,Intel® Celeron® Processor N4120 ,Intel® Celeron® Processor N4020 ,Intel® Celeron® Processor N6211 ,Intel® Celeron® Processor N4505 ,Intel® Celeron® Processor N4500 ,Intel® Celeron® Processor N5105 ,Intel® Celeron® Processor N5100 ,Intel® Celeron® Processor N2910 ,Intel® Celeron® Processor N2810 ,Intel® Celeron® Processor N2805 ,Intel® Celeron® Processor N2806 ,Intel® Celeron® Processor N2815 ,Intel® Celeron® Processor N2820 ,Intel® Celeron® Processor N2920 ,Intel® Celeron® Processor N2830 ,Intel® Celeron® Processor N2807 ,Intel® Celeron® Processor N2930 ,Intel® Celeron® Processor N2808 ,Intel® Celeron® Processor N2840 ,Intel® Celeron® Processor N2940 ,Intel® Celeron® Processor N3050 ,Intel® Celeron® Processor N3150 ,Intel® Celeron® Processor N3000 ,Intel® Celeron® Processor N3010 ,Intel® Celeron® Processor N3160 ,Intel® Celeron® Processor N3060 ,Intel® Celeron® Processor N3450 ,Intel® Celeron® Processor N3350 
+Essentials
+Product Collection,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series,Intel® Celeron® Processor N Series
+Vertical Segment,Mobile,Mobile,Mobile,Mobile,Mobile,Embedded,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,N4100,N4000,N3350E,N4120,N4020,N6211,N4505,N4500,N5105,N5100,N2910,N2810,N2805,N2806,N2815,N2820,N2920,N2830,N2807,N2930,N2808,N2840,N2940,N3050,N3150,N3000,N3010,N3160,N3060,N3450,N3350
+Lithography,14 nm,14 nm,14 nm,14 nm,14 nm,10 nm,10 nm,10 nm,10 nm,10 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm
+Use Conditions,,,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,,,,,,,,,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,,,,,,,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,,PC/Client/Tablet
+Recommended Customer Price,,,,,,$64.00,,,,,,,,,,,,,$31.00,$41.00,,$107.00,,,,,$20.00,$31.00,$20.00,$107.00,$24.00
+
+CPU Specifications
+Total Cores,4,2,2,4,2,2,2,2,4,4,4,2,2,2,2,2,4,2,2,4,2,2,4,2,4,2,2,4,2,4,2
+Total Threads,4,2,2,4,2,2,2,2,4,4,4,2,2,2,2,2,4,2,2,4,2,2,4,2,4,2,2,4,2,4,2
+Burst Frequency,2.40 GHz,2.60 GHz,,2.60 GHz,2.80 GHz,3.00 GHz,2.90 GHz,2.80 GHz,2.90 GHz,2.80 GHz,,,,2.00 GHz,2.13 GHz,2.39 GHz,2.00 GHz,2.41 GHz,2.16 GHz,2.16 GHz,2.25 GHz,2.58 GHz,2.25 GHz,2.16 GHz,2.08 GHz,2.08 GHz,2.24 GHz,2.24 GHz,2.48 GHz,2.20 GHz,2.40 GHz
+Processor Base Frequency,1.10 GHz,1.10 GHz,1.10 GHz,1.10 GHz,1.10 GHz,1.20 GHz,2.00 GHz,1.10 GHz,2.00 GHz,1.10 GHz,1.60 GHz,2.00 GHz,1.46 GHz,1.60 GHz,1.86 GHz,2.13 GHz,1.86 GHz,2.16 GHz,1.58 GHz,1.83 GHz,1.58 GHz,2.16 GHz,1.83 GHz,1.60 GHz,1.60 GHz,1.04 GHz,1.04 GHz,1.60 GHz,1.60 GHz,1.10 GHz,1.10 GHz
+Cache,4 MB,4 MB,2 MB,4 MB,4 MB,1.5 MB L2 Cache,4 MB Intel® Smart Cache,4 MB Intel® Smart Cache,4 MB Intel® Smart Cache,4 MB Intel® Smart Cache,2 MB,1 MB,1 MB,1 MB,1 MB,1 MB,2 MB,1 MB,1 MB,2 MB,1 MB L2 Cache,1 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache
+Scenario Design Power (SDP),4.8 W,4.8 W,,4.8 W,4.8 W,,,4.8 W,,4.8 W,4.5 W,4.5 W,2.5 W,2.5 W,4.5 W,4.5 W,4.5 W,4.5 W,2.5 W,4.5 W,3 W,4.5 W,4.5 W,4 W,4 W,3 W,3 W,4 W,4 W,4 W,4 W
+TDP,6 W,6 W,6 W,6 W,6 W,6.5 W,10 W,6 W,10 W,6 W,7.5 W,7.5 W,4.3 W,4.5 W,7.5 W,7.5 W,7.5 W,7.5 W,4.3 W,7.5 W,4.5 W,7.5 W,7.5 W,6 W,6 W,4 W,4 W,6 W,6 W,6 W,6 W
+Max Turbo Frequency,,,2.40 GHz,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Launched,Launched,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Launched,Launched,Launched,Discontinued,Launched
+Launch Date,Q4'17,Q4'17,Q3'19,Q4'19,Q4'19,Q1'21,Q1'21,Q1'21,Q1'21,Q1'21,Q3'13,Q3'13,Q3'13,Q4'13,Q4'13,Q4'13,Q4'13,Q1'14,Q1'14,Q1'14,Q3'14,Q3'14,Q3'14,Q1'15,Q1'15,Q1'15,Q1'16,Q1'16,Q1'16,Q3'16,Q3'16
+Embedded Options Available,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Yes
+Product Brief,View now,View now,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Servicing Status,,,End of Servicing Lifetime,,,,,,,,,,,,,,,,,,,,,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,ESU Notification Issued
+End of Servicing Updates Date,,,Friday |  June 30 |  2023,,,,,,,,,,,,,,,,,,,,,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Friday |  June 30 |  2023,Saturday |  September 30 |  2023
+Description,,,The Intel® Celeron® Processor N3350E is now named as Intel® Celeron® Processor N3350. Please refer to the "N3350" ARK Page for all the product details.,,N4020 is offered in 2 MM#: 99AAJ6: Launched Q4'20 with Spec Code SRKLL supports DDR4 only. See Additional information for more details. 984730: Launched Q4'19 with Spec Code SRETO supports DDR4/LPDDR4,,,,,,,,,,,,,,,,,,,,,,,,,,
+Additional Information URL,,,,,View now,,,,,,,,,,,,,,,,,,,,,,,,,,
+Expected Discontinuance,,,,,,,,,,,February 3 |  2014,,,,,,,,,,,,,,,,,,,,
+
+Memory Specifications
+Max Memory Size (dependent on memory type),8 GB,8 GB,8 GB,8 GB,8 GB,32 GB,16 GB,16 GB,16 GB,16 GB,8.79 GB,8 GB,4 GB,4 GB,8 GB,8 GB,8 GB,8 GB,4 GB,8 GB,4 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB
+Memory Types,DDR4/LPDDR4 upto 2400MT/s,DDR4/LPDDR4 upto 2400 MT/s,DDR3L/LPDDR3 up to 1866 MT/s; LPDDR4 up to 2400 MT/s,DDR4/LPDDR4 upto 2400 MT/s,DDR4/LPDDR4 (SRET0) up to 2400 MT/s DDR4 (SRKLL) up to 2400 MT/s,4x32 LPDDR4/x 3200MT/s Max 16GB / 2x64 DDR4 3200MT/s Max 32GB,DDR4 LPDDR4x,DDR4 LPDDR4x,DDR4 LPDDR4x,DDR4 LPDDR4x,DDR3L 1066,DDR3L 1066,DDR3L 1066,DDR3L 1066,DDR3L 1066,DDR3L 1066,DDR3L 1066,DDR3L 1333,DDR3L 1333,DDR3L 1333,DDR3L 1333,DDR3L 1333,DDR3L 1333,DDR3L-1600,DDR3L-1600,DDR3L-1600,DDR3L-1600,DDR3L-1600,DDR3L-1600,DDR3L/LPDDR3 up to 1866 MT/s; LPDDR4 up to 2400 MT/s,DDR3L/LPDDR3 up to 1866 MT/s; LPDDR4 up to 2400 MT/s
+Max # of Memory Channels,2,2,2,2,2,4,2,2,2,2,2,2,1,1,2,2,2,2,1,2,1,2,2,2,2,2,2,2,2,2,2
+ECC Memory Supported   ‡,No,No,No,No,No,No,No,No,No,No,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No
+Max Memory Bandwidth,,,,,,51.2 GB/s,,,,,,,,,,,,,,,10.66 GB/s,21.32 GB/s,21.32 GB/s,,,,,,,,
+Maximum Memory Speed,,,,,,,2933 MHz,2933 MHz,2933 MHz,2933 MHz,,,,,,,,,,,,,,,,,,,,,
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics 600,Intel® UHD Graphics 600,Intel® HD Graphics 500,Intel® UHD Graphics 600,Intel® UHD Graphics 600,Intel® UHD Graphics for 10th Gen Intel® Processors,Intel® UHD Graphics,Intel® UHD Graphics,Intel® UHD Graphics,Intel® UHD Graphics,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel® Celeron® Processor N3000 Series,Intel® HD Graphics for Intel® Celeron® Processor N3000 Series,Intel® HD Graphics for Intel® Celeron® Processor N3000 Series,,,,Intel® HD Graphics 500,Intel® HD Graphics 500
+Graphics Base Frequency,200 MHz,200 MHz,200 MHz,200 MHz,200 MHz,250 MHz,450 MHz,350 MHz,450 MHz,350 MHz,313 MHz,313 MHz,313 MHz,313 MHz,313 MHz,313 MHz,313 MHz,313 MHz,313 MHz,313 MHz,311 MHz,311 MHz,313 MHz,320 MHz,320 MHz,320 MHz,320 MHz,320 MHz,320 MHz,200 MHz,200 MHz
+Graphics Burst Frequency,700 MHz,650 MHz,,700 MHz,650 MHz,750 MHz,750 MHz,750 MHz,800 MHz,800 MHz,756 MHz,756 MHz,667 MHz,756 MHz,756 MHz,756 MHz,844 MHz,750 MHz,750 MHz,854 MHz,792 MHz,792 MHz,854 MHz,600 MHz,640 MHz,600 MHz,600 MHz,640 MHz,600 MHz,700 MHz,650 MHz
+Graphics Video Max Memory,8 GB,8 GB,8 GB,8 GB,8 GB,,,,,,,,,,,,,,,,,,,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB
+Graphics Output,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,,,,,,,,,,,,,,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI
+Execution Units,12,12,12,12,12,16,16,16,24,24,,,,,,,,,,,,,,12,12,12,12,12,12,12,12
+4K Support,Yes |  at 60Hz,Yes |  at 60Hz,,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,,,,,,,,,,,,,,,,,,,,,
+DirectX* Support,12,12,Yes,12,12,Yes,12,12,12,12,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+OpenGL* Support,4.4,4.4,Yes,4.4,4.4,Yes,4.5,4.5,4.5,4.5,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Quick Sync Video,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+# of Displays Supported ‡,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3
+Device ID,0x3185,0x3185,,0x3185,0x3185,,0x4E55,0x4E55,0x4E61,0x4E61,,,,,,,,,,,,,,,,,,,,0x5A85,0x5A85
+Graphics Max Dynamic Frequency,,,650 MHz,,,,,,,,756 MHz,756 MHz,667 MHz,756 MHz,756 MHz,756 MHz,844 MHz,750 MHz,750 MHz,854 MHz,792 MHz,792 MHz,854 MHz,,,,,,,,
+Intel® InTru™ 3D Technology,,,No,,,,,,,,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® Clear Video HD Technology,,,Yes,,,,,,,,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Clear Video Technology,,,Yes,,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Max Resolution (HDMI)‡,,,,4096x2160@30Hz,4096x2160@30Hz,,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,,,,,,,,,,,,,,,,,,,,,
+Max Resolution (DP)‡,,,,4096x2160@60Hz,4096x2160@60Hz,4096x2160@ 60Hz,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,,,,,,,,,,,,,,,,,,,,,
+Max Resolution (eDP - Integrated Flat Panel)‡,,,,4096x2160@60Hz,4096x2160@60Hz,4096x2160@ 60Hz,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,,,,,,,,,,,,,,,,,,,,,
+OpenCL* Support,,,,,,Yes,1.2,1.2,1.2,1.2,,,,,,,,,,,,,,,,,,,,,
+
+Expansion Options
+PCI Express Revision,2.0,2.0,2.0,2.0,2.0,3.0,,,,,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+PCI Express Configurations ‡,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,PCIe 0: 1 x4/2 x2/1 x2 + 2 x1/4 x1 |  PCIe 1-3: 1 x2/1 x1,,,,,1x4,1x4,1x4,,,,,1x4,1x4,1x4,1x4,1x4,1x4,1x4/2x2/1x2 + 2x1/4x1,1x4/2x2/1x2 + 2x1/4x1,1x4/2x2/1x2 + 2x1/4x1,1x4/2x2/1x2 + 2x1/4x1,1x4/2x2/1x2 + 2x1/4x1,1x4/2x2/1x2 + 2x1/4x1,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2
+Max # of PCI Express Lanes,6,6,6,6,6,8,8,8,8,8,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,6
+Chipset / PCH PCIe Revision,,,,,,,Gen 3,Gen 3,Gen 3,Gen 3,,,,,,,,,,,,,,,,,,,,,
+
+I/O Specifications
+# of USB Ports,8,8,,8,8,4,14,14,14,14,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,8,8
+USB Revision,2.0/3.0,2.0/3.0,,2.0/3.0,2.0/3.0,2.0/3.0/3.1,2.0/3.2,2.0/3.2,2.0/3.2,2.0/3.2,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0
+Total # of SATA Ports,2,2,,2,2,2,,,,,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+Integrated LAN,No,No,,No,No,3x 2.5GbE,No,No,No,No,,,,,,,,,,,,,,No,No,No,No,No,No,No,No
+Integrated Wireless‡,Intel® Wireless-AC MAC,Intel® Wireless-AC MAC,,Intel® Wireless-AC MAC,Intel® Wireless-AC MAC,,Intel® Wireless-AX MAC,Intel® Wireless-AX MAC,Intel® Wireless-AX MAC,Intel® Wireless-AX MAC,,,,,,,,,,,,,,,,,,,,,
+General Purpose IO,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+UART,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Max # of SATA 6.0 Gb/s Ports,2,2,,2,2,,2,2,2,2,,,,,,,,,,,,,,2,2,2,2,2,2,2,2
+
+Package Specifications
+Sockets Supported,FCBGA1090,FCBGA1090,,FCBGA1090,FCBGA1090,FCBGA1493,FCBGA1338,FCBGA1338,FCBGA1338,FCBGA1338,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1296,FCBGA1296
+Max CPU Configuration,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+Thermal Solution Specification,105 deg C,105 deg C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+TJUNCTION,105 deg C,105 deg C,105°C,105°C,105°C,105°C,105°C,105°C,105°C,105°C,100°C,100°C,80°C,105°C,105°C,105°C,105°C,100°C,105°C,100°C,100°C,100°C,100°C,90°C,90°C,90°C,90°C,90°C,90°C,105°C,105°C
+Package Size,25mm x 24mm,25mm x 24mm,24mm x 31mm,25mm x 24mm,25mm x 24mm,35mm x 24mm,35mm x 24mm,35mm x 24mm,35mm x 24mm,35mm x 24mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,24mm x 31mm,24mm x 31mm
+Operating Temperature Range,,,,,,0°C to 70°C,,,,,,,,,,,,,,,,,,,,,,,,,
+Operating Temperature (Maximum),,,,,,70 °C,,,,,,,,,,,,,,,,,,,,,,,,,
+Operating Temperature (Minimum),,,,,,0 °C,,,,,,,,,,,,,,,,,,,,,,,,,
+
+Advanced Technologies
+Intel® Optane™ Memory Supported ‡,No,No,,No,No,,No,No,No,No,,,,,,,,,,,,,,,,,,,,,
+Intel® Speed Shift Technology,No,No,,No,No,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,
+Intel® Turbo Boost Max Technology 3.0 ‡,No,No,,No,No,,No,No,No,No,,,,,,,,,,,,,,,,,,,,,
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.2,Intel® SSE4.2,,Intel® SSE4.2,Intel® SSE4.2,,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,,,,,,,,,,,,,,,,,,,,,
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No,No,No,No,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Smart Response Technology,No,No,No,No,No,,No,No,No,No,,,,,,,,,,,,,,No,No,No,No,No,No,No,No
+Intel® Smart Idle Technology,,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Intel® Virtualization Technology for Itanium (VT-i),,,No,,,,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No
+Intel® Gaussian & Neural Accelerator,,,,,,1.0,2.0,2.0,2.0,2.0,,,,,,,,,,,,,,,,,,,,,
+Secure Boot,,,,,,Yes,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® HD Audio Technology,,,,,,Yes,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Image Processing Unit,,,,,,,6.0,6.0,6.0,6.0,,,,,,,,,,,,,,,,,,,,,
+Intel® Smart Sound Technology,,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,
+Intel® Wake on Voice,,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,
+Intel® High Definition Audio,,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,
+Intel® Rapid Storage Technology,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,,,,No,No,No,No,No,No,No,No
+Intel® Smart Connect Technology,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No,No
+4G WiMAX Wireless Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,,
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),Yes with Intel® ME,Yes with Intel® ME,,Yes with Intel® ME,Yes with Intel® ME,,No,No,No,No,,,,,,,,,,,,,,,,,,,,,
+Intel® Memory Protection Extensions (Intel® MPX),Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,,,,,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Anti-Theft Technology,No,No,No,No,No,,,,,,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® OS Guard,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,,,No,,,No,No,No,No,No,,,,,,,,,,,,,,No,No,No,No,No,No,No,No
+Intel® Stable Image Platform Program (SIPP),,,No,,,,,,,,,,,,,,,No,,,,,,No,No,No,No,No,No,No,No
+Intel® Boot Guard,,,,,,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,
+Mode-based Execute Control (MBE),,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,

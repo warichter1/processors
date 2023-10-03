@@ -1,0 +1,71 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:47:07 PM
+ ,Intel® Xeon® Processor E7-2850 v2 ,Intel® Xeon® Processor E7-2870 v2 ,Intel® Xeon® Processor E7-2880 v2 ,Intel® Xeon® Processor E7-2890 v2 ,Intel® Xeon® Processor E7-4809 v2 ,Intel® Xeon® Processor E7-4820 v2 ,Intel® Xeon® Processor E7-4830 v2 ,Intel® Xeon® Processor E7-4850 v2 ,Intel® Xeon® Processor E7-4860 v2 ,Intel® Xeon® Processor E7-4870 v2 ,Intel® Xeon® Processor E7-4890 v2 ,Intel® Xeon® Processor E7-8850 v2 ,Intel® Xeon® Processor E7-8857 v2 ,Intel® Xeon® Processor E7-8870 v2 ,Intel® Xeon® Processor E7-8880L v2 ,Intel® Xeon® Processor E7-8880 v2 ,Intel® Xeon® Processor E7-8890 v2 ,Intel® Xeon® Processor E7-8891 v2 ,Intel® Xeon® Processor E7-8893 v2 ,Intel® Xeon® Processor E7-4880 v2 
+Essentials
+Product Collection,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family,Intel® Xeon® Processor E7 v2 Family
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,E7-2850V2,E7-2870V2,E7-2880V2,E7-2890V2,E7-4809V2,E7-4820V2,E7-4830V2,E7-4850V2,E7-4860V2,E7-4870V2,E7-4890V2,E7-8850V2,E7-8857V2,E7-8870V2,E7-8880LV2,E7-8880V2,E7-8890V2,E7-8891V2,E7-8893V2,E7-4880V2
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm
+Recommended Customer Price,,$4227.00,$5339.00,$6451.00,$1223.00,$1446.00,$2059.00,$2837.00,$3838.00,$4394.00,$6619.00,$3059.00,$3838.00,$4616.00,$5729.00,$5729.00,$6841.00,$6841.00,$6841.00,$5506.00
+
+CPU Specifications
+Total Cores,12,15,15,15,6,8,10,12,12,15,15,12,12,15,15,15,15,10,6,15
+Total Threads,24,30,30,30,12,16,20,24,24,30,30,24,12,30,30,30,30,20,12,30
+Max Turbo Frequency,2.80 GHz,2.90 GHz,3.10 GHz,3.40 GHz,,2.50 GHz,2.70 GHz,2.80 GHz,3.20 GHz,2.90 GHz,3.40 GHz,2.80 GHz,3.60 GHz,2.90 GHz,2.80 GHz,3.10 GHz,3.40 GHz,3.70 GHz,3.70 GHz,3.10 GHz
+Intel® Turbo Boost Technology 2.0 Frequency‡,2.80 GHz,2.90 GHz,3.10 GHz,3.40 GHz,,2.50 GHz,2.70 GHz,2.80 GHz,3.20 GHz,2.90 GHz,3.40 GHz,2.80 GHz,3.60 GHz,2.90 GHz,2.80 GHz,3.10 GHz,3.40 GHz,3.70 GHz,3.70 GHz,3.10 GHz
+Processor Base Frequency,2.30 GHz,2.30 GHz,2.50 GHz,2.80 GHz,1.90 GHz,2.00 GHz,2.20 GHz,2.30 GHz,2.60 GHz,2.30 GHz,2.80 GHz,2.30 GHz,3.00 GHz,2.30 GHz,2.20 GHz,2.50 GHz,2.80 GHz,3.20 GHz,3.40 GHz,2.50 GHz
+Cache,24 MB,30 MB,37.5 MB,37.5 MB,12 MB,16 MB,20 MB,24 MB,30 MB,30 MB,37.5 MB,24 MB,30 MB,30 MB,37.5 MB,37.5 MB,37.5 MB,37.5 MB,37.5 MB,37.5 MB
+Bus Speed,7.2 GT/s,8 GT/s,8 GT/s,8 GT/s,6.4 GT/s,7.2 GT/s,7.2 GT/s,7.2 GT/s,8 GT/s,8 GT/s,8 GT/s,7.2 GT/s,8 GT/s,8 GT/s,8 GT/s,8 GT/s,8 GT/s,8 GT/s,8 GT/s,8 GT/s
+# of QPI Links,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
+TDP,105 W,130 W,130 W,155 W,105 W,105 W,105 W,105 W,130 W,130 W,155 W,105 W,130 W,130 W,105 W,130 W,155 W,155 W,155 W,130 W
+
+Supplemental Information
+Marketing Status,Discontinued,Launched,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Launched,Discontinued,Discontinued,Discontinued,Launched,Launched,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14
+Supply Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020,Tuesday |  June 30 |  2020
+Embedded Options Available,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Additional Information,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now,View now
+
+Memory Specifications
+Max Memory Size (dependent on memory type),1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB,1.5 TB
+Memory Types,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600,DDR3 1066/1333/1600
+Max # of Memory Channels,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+Max Memory Bandwidth,68 GB/s,85 GB/s,85 GB/s,85 GB/s,68 GB/s,68 GB/s,68 GB/s,68 GB/s,85 GB/s,85 GB/s,85 GB/s,68 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s
+Physical Address Extensions,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+Scalability,S2S,S2S,S2S,S2S,S4S,S4S,S4S,S4S,S4S,S4S,S4S,S8S,S8S,S8S,S8S,S8S,S8S,S8S,S8S,S4S
+PCI Express Revision,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0
+PCI Express Configurations ‡,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16
+Max # of PCI Express Lanes,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32
+
+Package Specifications
+Sockets Supported,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011
+Max CPU Configuration,2,2,2,2,4,4,4,4,4,4,4,8,8,8,8,8,8,8,8,4
+TCASE,68°C,73°C,73°C,77°C,68°C,68°C,68°C,68°C,73°C,73°C,77°C,68°C,73°C,73°C,68°C,73°C,77°C,77°C,77°C,73°C
+Package Size,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm,52mm x 45mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,No,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Transactional Synchronization Extensions,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX,Intel® AVX
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Instruction Replay Technology,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes

@@ -1,0 +1,98 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:14:00 PM
+ ,Intel® Celeron® 6305E Processor ,Intel® Celeron® 6305 Processor ,Intel® Celeron® 6600HE Processor 
+Essentials
+Product Collection,Intel® Celeron® Processor 6000 Series,Intel® Celeron® Processor 6000 Series,Intel® Celeron® Processor 6000 Series
+Vertical Segment,Embedded,Mobile,Embedded
+Processor Number,6305E,6305,6600HE
+Lithography,10 nm SuperFin,10 nm SuperFin,10 nm SuperFin
+Use Conditions,Embedded Broad Market Commercial Temp,,Embedded Broad Market Commercial Temp
+Recommended Customer Price,$107.00,$128.00,$107.00
+
+CPU Specifications
+Total Cores,2,2,2
+Total Threads,2,2,2
+Processor Base Frequency,1.80 GHz,,2.60 GHz
+Cache,4 MB Intel® Smart Cache,4 MB Intel® Smart Cache,8 MB Intel® Smart Cache
+Bus Speed,4 GT/s,4 GT/s,
+TDP,15 W,,35 W
+Configurable TDP-up Frequency,,1.80 GHz,
+Configurable TDP-up,,15 W,
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched
+Launch Date,Q4'20,Q4'20,Q3'21
+Embedded Options Available,Yes,No,Yes
+
+Memory Specifications
+Max Memory Size (dependent on memory type),64 GB,64 GB,128 GB
+Memory Types,DDR4-3200 |  LPDDR4x-3733,DDR4-3200 |  LPDDR4x-3733,DDR4-3200
+Max # of Memory Channels,2,2,2
+ECC Memory Supported   ‡,No,No,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics,Intel® UHD Graphics for 11th Gen Intel® Processors,Intel® UHD Graphics for 11th Gen Intel® Processors
+Graphics Max Dynamic Frequency,1.25 GHz,1.25 GHz,1.10 GHz
+Graphics Output,eDP 1.4b |  MIPI-DSI 2.0 |  DP 1.4 |  HDMI 2.0b,eDP 1.4b |  MIPI-DSI 2.0 |  DP 1.4 |  HDMI 2.0b,eDP 1.4b |  MIPI-DSI 2.0 |  DP 1.4 |  HDMI 2.0b
+Execution Units,48,48,16
+Max Resolution (HDMI)‡,4096x2304@60Hz,4096x2304@60Hz,4096x2304@60Hz
+Max Resolution (DP)‡,7680x4320@60Hz,7680x4320@60Hz,7680x4320@60Hz
+Max Resolution (eDP - Integrated Flat Panel)‡,4096x2304@60Hz,4096x2304@60Hz,4096x2304@60Hz
+DirectX* Support,12.1,12.1,12.1
+OpenGL* Support,4.6,4.6,4.6
+OpenCL* Support,2.0,3.0,3.0
+Multi-Format Codec Engines,1,1,
+Intel® Quick Sync Video,Yes,Yes,Yes
+Intel® Clear Video HD Technology,Yes,Yes,
+# of Displays Supported ‡,4,4,4
+Device ID,0x9A78,0x9A78,0x9A68
+Graphics Base Frequency,,,350 MHz
+
+Expansion Options
+Intel® Thunderbolt™ 4,Yes,Yes,Yes
+Microprocessor PCIe Revision,Gen 3,Gen 3,Gen 4
+Chipset / PCH PCIe Revision,Gen 3,Gen 3,Gen 3
+PCI Express Configurations ‡,,,Up to 1x16+1x4 |  2x8+1x4 |  1x8+3x4
+Max # of PCI Express Lanes,,,20
+
+Package Specifications
+Sockets Supported,FCBGA1449,FCBGA1449,FCBGA1787
+Max CPU Configuration,1,1,1
+TJUNCTION,100C,100°C,100°C
+Operating Temperature Range,0°C to 100°C,,
+Operating Temperature (Maximum),100 °C,,100 °C
+Operating Temperature (Minimum),0 °C,,0 °C
+Package Size,45.5mm x 25mm,45.5x25,50 x 26.5
+
+Advanced Technologies
+Intel® Gaussian & Neural Accelerator,2.0,2.0,2.0
+Intel® Image Processing Unit,6.0,6.0,6.0
+Intel® Smart Sound Technology,Yes,Yes,Yes
+Intel® High Definition Audio,Yes,Yes,Yes
+MIPI SoundWire*,1.1,1.1,1.1
+Intel® Deep Learning Boost (Intel® DL Boost),Yes,Yes,Yes
+Intel® Optane™ Memory Supported ‡,Yes,Yes,
+Intel® Speed Shift Technology,Yes,Yes,Yes
+Intel® Turbo Boost Technology ‡,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No
+Instruction Set,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2 |  Intel® AVX-512
+Idle States,Yes,Yes,
+Thermal Monitoring Technologies,Yes,Yes,Yes
+Intel® Volume Management Device (VMD),Yes,Yes,Yes
+Intel® Adaptix™ Technology,,Yes,
+# of AVX-512 FMA Units,,,2
+
+Security & Reliability
+Intel® Control-Flow Enforcement Technology,Yes,Yes,Yes
+Intel® Total Memory Encryption,No,No,No
+Intel® AES New Instructions,Yes,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),No,No,No
+Intel® Trusted Execution Technology ‡,No,No,No
+Intel® OS Guard,Yes,Yes,Yes
+Intel® Boot Guard,Yes,Yes,Yes
+Mode-based Execute Control (MBEC),Yes,Yes,Yes
+Intel® Stable IT Platform Program (SIPP),No,No,
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes

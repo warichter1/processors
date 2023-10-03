@@ -1,0 +1,105 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:12:42 PM
+ ,Intel Atom® Processor Z540 ,Intel Atom® Processor Z530 ,Intel Atom® Processor Z520 ,Intel Atom® Processor Z510 ,Intel Atom® Processor Z500 ,Intel Atom® Processor 230 ,Intel Atom® Processor 330 ,Intel Atom® Processor N270 ,Intel Atom® Processor Z515 ,Intel Atom® Processor Z550 ,Intel Atom® Processor Z530P ,Intel Atom® Processor Z520PT ,Intel Atom® Processor Z510P ,Intel Atom® Processor Z510PT ,Intel Atom® Processor N280 ,Intel Atom® Processor N450 ,Intel Atom® Processor D510 ,Intel Atom® Processor D410 ,Intel Atom® Processor N470 ,Intel Atom® Processor D425 ,Intel Atom® Processor D525 ,Intel Atom® Processor N455 ,Intel Atom® Processor N475 ,Intel Atom® Processor Z600 ,Intel Atom® Processor Z615 ,Intel Atom® Processor Z625 ,Intel Atom® Processor Z560 ,Intel Atom® Processor N550 ,Intel Atom® Processor E620 ,Intel Atom® Processor E620T ,Intel Atom® Processor E640 ,Intel Atom® Processor E640T ,Intel Atom® Processor E660 ,Intel Atom® Processor E660T ,Intel Atom® Processor E680 ,Intel Atom® Processor E680T ,Intel Atom® Processor E645C ,Intel Atom® Processor E645CT ,Intel Atom® Processor E665C ,Intel Atom® Processor E665CT ,Intel Atom® Processor N570 ,Intel Atom® Processor Z670 ,Intel Atom® Processor Z650 
+Essentials
+Product Collection,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors,Legacy Intel Atom® Processors
+Vertical Segment,Mobile,Mobile,Mobile,Mobile,Mobile,Desktop,Desktop,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Desktop,Desktop,Mobile,Desktop,Desktop,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Mobile,Mobile,Mobile
+Processor Number,Z540,Z530,Z520,Z510,Z500,230,330,N270,Z515,Z550,Z530P,Z520PT,Z510P,Z510PT,N280,N450,D510,D410,N470,D425,D525,N455,N475,Z600,Z615,Z625,Z560,N550,E620,E620T,E640,E640T,E660,E660T,E680,E680T,E645C,E645CT,E665C,E665CT,N570,Z670,Z650
+Lithography,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm
+Use Conditions,,PC/Client/Tablet,,PC/Client/Tablet,,,,PC/Client/Tablet,,,Communications,Communications,Communications,Communications,,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,,,,,,,Industrial Commercial Temp,Industrial Commercial Temp |  Industrial Extended Temp,Industrial Commercial Temp,Industrial Commercial Temp |  Industrial Extended Temp,Industrial Commercial Temp,Industrial Commercial Temp |  Industrial Extended Temp,Industrial Commercial Temp,Industrial Commercial Temp |  Industrial Extended Temp,,,,,,,
+Recommended Customer Price,,$65.00,,$20.00,,,,,,,$65.00,$50.00,$20.00,,,,,$43.00,,,$63.00,,,,,,,,,,,,,,,,,,,,,,
+
+Performance Specifications
+Total Cores,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,,,,,,,,,,,,1,,,,,,,,,,,,,,,,
+Processor Base Frequency,1.86 GHz,1.60 GHz,1.33 GHz,1.10 GHz,800 MHz,1.60 GHz,1.60 GHz,1.60 GHz,1.20 GHz,2.00 GHz,1.60 GHz,1.33 GHz,1.10 GHz,1.10 GHz,1.66 GHz,,,,,,,,,,,,2.13 GHz,,,,,,,,,,,,,,,,
+Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,1 MB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,,,,,,,,,,,,512 KB L2 Cache,,,,,,,,,,,,,,,,
+Bus Speed,533 MHz,533 MHz,533 MHz,400 MHz,400 MHz,533 MHz,533 MHz,533 MHz,400 MHz,533 MHz,533 MHz,533 MHz,400 MHz,400 MHz,667 MHz,,,,,,,,,,,,533 MHz,,,,,,,,,,,,,,,,
+FSB Parity,No,No,No,No,No,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,No,,,,,,,,,,,,,,,,
+TDP,2.4 W,2 W,2 W,2 W,0.65 W,4 W,8 W,2.5 W,1.4 W,2.4 W,2.2 W,2.2 W,2.2 W,2.2 W,2.5 W,,,,,,,,,,,,2.5 W,,,,,,,,,,,,,,,,
+Scenario Design Power (SDP),0.96 W,0.96 W,0.96 W,0.96 W,0.96 W,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+VID Voltage Range,0.75 -1.1V,0.75 -1.1V,0.75-1.1V,0.75-1.1V,0.80 -1.10V,0.9V-1.1625V,0.9V-1.1625V,0.9V-1.1625V,,,0.8V-1.1V,0.9V-1.1V,0.8V-1.1V,0.75V-1.1V,0.9V-1.1625V,,,,,,,,,,,,0.75V-1.1V,,,,,,,,,,,,,,,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q2'08,Q2'08,Q2'08,Q2'08,Q2'08,Q2'08,Q3'08,Q2'08,Q2'09,Q2'09,Q2'08,Q2'08,Q2'08,Q2'08,Q1'09,Q1'10,Q1'10,Q1'10,Q1'10,Q2'10,Q2'10,Q2'10,Q2'10,Q2'10,Q2'10,Q2'10,Q2'10,Q3'10,Q3'10,Q3'10,Q3'10,Q3'10,Q3'10,Q3'10,Q3'10,Q3'10,Q4'10,Q4'10,Q4'10,Q4'10,Q1'11,Q2'11,Q2'11
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,Yes,No,Yes,No,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No
+
+Package Specifications
+Sockets Supported,PBGA441,PBGA441,PBGA441,PBGA441,PBGA441,PBGA437,PBGA437,PBGA437,PBGA441,PBGA441,FCBGA437,FCBGA437 | PBGA441,FCBGA437,FCBGA437,PBGA437,FCBGA559,FCBGA559,FCBGA559,FCBGA559,FCBGA559,FCBGA559,FCBGA559,FCBGA559,T-PBGA518,T-PBGA518,T-PBGA518,PBGA441,FCBGA559,FCBGA676,FCBGA676,FCBGA676,FCBGA676,FCBGA676,FCBGA676,FCBGA676,FCBGA676,FCBGA1466,FCBGA1466,FCBGA1466,FCBGA1466,FCBGA559,T-PBGA518,T-PBGA518
+TJUNCTION,90°C,90°C,90°C,90°C,90°C,,,90°C,90°C,90°C,90°C,90°C,90°C,90°C,90°C,100°C,100°C,100°C,100°C,100°C,100°C,100°C,100°C,-25°C to +90°C,0 to +90°C,0 to +90°C,90°C,,90°C,110°C,90°C,110°C,90°C,110°C,90°C,110°C,,,,,,90,90
+Package Size,13mm x 14mm,13mm x 14mm,13mm x 14mm,13mm x 14mm,13mm x 14mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,13mm x 14mm,13mm x 14mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,22mm x 22mm,13.8mmx13.8mmx1.1mm,13.8mmx 13.8mmx1.1mm,13.8mmx13.8mmx1.1mm,13mm x 14mm,22mm x 22mm,22mm x 22mm,22mmx22mm,22mmx22mm,22mmx22mm,22mmx22mm,22mmx22mm,22mmx22mm,22mmx22mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,22mm x 22mm,13.8mmx13.8mm,13.8mmx13.8mm
+Processing Die Size,26 mm2,26 mm2,26 mm2,26 mm2,26 mm2,26 mm2,52 mm2,26 mm2,26 mm2,26 mm2,26 mm2,26 mm2,26 mm2,26 mm2,26 mm2,66 mm2,87 mm2,66 mm2,66 mm2,66 mm2,87 mm2,66 mm2,66 mm2,,,,26 mm2,87 mm2,,,,,,,,,,,,,87 mm2,,
+# of Processing Die Transistors,47 million,47 million,47 million,47 million,47 million,47 million,94 million,47 million,47 million,47 million,47 million,47 million,47 million,47 million,47 million,123 million,176 million,123 million,123 million,123 million,176 million,123 million,123 million,,,,47 million,176 million,,,,,,,,,,,,,176 million,,
+TCASE,,,,,,85.2°C,85.2°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Max CPU Configuration,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,,,,,,,,,,,,,,,,,
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,,
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,No,No,,,,,,,,,,,,Yes,,,,,,,,,,,,,,,,
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,No,,,,,,,,,,,,,,,,
+Intel® 64 ‡,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,No,No,No,No,No,,,,,Yes,No,No
+Instruction Set,32-bit,32-bit,32-bit,32-bit,32-bit,64-bit,64-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,32-bit,32-bit,32-bit,32-bit,64-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,64-bit,32-bit,32-bit
+Instruction Set Extensions,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE |  Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE |  Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE |  Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE |  Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,,,,,,,,,,,,,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE |  Intel® SSE2 |  Intel® SSE3
+Idle States,Yes,Yes,Yes,Yes,Yes,No,,No,Yes,Yes,Yes,Yes,Yes,Yes,,,No,No,,No,No,,,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,No,No,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Demand Based Switching,Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,,,,,No,,
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,Yes,Yes,Yes
+Intel® ME Firmware Version,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Quick Resume Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Quiet System Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® HD Audio Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® AC97 Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Matrix Storage Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Fast Memory Access,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Flex Memory Access,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® I/O Acceleration Technology,,,,,,,,,,,,,,,,,,,,,,,,,No,No,,,,,,,,,,,,,,,,,
+
+Security & Reliability
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,,,,,No,,
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No,,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No,,No,No,No,No,No,No,No,No,No,,,,,No,No,No
+Intel® AES New Instructions,,,,,,,,,,,,,,,,,No,No,,No,No,,,No,No,No,,,,,,,,,,,,,,,,,
+
+CPU Specifications
+# of Cores,,,,,,,,,,,,,,,,1,2,1,1,1,2,1,1,1,1,1,,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1
+Total Threads,,,,,,,,,,,,,,,,2,4,2,2,2,4,2,2,2,2,2,,4,2,2,2,2,2,2,2,2,2,2,2,2,4,2,2
+Processor Base Frequency,,,,,,,,,,,,,,,,1.66 GHz,1.66 GHz,1.66 GHz,1.83 GHz,1.80 GHz,1.80 GHz,1.66 GHz,1.83 GHz,1.20 GHz,1.60 GHz,1.90 GHz,,1.50 GHz,600 MHz,600 MHz,1.00 GHz,1.00 GHz,1.30 GHz,1.30 GHz,1.60 GHz,1.60 GHz,1.00 GHz,1.00 GHz,1.30 GHz,1.30 GHz,1.66 GHz,1.50 GHz,1.20 GHz
+Cache,,,,,,,,,,,,,,,,512 KB L2 Cache,1 MB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,1 MB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB Intel® Smart Cache,512 KB Intel® Smart Cache,512 KB Intel® Smart Cache,,1 MB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,512 KB L2 Cache,1 MB L2 Cache,512 KB,512 KB L2 Cache
+Bus Speed,,,,,,,,,,,,,,,,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,400 MHz,400 MHz,400 MHz,,2.5 GT/s,2500 MHz,2500 MHz,2500 MHz,2500 MHz,2500 MHz,2500 MHz,2500 MHz,2500 MHz,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,2.5 GT/s,,
+TDP,,,,,,,,,,,,,,,,5.5 W,13 W,10 W,6.5 W,10 W,13 W,6.5 W,6.5 W,1.3 W,2.2 W,2.2 W,,8.5 W,3.3 W,3.3 W,3.6 W,3.6 W,3.6 W,3.6 W,4.5 W,4.5 W,7 W,7 W,7 W,7 W,8.5 W,3 W,3 W
+FSB Parity,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,,,,,,,
+
+Memory Specifications
+Max Memory Size (dependent on memory type),,,,,,,,,,,,,,,,2 GB,4 GB,4 GB,2 GB,4 GB,4 GB,2 GB,2 GB,1 GB,2 GB,2 GB,,2 GB,2 GB,2 GB,2 GB,2 GB,2 GB,2 GB,2 GB,2 GB,2.93 GB,2.93 GB,2.93 GB,2.93 GB,2 GB,2.93 GB,2.93 GB
+Memory Types,,,,,,,,,,,,,,,,DDR2 667,DDR2 667/800,DDR2 667/800,DDR2 667,DDR3 800 (SODIMM only); DDR2 667/800,DDR3 800 (SODIMM only); DDR2 667/800,DDR2/3,DDR2/3,LPDDR1 400,DDR2 800,DDR2 800,,DDR3,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR2 800,DDR3,DDR2 800,DDR2 800
+Max # of Memory Channels,,,,,,,,,,,,,,,,1,1,1,1,1,1,1,1,1,1,1,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+Max Memory Bandwidth,,,,,,,,,,,,,,,,,6.4 GB/s,6.4 GB/s,,6.4 GB/s,6.4 GB/s,,,1.6 GB/s,3.2 GB/s,3.2 GB/s,,,,,,,,,,,,,,,,,
+Physical Address Extensions,,,,,,,,,,,,,,,,,32-bit,32-bit,,32-bit,32-bit,,,32-bit,32-bit,32-bit,,,,,,,,,,,,,,,,,
+ECC Memory Supported ‡,,,,,,,,,,,,,,,,,No,No,,No,No,,,,,,,,No,No,No,No,No,No,No,No,No,No,No,No,,No,No
+
+Processor Graphics
+Graphics Base Frequency,,,,,,,,,,,,,,,,,,,200 MHz,,,200 MHz,200 MHz,200 MHz,400 MHz,400 MHz,,200 MHz,320 MHz,320 MHz,320 MHz,320 MHz,400 MHz,400 MHz,400 MHz,400 MHz,320 MHz,320 MHz,400 MHz,400 MHz,200 MHz,400 MHz,400 MHz
+Graphics Video Max Memory,,,,,,,,,,,,,,,,,,,,,,,,256 MB,256 MB,,,,,,,,,,,,,,,,,,
+Graphics Output,,,,,,,,,,,,,,,,,,,,,,,,MIPI |  LVDS,LVDS |  MIPI,LVDS |  MIPI,,,,,,,,,,,,,,,,LVDS,LVDS
+Intel® Flexible Display Interface (Intel® FDI),,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Clear Video HD Technology,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+Intel® Clear Video Technology,,,,,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,,,,,,,,,,,,,,,,,
+Macrovision* License Required,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,,
+
+Expansion Options
+PCI Support,,,,,,,,,,,,,,,,,,,,,,,,No,No,No,,,,,,,,,,,,,,,,No,No
+PCI Express Revision,,,,,,,,,,,,,,,,,,,,,,,,None,None,No,,,1.0a,1.0a,1.0a,1.0a,1.0a,1.0a,1.0a,1.0a,,,,,,,
+PCI Express Configurations ‡,,,,,,,,,,,,,,,,,,,,,,,,No,None,None,,,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,x1 root complex only,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,x1 |  root complex only,,,
+Max # of PCI Express Lanes,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,,,4,4,4,4,4,4,4,4,2,2,2,2,,,
+
+I/O Specifications
+# of USB Ports,,,,,,,,,,,,,,,,,,,,,,,,4,4,4,,,,,,,,,,,,,,,,,
+USB Revision,,,,,,,,,,,,,,,,,,,,,,,,2.0,2.0,2.0,,,,,,,,,,,,,,,,,
+Total # of SATA Ports,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,,,,,,,,,,,,,,,,,
+Integrated LAN,,,,,,,,,,,,,,,,,,,,,,,,None,No,No,,,,,,,,,,,,,,,,,
+Integrated IDE,,,,,,,,,,,,,,,,,,,,,,,,None,No,No,,,,,,,,,,,,,,,,,
+General Purpose IO,,,,,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,,,,,,,,,,,,,,,,,
+UART,,,,,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,,,,,,,,,,,,,,,,,

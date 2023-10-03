@@ -1,0 +1,41 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:19:48 PM
+ ,Intel® Itanium® Processor 9740 ,Intel® Itanium® Processor 9720 ,Intel® Itanium® Processor 9760 ,Intel® Itanium® Processor 9750 
+Essentials
+Product Collection,Intel® Itanium® Processor 9700 Series,Intel® Itanium® Processor 9700 Series,Intel® Itanium® Processor 9700 Series,Intel® Itanium® Processor 9700 Series
+Vertical Segment,Server,Server,Server,Server
+Processor Number,9740,9720,9760,9750
+Lithography,32 nm,32 nm,32 nm,32 nm
+
+CPU Specifications
+Total Cores,8,4,8,4
+Total Threads,16,8,16,8
+Processor Base Frequency,2.13 GHz,1.73 GHz,2.66 GHz,2.53 GHz
+Cache,24 MB,20 MB,32 MB,32 MB
+Bus Speed,6.4 GT/s,6.4 GT/s,6.4 GT/s,6.4 GT/s
+TDP,170 W,130 W,170 W,170 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q2'17,Q2'17,Q2'17,Q2'17
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No
+
+Memory Specifications
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes
+
+Package Specifications
+Sockets Supported,LGA1248,LGA1248,LGA1248,LGA1248
+TJUNCTION,95.0 C,95.0 C,95.0 C,95.0 C
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Itanium (VT-i),Yes,Yes,Yes,Yes
+
+Security & Reliability
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes

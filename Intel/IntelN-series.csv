@@ -1,0 +1,79 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:13:35 PM
+ ,Intel® Processor N100 ,Intel® Processor N200 ,Intel® Processor N50 ,Intel® Processor N97 
+Essentials
+Product Collection,Intel® Processor N-series,Intel® Processor N-series,Intel® Processor N-series,Intel® Processor N-series
+Vertical Segment,Mobile,Mobile,Embedded,Embedded
+Processor Number,N100,N200,N50,N97
+Lithography,Intel 7,Intel 7,Intel 7,Intel 7
+Recommended Customer Price,$128.00,$193.00,$128.00,$128.00
+
+CPU Specifications
+Total Cores,4,4,2,4
+Total Threads,4,4,,
+Max Turbo Frequency,3.40 GHz,3.70 GHz,3.40 GHz,3.60 GHz
+Cache,6 MB Intel® Smart Cache,6 MB Intel® Smart Cache,6 MB,6 MB Intel® Smart Cache
+TDP,6 W,6 W,6 W,12 W
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched,Launched
+Launch Date,Q1'23,Q1'23,Q1'23,Q1'23
+Embedded Options Available,No,Yes,Yes,Yes
+
+Memory Specifications
+Max Memory Size (dependent on memory type),16 GB,16 GB,16 GB,16 GB
+Memory Types,DDR4 3200 MT/s DDR5 4800 MT/s LPDDR5 4800 MT/s,DDR4 3200 MT/s DDR5 4800 MT/s LPDDR5 4800 MT/s,DDR4 3200 MT/s DDR5 4800 MT/s LPDDR5 4800 MT/s,DDR4 3200 MT/s DDR5 4800 MT/s LPDDR5 4800 MT/s
+Maximum Memory Speed,4800 MHz,4800 MHz,4800 MHz,4800 MHz
+Max # of Memory Channels,1,1,1,1
+ECC Memory Supported   ‡,No,No,,
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics,Intel® UHD Graphics,Intel® UHD Graphics,Intel® UHD Graphics
+Graphics Max Dynamic Frequency,750 MHz,750 MHz,750 MHz,1.20 GHz
+Graphics Output,eDP 1.4b |  DP 1.4 |  HDMI 2.1 |  MIPI-DSI 1.3,eDP 1.4b |  DP 1.4 |  HDMI 2.1 |  MIPI-DSI 1.3,eDP 1.4b |  DP 1.4 |  HDMI 2.1 |  MIPI-DSI 1.3,eDP 1.4b |  DP 1.4 |  HDMI 2.1 |  MIPI-DSI 1.3
+Execution Units,24,32,16,24
+4K Support,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz
+Max Resolution (HDMI)‡,4096 x 2160@60Hz,4096 x 2160@60Hz,4096 x 2160@60Hz,4096 x 2160@60Hz
+Max Resolution (DP)‡,4096 x 2160@60Hz,4096 x 2160@60Hz,4096 x 2160@60Hz,4096 x 2160@60Hz
+DirectX* Support,12.1,12.1,12.1,12.1
+OpenGL* Support,4.6,4.6,4.6,4.6
+OpenCL* Support,3.0,3.0,3.0,3.0
+Intel® Quick Sync Video,Yes,Yes,Yes,Yes
+# of Displays Supported ‡,3,3,3,3
+Device ID,0x46D1,0x46D0,,
+
+Expansion Options
+Chipset / PCH PCIe Revision,Gen 3,Gen 3,Gen 3,Gen 3
+Max # of PCI Express Lanes,9,9,9,9
+
+I/O Specifications
+USB Revision,2.0/3.2,2.0/3.2,2.0/3.2,2.0/3.2
+General Purpose IO,Yes,Yes,Yes,Yes
+
+Package Specifications
+Sockets Supported,FCBGA1264,FCBGA1264,FCBGA1264,FCBGA1264
+Max CPU Configuration,1,1,1,1
+TJUNCTION,105°C,105°C,105°C,105°C
+Package Size,35mm x 24mm,35mm x 24mm,35mm x 24mm,35mm x 24mm
+
+Advanced Technologies
+Intel® Gaussian & Neural Accelerator,3.0,3.0,3.0,3.0
+Intel® Image Processing Unit,6.0,6.0,6.0,6.0
+Intel® Smart Sound Technology,Yes,Yes,Yes,Yes
+Intel® Wake on Voice,Yes,Yes,Yes,Yes
+Intel® High Definition Audio,Yes,Yes,Yes,Yes
+MIPI SoundWire*,1.2,1.2,1.2,1.2
+Intel® Speed Shift Technology,Yes,Yes,Yes,Yes
+Intel® Hyper-Threading Technology ‡,No,No,No,No
+Instruction Set,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes
+Intel® OS Guard,Yes,Yes,Yes,Yes
+Intel® Boot Guard,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes

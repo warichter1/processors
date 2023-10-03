@@ -1,0 +1,67 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:09:36 PM
+ ,Intel Atom® Processor E3825 ,Intel Atom® Processor E3845 ,Intel Atom® Processor E3815 ,Intel Atom® Processor E3826 ,Intel Atom® Processor E3827 ,Intel Atom® Processor E3805 
+Essentials
+Product Collection,Intel Atom® Processor E Series,Intel Atom® Processor E Series,Intel Atom® Processor E Series,Intel Atom® Processor E Series,Intel Atom® Processor E Series,Intel Atom® Processor E Series
+Vertical Segment,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded
+Processor Number,E3825,E3845,E3815,E3826,E3827,E3805
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm
+Use Conditions,Automotive |  Industrial Commercial Temp |  Industrial Extended Temp |  Embedded Broad Market Commercial Temp,Automotive |  Industrial Commercial Temp |  Industrial Extended Temp |  Embedded Broad Market Commercial Temp,Automotive |  Industrial Commercial Temp |  Industrial Extended Temp |  Embedded Broad Market Commercial Temp,Automotive |  Industrial Commercial Temp |  Industrial Extended Temp |  Embedded Broad Market Commercial Temp,Automotive |  Industrial Commercial Temp |  Industrial Extended Temp |  Embedded Broad Market Commercial Temp,Automotive |  Industrial Commercial Temp |  Industrial Extended Temp |  Embedded Broad Market Commercial Temp
+Recommended Customer Price,$31.00,$50.00,$25.00,$36.00,$41.00,$25.00
+
+CPU Specifications
+Total Cores,2,4,1,2,2,2
+Total Threads,2,4,1,2,2,2
+Processor Base Frequency,1.33 GHz,1.91 GHz,1.46 GHz,1.46 GHz,1.75 GHz,1.33 GHz
+Cache,1 MB L2 Cache,2 MB L2 Cache,512 KB L2 Cache,1 MB L2 Cache,1 MB L2 Cache,1 MB L2 Cache
+TDP,6 W,10 W,5 W,7 W,8 W,3 W
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched,Launched,Launched,Launched
+Launch Date,Q4'13,Q4'13,Q4'13,Q4'13,Q4'13,Q4'14
+Embedded Options Available,Yes,Yes,Yes,Yes,Yes,Yes
+
+Memory Specifications
+Max Memory Size (dependent on memory type),8 GB,8 GB,8 GB,8 GB,8 GB,8 GB
+Memory Types,DDR3L 1067,DDR3L 1333,DDR3L 1067,DDR3L 1067,DDR3L 1333,DDR3L 1067
+Max # of Memory Channels,1,2,1,2,2,1
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes
+
+Processor Graphics
+Processor Graphics ‡,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,
+Graphics Base Frequency,533 MHz,542 MHz,400 MHz,533 MHz,542 MHz,
+Graphics Burst Frequency,533 MHz,792 MHz,400 MHz,667 MHz,792 MHz,
+Intel® Quick Sync Video,Yes,Yes,Yes,Yes,Yes,No
+# of Displays Supported ‡,2,2,2,2,2,
+
+Expansion Options
+PCI Express Revision,2.0,2.0,2.0,2.0,2.0,2.0
+PCI Express Configurations ‡,x4 |  x2 |  x1,x4 |  x2 |  x1,x4 |  x2 |  x1,x4 |  x2 |  x1,x4 |  x2 |  x1,x4 |  x2 |  x1
+Max # of PCI Express Lanes,4,4,4,4,4,4
+
+I/O Specifications
+USB Revision,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0
+Total # of SATA Ports,2,2,2,2,2,2
+Integrated LAN,No,No,No,No,No,No
+Integrated IDE,No,No,No,No,No,No
+UART,Yes,Yes,Yes,Yes,Yes,Yes
+
+Package Specifications
+Sockets Supported,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170
+TJUNCTION,-40°C to 110°C,-40°C to 110°C,-40°C to 110°C,-40°C to 110°C,-40°C to 110°C,-40°C to 110°C
+Package Size,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm
+
+Advanced Technologies
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® HD Audio Technology,Yes,Yes,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No,No,No,No
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes

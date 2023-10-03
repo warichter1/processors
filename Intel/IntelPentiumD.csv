@@ -1,0 +1,81 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:32:19 PM
+ ,Intel® Pentium® Processor D1517 ,Intel® Pentium® Processor D1508 ,Intel® Pentium® Processor D1519 ,Intel® Pentium® Processor D1509 ,Intel® Pentium® Processor D1507 
+Essentials
+Product Collection,Intel® Pentium® Processor D Series,Intel® Pentium® Processor D Series,Intel® Pentium® Processor D Series,Intel® Pentium® Processor D Series,Intel® Pentium® Processor D Series
+Vertical Segment,Server,Server,Server,Server,Server
+Processor Number,D1517,D1508,D1519,D1509,D1507
+Lithography,7 nm,14 nm,7 nm,14 nm,14 nm
+Use Conditions,Communications Commercial Temp,Industrial Commercial Temp |  Communications,Industrial Commercial Temp |  Industrial Extended Temp |  Communications,Industrial Commercial Temp |  Industrial Extended Temp,Communications Commercial Temp
+Recommended Customer Price,$159.00,$106.00,$165.00,$128.00,$85.00
+
+CPU Specifications
+Total Cores,4,2,4,2,2
+Total Threads,8,4,8,2,2
+Max Turbo Frequency,2.20 GHz,2.60 GHz,2.10 GHz,,
+Intel® Turbo Boost Technology 2.0 Frequency‡,2.20 GHz,2.60 GHz,2.10 GHz,,
+Processor Base Frequency,1.60 GHz,2.20 GHz,1.50 GHz,1.50 GHz,1.20 GHz
+Cache,6 MB,3 MB,6 MB,3 MB,3 MB
+TDP,25 W,25 W,25 W,19 W,20 W
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched,Launched,Launched
+Launch Date,Q4'15,Q4'15,Q2'16,Q4'15,Q4'15
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Saturday |  December 31 |  2022,Saturday |  December 31 |  2022,Saturday |  December 31 |  2022,Saturday |  December 31 |  2022,Saturday |  December 31 |  2022
+Embedded Options Available,Yes,Yes,Yes,Yes,Yes
+Product Brief,View now,View now,View now,View now,View now
+
+Memory Specifications
+Max Memory Size (dependent on memory type),128 GB,128 GB,128 GB,128 GB,128 GB
+Memory Types,DDR4 |  DDR3,DDR4 |  DDR3,DDR4 |  DDR3,DDR4 |  DDR3,DDR4 |  DDR3
+Maximum Memory Speed,2133 MHz,1866 MHz,2133 MHz,1600 MHz,1600 MHz
+Max # of Memory Channels,2,2,2,2,2
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+Scalability,1S Only,1S Only,1S Only,1S Only,1S Only
+PCI Express Revision,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0
+PCI Express Configurations ‡,x4 x8 x16,x4 x8 x16,x4 x8 x16,x4 x8 x16,x4 x8 x16
+Max # of PCI Express Lanes,32,32,32,32,32
+
+I/O Specifications
+# of USB Ports,8,8,8,8,8
+USB Revision,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0
+Total # of SATA Ports,6,6,6,6,6
+Integrated LAN,Yes,Yes,Yes,No,Yes
+General Purpose IO,Yes,Yes,Yes,Yes,Yes
+UART,Yes,Yes,Yes,Yes,Yes
+
+Networking Specifications
+Interfaces Supported,SFI |  KR |  KX |  KX4 |  1000Base-T |  10GBase-T,SFI |  KR |  KX |  KX4 |  1000Base-T |  10GBase-T,SFI |  KR |  KX |  KX4 |  1000Base-T |  10GBase-T,,SFI |  KX |  KX4 |  1000Base-T |  10GBase-T
+
+Package Specifications
+Sockets Supported,FCBGA1667,FCBGA1667,FCBGA1667,FCBGA1667,FCBGA1667
+Max CPU Configuration,1,1,1,1,1
+Package Size,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm
+Operating Temperature Range,,,-40°C to 85°C,,
+Operating Temperature (Maximum),,,85 °C,,
+Operating Temperature (Minimum),,,-40 °C,,
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,No,No
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,No,No
+Intel® Transactional Synchronization Extensions,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2
+Idle States,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes

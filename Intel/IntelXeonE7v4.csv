@@ -1,0 +1,72 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:45:18 PM
+ ,Intel® Xeon® Processor E7-8890 v4 ,Intel® Xeon® Processor E7-8893 v4 ,Intel® Xeon® Processor E7-8880 v4 ,Intel® Xeon® Processor E7-8860 v4 ,Intel® Xeon® Processor E7-4809 v4 ,Intel® Xeon® Processor E7-8891 v4 ,Intel® Xeon® Processor E7-8870 v4 ,Intel® Xeon® Processor E7-8867 v4 ,Intel® Xeon® Processor E7-4850 v4 ,Intel® Xeon® Processor E7-4830 v4 ,Intel® Xeon® Processor E7-4820 v4 ,Intel® Xeon® Processor E7-8894 v4 
+Essentials
+Product Collection,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family,Intel® Xeon® Processor E7 v4 Family
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,E7-8890V4,E7-8893V4,E7-8880V4,E7-8860V4,E7-4809V4,E7-8891V4,E7-8870V4,E7-8867V4,E7-4850V4,E7-4830V4,E7-4820V4,E7-8894V4
+Lithography,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm
+Recommended Customer Price,$7174.00,$6841.00,$5895.00,$4061.00,$1223.00,$6841.00,$4672.00,$4672.00,$3003.00,$2170.00,$1502.00,$8898.00
+
+CPU Specifications
+Total Cores,24,4,22,18,8,10,20,18,16,14,10,24
+Total Threads,48,8,44,36,16,20,40,36,32,28,20,48
+Max Turbo Frequency,3.40 GHz,3.50 GHz,3.30 GHz,3.20 GHz,,3.50 GHz,3.00 GHz,3.30 GHz,2.80 GHz,2.80 GHz,,3.40 GHz
+Intel® Turbo Boost Technology 2.0 Frequency‡,3.40 GHz,3.50 GHz,3.30 GHz,3.20 GHz,,3.50 GHz,3.00 GHz,3.30 GHz,2.80 GHz,2.80 GHz,,3.40 GHz
+Processor Base Frequency,2.20 GHz,3.20 GHz,2.20 GHz,2.20 GHz,2.10 GHz,2.80 GHz,2.10 GHz,2.40 GHz,2.10 GHz,2.00 GHz,2.00 GHz,2.40 GHz
+Cache,60 MB,60 MB,55 MB,45 MB,20 MB,60 MB,50 MB,45 MB,40 MB,35 MB,25 MB,60 MB
+Bus Speed,9.6 GT/s,9.6 GT/s,9.6 GT/s,9.6 GT/s,6.4 GT/s,9.6 GT/s,9.6 GT/s,9.6 GT/s,8 GT/s,8 GT/s,6.4 GT/s,9.6 GT/s
+# of QPI Links,3,3,3,3,3,3,3,3,3,3,3,3
+TDP,165 W,140 W,150 W,140 W,115 W,165 W,140 W,165 W,115 W,115 W,115 W,165 W
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Launched
+Launch Date,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q2'16,Q1'17
+Servicing Status,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates,End of Servicing Updates
+End of Servicing Updates Date,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022
+Embedded Options Available,No,No,No,No,No,No,No,No,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),3 TB,3 TB,3 TB,3 TB,3 TB,3 TB,3 TB,3 TB,3 TB,3 TB,3 TB,3 TB
+Memory Types,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866   DDR3-1066/1333/1600,DDR4-1333/1600/1866 |  DDR3-1066/1333,DDR4-1333/1600/1866 DDR3-1066/1333/1600
+Max # of Memory Channels,4,4,4,4,4,4,4,4,4,4,4,4
+Max Memory Bandwidth,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s,85 GB/s
+Physical Address Extensions,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit,46-bit
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+Scalability,S8S,S8S,S8S,S8S,S4S,S8S,S8S,S8S,S4S,S4S,S4S,S8S
+PCI Express Revision,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0
+PCI Express Configurations ‡,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16
+Max # of PCI Express Lanes,32,32,32,32,32,32,32,32,32,32,32,32
+
+Package Specifications
+Sockets Supported,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011,FCLGA2011
+Max CPU Configuration,8,8,8,8,4,8,8,8,4,4,4,8
+TCASE,79°C,77°C,77°C,75°C,69°C,79°C,76°C,80°C,69°C,68°C,67°C,79°C
+Package Size,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm,45mm x 52.5mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,No,2.0,2.0,2.0,2.0,2.0,No,2.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Transactional Synchronization Extensions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2,Intel® AVX2
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Demand Based Switching,No,,,,,,,,,,,No
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Flex Memory Access,No,,,,,,,,,,,No
+Intel® Instruction Replay Technology,No,No,No,No,No,No,No,No,No,No,No,No
+
+Security & Reliability
+Intel vPro® Eligibility ‡,Intel vPro® Platform,,,,,,,,,,,Intel vPro® Platform
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes

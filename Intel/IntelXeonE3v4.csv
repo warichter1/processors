@@ -1,0 +1,89 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:52:17 PM
+ ,Intel® Xeon® Processor E3-1265L v4 ,Intel® Xeon® Processor E3-1285L v4 ,Intel® Xeon® Processor E3-1285 v4 ,Intel® Xeon® Processor E3-1258L v4 ,Intel® Xeon® Processor E3-1278L v4 
+Essentials
+Product Collection,Intel® Xeon® Processor E3 v4 Family,Intel® Xeon® Processor E3 v4 Family,Intel® Xeon® Processor E3 v4 Family,Intel® Xeon® Processor E3 v4 Family,Intel® Xeon® Processor E3 v4 Family
+Vertical Segment,Server,Server,Server,Embedded,Embedded
+Processor Number,E3-1265LV4,E3-1285LV4,E3-1285V4,E3-1258LV4,E3-1278LV4
+Lithography,14 nm,14 nm,14 nm,14 nm,14 nm
+
+CPU Specifications
+Total Cores,4,4,4,4,4
+Total Threads,8,8,8,8,8
+Max Turbo Frequency,3.30 GHz,3.80 GHz,3.80 GHz,3.20 GHz,3.30 GHz
+Intel® Turbo Boost Technology 2.0 Frequency‡,3.30 GHz,3.80 GHz,3.80 GHz,3.20 GHz,3.30 GHz
+Processor Base Frequency,2.30 GHz,3.40 GHz,3.50 GHz,1.80 GHz,2.00 GHz
+Cache,6 MB,6 MB,6 MB,6 MB Intel® Smart Cache,6 MB Intel® Smart Cache
+Bus Speed,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s
+# of QPI Links,0,0,0,,
+TDP,35 W,65 W,95 W,47 W,47 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q2'15,Q2'15,Q2'15,Q2'15,Q2'15
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021
+Embedded Options Available,No,No,No,Yes,Yes
+Product Brief,View now,View now,View now,View now,View now
+
+Memory Specifications
+Max Memory Size (dependent on memory type),32 GB,32 GB,32 GB,32 GB,32 GB
+Memory Types,DDR3 and DDR3L 1333/1600/1866 at 1.5V,DDR3 and DDR3L 1333/1600/1866 at 1.5V,DDR3 and DDR3L 1333/1600/1866 at 1.5V,DDR3L 1600,DDR3L 1600
+Max # of Memory Channels,2,2,2,2,2
+Max Memory Bandwidth,29.8 GB/s,29.8 GB/s,29.8 GB/s,25.6 GB/s,25.6 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes
+
+Processor Graphics
+Graphics Base Frequency,300 MHz,300 MHz,300 MHz,700 MHz,800 MHz
+Graphics Max Dynamic Frequency,1.05 GHz,1.15 GHz,1.15 GHz,1.00 GHz,1.00 GHz
+Graphics Video Max Memory,32 GB,32 GB,32 GB,,32 GB
+eDRAM,128 MB,128 MB,128 MB,,
+Execution Units,48,48,48,,
+Intel® Quick Sync Video,Yes,Yes,Yes,Yes,Yes
+Intel® Flexible Display Interface (Intel® FDI),Yes,Yes,Yes,Yes,Yes
+Intel® Clear Video Technology,Yes,Yes,Yes,,
+# of Displays Supported ‡,3,3,3,3,3
+Graphics Output,,,,eDP/DP/HDMI/VGA,eDP/DP/HDMI/VGA
+Max Resolution (HDMI)‡,,,,2560x1600@60Hz,2560x1600@60Hz
+Max Resolution (DP)‡,,,,4096x2304@60Hz,4096x2304@60Hz
+DirectX* Support,,,,11.2,11.2
+OpenGL* Support,,,,4.3,4.3
+Intel® InTru™ 3D Technology,,,,Yes,Yes
+Intel® Clear Video HD Technology,,,,Yes,Yes
+
+Expansion Options
+Scalability,1S Only,1S Only,1S Only,1S Only,1S Only
+PCI Express Revision,3.0,3.0,3.0,3.0,3.0
+PCI Express Configurations ‡,1x16,1x16,1x16,Up to 1x16 2x8 1x8 2x4,Up to 1x16 2x8 1x8 2x4
+Max # of PCI Express Lanes,16,16,16,16,16
+
+Package Specifications
+Sockets Supported,FCLGA1150,FCLGA1150,FCLGA1150,FCBGA1364,FCBGA1364
+Max CPU Configuration,1,1,1,1,1
+Thermal Solution Specification,PCG 2013B,PCG 2013B,PCG 2013B,,
+Package Size,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 32mm x 1.8mm,37.5mm x 32mm x 1.8mm
+TJUNCTION,,,,105°C,105°C
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,2.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Transactional Synchronization Extensions,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2
+Idle States,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,,,,Yes,Yes
+
+Security & Reliability
+Intel vPro® Eligibility ‡,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes
+Secure Key,,,,Yes,Yes
+Anti-Theft Technology,,,,Yes,Yes
+Intel® Stable Image Platform Program (SIPP),,,,No,No

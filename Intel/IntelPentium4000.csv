@@ -1,0 +1,90 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:35:29 PM
+ ,Intel® Pentium® Processor 4405U ,Intel® Pentium® Processor 4405Y 
+Essentials
+Product Collection,Intel® Pentium® Processor 4000 Series,Intel® Pentium® Processor 4000 Series
+Vertical Segment,Mobile,Mobile
+Processor Number,4405U,4405Y
+Lithography,14 nm,14 nm
+Recommended Customer Price,,$161.00
+
+CPU Specifications
+Total Cores,2,2
+Total Threads,4,4
+Processor Base Frequency,2.10 GHz,1.50 GHz
+Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache
+Bus Speed,4 GT/s,4 GT/s
+TDP,15 W,6 W
+Configurable TDP-down,10 W,4.5 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued
+Launch Date,Q3'15,Q3'15
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Friday |  September 30 |  2022,Friday |  September 30 |  2022
+Embedded Options Available,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),32 GB,16 GB
+Memory Types,DDR4-1866/2133 |  LPDDR3-1600/1866,LPDDR3-1866 |  DDR3L-1600
+Max # of Memory Channels,2,2
+Max Memory Bandwidth,34.1 GB/s,29.8 GB/s
+ECC Memory Supported   ‡,No,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® HD Graphics 510,Intel® HD Graphics 515
+Graphics Base Frequency,300 MHz,300 MHz
+Graphics Max Dynamic Frequency,950 MHz,800 MHz
+Graphics Video Max Memory,32 GB,16 GB
+Graphics Output,eDP/DP/HDMI/DVI,eDP/DP/HDMI/DVI
+4K Support,Yes |  at 60Hz,Yes |  at 60Hz
+Max Resolution (HDMI)‡,4096x2304@24Hz,4096x2304@24Hz
+Max Resolution (DP)‡,4096x2304@60Hz,3840x2160@60Hz
+Max Resolution (eDP - Integrated Flat Panel)‡,4096x2304@60Hz,3840x2160@60Hz
+Max Resolution (VGA)‡,N/A,N/A
+DirectX* Support,12,12
+OpenGL* Support,4.4,4.4
+Intel® Quick Sync Video,Yes,Yes
+Intel® Clear Video HD Technology,Yes,Yes
+Intel® Clear Video Technology,Yes,Yes
+# of Displays Supported ‡,3,3
+Device ID,0x1906,0x191E
+
+Expansion Options
+PCI Express Revision,2.0,3.0
+PCI Express Configurations ‡,1x4 |  2x2 |  1x2+2x1 and 4x1,1x4 |  2x2 |  1x2+2x1 and 4x1
+Max # of PCI Express Lanes,10,10
+
+Package Specifications
+Sockets Supported,FCBGA1356,FCBGA1515
+Max CPU Configuration,1,1
+TJUNCTION,100°C,100°C
+Package Size,42mm X 24mm,20mm X 16.5mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No
+Intel® Hyper-Threading Technology ‡,Yes,Yes
+Intel® Transactional Synchronization Extensions,No,No
+Intel® 64 ‡,Yes,Yes
+Instruction Set,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2
+Idle States,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes
+Intel® Flex Memory Access,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes
+Intel® Smart Response Technology,Yes,Yes
+Intel® My WiFi Technology,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes
+Secure Key,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),Yes with Intel® ME,Yes with Intel® ME
+Intel® Memory Protection Extensions (Intel® MPX),No,No
+Intel® Trusted Execution Technology ‡,No,No
+Execute Disable Bit ‡,Yes,Yes
+Intel® OS Guard,No,No
+Intel® Stable IT Platform Program (SIPP),No,No
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes

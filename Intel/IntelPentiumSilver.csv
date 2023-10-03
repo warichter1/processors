@@ -1,0 +1,107 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:31:30 PM
+ ,Intel® Pentium® Silver J5005 Processor ,Intel® Pentium® Silver N5000 Processor ,Intel® Pentium® Silver J5040 Processor ,Intel® Pentium® Silver N5030 Processor ,Intel® Pentium® Silver N6005 Processor ,Intel® Pentium® Silver N6000 Processor 
+Essentials
+Product Collection,Intel® Pentium® Silver Processor Series,Intel® Pentium® Silver Processor Series,Intel® Pentium® Silver Processor Series,Intel® Pentium® Silver Processor Series,Intel® Pentium® Silver Processor Series,Intel® Pentium® Silver Processor Series
+Vertical Segment,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,J5005,N5000,J5040,N5030,N6005,N6000
+Lithography,14 nm,14 nm,14 nm,14 nm,10 nm,10 nm
+Use Conditions,,,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet,PC/Client/Tablet
+
+CPU Specifications
+Total Cores,4,4,4,4,4,4
+Total Threads,4,4,4,4,4,4
+Burst Frequency,2.80 GHz,2.70 GHz,3.20 GHz,3.10 GHz,3.30 GHz,3.30 GHz
+Processor Base Frequency,1.50 GHz,1.10 GHz,2.00 GHz,1.10 GHz,2.00 GHz,1.10 GHz
+Cache,4 MB,4 MB,4 MB,4 MB,4 MB Intel® Smart Cache,4 MB Intel® Smart Cache
+TDP,10 W,6 W,10 W,6 W,10 W,6 W
+Scenario Design Power (SDP),,4.8 W,,4.8 W,,4.8 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Launched,Launched,Launched,Launched
+Launch Date,Q4'17,Q4'17,Q4'19,Q4'19,Q1'21,Q1'21
+Embedded Options Available,No,No,No,No,No,No
+Product Brief,View now,View now,,,,
+
+Memory Specifications
+Max Memory Size (dependent on memory type),8 GB,8 GB,8 GB,8 GB,16 GB,16 GB
+Memory Types,DDR4/LPDDR4 upto 2400 MT/s,DDR4/LPDDR4 upto 2400 MT/s,DDR4/LPDDR4 upto 2400 MT/s,DDR4/LPDDR4 upto 2400 MT/s,DDR4 LPDDR4x,DDR4 LPDDR4x
+Max # of Memory Channels,2,2,2,2,2,2
+ECC Memory Supported   ‡,No,No,No,No,No,No
+Maximum Memory Speed,,,,,2933 MHz,2933 MHz
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics 605,Intel® UHD Graphics 605,Intel® UHD Graphics 605,Intel® UHD Graphics 605,Intel® UHD Graphics,Intel® UHD Graphics
+Graphics Base Frequency,250 MHz,200 MHz,250 MHz,200 MHz,450 MHz,350 MHz
+Graphics Burst Frequency,800 MHz,750 MHz,800 MHz,750 MHz,900 MHz,850 MHz
+Graphics Video Max Memory,8 GB,8 GB,8 GB,8 GB,,
+Graphics Output,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI
+Execution Units,18,18,18,18,32,32
+4K Support,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz,Yes |  at 60Hz
+DirectX* Support,12,12,12,12,12,12
+OpenGL* Support,4.4,4.4,4.4,4.4,4.5,4.5
+Intel® Quick Sync Video,Yes,Yes,Yes,Yes,Yes,Yes
+# of Displays Supported ‡,3,3,3,3,3,3
+Device ID,0x3184,0x3184,0x3184,0x3184,0x4E71,0x4E71
+Max Resolution (HDMI)‡,,,4096x2160@30Hz,4096x2160@30Hz,4096x2160@60Hz,4096x2160@60Hz
+Max Resolution (DP)‡,,,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz
+Max Resolution (eDP - Integrated Flat Panel)‡,,,4096x2160@60Hz,4096x2160@60Hz,4096x2160@60Hz,
+OpenCL* Support,,,,,1.2,1.2
+
+Expansion Options
+PCI Express Revision,2.0,2.0,2.0,2.0,,
+PCI Express Configurations ‡,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,,
+Max # of PCI Express Lanes,6,6,6,6,8,8
+Chipset / PCH PCIe Revision,,,,,Gen 3,Gen 3
+
+I/O Specifications
+# of USB Ports,8,8,8,8,14,14
+USB Revision,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.0,2.0/3.2,2.0/3.2
+Total # of SATA Ports,2,2,2,2,,
+Integrated LAN,No,No,No,No,No,No
+Integrated Wireless‡,Intel® Wireless-AC MAC,Intel® Wireless-AC MAC,Intel® Wireless-AC MAC,Intel® Wireless-AC MAC,Intel® Wireless-AX MAC,Intel® Wireless-AX MAC
+General Purpose IO,Yes,Yes,Yes,Yes,Yes,Yes
+UART,Yes,Yes,Yes,Yes,Yes,Yes
+Max # of SATA 6.0 Gb/s Ports,2,2,2,2,2,2
+
+Package Specifications
+Sockets Supported,FCBGA1090,FCBGA1090,FCBGA1090,FCBGA1090,FCBGA1338,FCBGA1338
+Max CPU Configuration,1,1,1,1,1,1
+Thermal Solution Specification,105 deg C,105°C,,,,
+TJUNCTION,105 deg C,105°C,105°C,105°C,105°C,105°C
+Package Size,25mm x 24mm,25mm x 24mm,25mm x 24mm,25mm x 24mm,35mm x 24mm,35mm x 24mm
+
+Advanced Technologies
+Intel® Optane™ Memory Supported ‡,No,No,No,No,No,No
+Intel® Speed Shift Technology,No,No,No,No,Yes,Yes
+Intel® Turbo Boost Max Technology 3.0 ‡,No,No,No,No,No,No
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2
+Idle States,Yes,Yes,Yes,Yes,Yes,
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Smart Response Technology,No,No,No,No,No,
+Intel® Gaussian & Neural Accelerator,,,,,2.0,2.0
+Intel® Image Processing Unit,,,,,6.0,6.0
+Intel® Smart Sound Technology,,,,,Yes,Yes
+Intel® Wake on Voice,,,,,Yes,Yes
+Intel® High Definition Audio,,,,,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,,
+Intel® Software Guard Extensions (Intel® SGX),Yes with Intel® ME,Yes with Intel® ME,Yes with Intel® ME,Yes with Intel® ME,No,No
+Intel® Memory Protection Extensions (Intel® MPX),Yes,Yes,Yes,Yes,,
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,,
+Anti-Theft Technology,No,No,No,No,,
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,,,,,No,No
+Intel® Boot Guard,,,,,Yes,Yes
+Mode-based Execute Control (MBE),,,,,Yes,Yes

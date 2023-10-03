@@ -1,0 +1,86 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:15:45 PM
+ ,Intel® Celeron® Processor 5305U ,Intel® Celeron® Processor 5205U 
+Essentials
+Product Collection,Intel® Celeron® Processor 5000 Series,Intel® Celeron® Processor 5000 Series
+Vertical Segment,Mobile,Mobile
+Processor Number,5305U,5205U
+Lithography,14 nm,14 nm
+Recommended Customer Price,$128.00,$128.00
+
+CPU Specifications
+Total Cores,2,2
+Total Threads,2,2
+Processor Base Frequency,2.30 GHz,1.90 GHz
+Cache,2 MB,2 MB
+Bus Speed,4 GT/s,4 GT/s
+TDP,15 W,15 W
+Configurable TDP-down Base Frequency,800 MHz,800 MHz
+Configurable TDP-down,12.5 W,12.5 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued
+Launch Date,Q2'20,Q4'19
+Embedded Options Available,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),64 GB,64 GB
+Memory Types,DDR4-2400 |  LPDDR3-2133,DDR4-2400 |  LPDDR3-2133
+Max # of Memory Channels,2,2
+Max Memory Bandwidth,37.5 GB/s,37.5 GB/s
+ECC Memory Supported   ‡,No,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics for 10th Gen Intel® Processors,Intel® UHD Graphics for 10th Gen Intel® Processors
+Graphics Base Frequency,300 MHz,300 MHz
+Graphics Max Dynamic Frequency,900 MHz,900 MHz
+Graphics Video Max Memory,32 GB,32 GB
+Graphics Output,eDP/DP/HDMI/DVI,eDP/DP/HDMI/DVI
+4K Support,Yes |  at 60Hz,Yes |  at 60Hz
+Max Resolution (HDMI)‡,4096x2304@24Hz,4096x2304@24Hz
+Max Resolution (DP)‡,4096x2304@60Hz,4096x2304@60Hz
+Max Resolution (eDP - Integrated Flat Panel)‡,4096x2304@60Hz,4096x2304@60Hz
+DirectX* Support,12,12
+OpenGL* Support,4.5,4.5
+Intel® Quick Sync Video,Yes,Yes
+Intel® Clear Video HD Technology,Yes,Yes
+Intel® Clear Video Technology,Yes,Yes
+# of Displays Supported ‡,3,3
+Device ID,0x9B21,0x9B21 | 0x9BAA
+
+Expansion Options
+PCI Express Revision,2.0,2.0
+PCI Express Configurations ‡,1x4 |  2x2 |  1x2+2x1 and 4x1,1x4 |  2x2 |  1x2+2x1 and 4x1
+Max # of PCI Express Lanes,16,12
+
+Package Specifications
+Sockets Supported,FCBGA1528,FCBGA1528
+Max CPU Configuration,1,1
+TJUNCTION,100°C,100°C
+Package Size,46mm x 24mm,46mm x 24mm
+
+Advanced Technologies
+Intel® Optane™ Memory Supported ‡,Yes,No
+Intel® Speed Shift Technology,Yes,Yes
+Intel® Turbo Boost Technology ‡,No,No
+Intel® Hyper-Threading Technology ‡,No,No
+Intel® Transactional Synchronization Extensions,No,No
+Intel® 64 ‡,Yes,Yes
+Instruction Set,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2
+Idle States,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes
+Intel® Flex Memory Access,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes
+Secure Key,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),Yes with Intel® ME,Yes with Intel® ME
+Intel® OS Guard,Yes,Yes
+Intel® Trusted Execution Technology ‡,No,No
+Execute Disable Bit ‡,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes

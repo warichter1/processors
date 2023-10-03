@@ -1,0 +1,58 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:06:54 PM
+ ,Intel® Xeon® Processor X5690 ,Intel® Xeon® Processor X5675 ,Intel® Xeon® Processor X5687 ,Intel® Xeon® Processor X5672 ,Intel® Xeon® Processor X5647 ,Intel® Xeon® Processor E5649 ,Intel® Xeon® Processor E5607 ,Intel® Xeon® Processor E5606 ,Intel® Xeon® Processor E5603 
+Essentials
+Product Collection,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,X5690,X5675,X5687,X5672,X5647,E5649,E5607,E5606,E5603
+Lithography,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm
+Recommended Customer Price,$1666.00,$1443.00,,,,$777.00,$279.00,$219.00 - $227.00,$188.00 - $195.00
+
+CPU Specifications
+Total Cores,6,6,4,4,4,6,4,4,4
+Total Threads,12,12,8,8,8,12,4,4,4
+Max Turbo Frequency,3.73 GHz,3.46 GHz,3.86 GHz,3.60 GHz,3.20 GHz,2.93 GHz,,,
+Processor Base Frequency,3.46 GHz,3.06 GHz,3.60 GHz,3.20 GHz,2.93 GHz,2.53 GHz,2.26 GHz,2.13 GHz,1.60 GHz
+Cache,12 MB Intel® Smart Cache,12 MB Intel® Smart Cache,12 MB Intel® Smart Cache,12 MB Intel® Smart Cache,12 MB Intel® Smart Cache,12 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,4 MB Intel® Smart Cache
+Bus Speed,6.4 GT/s,6.4 GT/s,6.4 GT/s,6.4 GT/s,5.86 GT/s,5.86 GT/s,4.8 GT/s,4.8 GT/s,4.8 GT/s
+# of QPI Links,2,2,2,2,2,2,2,2,2
+TDP,130 W,95 W,130 W,95 W,130 W,80 W,80 W,80 W,80 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q1'11,Q1'11,Q1'11,Q1'11,Q1'11,Q1'11,Q1'11,Q1'11,Q1'11
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No,No,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),288 GB,288 GB,288 GB,288 GB,288 GB,288 GB,288 GB,288 GB,288 GB
+Memory Types,DDR3 800/1066/1333,DDR3 800/1066/1333,DDR3 800/1066/1333,DDR3 800/1066/1333,DDR3 800/1066,DDR3 800/1066/1333,DDR3 800/1066,DDR3 800/1066,DDR3 800/1066
+Max # of Memory Channels,3,3,3,3,3,3,3,3,3
+Max Memory Bandwidth,32 GB/s,32 GB/s,32 GB/s,32 GB/s,25.6 GB/s,32 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s
+Physical Address Extensions,40-bit,40-bit,40-bit,40-bit,40-bit,40-bit,40-bit,40-bit,40-bit
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Package Specifications
+Sockets Supported,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366
+Max CPU Configuration,2,2,2,2,2,,2,2,2
+TCASE,78.5°C,81.3°C,80.4°C,82.9°C,80.4°C,76.2°C,,,
+Package Size,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm,42.5mm X 45mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,1.0,1.0,1.0,1.0,1.0,1.0,No,No,No
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Demand Based Switching,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,No,No,No,No,No,No,No,No,No
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes

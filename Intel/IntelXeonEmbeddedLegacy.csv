@@ -1,0 +1,78 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:57:35 PM
+ ,64-bit Intel® Xeon® Processor LV 2.80 GHz, 1M Cache, 800 MHz FSB ,Intel® Xeon® Processor 5130 ,Intel® Xeon® Processor 5140 ,Intel® Xeon® Processor LV 1.66 GHz, 2M Cache, 667 MHz FSB ,Intel® Xeon® Processor LV 2.00 GHz, 2M Cache, 667 MHz FSB ,Intel® Xeon® Processor LV 5148 ,64-bit Intel® Xeon® Processor 3.20 GHz, 1M Cache, 800 MHz FSB ,Intel® Xeon® Processor E5345 ,Intel® Xeon® Processor E5335 ,Intel® Xeon® Processor ULV 1.66 GHz, 2M Cache, 667 MHz FSB ,Intel® Xeon® Processor LV 5128 ,Intel® Xeon® Processor LV 5138 ,Intel® Xeon® Processor E5440 ,Intel® Xeon® Processor L5410 ,Intel® Xeon® Processor L5408 ,Intel® Xeon® Processor L5238 ,Intel® Xeon® Processor E5240 ,Intel® Xeon® Processor L5318 ,Intel® Xeon® Processor E5220 ,Intel® Xeon® Processor E5540 ,Intel® Xeon® Processor E5504 ,Intel® Xeon® Processor L5508 ,Intel® Xeon® Processor L5518 ,Intel® Xeon® Processor X3430 ,Intel® Xeon® Processor X3450 ,Intel® Xeon® Processor EC5549 ,Intel® Xeon® Processor EC5539 ,Intel® Xeon® Processor LC5528 ,Intel® Xeon® Processor EC3539 ,Intel® Xeon® Processor EC5509 ,Intel® Xeon® Processor LC5518 ,Intel® Xeon® Processor LC3528 ,Intel® Xeon® Processor LC3518 ,Intel® Xeon® Processor E5620 ,Intel® Xeon® Processor L5638 ,Intel® Xeon® Processor L5618 ,Intel® Xeon® Processor E5645 
+Essentials
+Product Collection,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors,Legacy Intel® Xeon® Processors
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Embedded,Embedded,Embedded,Server,Server,Server,Server,Embedded,Embedded,Server,Server,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Embedded,Server,Server,Server,Server
+Lithography,90 nm,65 nm,65 nm,65 nm,65 nm,65 nm,90 nm,65 nm,65 nm,65 nm,65 nm,65 nm,45 nm,45 nm,45 nm,45 nm,45 nm,65 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,45 nm,32 nm,32 nm,32 nm,32 nm
+Processor Number,,5130,5140,,,5148,,E5345,E5335,,5128,5138,E5440,L5410,L5408,L5238,E5240,L5318,E5220,E5540,E5504,L5508,L5518,X3430,X3450,EC5549,EC5539,LC5528,EC3539,EC5509,LC5518,LC3528,LC3518,E5620,L5638,L5618,E5645
+Use Conditions,,,,,,,,,,,,,Server/Enterprise,Server/Enterprise,Communications,Communications,Communications,,Communications,Server/Enterprise,Server/Enterprise,Communications,Communications,Server/Enterprise,Server/Enterprise,Communications,Communications,Communications,Communications,Communications,Communications,Communications,Communications,Server/Enterprise,Communications,Communications,Communications
+Recommended Customer Price,,,,,,,,,,,,,$703.00 - $735.00,$351.00,,$560.00,,,$317.00,$940.00,,,$504.00,$203.00,$261.00,$503.00,$417.00,$493.00,,$286.00,$493.00,,$221.00,$369.00 - $391.00,,,$554.00
+
+Performance Specifications
+Total Cores,1,2,2,2,2,2,1,4,4,2,2,2,4,4,4,2,2,4,2,,,,,,,,,,,,,,,,,,
+Processor Base Frequency,2.80 GHz,2.00 GHz,2.33 GHz,1.66 GHz,2.00 GHz,2.33 GHz,3.20 GHz,2.33 GHz,2.00 GHz,1.66 GHz,1.86 GHz,2.13 GHz,2.83 GHz,2.33 GHz,2.13 GHz,2.66 GHz,3.00 GHz,1.60 GHz,2.33 GHz,,,,,,,,,,,,,,,,,,
+Cache,1 MB L2 Cache,4 MB L2 Cache,4 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,4 MB L2 Cache,1 MB L2 Cache,8 MB L2 Cache,8 MB L2 Cache,2 MB L2 Cache,4 MB L2 Cache,4 MB L2 Cache,12 MB L2 Cache,12 MB L2 Cache,12 MB L2 Cache,6 MB L2 Cache,6 MB L2 Cache,8 MB L2 Cache,6 MB L2 Cache,,,,,,,,,,,,,,,,,,
+Bus Speed,800 MHz,1333 MHz,1333 MHz,667 MHz,667 MHz,1333 MHz,800 MHz,1333 MHz,1333 MHz,667 MHz,1066 MHz,1066 MHz,1333 MHz,1333 MHz,1066 MHz,1333 MHz,1333 MHz,1066 MHz,1333 MHz,,,,,,,,,,,,,,,,,,
+FSB Parity,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,,,,,,,,,,,,,,,,,,
+TDP,55 W,65 W,65 W,31 W,31 W,40 W,103 W,80 W,80 W,15 W,40 W,35 W,80 W,50 W,40 W,35 W,65 W,40 W,65 W,,,,,,,,,,,,,,,,,,
+VID Voltage Range,1.1125V-1.2000V,B2=1.00V-1.50V,B2=1.0V-1.5V |  G0=.85V-1.5V,1.1125-1.275V,1.1125V-1.25V,1.150V-1.250V,1.287V-1.400V,1.0000V-1.5000V,1.0000V-1.5000V,1.0V-1.2125V,B2=1.0V-1.5V |  G0=.85V-1.5V,B2=1.0V-1.5V |  G0=.85V-1.5V,0.850V-1.3500V,0.850V-1.3500V,0.850V-1.3500V,0.8500V-1.3500V,0.8500V-1.3500V,0.9000V-1.2500V,0.8500V-1.3500V,,,,,,,,,,,,,,,,,,
+Scenario Design Power (SDP),,0 W,0 W,,0 W,0 W,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q2'04,Q2'06,Q2'06,Q1'06,Q1'06,Q2'06,Q2'04,Q1'07,Q1'07,Q1'06,Q2'06,Q2'06,Q1'08,Q1'08,Q1'08,Q1'08,Q1'08,Q1'07,Q1'08,Q1'09,Q1'09,Q1'09,Q1'09,Q3'09,Q3'09,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Memory Specifications
+Physical Address Extensions,32-bit,,,32-bit,32-bit,32-bit,,32-bit,,,,,,,,,,,,40-bit,40-bit,40-bit,40-bit,36-bit,36-bit,,,,,,,,,40-bit,,,40-bit
+ECC Memory Supported   ‡,No,,,No,No,No,,No,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,Yes
+Max Memory Size (dependent on memory type),,,,,,,,,,,,,,,,,,,,144 GB,144 GB,144 GB,144 GB,32 GB,32 GB,,,,,,,,,288 GB,,,288 GB
+Memory Types,,,,,,,,,,,,,,,,,,,,DDR3 800/1066,DDR3 800,DDR3 800/1066,DDR3 800/1066,DDR3 800/1066/1333,DDR3 800/1066/1333,DDR3 800/1066/1333,,,,,,,,DDR3 800/1066,,,DDR3 800/1066/1333
+Max # of Memory Channels,,,,,,,,,,,,,,,,,,,,3,3,3,3,2,2,3,3,3,3,3,3,2,2,3,,,3
+Max Memory Bandwidth,,,,,,,,,,,,,,,,,,,,25.6 GB/s,19.2 GB/s,25.6 GB/s,25.6 GB/s,21 GB/s,21 GB/s,,,,,,,,,25.6 GB/s,,,32 GB/s
+
+Package Specifications
+Sockets Supported,PPGA604,,LGA771,PPGA478,PPGA478,LGA771,PPGA604,LGA771 | PLGA771,LGA771 | PLGA771,,LGA771,LGA771,LGA771,LGA771,LGA771,LGA771,LGA771,PLGA771,LGA771,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1156 | LGA1156,FCLGA1156 | LGA1156,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366,FCLGA1366 | LGA1366
+TCASE,86°C,65°C,65°C,100°C,100°C,58°C,72°C,66°C,66°C,100°C,58°C,70.8°C,67°C,57°C,72°C,71°C,66°C,72.2°C,66°C,76°C,76°C,85°C,85°C,72.7°C,72.7°C,77.6°C,74.6°C,70.0°C - 85.0°C,74.6°C,77.6°C,77.5°C - 92.5°C,79.5°C - 94.5°C,79.5°C - 94.5°C,77.6°C,85°C,87°C,76.2°C
+Package Size,42.5mm x 42.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,35mm x 35mm,35mm x 35mm,37.5mm x 37.5mm,42.5mm x 42.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,35mm x 35mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,,,37.5mm x 37.5mm,37.5mm x 37.5mm,42.5mm x 45mm,42.5mm x 45mm,42.5mm x 45mm,42.5mm x 45mm,37.5mm x 37.5mm,37.5mm x 37.5mm,,,,,,,,,42.5mm X 45mm,,,42.5mm X 45mm
+Processing Die Size,112 mm2,143 mm2,143 mm2,90 mm2,90 mm2,143 mm2,112 mm2,286 mm2,286 mm2,90 mm2,143 mm2,143 mm2,214 mm2,214 mm2,214 mm2,107 mm2,107 mm2,286 mm2,107 mm2,263 mm2,,263 mm2,263 mm2,296 mm2,296 mm2,,,,,,,,,,,,
+# of Processing Die Transistors,125 million,291 million,291 million,151 million,151 million,291 million,125 million,582 million,582 million,151 million,291 million,291 million,820 million,820 million,820 million,410 million,410 million,582 million,410 million,731 million,,731 million,731 million,774 million,774 million,,,,,,,,,,,,
+Max CPU Configuration,,,,,,,,,,,,,,,,,,,,2,2,2,2,1,1,2,2,2,1,2,2,1,1,2,,,2
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,1.0,No,1.0,1.0,1.0,1.0,1.0,No,1.0,No,No,1.0,1.0,No,1.0,1.0,1.0,1.0
+Intel® Hyper-Threading Technology ‡,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,
+Intel® 64 ‡,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,,,,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,32-bit,32-bit,64-bit,64-bit,64-bit,64-bit,32-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,,,64-bit
+Idle States,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,Yes
+Intel® Demand Based Switching,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,,No,No,Yes,Yes,No,,No,No,Yes,No,No,No,No,No,,,No,,,,,,,,,,,,,,,,,,,
+Thermal Monitoring Technologies,,Yes,Yes,,,Yes,,Yes,Yes,,Yes,Yes,Yes,,,,,,,,,,,No,No,,,,,,,,,No,,,No
+Instruction Set Extensions,,,,,,,,,,,,,,,,,,,,,,,,Intel® SSE4.2,Intel® SSE4.2,,,,,,,,,Intel® SSE4.2,,,Intel® SSE4.2
+
+Security & Reliability
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,,,,,,,,,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,Yes
+Intel® Virtualization Technology (VT-x) ‡,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,,,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® AES New Instructions,,,,,,,,,,,,,,,,,,,,,,,,No,No,,,,,,,,,Yes,Yes,Yes,Yes
+
+CPU Specifications
+# of Cores,,,,,,,,,,,,,,,,,,,,4,4,2,4,4,4,4,2,4,4,4,4,2,1,4,6,4,6
+Total Threads,,,,,,,,,,,,,,,,,,,,8,4,4,8,4,8,8,2,8,4,4,8,4,1,8,12,8,12
+Max Turbo Frequency,,,,,,,,,,,,,,,,,,,,2.80 GHz,,2.40 GHz,2.40 GHz,2.80 GHz,3.20 GHz,2.93 GHz,,2.53 GHz,,,2.13 GHz,1.87 GHz,,2.66 GHz,2.40 GHz,2.26 GHz,2.67 GHz
+Processor Base Frequency,,,,,,,,,,,,,,,,,,,,2.53 GHz,2.00 GHz,2.00 GHz,2.13 GHz,2.40 GHz,2.66 GHz,2.53 GHz,2.27 GHz,2.13 GHz,2.13 GHz,2.00 GHz,1.73 GHz,1.73 GHz,1.73 GHz,2.40 GHz,2.00 GHz,1.87 GHz,2.40 GHz
+Cache,,,,,,,,,,,,,,,,,,,,8 MB Intel® Smart Cache,4 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB L3 Cache,4 MB L3 Cache,8 MB L3 Cache,8 MB L3 Cache,8 MB L3 Cache,8 MB L3 Cache,4 MB L3 Cache,2 MB L3 Cache,12 MB Intel® Smart Cache,12 MB,12 MB,12 MB Intel® Smart Cache
+Bus Speed,,,,,,,,,,,,,,,,,,,,5.86 GT/s,4.8 GT/s,5.86 GT/s,5.86 GT/s,2.5 GT/s,2.5 GT/s,5.87 GT/s,5.87 GT/s,4.8 GT/s,2.5 GT/s,4.8 GT/s,4.8 GT/s,2.5 GT/s,2.5 GT/s,5.86 GT/s,5.86 GT/s,5.86 GT/s,5.86 GT/s
+# of QPI Links,,,,,,,,,,,,,,,,,,,,2,2,2,2,,,1,1,1,,1,1,,,2,2,,2
+TDP,,,,,,,,,,,,,,,,,,,,80 W,80 W,38 W,60 W,95 W,95 W,85 W,65 W,60 W,65 W,85 W,48 W,35 W,23 W,80 W,60 W,40 W,80 W
+
+Expansion Options
+PCI Express Revision,,,,,,,,,,,,,,,,,,,,,,,,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,,,,
+PCI Express Configurations ‡,,,,,,,,,,,,,,,,,,,,,,,,1x16 |  2x8 |  4x4,1x16 |  2x8 |  4x4,1x16 |  2x8 |  4x4,,,,,,,,,,,
+Max # of PCI Express Lanes,,,,,,,,,,,,,,,,,,,,,,,,16,16,,,,,,,,,,,,

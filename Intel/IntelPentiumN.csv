@@ -1,0 +1,117 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:34:07 PM
+ ,Intel® Pentium® Processor N4200E ,Intel® Pentium® Processor N6415 ,Intel® Pentium® Processor N3510 ,Intel® Pentium® Processor N3520 ,Intel® Pentium® Processor N3530 ,Intel® Pentium® Processor N3540 ,Intel® Pentium® Processor N3700 ,Intel® Pentium® Processor N3710 ,Intel® Pentium® Processor N4200 
+Essentials
+Product Collection,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series,Intel® Pentium® Processor N Series
+Vertical Segment,Mobile,Embedded,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,N4200E,N6415,N3510,N3520,N3530,N3540,N3700,N3710,N4200
+Lithography,14 nm,10 nm,22 nm,22 nm,22 nm,22 nm,14 nm,14 nm,14 nm
+Use Conditions,PC/Client/Tablet,PC/Client/Tablet,,,,,,PC/Client/Tablet,PC/Client/Tablet
+Recommended Customer Price,,$96.00,,,,,,$50.00,$56.00
+
+CPU Specifications
+Total Cores,4,4,4,4,4,4,4,4,4
+Total Threads,4,4,4,4,4,4,4,4,4
+Max Turbo Frequency,2.50 GHz,,,,,,,,
+Burst Frequency,2.50 GHz,3.00 GHz,,2.42 GHz,2.58 GHz,2.66 GHz,2.40 GHz,2.56 GHz,2.50 GHz
+Processor Base Frequency,1.10 GHz,1.20 GHz,2.00 GHz,2.17 GHz,2.16 GHz,2.16 GHz,1.60 GHz,1.60 GHz,1.10 GHz
+Cache,2 MB,1.5 MB L2 Cache,2 MB,2 MB,2 MB,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache
+TDP,6 W,6.5 W,7.5 W,7.5 W,7.5 W,7.5 W,6 W,6 W,6 W
+Scenario Design Power (SDP),,,4.5 W,4.5 W,4.5 W,4.5 W,4 W,4 W,4 W
+
+Supplemental Information
+Marketing Status,Discontinued,Launched,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Launched,Launched
+Launch Date,Q3'19,Q1'21,Q3'13,Q4'13,Q1'14,Q3'14,Q1'15,Q1'16,Q3'16
+Servicing Status,End of Servicing Lifetime,,,,,,End of Servicing Lifetime,End of Servicing Lifetime,ESU Notification Issued
+End of Servicing Updates Date,Friday |  June 30 |  2023,,,,,,Thursday |  June 30 |  2022,Thursday |  June 30 |  2022,Saturday |  September 30 |  2023
+Embedded Options Available,No,Yes,No,No,No,No,No,Yes,Yes
+Description,The Intel® Pentium® Processor N4200E is now named as Intel® Pentium® Processor N4200 processor. Please refer to the "N4200" ARK Page for all the product details.,,,,,,,,
+Expected Discontinuance,,,Feburary 3 |  2014,Feburary 3 |  2014,,,,,
+Additional Information URL,,,View now,View now,View now,View now,View now,View now,
+
+Memory Specifications
+Max Memory Size (dependent on memory type),8 GB,32 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB,8 GB
+Memory Types,DDR3L/LPDDR3 up to 1866 MT/s; LPDDR4 up to 2400 MT/s,4x32 LPDDR4/x 3200MT/s Max 16GB / 2x64 DDR4 3200MT/s Max 32GB,DDR3L 1333,DDR3L 1333,DDR3L 1333,DDR3L 1333,DDR3L-1600,DDR3L-1600,DDR3L/LPDDR3 up to 1866 MT/s; LPDDR4 up to 2400 MT/s
+Max # of Memory Channels,2,4,2,2,2,2,2,2,2
+ECC Memory Supported   ‡,No,No,,,,No,No,No,No
+Max Memory Bandwidth,,51.2 GB/s,,,,21.32 GB/s,,,
+
+Discrete Graphics
+Graphics Base Clock,200 MHz,,,,,,,,
+
+Processor Graphics
+Processor Graphics ‡,Intel® HD Graphics 505,Intel® UHD Graphics for 10th Gen Intel® Processors,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel® Celeron® Processor N3000 Series,,Intel® HD Graphics 505
+Graphics Base Frequency,200 MHz,350 MHz,313 MHz,313 MHz,313 MHz,313 MHz,400 MHz,400 MHz,200 MHz
+Graphics Burst Frequency,750 MHz,800 MHz,750 MHz,854 MHz,896 MHz,896 MHz,700 MHz,700 MHz,750 MHz
+Graphics Video Max Memory,8 GB,,,,,,8 GB,8 GB,8 GB
+Graphics Output,eDP/DP/HDMI/MIPI-DSI,eDP/DP/HDMI/MIPI-DSI,,,,,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI/MIPI-DSI
+Execution Units,18,16,,,,,16,16,18
+DirectX* Support,Yes,Yes,,,,11.2,Yes,Yes,Yes
+OpenGL* Support,Yes,Yes,,,,,Yes,Yes,Yes
+Intel® Quick Sync Video,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes
+Intel® InTru™ 3D Technology,No,,No,No,No,No,No,No,No
+Intel® Clear Video HD Technology,Yes,,No,No,No,No,Yes,Yes,Yes
+Intel® Clear Video Technology,Yes,,,,,,Yes,Yes,Yes
+# of Displays Supported ‡,3,3,2,2,2,2,3,3,3
+4K Support,,Yes |  at 60Hz,,,,,,,
+Max Resolution (DP)‡,,4096x2160@ 60Hz,,,,,,,
+Max Resolution (eDP - Integrated Flat Panel)‡,,4096x2160@ 60Hz,,,,,,,
+OpenCL* Support,,Yes,,,,,,,
+Graphics Max Dynamic Frequency,,,750 MHz,854 MHz,896 MHz,896 MHz,,,
+Device ID,,,,,,,,,0x5A84
+
+Expansion Options
+PCI Express Revision,2.0,3.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+PCI Express Configurations ‡,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2,PCIe 0: 1 x4/2 x2/1 x2 + 2 x1/4 x1 |  PCIe 1-3: 1 x2/1 x1,1x4,,1x4,1x4,1x4/2x2/1x2 + 2x1/4x1,1x4/2x2/1x2 + 2x1/4x1,1x4 + 1x2 or 4x1 or 2x1+1x2 + 1x2
+Max # of PCI Express Lanes,6,8,4,4,4,4,4,4,6
+
+I/O Specifications
+# of USB Ports,8,4,5,5,5,5,5,5,8
+USB Revision,2.0/3.0,2.0/3.0/3.1,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,3.0 and 2.0,2.0/3.0,2.0/3.0,2.0/3.0
+Total # of SATA Ports,2,2,2,2,2,2,2,2,2
+Integrated LAN,No,3x 2.5GbE,,,,,No,No,No
+General Purpose IO,Yes,Yes,,,,,Yes,Yes,Yes
+UART,Yes,Yes,,,,,Yes,Yes,Yes
+Max # of SATA 6.0 Gb/s Ports,2,,,,,,2,2,2
+
+Package Specifications
+Sockets Supported,FCBGA1296,FCBGA1493,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1170,FCBGA1296
+Max CPU Configuration,1,1,1,1,1,1,1,1,1
+TJUNCTION,105°C,105°C,100°C,105°C,100°C,100°C,90°C,90°C,105°C
+Package Size,24mm x 31mm,35mm x 24mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,25mm x 27mm,24mm x 31mm
+Operating Temperature Range,,0°C to 70°C,,,,,,,
+Operating Temperature (Maximum),,70 °C,,,,,,,
+Operating Temperature (Minimum),,0 °C,,,,,,,
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,,No,No,No,No,No,No,No
+Secure Boot,Yes,Yes,,,,,Yes,Yes,Yes
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,,,,,,Yes,Yes,Yes
+Intel® HD Audio Technology,Yes,Yes,,,,,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,,No,No,No,,Yes,Yes,Yes
+Intel® Rapid Storage Technology,No,,No,No,No,,No,No,No
+Intel® Smart Connect Technology,No,,Yes,Yes,Yes,Yes,No,No,No
+Intel® Smart Response Technology,No,,,,,,No,No,No
+Intel® Virtualization Technology for Itanium (VT-i),No,,,,,,No,No,No
+Intel® Gaussian & Neural Accelerator,,1.0,,,,,,,
+Intel® Speed Shift Technology,,Yes,,,,,,,
+4G WiMAX Wireless Technology,,,,,,,No,No,
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,No,No,No,No,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Memory Protection Extensions (Intel® MPX),Yes,,,,,,,,Yes
+Intel® Trusted Execution Technology ‡,No,No,,,,,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Anti-Theft Technology,No,,No,No,No,No,No,No,No
+Intel® OS Guard,Yes,Yes,,,,,No,No,Yes
+Intel® Stable IT Platform Program (SIPP),No,,,,,,No,No,No
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,No,No,No,No,No,No,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,,,,,Yes,Yes,Yes
+Intel® Boot Guard,,Yes,,,,,,,

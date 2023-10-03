@@ -1,0 +1,61 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:16:37 PM
+ ,Intel® Xeon Phi™ Processor 7295 ,Intel® Xeon Phi™ Processor 7285 ,Intel® Xeon Phi™ Processor 7235 
+Essentials
+Product Collection,Intel® Xeon Phi™ 72x5 Processor Family,Intel® Xeon Phi™ 72x5 Processor Family,Intel® Xeon Phi™ 72x5 Processor Family
+Vertical Segment,Server,Server,Server
+Processor Number,7295,7285,7235
+Lithography,14 nm,14 nm,14 nm
+
+Performance Specifications
+Total Cores,72,68,64
+Processor Base Frequency,1.50 GHz,1.30 GHz,1.30 GHz
+Max Turbo Frequency,1.60 GHz,1.40 GHz,1.40 GHz
+Cache,36 MB L2 Cache,34 MB L2 Cache,32 MB L2 Cache
+TDP,320 W,250 W,250 W
+VID Voltage Range,0.550-1.200V,0.550-1.200V,0.550-1.200V
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued
+Launch Date,Q4'17,Q4'17,Q4'17
+Supply Status,Discontinued,Discontinued,Discontinued
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),384 GB,384 GB,384 GB
+Memory Types,DDR4-2400,DDR4-2400,DDR4-2133
+Max # of Memory Channels,6,6,6
+Max Memory Bandwidth,115.2 GB/s,115.2 GB/s,102 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes
+
+Processor Graphics
+Graphics Video Max Memory,1 GB,,
+
+Expansion Options
+PCI Express Revision,3.0,3.0,3.0
+PCI Express Configurations ‡,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port 1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port 1) may negotiate down to x2 |  or x1,x 16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port 1) may negotiate down to x2 |  or x1
+Max # of PCI Express Lanes,36,36,36
+
+Package Specifications
+Sockets Supported,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647
+TCASE,77°C,72°C,72°C
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512
+Idle States,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),No,No,No
+Intel® Memory Protection Extensions (Intel® MPX),No,No,No
+Intel® Trusted Execution Technology ‡,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes
+Intel® Boot Guard,No,No,No

@@ -1,0 +1,79 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:54:07 PM
+ ,Intel® Xeon® Processor E3-1220 ,Intel® Xeon® Processor E3-1225 ,Intel® Xeon® Processor E3-1230 ,Intel® Xeon® Processor E3-1235 ,Intel® Xeon® Processor E3-1240 ,Intel® Xeon® Processor E3-1245 ,Intel® Xeon® Processor E3-1260L ,Intel® Xeon® Processor E3-1270 ,Intel® Xeon® Processor E3-1275 ,Intel® Xeon® Processor E3-1280 ,Intel® Xeon® Processor E3-1220L ,Intel® Xeon® Processor E3-1290 ,Intel® Xeon® Processor E3-1125C ,Intel® Xeon® Processor E3-1105C 
+Essentials
+Product Collection,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family,Intel® Xeon® Processor E3 Family
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Embedded,Embedded
+Processor Number,E3-1220,E3-1225,E3-1230,E3-1235,E3-1240,E3-1245,E3-1260L,E3-1270,E3-1275,E3-1280,E3-1220L,E3-1290,E3-1125C,E3-1105C
+Lithography,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,32 nm,,
+Use Conditions,,Server/Enterprise,,,,,,,Server/Enterprise,,,,Communications,Communications
+Recommended Customer Price,$203.00,$209.00,$230.00,$250.00,$261.00,$273.00,,$339.00,$350.00,$623.00,,,,
+
+CPU Specifications
+Total Cores,4,4,4,4,4,4,4,4,4,4,2,4,4,4
+Total Threads,4,4,8,8,8,8,8,8,8,8,4,8,8,8
+Max Turbo Frequency,3.40 GHz,3.40 GHz,3.60 GHz,3.60 GHz,3.70 GHz,3.70 GHz,3.30 GHz,3.80 GHz,3.80 GHz,3.90 GHz,3.40 GHz,4.00 GHz,,
+Intel® Turbo Boost Technology 2.0 Frequency‡,3.40 GHz,3.40 GHz,3.60 GHz,3.60 GHz,3.70 GHz,3.70 GHz,3.30 GHz,3.80 GHz,3.80 GHz,3.90 GHz,3.40 GHz,4.00 GHz,,
+Processor Base Frequency,3.10 GHz,3.10 GHz,3.20 GHz,3.20 GHz,3.30 GHz,3.30 GHz,2.40 GHz,3.40 GHz,3.40 GHz,3.50 GHz,2.20 GHz,3.60 GHz,2.00 GHz,1.00 GHz
+Cache,8 MB Intel® Smart Cache,6 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,3 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB L3 Cache,6 MB L3 Cache
+Bus Speed,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,,
+TDP,80 W,95 W,80 W,95 W,80 W,95 W,45 W,80 W,95 W,95 W,20 W,95 W,40 W,25 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q2'11,Q3'11,Q2'12,Q2'12
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019
+Embedded Options Available,No,Yes,No,No,No,No,No,No,Yes,No,No,No,Yes,Yes
+
+Memory Specifications
+Max Memory Size (dependent on memory type),32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB
+Memory Types,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333,DDR3 1066/1333/1600,DDR3 1066/1333/1600
+Max # of Memory Channels,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+Max Memory Bandwidth,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,21 GB/s,25.6 GB/s,25.6 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Processor Graphics
+Intel® Quick Sync Video,No,Yes,No,Yes,No,Yes,Yes,No,Yes,No,No,No,,
+Intel® InTru™ 3D Technology,No,Yes,No,Yes,No,Yes,Yes,No,Yes,No,No,No,,
+Intel® Flexible Display Interface (Intel® FDI),No,Yes,No,Yes,No,Yes,Yes,No,Yes,No,No,No,,
+Intel® Clear Video HD Technology,No,Yes,No,Yes,No,Yes,Yes,No,Yes,No,No,No,,
+Graphics Base Frequency,,850 MHz,,850 MHz,,850 MHz,650 MHz,,850 MHz,,,,,
+Graphics Max Dynamic Frequency,,1.35 GHz,,1.35 GHz,,1.35 GHz,1.25 GHz,,1.35 GHz,,,,,
+# of Displays Supported ‡,,2,,2,,2,2,,2,,,,,
+Processor Graphics ‡,,,,,,,Intel® HD Graphics 2000,,,,,,,
+
+Expansion Options
+PCI Express Revision,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2,2
+Max # of PCI Express Lanes,20,20,20,20,20,20,20,20,20,20,20,20,20,20
+PCI Express Configurations ‡,,,,,,,,,,,,,1x16  1x4 or 2x8  1x4 or 1x8  3x4,1x16 1x4 or 2x8 1x4 or 1x8 3x4
+
+Package Specifications
+Sockets Supported,LGA1155,LGA1155,LGA1155,LGA1155,LGA1155,LGA1155,LGA1155,LGA1155,LGA1155,LGA1155,FCLGA1155,LGA1155,FCBGA1284,FCBGA1284
+Max CPU Configuration,1,1,1,1,1,1,1,1,1,1,1,1,1,
+TCASE,69.1°C,72.6°C,69.1°C,72.6°C,69.1°C,72.6°C,58.6°C,69.1°C,72.6°C,73.6°C,77.5°C,56.7°C,,
+Package Size,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5 mm,37.5mm x 37.5 mm
+TJUNCTION,,,,,,,,,,,,,100°C,100°C
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,No,No
+Intel® Hyper-Threading Technology ‡,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX,Intel® AVX,Intel® AVX
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,,Yes,Yes
+Intel® Demand Based Switching,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Fast Memory Access,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Flex Memory Access,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,
+
+Security & Reliability
+Intel vPro® Eligibility ‡,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,,
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes

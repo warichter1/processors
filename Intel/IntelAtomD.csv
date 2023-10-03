@@ -1,0 +1,64 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:09:11 PM
+ ,Intel Atom® Processor D2500 ,Intel Atom® Processor D2700 ,Intel Atom® Processor D2550 
+Essentials
+Product Collection,Intel Atom® Processor D Series,Intel Atom® Processor D Series,Intel Atom® Processor D Series
+Vertical Segment,Desktop,Desktop,Desktop
+Processor Number,D2500,D2700,D2550
+Lithography,32 nm,32 nm,32 nm
+Use Conditions,,,PC/Client/Tablet
+Recommended Customer Price,,,$47.00
+
+CPU Specifications
+Total Cores,2,2,2
+Total Threads,2,4,4
+Processor Base Frequency,1.86 GHz,2.13 GHz,1.86 GHz
+Cache,1 MB L2 Cache,1 MB L2 Cache,1 MB L2 Cache
+Bus Speed,2.5 GT/s,2.5 GT/s,
+TDP,10 W,10 W,10 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued
+Launch Date,Q3'11,Q3'11,Q1'12
+Embedded Options Available,No,No,Yes
+
+Memory Specifications
+Max Memory Size (dependent on memory type),4 GB,4 GB,4 GB
+Memory Types,DDR3 800/1066,DDR3 800/1066,DDR3 800/1066
+Max # of Memory Channels,1,1,1
+Max Memory Bandwidth,6.4 GB/s,6.4 GB/s,6.4 GB/s
+Physical Address Extensions,36-bit,36-bit,36-bit
+ECC Memory Supported   ‡,No,No,No
+
+Processor Graphics
+Graphics Base Frequency,400 MHz,640 MHz,640 MHz
+# of Displays Supported ‡,2,2,2
+
+Expansion Options
+Max # of PCI Express Lanes,4,4,4
+
+I/O Specifications
+# of USB Ports,8,8,
+Total # of SATA Ports,2,2,
+
+Package Specifications
+Sockets Supported,FCBGA559,FCBGA559,FCBGA559
+TJUNCTION,100 C,100 C,100 C
+Package Size,22mm X 22mm,22mm X 22 mm,22mm X 22 mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No
+Intel® Hyper-Threading Technology ‡,No,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3
+Enhanced Intel SpeedStep® Technology,No,No,No
+Intel® Demand Based Switching,No,No,
+Intel® ME Firmware Version,No,No,
+Intel® HD Audio Technology,Yes,Yes,
+Intel® Virtualization Technology for Itanium (VT-i),,,No
+
+Security & Reliability
+Execute Disable Bit ‡,Yes,Yes,
+Intel® Virtualization Technology (VT-x) ‡,No,No,No
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No

@@ -1,0 +1,49 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:23:22 PM
+ ,Intel® Itanium® Processor 9015 
+Essentials
+Product Collection,Intel® Itanium® Processor 9000 Series
+Vertical Segment,Server
+Processor Number,9015
+Lithography,90 nm
+
+Performance Specifications
+Total Cores,2
+Processor Base Frequency,1.40 GHz
+Cache,12 MB L2 Cache
+Bus Speed,533 MHz
+FSB Parity,Yes
+TDP,104 W
+VID Voltage Range,1.0875V-1.25V
+
+Supplemental Information
+Marketing Status,Discontinued
+Launch Date,Q1'07
+Expected Discontinuance,Q2'2008
+Servicing Status,End of Servicing Lifetime
+Embedded Options Available,No
+
+Memory Specifications
+Physical Address Extensions,32-bit
+ECC Memory Supported   ‡,No
+
+Package Specifications
+Sockets Supported,PPGA611
+TCASE,76°C
+Package Size,113mm x 48.2mm
+Processing Die Size,596 mm2
+# of Processing Die Transistors,1720 million
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No
+Intel® Hyper-Threading Technology ‡,No
+Intel® Virtualization Technology (VT-x) ‡,Yes
+Intel® 64 ‡,No
+Instruction Set,Itanium 64-bit
+Idle States,No
+Enhanced Intel SpeedStep® Technology,No
+Intel® Demand Based Switching,No
+
+Security & Reliability
+Intel® Trusted Execution Technology ‡,No
+Execute Disable Bit ‡,No

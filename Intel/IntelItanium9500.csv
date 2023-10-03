@@ -1,0 +1,42 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:20:49 PM
+ ,Intel® Itanium® Processor 9560 ,Intel® Itanium® Processor 9550 ,Intel® Itanium® Processor 9540 ,Intel® Itanium® Processor 9520 
+Essentials
+Product Collection,Intel® Itanium® Processor 9500 Series,Intel® Itanium® Processor 9500 Series,Intel® Itanium® Processor 9500 Series,Intel® Itanium® Processor 9500 Series
+Vertical Segment,Server,Server,Server,Server
+Processor Number,9560,9550,9540,9520
+Lithography,32 nm,32 nm,32 nm,32 nm
+Recommended Customer Price,$4650.00,$3750.00,$2650.00,$1350.00
+
+CPU Specifications
+Total Cores,8,4,8,4
+Total Threads,16,8,16,8
+Processor Base Frequency,2.53 GHz,2.40 GHz,2.13 GHz,1.73 GHz
+Cache,32 MB,32 MB,24 MB,20 MB
+Bus Speed,6.4 GT/s,6.4 GT/s,6.4 GT/s,6.4 GT/s
+TDP,170 W,170 W,170 W,130 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q4'12,Q4'12,Q4'12,Q4'12
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No
+
+Memory Specifications
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes
+
+Package Specifications
+Sockets Supported,LGA1248,LGA1248,LGA1248,LGA1248
+TJUNCTION,95 C,95 C,95 C,95 C
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Itanium (VT-i),Yes,Yes,Yes,Yes
+
+Security & Reliability
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes

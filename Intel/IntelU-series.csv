@@ -1,0 +1,98 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:14:18 PM
+ ,Intel® Processor U300 ,Intel® Processor U300E 
+Essentials
+Product Collection,Intel® Processor U-series,Intel® Processor U-series
+Vertical Segment,Mobile,Embedded
+Processor Number,U300,U300E
+Lithography,Intel 7,Intel 7
+Use Conditions,,Embedded Broad Market Commercial Temp
+Recommended Customer Price,$193.00,$196.00
+
+CPU Specifications
+Total Cores,5,5
+# of Performance-cores,1,1
+# of Efficient-cores,4,4
+Total Threads,6,6
+Max Turbo Frequency,4.40 GHz,4.30 GHz
+Performance-core Max Turbo Frequency,4.40 GHz,4.30 GHz
+Efficient-core Max Turbo Frequency,3.30 GHz,3.20 GHz
+Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache
+Processor Base Power,15 W,15 W
+Maximum Turbo Power,55 W,55 W
+Minimum Assured Power,12 W,12 W
+Processor Base Frequency,,1.10 GHz
+Minimum Assured Frequency,,800 MHz
+Maximum Assured Power,,28 W
+Maximum Assured Frequency,,2.50 GHz
+
+Supplemental Information
+Marketing Status,Launched,Launched
+Launch Date,Q1'23,Q1'23
+Embedded Options Available,No,Yes
+
+Memory Specifications
+Max Memory Size (dependent on memory type),64 GB,64 GB
+Memory Types,Up to DDR5 5200 MT/s Up to DDR4 3200 MT/s Up to LPDDR5/x 5200 MT/s Up to LPDDR4x 4267 MT/s,Up to DDR5 5200 MT/s Up to DDR4 3200 MT/s Up to LPDDR5/x 6400 MT/s Up to LPDDR4x 4267 MT/s
+Max # of Memory Channels,2,2
+ECC Memory Supported   ‡,No,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics for 13th Gen Intel® Processors,Intel® UHD Graphics for 13th Gen Intel® Processors
+Graphics Max Dynamic Frequency,1.10 GHz,1.10 GHz
+Graphics Output,eDP 1.4b |  DP 1.4a |  HDMI 2.1,eDP 1.4b |  DP 1.4a |  HDMI 2.1
+Execution Units,48,48
+Max Resolution (HDMI)‡,4096 x 2304 @ 60Hz,4096 x 2304 @ 60Hz
+Max Resolution (DP)‡,7680 x 4320 @ 60Hz,7680 x 4320 @ 60Hz
+Max Resolution (eDP - Integrated Flat Panel)‡,4096 x 2304 @ 120Hz,4096 x 2304 @ 120Hz
+DirectX* Support,12.1,12.1
+OpenGL* Support,4.6,4.6
+OpenCL* Support,3.0,3.0
+Multi-Format Codec Engines,1,2
+Intel® Quick Sync Video,Yes,Yes
+# of Displays Supported ‡,4,4
+Device ID,0xA7A9,0xA7A9
+
+Expansion Options
+Intel® Thunderbolt™ 4,Yes,Yes
+Microprocessor PCIe Revision,Gen 4,Gen 4
+Chipset / PCH PCIe Revision,Gen 3,Gen 3
+Max # of PCI Express Lanes,20,20
+
+Package Specifications
+Sockets Supported,FCBGA1744,FCBGA1744
+Max CPU Configuration,1,1
+TJUNCTION,100°C,100°C
+Package Size,50mm x25mm,50mm x25mm
+
+Advanced Technologies
+Intel® Gaussian & Neural Accelerator,3.0,3.0
+Intel® Thread Director,Yes,Yes
+Intel® Image Processing Unit,6.0,6.0
+Intel® Smart Sound Technology,Yes,Yes
+Intel® Wake on Voice,Yes,Yes
+Intel® High Definition Audio,Yes,Yes
+MIPI SoundWire*,1.2,1.2
+Intel® Deep Learning Boost (Intel® DL Boost),Yes,Yes
+Intel® Adaptix™ Technology,Yes,
+Intel® Speed Shift Technology,Yes,Yes
+Intel® Hyper-Threading Technology ‡,Yes,Yes
+Instruction Set,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2
+Thermal Monitoring Technologies,Yes,Yes
+Intel® Flex Memory Access,Yes,Yes
+Intel® Volume Management Device (VMD),Yes,Yes
+
+Security & Reliability
+Intel® Threat Detection Technology (TDT),Yes,Yes
+Intel® QuickAssist Software Acceleration,Yes,
+Intel® Control-Flow Enforcement Technology,Yes,Yes
+Intel® AES New Instructions,Yes,Yes
+Secure Key,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes
+Intel® OS Guard,Yes,Yes
+Intel® Boot Guard,Yes,Yes
+Mode-based Execute Control (MBEC),Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes

@@ -1,0 +1,92 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:52:50 PM
+ ,Intel® Xeon® Processor E3-1220L v3 ,Intel® Xeon® Processor E3-1220 v3 ,Intel® Xeon® Processor E3-1230L v3 ,Intel® Xeon® Processor E3-1230 v3 ,Intel® Xeon® Processor E3-1240 v3 ,Intel® Xeon® Processor E3-1270 v3 ,Intel® Xeon® Processor E3-1280 v3 ,Intel® Xeon® Processor E3-1225 v3 ,Intel® Xeon® Processor E3-1245 v3 ,Intel® Xeon® Processor E3-1265L v3 ,Intel® Xeon® Processor E3-1275 v3 ,Intel® Xeon® Processor E3-1285 v3 ,Intel® Xeon® Processor E3-1285L v3 ,Intel® Xeon® Processor E3-1268L v3 ,Intel® Xeon® Processor E3-1275L v3 ,Intel® Xeon® Processor E3-1281 v3 ,Intel® Xeon® Processor E3-1271 v3 ,Intel® Xeon® Processor E3-1241 v3 ,Intel® Xeon® Processor E3-1231 v3 ,Intel® Xeon® Processor E3-1240L v3 ,Intel® Xeon® Processor E3-1286 v3 ,Intel® Xeon® Processor E3-1286L v3 ,Intel® Xeon® Processor E3-1276 v3 ,Intel® Xeon® Processor E3-1246 v3 ,Intel® Xeon® Processor E3-1226 v3 
+Essentials
+Product Collection,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family,Intel® Xeon® Processor E3 v3 Family
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Embedded,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,E3-1220LV3,E3-1220 v3,E3-1230Lv3,E3-1230 v3,E3-1240 v3,E3-1270 v3,E3-1280 v3,E3-1225V3,E3-1245 v3,E3-1265Lv3,E3-1275 v3,E3-1285 v3,E3-1285Lv3,E3-1268LV3,E3-1275LV3,E3-1281V3,E3-1271V3,E3-1241V3,E3-1231V3,E3-1240LV3,E3-1286V3,E3-1286LV3,E3-1276V3,E3-1246V3,E3-1226V3
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm
+Use Conditions,,,,,,,,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,,,PC/Client/Tablet,,,Embedded Broad Market Commercial Temp |  PC/Client/Tablet,,,,,,,,,,,
+
+CPU Specifications
+Total Cores,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+Total Threads,4,4,8,8,8,8,8,4,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,4
+Max Turbo Frequency,1.50 GHz,3.50 GHz,2.80 GHz,3.70 GHz,3.80 GHz,3.90 GHz,4.00 GHz,3.60 GHz,3.80 GHz,3.70 GHz,3.90 GHz,4.00 GHz,3.90 GHz,3.30 GHz,3.90 GHz,4.10 GHz,4.00 GHz,3.90 GHz,3.80 GHz,3.00 GHz,4.10 GHz,4.00 GHz,4.00 GHz,3.90 GHz,3.70 GHz
+Intel® Turbo Boost Technology 2.0 Frequency‡,1.50 GHz,3.50 GHz,2.80 GHz,3.70 GHz,3.80 GHz,3.90 GHz,4.00 GHz,3.60 GHz,3.80 GHz,3.70 GHz,3.90 GHz,4.00 GHz,3.90 GHz,3.30 GHz,3.90 GHz,4.10 GHz,4.00 GHz,3.90 GHz,3.80 GHz,3.00 GHz,4.10 GHz,4.00 GHz,4.00 GHz,3.90 GHz,3.70 GHz
+Processor Base Frequency,1.10 GHz,3.10 GHz,1.80 GHz,3.30 GHz,3.40 GHz,3.50 GHz,3.60 GHz,3.20 GHz,3.40 GHz,2.50 GHz,3.50 GHz,3.60 GHz,3.10 GHz,2.30 GHz,2.70 GHz,3.70 GHz,3.60 GHz,3.50 GHz,3.40 GHz,2.00 GHz,3.70 GHz,3.20 GHz,3.60 GHz,3.50 GHz,3.30 GHz
+Cache,4 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache,8 MB Intel® Smart Cache
+Bus Speed,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s
+# of QPI Links,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+TDP,13 W,80 W,25 W,80 W,80 W,80 W,82 W,84 W,84 W,45 W,84 W,84 W,65 W,45 W,45 W,82 W,80 W,80 W,80 W,25 W,84 W,65 W,84 W,84 W,84 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q3'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021
+Embedded Options Available,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB,32 GB
+Memory Types,DDR3 1333/1600,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 1333/1600,DDR3 1333/1600,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V,DDR3 and DDR3L 1333/1600 at 1.5V
+Max # of Memory Channels,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+Max Memory Bandwidth,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+Scalability,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only
+PCI Express Revision,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0
+PCI Express Configurations ‡,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,Up to 1x16 |  2x8 |  1x8 2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4,1x16 |  2x8 |  1x8/2x4
+Max # of PCI Express Lanes,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16
+
+Package Specifications
+Sockets Supported,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150,FCLGA1150
+Max CPU Configuration,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+Thermal Solution Specification,PCG 2013A,PCG 2013D,PCG 2013A,PCG 2013D,PCG 2013D,PCG 2013D,PCG 2013D,PCG 2013D,PCG 2013D,PCG 2013B,PCG 2013D,PCG 2013D,PCG 2013C,PCG 2013B,PCG 2013B,PCG 2013D,PCG 2013D,PCG 2013D,PCG 2013D,PCG 2013A,PCG 2013D,PCG 2013C,PCG 2013D,PCG 2013D,PCG 2013D
+Package Size,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm (LGA1150),37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm,37.5mm x 37.5mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Intel® Hyper-Threading Technology ‡,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No
+Intel® Transactional Synchronization Extensions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Fast Memory Access,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Flex Memory Access,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® My WiFi Technology,,,,,,,,,,,,,,,,,,,No,,,,,No,
+
+Security & Reliability
+Intel vPro® Eligibility ‡,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform,Intel vPro® Platform
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Anti-Theft Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Stable IT Platform Program (SIPP),Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Processor Graphics
+Graphics Base Frequency,,,,,,,,350 MHz,350 MHz,350 MHz,350 MHz,350 MHz,350 MHz,350 MHz,350 MHz,,,,,,350 MHz,350 MHz,350 MHz,350 MHz,350 MHz
+Graphics Max Dynamic Frequency,,,,,,,,1.20 GHz,1.20 GHz,1.20 GHz,1.25 GHz,1.30 GHz,1.25 GHz,1.00 GHz,1.20 GHz,,,,,,1.30 GHz,1.25 GHz,1.25 GHz,1.20 GHz,1.20 GHz
+Intel® Quick Sync Video,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,Yes,Yes,Yes,Yes,Yes
+Intel® InTru™ 3D Technology,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,Yes,Yes,Yes,Yes,Yes
+Intel® Flexible Display Interface (Intel® FDI),,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,Yes,Yes,Yes,Yes,Yes
+Intel® Clear Video HD Technology,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,Yes,Yes,Yes,Yes,Yes
+# of Displays Supported ‡,,,,,,,,3,3,3,3,3,3,3,3,,,,,,3,3,3,3,3
+Processor Graphics ‡,,,,,,,,,,Intel® HD Graphics for 4th Generation Intel® Processors,,,,Intel® HD Graphics 4600,Intel® HD Graphics for 4th Generation Intel® Processors,,,,,,,,,,
+DirectX* Support,,,,,,,,,,,,,11.2,,11.2,,,,,,11.2,11.2,11.2,11.2,11.2
+Graphics Video Max Memory,,,,,,,,,,,,,,,1.7 GB,,,,,,1.7 GB,1.7 GB,1.7 GB,1.7 GB,1.7 GB
+Graphics Output,,,,,,,,,,,,,,,eDP/DP/HDMI/VGA,,,,,,eDP/DP/HDMI/VGA,eDP/DP/HDMI/VGA,eDP/DP/HDMI/VGA,eDP/DP/HDMI/VGA,eDP/DP/HDMI/VGA
+Execution Units,,,,,,,,,,,,,,,10,,,,,,20,20,20,20,20
+Max Resolution (HDMI)‡,,,,,,,,,,,,,,,3840x2160@60Hz,,,,,,3840x2160@60Hz,3840x2160@60Hz,3840x2160@60Hz,3840x2160@60Hz,3840x2160@60Hz
+Max Resolution (DP)‡,,,,,,,,,,,,,,,3840x2160@60Hz,,,,,,3840x2160@60Hz,3840x2160@60Hz,3840x2160@60Hz,3840x2160@60Hz,3840x2160@60Hz
+Max Resolution (VGA)‡,,,,,,,,,,,,,,,2880x1800@60Hz,,,,,,2880x1800@60Hz,2880x1800@60Hz,2880x1800@60Hz,2880x1800@60Hz,2880x1800@60Hz
+OpenGL* Support,,,,,,,,,,,,,,,4.3,,,,,,4.3,4.3,4.3,4.3,4.3

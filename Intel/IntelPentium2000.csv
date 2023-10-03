@@ -1,0 +1,79 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:37:00 PM
+ ,Intel® Pentium® Processor 2020M ,Intel® Pentium® Processor 2117U ,Intel® Pentium® Processor 2129Y ,Intel® Pentium® Processor 2030M ,Intel® Pentium® Processor 2127U 
+Essentials
+Product Collection,Intel® Pentium® Processor 2000 Series,Intel® Pentium® Processor 2000 Series,Intel® Pentium® Processor 2000 Series,Intel® Pentium® Processor 2000 Series,Intel® Pentium® Processor 2000 Series
+Vertical Segment,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,2020M,2117U,2129Y,2030M,2127U
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm
+Recommended Customer Price,$134.00,,,,
+
+CPU Specifications
+Total Cores,2,2,2,2,2
+Total Threads,2,2,2,2,2
+Processor Base Frequency,2.40 GHz,1.80 GHz,1.10 GHz,2.50 GHz,1.90 GHz
+Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache
+Bus Speed,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s
+TDP,35 W,17 W,10 W,35 W,17 W
+Scenario Design Power (SDP),,,7 W,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q3'12,Q3'12,Q1'13,Q1'13,Q3'13
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019,Tuesday |  December 31 |  2019
+Embedded Options Available,No,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),32 GB,32 GB,32 GB,32 GB,32 GB
+Memory Types,DDR3/L/-RS 1333/1600,DDR3/L/-RS 1333/1600,DDR3/L/-RS 1333/1600,DDR3/L/-RS 1333/1600,DDR3/L/-RS 1333/1600
+Max # of Memory Channels,2,2,2,2,2
+Max Memory Bandwidth,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s
+ECC Memory Supported   ‡,No,No,No,No,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® HD Graphics for 3rd Generation Intel® Processors,Intel® HD Graphics for 3rd Generation Intel® Processors,Intel® HD Graphics for 3rd Generation Intel® Processors,Intel® HD Graphics for 3rd Generation Intel® Processors,Intel® HD Graphics for 3rd Generation Intel® Processors
+Graphics Base Frequency,650 MHz,350 MHz,350 MHz,650 MHz,350 MHz
+Graphics Max Dynamic Frequency,1.10 GHz,1.00 GHz,850 MHz,1.10 GHz,1.10 GHz
+Graphics Output,eDP/DP/HDMI/SDVO/CRT,eDP/DP/HDMI/SDVO/CRT,eDP/DP/HDMI/SDVO/CRT,eDP/DP/HDMI/SDVO/CRT,eDP/DP/HDMI/SDVO/CRT
+Intel® Quick Sync Video,No,No,No,No,No
+Intel® InTru™ 3D Technology,No,No,No,No,No
+Intel® Flexible Display Interface (Intel® FDI),Yes,Yes,Yes,Yes,Yes
+Intel® Clear Video HD Technology,No,No,No,No,No
+Intel® Clear Video Technology,No,No,No,No,No
+# of Displays Supported ‡,3,3,3,3,3
+
+Expansion Options
+PCI Express Revision,2.0,2.0,,2.0,2.0
+PCI Express Configurations ‡,1x16 |  2x8 |  1x8 2x4,1x16 |  2x8 |  1x8 2x4,,1x16 |  2x8 |  1x8 2x4,1x16 |  2x8 |  1x8 2x4
+Max # of PCI Express Lanes,16,16,,16,16
+
+Package Specifications
+Sockets Supported,FCPGA988,FCBGA1023,FCBGA1023,FCPGA988,FCBGA1023
+Max CPU Configuration,1,1,1,1,1
+TJUNCTION,90 C,105 C,105 C,90 C,105 C
+Package Size,37.5mm x 37.5mm (rPGA988B),31mm x 24mm,31mm x 24mm,37.5mm x 37.5mm (rPGA988B),31mm x 24mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2
+Intel® My WiFi Technology,Yes,Yes,No,No,Yes
+4G WiMAX Wireless Technology,No,No,No,No,No
+Idle States,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes
+Intel® Demand Based Switching,No,No,No,No,No
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes
+Intel® Fast Memory Access,Yes,Yes,Yes,Yes,Yes
+Intel® Flex Memory Access,Yes,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,No,No,No,No,No
+Intel® Trusted Execution Technology ‡,No,No,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes
+Anti-Theft Technology,No,No,No,No,No
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No,No,No
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes

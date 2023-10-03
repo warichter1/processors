@@ -1,0 +1,71 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:12:09 PM
+ ,Intel Atom® Processor Z2480 ,Intel Atom® Processor Z2460 ,Intel Atom® Processor Z2580 ,Intel Atom® Processor Z2560 ,Intel Atom® Processor Z3480 ,Intel Atom® Processor Z3460 ,Intel Atom® Processor Z2760 ,Intel Atom® Processor Z2420 ,Intel Atom® Processor Z2520 ,Intel Atom® Processor Z3740 ,Intel Atom® Processor Z3770 ,Intel Atom® Processor Z3770D ,Intel Atom® Processor Z3740D ,Intel Atom® Processor Z3795 ,Intel Atom® Processor Z3775 ,Intel Atom® Processor Z3775D ,Intel Atom® Processor Z3745 ,Intel Atom® Processor Z3745D ,Intel Atom® Processor Z3735D ,Intel Atom® Processor Z3735E ,Intel Atom® Processor Z3735F ,Intel Atom® Processor Z3735G ,Intel Atom® Processor Z3785 ,Intel Atom® Processor Z3560 ,Intel Atom® Processor Z3580 ,Intel Atom® Processor Z3736F ,Intel Atom® Processor Z3736G ,Intel Atom® Processor Z3530 ,Intel Atom® Processor Z3570 ,Intel Atom® Processor Z3590 
+Essentials
+Product Collection,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series,Intel Atom® Processor Z Series
+Vertical Segment,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,Z2480,Z2460,Z2580,Z2560,Z3480,Z3460,Z2760,Z2420,Z2520,Z3740,Z3770,Z3770D,Z3740D,Z3795,Z3775,Z3775D,Z3745,Z3745D,Z3735D,Z3735E,Z3735F,Z3735G,Z3785,Z3560,Z3580,Z3736F,Z3736G,Z3530,Z3570,Z3590
+Lithography,32 nm,32 nm,32 nm,32 nm,22 nm,22 nm,32 nm,32 nm,32 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm
+Recommended Customer Price,,,,,,,,,,,,,,$40.00,$35.00,$35.00,$30.00,,,,,$17.00,,,,$20.00,,,,
+
+CPU Specifications
+Total Cores,1,1,2,2,2,2,2,1,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+Total Threads,2,2,4,4,,,4,2,4,,,,,,,,,,,,,,,,,,,,,
+Burst Frequency,2.00 GHz,1.60 GHz,2.00 GHz,1.60 GHz,2.13 GHz,1.60 GHz,,1.20 GHz,,1.86 GHz,2.39 GHz,2.41 GHz,1.83 GHz,2.39 GHz,2.39 GHz,2.41 GHz,1.86 GHz,1.83 GHz,1.83 GHz,1.83 GHz,1.83 GHz,1.83 GHz,2.41 GHz,1.83 GHz,2.33 GHz,2.16 GHz,2.16 GHz,1.33 GHz,2.00 GHz,2.50 GHz
+Cache,512 KB Intel® Smart Cache,512 KB Intel® Smart Cache,1 MB Intel® Smart Cache,1 MB Intel® Smart Cache,1 MB Intel® Smart Cache,1 MB Intel® Smart Cache,1 MB L2 Cache,512 KB Intel® Smart Cache,1 MB Intel® Smart Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB L2 Cache,2 MB,2 MB,2 MB L2 Cache,2 MB L2 Cache,2 MB,2 MB,2 MB
+Processor Base Frequency,,,,,,,1.80 GHz,,1.20 GHz,1.33 GHz,1.46 GHz,1.50 GHz,1.33 GHz,1.59 GHz,1.46 GHz,1.49 GHz,1.33 GHz,1.33 GHz,1.33 GHz,1.33 GHz,1.33 GHz,1.33 GHz,1.49 GHz,,,1.33 GHz,1.33 GHz,,,
+Scenario Design Power (SDP),,,,,,,,,,2 W,2 W,2.2 W,2.2 W,2 W,2 W,2.2 W,2 W,2.2 W,2.2 W,2.2 W,2.2 W,2.2 W,2.2 W,,,2.2 W,2.2 W,,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q3'12,Q2'12,Q2'13,Q2'13,Q1'14,Q1'14,Q3'12,Q1'13,Q2'13,Q3'13,Q3'13,Q3'13,Q3'13,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q1'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q2'14,Q3'14,Q3'15
+Expected Discontinuance,7/4/14,7/4/14,,,,,,7/4/14,,,,,,,,,,,,,,,,,,,,,,
+Embedded Options Available,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No
+Servicing Status,,,,,End of Servicing Lifetime,End of Servicing Lifetime,,,,,,,,,,,,,,,,,,End of Servicing Lifetime,End of Servicing Lifetime,,,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+
+Memory Specifications
+Max Memory Size (dependent on memory type),2 GB,2 GB,2 GB,2 GB,4 GB,4 GB,2.4 GB,1 GB,2 GB,4 GB,4 GB,2 GB,2 GB,4 GB,4 GB,2 GB,4 GB,2 GB,2 GB,1 GB,2 GB,1 GB,4 GB,4 GB,4 GB,2 GB,1 GB,4 GB,4 GB,4 GB
+Memory Types,LPDDR2 800,LPDDR2 800,LPDDR2 1066,LPDDR2 1066,LPDDR3 1066,LPDDR3 1066,LPDDR2 800,LPDDR2 800,LPDDR2 1066,LPDDR3 1066,LPDDR3 1066,DDR3L-RS 1333,DDR3L-RS 1333,LPDDR3 1066,LPDDR3 1066,DDR3L-RS 1333,LPDDR3 1066,DDR3L-RS 1333,DDR3L-RS 1333,DDR3L-RS 1333,DDR3L-RS 1333,DDR3L-RS 1333,LPDDR3 1333,LPDDR3 1600,LPDDR3 1600,DDR3L-RS 1333,DDR3L-RS 1333,LPDDR3 1600,LPDDR3 1600,LPDDR3 1600
+Max # of Memory Channels,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,1,2,1,1,1,1,1,2,2,2,1,1,2,2,2
+Max Memory Bandwidth,6.4 GB/s,6.4 GB/s,8.5 GB/s,8.5 GB/s,8.5 GB/s,8.5 GB/s,6.4 GB/s,6.4 GB/s,8.5 GB/s,17.1 GB/s,17.1 GB/s,10.6 GB/s,10.6 GB/s,17.1 GB/s,17.1 GB/s,10.6 GB/s,17.1 GB/s,10.6 GB/s,10.6 GB/s,5.3 GB/s,10.6 GB/s,5.3 GB/s,21.3 GB/s,12.8 GB/s,12.8 GB/s,10.6 GB/s,5.3 GB/s,12.8 GB/s,12.8 GB/s,12.8 GB/s
+Physical Address Extensions,32-bit,32-bit,32-bit,32-bit,32-bit,32-bit,,32-bit,32-bit,,,,,,,,,,,,,,,32-bit,32-bit,,,32-bit,32-bit,32-bit
+ECC Memory Supported   ‡,,,,,,,No,,,No,No,No,No,,,,No,,,,,,,,,,,,,
+
+Processor Graphics
+Graphics Base Frequency,400 MHz,400 MHz,400 MHz,400 MHz,457 MHz,400 MHz,533 MHz,400 MHz,300 MHz,311 MHz,311 MHz,313 MHz,313 MHz,311 MHz,311 MHz,311 MHz,311 MHz,311 MHz,311 MHz,311 MHz,311 MHz,311 MHz,313 MHz,457 MHz,457 MHz,313 MHz,313 MHz,457 MHz,457 MHz,457 MHz
+Graphics Output,HDMI,HDMI,,,MIPI-DSI,MIPI-DSI,,,,,,,,,,,,,,,,,,MIPI-DSI,MIPI-DSI,,,MIPI-DSI,MIPI-DSI,MIPI-DSI
+# of Displays Supported ‡,2,2,2,2,2,2,,2,2,,,,,,,,,,,,,,,2,2,,,,2,2
+Graphics Burst Frequency,,,533 MHz,,533 MHz,457 MHz,,,,667 MHz,667 MHz,688 MHz,688 MHz,778 MHz,778 MHz,792 MHz,778 MHz,792 MHz,646 MHz,646 MHz,646 MHz,646 MHz,833 MHz,533 MHz,533 MHz,646 MHz,646 MHz,,640 MHz,640 MHz
+Processor Graphics ‡,,,,,,,,,,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,,,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,Intel® HD Graphics for Intel Atom® Processor Z3700 Series,,,
+Intel® Quick Sync Video,,,,,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,
+Intel® Clear Video HD Technology,,,,,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,
+
+I/O Specifications
+# of USB Ports,1,1,2,2,2,2,,1,2,,,,,,,,,,,,,,,2,2,,,2,2,2
+USB Revision,2.0 OTG,2.0 OTG,2.0 OTG |  USB-SPH 2.0,2.0 OTG |  USB-SPH 2.0,2.0/3.0,2.0/3.0,,2.0 OTG,2.0 OTG |  USB-SPH 2.0,,,,,,,,2.0/3.0,,,,,,,2.0/3.0,2.0/3.0,,,2.0/3.0,2.0/3.0,2.0/3.0
+General Purpose IO,152,152,,,175,175,,152,,,,,,,,,,,,,,,,175,175,,,175,175,175
+UART,3,3,3,3,3,3,,3,3,,,,,,,,,,,,,,,3,3,,,3,3,3
+
+Package Specifications
+Sockets Supported,FC-MB4617,FC-MB4617,FC-MB4760,FC-MB4760,FC-MB5796,FC-MB5796,FC-MB4760,FC-MB4617,FC-MB4760,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA1380,UTFCBGA592,UTFCBGA592,UTFCBGA1380,,,UTFCBGA592,UTFCBGA592,FC-MB5T1064,,
+Max CPU Configuration,1,1,1,1,1,1,,1,1,,,,,,,,,,,,,,,1,1,,,1,1,1
+TJUNCTION,90,90,90°C,90°C,90°C,90°C,,90,90°C,90°C,90°C,90°C,90°C,,,,90°C,,,,,,,90°C,90°C,,,90°C,90°C,90°C
+Package Size,12mm x 12mm,12mm x 12mm,14mm x 14mm,14mm x 14mm,12mm x 12mm,12mm x 12mm,14mm x 14mm,12mm x 12mm,14mm x 14mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,17mm x 17mm,14x14mm,14x14mm,17mm x 17mm,17mm x 17mm,14x14mm,14x14mm,14x14mm
+
+Advanced Technologies
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,,,Yes,Yes,Yes,,,,,,,,,,,,,,,,,,,,,
+Instruction Set,32-bit,32-bit,32-bit,32-bit,64-bit,64-bit,32-bit,32-bit,32-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE |  Intel® SSE2 |  Intel® SSE3,Intel® SSE |  Intel® SSE2 |  Intel® SSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2,,Intel® SSE |  Intel® SSE2 |  Intel® SSE3,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3,,,,,,,,,,,,,,,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2,,,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE2 |  Intel® SSE3 |  Intel® SSSE3 |  Intel® SSE4.1 |  Intel® SSE4.2
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,,,,,,,,,,,,,,,Yes,Yes,,,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,,,,,,,,,,,,,,,Yes,Yes,,,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,,,,,,,,,,,,,,,Yes,Yes,,,Yes,Yes,Yes
+Intel® Smart Idle Technology,,,Yes,Yes,Yes,Yes,,,Yes,,,,,,,,,,,,,,,Yes,Yes,,,Yes,Yes,Yes
+Intel® 64 ‡,,,,,Yes,Yes,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Identity Protection Technology ‡,,,,,,,,,,Yes,Yes,Yes,Yes,,,,Yes,,,,,,,,,,,,,
+
+Security & Reliability
+Execute Disable Bit ‡,Yes,Yes,,,Yes,Yes,,Yes,,,,,,,,,,,,,,,,Yes,Yes,,,Yes,Yes,Yes
+Intel® AES New Instructions,,,No,No,Yes,Yes,,,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,,,Yes,Yes,Yes,,,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,,,Yes,Yes,Yes,Yes,No,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,,,,,Yes,Yes,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,Yes,Yes,,,Yes,Yes,Yes
+Anti-Theft Technology,,,,,,,,,,Yes,Yes,Yes,Yes,,,,,,,,,,,,,,,,,

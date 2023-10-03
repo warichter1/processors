@@ -1,0 +1,100 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:36:17 PM
+ ,Intel® Pentium® Processor 3556U ,Intel® Pentium® Processor 3560Y ,Intel® Pentium® Processor 3550M ,Intel® Pentium® Processor 3558U ,Intel® Pentium® Processor 3561Y ,Intel® Pentium® Processor 3560M ,Intel® Pentium® Processor 3805U ,Intel® Pentium® Processor 3825U 
+Essentials
+Product Collection,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series,Intel® Pentium® Processor 3000 Series
+Vertical Segment,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,3556U,3560Y,3550M,3558U,3561Y,3560M,3805U,3825U
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,14 nm,14 nm
+
+CPU Specifications
+Total Cores,2,2,2,2,2,2,2,2
+Total Threads,2,2,2,2,2,2,2,4
+Processor Base Frequency,1.70 GHz,1.20 GHz,2.30 GHz,1.70 GHz,1.20 GHz,2.40 GHz,1.90 GHz,1.90 GHz
+Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB,2 MB,2 MB
+Bus Speed,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s
+TDP,15 W,11.5 W,37 W,15 W,11.5 W,37 W,15 W,15 W
+Scenario Design Power (SDP),,6 W,,,6 W,,,
+Configurable TDP-down Frequency,,,,,,,600 MHz,600 MHz
+Configurable TDP-down,,,,,,,10 W,10 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q3'13,Q3'13,Q4'13,Q4'13,Q4'13,Q2'14,Q1'15,Q1'15
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021
+Embedded Options Available,No,No,No,No,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),16 GB,16 GB,32 GB,16 GB,16 GB,32 GB,16 GB,16 GB
+Memory Types,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600,DDR3L 1333/1600 LPDDR3 1333/1600,DDR3L 1333/1600 LPDDR3 1333/1600
+Max # of Memory Channels,2,2,2,2,2,2,2,2
+Max Memory Bandwidth,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s
+ECC Memory Supported   ‡,No,No,No,No,No,No,,
+
+Processor Graphics
+Processor Graphics ‡,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 5th Generation Intel® Processors,Intel® HD Graphics for 5th Generation Intel® Processors
+Graphics Base Frequency,200 MHz,200 MHz,400 MHz,200 MHz,200 MHz,400 MHz,100 MHz,300 MHz
+Graphics Max Dynamic Frequency,1.00 GHz,850 MHz,1.10 GHz,1.00 GHz,850 MHz,1.10 GHz,800 MHz,850 MHz
+Graphics Output,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI/VGA,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI/VGA,eDP/DP/HDMI,eDP/DP/HDMI
+Intel® Quick Sync Video,No,No,No,Yes,Yes,Yes,Yes,Yes
+Intel® Flexible Display Interface (Intel® FDI),No,No,,No,No,,Yes,Yes
+Intel® Clear Video HD Technology,No,No,No,No,No,No,No,No
+Intel® Clear Video Technology,Yes,Yes,,Yes,Yes,,Yes,Yes
+# of Displays Supported ‡,3,3,3,3,3,3,3,3
+DirectX* Support,,,,,,,11.2/12,11.2/12
+Intel® InTru™ 3D Technology,,,,,,,Yes,Yes
+
+Expansion Options
+PCI Support,No,No,,No,No,,,
+PCI Express Revision,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+PCI Express Configurations ‡,4x1 |  1x4 |  1x2,4x1 |  2x4,1x16 or 2x8 or 1x8 2x4,4x1 |  1x4 |  1x2,4x1 |  2x4,1x16 or 2x8 or 1x8 2x4,4x1 2x4,4x1 2x4
+Max # of PCI Express Lanes,10,12,16,10,12,16,12,12
+
+I/O Specifications
+# of USB Ports,4,4,,4,4,,,
+USB Revision,3.0,3.0,,3.0,3.0,,,
+Total # of SATA Ports,2,4,,2,4,,,
+Integrated LAN,No,No,,No,No,,,
+Integrated IDE,No,No,,No,No,,,
+General Purpose IO,Yes,Yes,,Yes,Yes,,,
+UART,Yes,Yes,,Yes,Yes,,,
+Max # of SATA 6.0 Gb/s Ports,2,4,,2,4,,,
+
+Package Specifications
+Sockets Supported,FCBGA1168,FCBGA1168,FCPGA946,FCBGA1168,FCBGA1168,FCPGA946,FCBGA1168,FCBGA1168
+Max CPU Configuration,1,1,1,1,1,1,1,1
+TJUNCTION,100°C,100°C,100°C,100°C,100°C,100°C,105°C,105°C
+Package Size,40mm x 24mm x 1.5mm,40mm x 24mm x 1.5mm,37.5mm x 37.5mm x 4.7mm,40mm x 24mm x 1.5mm,40mm x 24mm x 1.5mm,37.5mm x 37.5mm x 4.7mm,40mm x 24mm x 1.3mm,40mm x 24mm x 1.3mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No,No,Yes
+Intel® Transactional Synchronization Extensions,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2
+Idle States,Yes,Yes,,Yes,Yes,,Yes,
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® ME Firmware Version,9.5,9.5,,9.5,9.5,,,
+Intel® HD Audio Technology,Yes,Yes,,Yes,Yes,,,
+Intel® Matrix Storage Technology,No,No,,No,No,,,
+Intel® Identity Protection Technology ‡,No,No,No,No,No,No,Yes,Yes
+Intel® Rapid Storage Technology,Yes,Yes,,Yes,Yes,,,
+Intel® Smart Connect Technology,Yes,Yes,,Yes,Yes,,,
+Intel® Smart Response Technology,No,No,,No,No,,No,No
+Intel® Fast Memory Access,,,,,,,Yes,Yes
+Intel® Flex Memory Access,,,,,,,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,No,Yes,No,No,Yes,No,No,No
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Anti-Theft Technology,No,No,No,No,No,No,,
+Intel® OS Guard,No,,,No,,,No,No
+Intel® Stable IT Platform Program (SIPP),No,No,,No,No,,No,
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No,No,No,No,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes

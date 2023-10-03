@@ -1,0 +1,89 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:10:33 PM
+ ,Intel Atom® Processor P5362 ,Intel Atom® Processor P5352 ,Intel Atom® Processor P5342 ,Intel Atom® Processor P5332 ,Intel Atom® Processor P5322 ,Intel Atom® Processor P5931B ,Intel Atom® Processor P5962B ,Intel Atom® Processor P5921B ,Intel Atom® Processor P5942B ,Intel Atom® Processor P5742 ,Intel Atom® Processor P5721 ,Intel Atom® Processor P5752 ,Intel Atom® Processor P5731 
+Essentials
+Product Collection,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series,Intel Atom® Processor P Series
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,P5362,P5352,P5342,P5332,P5322,P5931B,P5962B,P5921B,P5942B,P5742,P5721,P5752,P5731
+Lithography,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm,10 nm
+Use Conditions,Communications Extended Temp,Communications Extended Temp,Communications Extended Temp,Communications Extended Temp,Communications Extended Temp,Base Transceiver Station,Base Transceiver Station,Base Transceiver Station,Base Transceiver Station,Communications Extended Temp,Communications Extended Temp,Communications Extended Temp,Communications Extended Temp
+Recommended Customer Price,$708.00,$654.00,$632.00,$448.00,$352.00,,,,,$752.00,$392.00,$763.00,$561.00
+
+CPU Specifications
+Total Cores,24,20,16,12,8,12,24,8,16,16,8,20,12
+# of Efficient-cores,24,20,16,12,8,,,,,16,8,20,12
+Total Threads,24,20,16,12,8,12,24,8,16,16,8,20,12
+Processor Base Frequency,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz,2.20 GHz
+Cache,27 MB,22.5 MB,18 MB,13.5 MB,9 MB,13.5 MB L2 Cache,27 MB L2 Cache,9 MB L2 Cache,18 MB L2 Cache,18 MB,9 MB,22.5 MB,13.5 MB
+Max # of UPI Links,0,0,0,0,0,0,0,0,0,0,0,0,0
+# of QPI Links,0,0,0,0,0,0,0,0,0,0,0,0,0
+TDP,83 W,78 W,71 W,61 W,55 W,,,,,67 W,48 W,74.5 W,54.5 W
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched,Launched,Launched,Launched,Launched,Discontinued,Discontinued,Launched,Launched,Launched,Launched
+Launch Date,Q2'22,Q2'22,Q2'22,Q2'22,Q2'22,Q1'20,Q1'20,Q1'20,Q1'20,Q2'22,Q2'22,Q2'22,Q2'22
+Embedded Options Available,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Description,,,,,,View now,View now,View now,View now,,,,
+Product Brief,,,,,,View now,View now,View now,View now,,,,
+Additional Information URL,,,,,,View now,View now,View now,View now,,,,
+
+Memory Specifications
+Max Memory Size (dependent on memory type),256 GB,256 GB,256 GB,256 GB,256 GB,128 GB,128 GB,64 GB,128 GB,256 GB,256 GB,256 GB,256 GB
+Memory Types,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4,DDR4
+Maximum Memory Speed,2933 MHz,2933 MHz,2667 MHz,2400 MHz,2400 MHz,2933 MHz,2933 MHz,2933 MHz,2933 MHz,2933 MHz,2933 MHz,2933 MHz,2933 MHz
+Max # of Memory Channels,2,2,2,2,2,2,2,1,2,2,2,2,2
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Optane™ DC Persistent Memory Supported,,,,,,No,No,No,No,,,,
+
+Expansion Options
+Scalability,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only,1S Only
+PCI Express Revision,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0
+Microprocessor PCIe Revision,Gen 3,Gen 3,Gen 3,Gen 3,Gen 3,,,,,Gen 3,Gen 3,Gen 3,Gen 3
+Chipset / PCH PCIe Revision,Gen 3,Gen 3,Gen 3,Gen 3,Gen 3,,,,,Gen 3,Gen 3,Gen 3,Gen 3
+PCI Express Configurations ‡,x4 | x8 | x16,x4 | x8 | x16,x4 | x8 | x16,x4 | x8 | x16,x4 | x8 | x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 |  x8 |  x16,x4 | x8 | x16,x4 | x8 | x16,x4 | x8 | x16,x4 | x8 | x16
+Max # of PCI Express Lanes,32,32,32,32,32,32,32,32,32,32,32,32,32
+PCI Support,,,,,,16x PCIe 3.0 |  16x PCIe 2.0,16x PCIe 3.0 |  16x PCIe 2.0,16x PCIe 3.0 |  16x PCIe 2.0,16x PCIe 3.0 |  16x PCIe 2.0,,,,
+
+I/O Specifications
+# of USB Ports,8,8,8,8,8,8,8,8,8,8,8,8,8
+USB Configuration,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0,4x USB 2.0 |  4x USB 3.0
+USB Revision,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0,2.0 |  3.0
+Total # of SATA Ports,16,16,16,16,16,16,16,16,16,16,16,16,16
+Integrated LAN,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Integrated IDE,No,No,No,No,No,No,No,No,No,No,No,No,No
+General Purpose IO,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+UART,3,3,3,3,3,3,3,3,3,3,3,3,3
+
+Package Specifications
+Sockets Supported,FCBGA2106,FCBGA2106,FCBGA2106,FCBGA2106,FCBGA2106,,,,,FCBGA2106,FCBGA2106,FCBGA2106,FCBGA2106
+Max CPU Configuration,1,1,1,1,1,1,1,1,1,1,1,1,1
+Package Size,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm,47.5mm x 47.5mm
+Operating Temperature Range,,,,,,-40°C to 85°C,-40°C to 85°C,-40°C to 85°C,-40°C to 85°C,,,,
+Operating Temperature (Maximum),,,,,,85 °C,85 °C,85 °C,85 °C,,,,
+Operating Temperature (Minimum),,,,,,-40 °C,-40 °C,-40 °C,-40 °C,,,,
+
+Advanced Technologies
+Intel® Resource Director Technology (Intel® RDT),Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Optane™ Memory Supported ‡,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® Thermal Velocity Boost,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® Turbo Boost Max Technology 3.0 ‡,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2,Intel® SSE4.2
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,,,,,Yes,Yes,Yes,Yes
+Integrated Intel® QuickAssist Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Volume Management Device (VMD),No,No,No,No,No,No,No,No,No,No,No,No,No
+Secure Boot,,,,,,Yes,Yes,Yes,Yes,,,,
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),No,No,No,No,No,No,No,No,No,No,No,No,No
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Boot Guard,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,,,,,,Yes,Yes,Yes,Yes,,,,

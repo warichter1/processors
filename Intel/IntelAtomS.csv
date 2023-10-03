@@ -1,0 +1,48 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:11:10 PM
+ ,Intel Atom® Processor S1260 ,Intel Atom® Processor S1240 ,Intel Atom® Processor S1220 
+Essentials
+Product Collection,Intel Atom® Processor S Series,Intel Atom® Processor S Series,Intel Atom® Processor S Series
+Vertical Segment,Server,Server,Server
+Processor Number,S1260,S1240,S1220
+Lithography,32 nm,32 nm,32 nm
+Recommended Customer Price,,$64.00,$54.00
+
+CPU Specifications
+Total Cores,2,2,2
+Total Threads,4,4,4
+Processor Base Frequency,2.00 GHz,1.60 GHz,1.60 GHz
+Cache,1 MB,1 MB,1 MB
+TDP,8.5 W,6.1 W,8.1 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued
+Launch Date,Q4'12,Q4'12,Q4'12
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021
+Embedded Options Available,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),8 GB,8 GB,8 GB
+Memory Types,DDR3 1333,DDR3 1333,DDR3 1333
+Max # of Memory Channels,1,1,1
+Max Memory Bandwidth,10.6 GB/s,10.6 GB/s,10.6 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes
+
+Expansion Options
+PCI Support,PCI Support,PCI Support,PCI Support
+PCI Express Revision,2.0,2.0,2.0
+Max # of PCI Express Lanes,8,8,8
+
+I/O Specifications
+UART,UART,UART,UART
+
+Package Specifications
+Sockets Supported,FCBGA1283,FCBGA1283,FCBGA1283
+
+Advanced Technologies
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit
+
+Security & Reliability
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes

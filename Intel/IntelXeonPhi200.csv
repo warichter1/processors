@@ -1,0 +1,59 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:15:55 PM
+ ,Intel® Xeon Phi™ Processor 7210 ,Intel® Xeon Phi™ Processor 7230 ,Intel® Xeon Phi™ Processor 7250 ,Intel® Xeon Phi™ Processor 7210F ,Intel® Xeon Phi™ Processor 7230F ,Intel® Xeon Phi™ Processor 7250F ,Intel® Xeon Phi™ Processor 7290 ,Intel® Xeon Phi™ Processor 7290F 
+Essentials
+Product Collection,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family,Intel® Xeon Phi™ x200 Product Family
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,7210,7230,7250,7210F,7230F,7250F,7290,7290F
+Lithography,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm,14 nm
+Recommended Customer Price,$1881.00,$1992.00,$2436.00,$2036.00,$2147.00,$2591.00,$3213.00,$3368.00
+
+Performance Specifications
+Total Cores,64,64,68,64,64,68,72,72
+Processor Base Frequency,1.30 GHz,1.30 GHz,1.40 GHz,1.30 GHz,1.30 GHz,1.40 GHz,1.50 GHz,1.50 GHz
+Max Turbo Frequency,1.50 GHz,1.50 GHz,1.60 GHz,1.50 GHz,1.50 GHz,1.60 GHz,1.70 GHz,1.70 GHz
+Cache,32 MB L2 Cache,32 MB L2 Cache,34 MB L2 Cache,32 MB L2 Cache,32 MB L2 Cache,34 MB L2 Cache,36 MB L2 Cache,36 MB L2 Cache
+TDP,215 W,215 W,215 W,230 W,230 W,230 W,245 W,260 W
+VID Voltage Range,0.550-1.125V,0.550-1.125V,0.550-1.125V,0.550-1.125V,0.550-1.125V,0.550-1.125V,0.550-1.125V,0.550-1.125V
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q2'16,Q2'16,Q2'16,Q4'16,Q4'16,Q4'16,Q4'16,Q4'16
+Supply Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No,No,No,No,No
+Description,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.,Intel Xeon Phi processors do not currently support Virtualization. Intel is working with interested OEMs |  customers |  and the virtualization developer community in providing them with Virtualization feature at a later date.
+
+Memory Specifications
+Max Memory Size (dependent on memory type),384 GB,384 GB,384 GB,384 GB,384 GB,384 GB,384 GB,384 GB
+Memory Types,DDR4-2133,DDR4-2400,DDR4-2400,DDR4-2133,DDR4-2400,DDR4-2400,DDR4-2400,DDR4-2400
+Max # of Memory Channels,6,6,6,6,6,6,6,6
+Max Memory Bandwidth,102 GB/s,115.2 GB/s,115.2 GB/s,102 GB/s,115.2 GB/s,115.2 GB/s,115.2 GB/s,115.2 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+PCI Express Revision,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0
+PCI Express Configurations ‡,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port 1) may negotiate down to x2 |  or x1,x16 port (Port 2 and 3) may negotiate down to x8 |  x4 |  x2 |  or x1. x4 port (Port1) may negotiate down to x2 |  or x1
+Max # of PCI Express Lanes,36,36,36,4,4,4,36,4
+
+Package Specifications
+Sockets Supported,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647,SVLCLGA3647
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Intel® Virtualization Technology (VT-x) ‡,No,No,No,No,No,No,No,No
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No,No,No,No,No,No
+Intel® VT-x with Extended Page Tables (EPT) ‡,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512,Intel® AVX-512
+Idle States,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),No,No,No,No,No,No,No,No
+Intel® Memory Protection Extensions (Intel® MPX),No,No,No,No,No,No,No,No
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Boot Guard,No,No,No,No,No,No,No,No

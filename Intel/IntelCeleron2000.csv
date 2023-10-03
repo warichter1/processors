@@ -1,0 +1,98 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:17:24 PM
+ ,Intel® Celeron® Processor 2955U ,Intel® Celeron® Processor 2000E ,Intel® Celeron® Processor 2002E ,Intel® Celeron® Processor 2980U ,Intel® Celeron® Processor 2950M ,Intel® Celeron® Processor 2957U ,Intel® Celeron® Processor 2961Y ,Intel® Celeron® Processor 2981U ,Intel® Celeron® Processor 2970M 
+Essentials
+Product Collection,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series,Intel® Celeron® Processor 2000 Series
+Vertical Segment,Mobile,Embedded,Embedded,Mobile,Mobile,Mobile,Mobile,Mobile,Mobile
+Processor Number,2955U,2000E,2002E,2980U,2950M,2957U,2961Y,2981U,2970M
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm
+Use Conditions,,Industrial Commercial Temp,Industrial Commercial Temp,Industrial Commercial Temp |  Embedded Broad Market Commercial Temp |  PC/Client/Tablet,,,,,
+
+CPU Specifications
+Total Cores,2,2,2,2,2,2,2,2,2
+Total Threads,2,2,2,2,2,2,2,2,2
+Processor Base Frequency,1.40 GHz,2.20 GHz,1.50 GHz,1.60 GHz,2.00 GHz,1.40 GHz,1.10 GHz,1.60 GHz,2.20 GHz
+Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache,2 MB Intel® Smart Cache
+Bus Speed,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s,5 GT/s
+TDP,15 W,37 W,25 W,15 W,37 W,15 W,11.5 W,15 W,37 W
+Scenario Design Power (SDP),,,,,,,6 W,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q3'13,Q1'14,Q1'14,Q3'13,Q4'13,Q4'13,Q4'13,Q4'13,Q2'14
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+End of Servicing Updates Date,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021,Wednesday |  June 30 |  2021
+Embedded Options Available,No,Yes,Yes,Yes,No,No,No,No,No
+Product Brief,,View now,,,,,,,
+Additional Information URL,,View now,,,,,,,
+
+Memory Specifications
+Max Memory Size (dependent on memory type),16 GB,32 GB,32 GB,16 GB,32 GB,16 GB,16 GB,16 GB,32 GB
+Memory Types,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600,DDR3L 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600 |  LPDDR3 1333/1600,DDR3L 1333/1600
+Max # of Memory Channels,2,2,2,2,2,2,2,2,2
+Max Memory Bandwidth,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s,25.6 GB/s
+ECC Memory Supported   ‡,No,Yes,Yes,No,No,No,No,No,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors,Intel® HD Graphics for 4th Generation Intel® Processors
+Graphics Base Frequency,200 MHz,400 MHz,400 MHz,200 MHz,400 MHz,200 MHz,200 MHz,200 MHz,400 MHz
+Graphics Max Dynamic Frequency,1.00 GHz,900 MHz,900 MHz,1.00 GHz,1.10 GHz,1.00 GHz,850 MHz,1.00 GHz,1.10 GHz
+Graphics Output,eDP/DP/HDMI,eDP/DP/HDMI/VGA,eDP/DP/HDMI/VGA,eDP/DP/HDMI,eDP/DP/HDMI/VGA,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI,eDP/DP/HDMI/VGA
+Intel® Quick Sync Video,No,,,No,No,Yes,Yes,Yes,Yes
+Intel® Flexible Display Interface (Intel® FDI),No,Yes,Yes,No,,No,No,No,
+Intel® Clear Video Technology,Yes,,,Yes,,Yes,Yes,Yes,
+# of Displays Supported ‡,3,3,3,3,3,3,3,3,3
+Graphics Video Max Memory,,1 GB,1 GB,,,,,,
+
+Expansion Options
+PCI Support,No,,,No,,No,No,No,
+PCI Express Revision,2.0,3.0,3.0,2.0,2.0,2.0,2.0,2.0,2.0
+PCI Express Configurations ‡,4x1 |  1x4 |  1x2,1x16 or 2x8 or 1x8 2x4,1x16 or 2x8 or 1x8 2x4,4x1 |  2x4,1x16 or 2x8 or 1x8 2x4,4x1 |  1x4 |  1x2,4x1 |  2x4,4x1 |  2x4,1x16 or 2x8 or 1x8 2x4
+Max # of PCI Express Lanes,10,16,16,12,16,10,12,12,16
+Scalability,,1S Only,1S Only,,,,,,
+
+I/O Specifications
+# of USB Ports,4,,,4,,4,4,4,
+USB Revision,3.0,,,3.0,,3.0,3.0,3.0,
+Total # of SATA Ports,2,,,4,,2,4,2,
+Integrated LAN,No,,,No,,No,No,No,
+Integrated IDE,No,,,No,,No,No,No,
+General Purpose IO,Yes,,,Yes,,Yes,Yes,Yes,
+UART,Yes,,,Yes,,Yes,Yes,Yes,
+Max # of SATA 6.0 Gb/s Ports,2,,,2,,2,4,2,
+
+Package Specifications
+Sockets Supported,FCBGA1168,FCBGA1364,FCBGA1364,FCBGA1168,FCPGA946,FCBGA1168,FCBGA1168,FCBGA1168,FCPGA946
+Max CPU Configuration,1,1,1,1,1,1,1,1,1
+TJUNCTION,100°C,100°C,100°C,100°C,100°C,100°C,100°C,100°C,100°C
+Package Size,40mm x 24mm x 1.5mm,37.5mm x 32mm x 1.6mm,37.5mm x 32mm x 1.6mm,40mm x 24mm x 1.5mm,37.5mm x 37.5mm x 4.7mm,40mm x 24mm x 1.5mm,40mm x 24mm x 1.5mm,40mm x 24mm x 1.5mm,37.5mm x 37.5mm x 4.7mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,No,No,No,No,No,No,No,No,No
+Intel® Transactional Synchronization Extensions,No,No,No,No,No,No,No,No,No
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2,Intel® SSE4.1 |  Intel® SSE4.2
+Idle States,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,
+Enhanced Intel SpeedStep® Technology,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® ME Firmware Version,9.5,,,9.5,,9.5,9.5,9.5,
+Intel® HD Audio Technology,Yes,,,Yes,,Yes,Yes,Yes,
+Intel® Matrix Storage Technology,No,,,No,,No,No,No,
+Intel® Identity Protection Technology ‡,No,No,No,No,No,No,No,No,No
+Intel® Rapid Storage Technology,Yes,,,Yes,,Yes,Yes,Yes,
+Intel® Smart Connect Technology,Yes,,,Yes,,Yes,Yes,Yes,
+Intel® Smart Response Technology,No,,,No,,No,No,No,
+
+Security & Reliability
+Intel® AES New Instructions,No,No,No,No,No,No,No,No,No
+Secure Key,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No,No,No,No
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Anti-Theft Technology,No,,,No,No,No,No,No,No
+Intel® OS Guard,No,,,No,,No,,No,
+Intel® Stable IT Platform Program (SIPP),No,No,No,No,,No,No,No,
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,No,No,No,No,No,No,No,No,No
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes

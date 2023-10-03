@@ -1,0 +1,64 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:34:45 PM
+ ,Intel® Pentium® Processor 6805 
+Essentials
+Product Collection,Intel® Pentium® Processor 6800 Series
+Vertical Segment,Mobile
+Processor Number,6805
+Lithography,10 nm
+Use Conditions,PC/Client/Tablet
+Recommended Customer Price,$193.00
+
+CPU Specifications
+Total Cores,2
+Total Threads,4
+Max Turbo Frequency,3.00 GHz
+Burst Frequency,3.00 GHz
+Processor Base Frequency,1.10 GHz
+Cache,4 MB
+TDP,15 W
+
+Supplemental Information
+Marketing Status,Discontinued
+Launch Date,Q4'20
+Embedded Options Available,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),64 GB
+Memory Types,DDR4-3200 |  LPDDR4-3733
+Max # of Memory Channels,2
+ECC Memory Supported   ‡,No
+
+Processor Graphics
+Processor Graphics ‡,Intel® UHD Graphics for 10th Gen Intel® Processors
+Graphics Base Frequency,300 MHz
+Graphics Burst Frequency,850 MHz
+Graphics Max Dynamic Frequency,850 MHz
+Execution Units,32
+# of Displays Supported ‡,3
+
+Package Specifications
+Sockets Supported,FCBGA1526
+Max CPU Configuration,1
+TJUNCTION,100°C
+Package Size,50mm x 25mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,2.0
+Intel® Hyper-Threading Technology ‡,Yes
+Intel® Transactional Synchronization Extensions,No
+Intel® 64 ‡,Yes
+Instruction Set,64-bit
+Idle States,Yes
+Thermal Monitoring Technologies,Yes
+
+Security & Reliability
+Intel® AES New Instructions,Yes
+Secure Key,Yes
+Intel® Trusted Execution Technology ‡,No
+Execute Disable Bit ‡,Yes
+Intel® OS Guard,Yes
+Intel® Stable IT Platform Program (SIPP),No
+Intel® Virtualization Technology (VT-x) ‡,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes

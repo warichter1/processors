@@ -1,0 +1,39 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 10:15:03 PM
+ ,Intel® Xeon Phi™ Coprocessor 5110P ,Intel® Xeon Phi™ Coprocessor 3120A ,Intel® Xeon Phi™ Coprocessor 3120P ,Intel® Xeon Phi™ Coprocessor 7120P ,Intel® Xeon Phi™ Coprocessor 7120X ,Intel® Xeon Phi™ Coprocessor 5120D ,Intel® Xeon Phi™ Coprocessor 7120D ,Intel® Xeon Phi™ Coprocessor 7120A 
+Essentials
+Product Collection,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family,Intel® Xeon Phi™ x100 Product Family
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,5110P,3120A,3120P,7120P,7120X,5120D,7120D,7120A
+Lithography,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm,22 nm
+
+Performance Specifications
+Total Cores,60,57,57,61,61,60,61,61
+Processor Base Frequency,1.05 GHz,1.10 GHz,1.10 GHz,1.24 GHz,1.24 GHz,1.05 GHz,1.24 GHz,1.24 GHz
+Cache,30 MB L2 Cache,28.5 MB L2 Cache,28.5 MB L2 Cache,30.5 MB L2 Cache,30.5 MB L2 Cache,30 MB L2 Cache,30.5 MB L2 Cache,30.5 MB L2 Cache
+TDP,225 W,300 W,300 W,300 W,300 W,245 W,270 W,300 W
+Max Turbo Frequency,,,,1.33 GHz,1.33 GHz,,1.33 GHz,1.33 GHz
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q4'12,Q2'13,Q2'13,Q2'13,Q2'13,Q2'13,Q1'14,Q2'14
+Supply Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),8 GB,6 GB,6 GB,16 GB,16 GB,8 GB,16 GB,16 GB
+Max # of Memory Channels,16,12,12,16,16,16,16,16
+Max Memory Bandwidth,320 GB/s,240 GB/s,240 GB/s,352 GB/s,352 GB/s,352 GB/s,352 GB/s,352 GB/s
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+PCI Express Revision,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+
+Package Specifications
+Bracket Height,PCI bracket inluded or installed (not on Bulk) |  312 mm,Brackets installed or supplied (not on bulk); PCI 312 mm |  ISA 338.79 mm,PCI bracket inluded or installed (not on Bulk) |  312 mm,PCI bracket inluded or installed (not on Bulk) |  312 mm,No Brackets,No Brackets,No Brackets,PCI bracket included or installed (not on Bulk) |  312 mm
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,1.0,1.0,No,1.0,1.0
+Instruction Set,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit,64-bit
+Instruction Set Extensions,Intel® IMCI,Intel® IMCI,Intel® IMCI,Intel® IMCI,Intel® IMCI,Intel® IMCI,Intel® IMCI,Intel® IMCI

@@ -1,0 +1,44 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:21:55 PM
+ ,Intel® Itanium® Processor 9330 ,Intel® Itanium® Processor 9310 ,Intel® Itanium® Processor 9320 ,Intel® Itanium® Processor 9340 ,Intel® Itanium® Processor 9350 
+Essentials
+Product Collection,Intel® Itanium® Processor 9300 Series,Intel® Itanium® Processor 9300 Series,Intel® Itanium® Processor 9300 Series,Intel® Itanium® Processor 9300 Series,Intel® Itanium® Processor 9300 Series
+Vertical Segment,Server,Server,Server,Server,Server
+Processor Number,9330,9310,9320,9340,9350
+Lithography,65 nm,65 nm,65 nm,65 nm,65 nm
+Recommended Customer Price,$2059.00,$946.00,$1614.00,$2059.00,$3838.00
+
+CPU Specifications
+Total Cores,4,2,4,4,4
+Total Threads,8,4,8,8,8
+Max Turbo Frequency,1.60 GHz,,1.47 GHz,1.73 GHz,1.87 GHz
+Processor Base Frequency,1.46 GHz,1.60 GHz,1.33 GHz,1.60 GHz,1.73 GHz
+Cache,20 MB L3 Cache,10 MB L3 Cache,16 MB L3 Cache,20 MB L3 Cache,24 MB L3 Cache
+Bus Speed,4.8 GT/s,4.8 GT/s,4.8 GT/s,4.8 GT/s,4.8 GT/s
+TDP,155 W,130 W,155 W,185 W,185 W
+FSB Parity,,Yes,,,
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q1'10,Q1'10,Q1'10,Q1'10,Q1'10
+Expected Discontinuance,Q2'2014,Q2'2014,Q2'2014,Q2'2014,Q2'2014
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No,No
+
+Memory Specifications
+Physical Address Extensions,50-bit,50-bit,50-bit,50-bit,50-bit
+
+Package Specifications
+Sockets Supported,FCLGA1248,FCLGA1248,FCLGA1248,FCLGA1248,FCLGA1248
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,1.0,No,1.0,1.0,1.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,Yes
+Instruction Set,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit
+Intel® Demand Based Switching,Yes,Yes,Yes,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes

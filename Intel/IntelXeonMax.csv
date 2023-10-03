@@ -1,0 +1,82 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:42:34 PM
+ ,Intel® Xeon® CPU Max 9480 Processor ,Intel® Xeon® CPU Max 9470 Processor ,Intel® Xeon® CPU Max 9460 Processor ,Intel® Xeon® CPU Max 9468 Processor ,Intel® Xeon® CPU Max 9462 Processor 
+Essentials
+Product Collection,Intel® Xeon® CPU Max Series,Intel® Xeon® CPU Max Series,Intel® Xeon® CPU Max Series,Intel® Xeon® CPU Max Series,Intel® Xeon® CPU Max Series
+Vertical Segment,Server,Server,Server,Server,Server
+Processor Number,9480,9470,9460,9468,9462
+Lithography,Intel 7,Intel 7,Intel 7,Intel 7,Intel 7
+Use Conditions,Server/Enterprise,Server/Enterprise,Server/Enterprise,Server/Enterprise,Server/Enterprise
+Recommended Customer Price,,$515.00 - $566.00,$566.00,$515.00 - $566.00,$564.00
+
+CPU Specifications
+Total Cores,56,52,40,48,32
+Total Threads,112,104,80,96,64
+Max Turbo Frequency,3.50 GHz,3.50 GHz,3.50 GHz,3.50 GHz,3.50 GHz
+Processor Base Frequency,1.90 GHz,2.00 GHz,2.20 GHz,2.10 GHz,2.70 GHz
+Cache,112.5 MB,105 MB,97.5 MB,105 MB,75 MB
+Intel® UPI Speed,16 GT/s,16 GT/s,16 GT/s,16 GT/s,16 GT/s
+Max # of UPI Links,4,4,3,4,3
+TDP,350 W,350 W,350 W,350 W,350 W
+
+Supplemental Information
+Marketing Status,Launched,Launched,Launched,Launched,Launched
+Launch Date,Q1'23,Q1'23,Q1'23,Q1'23,Q1'23
+Servicing Status,Baseline Servicing,Baseline Servicing,Baseline Servicing,Baseline Servicing,Baseline Servicing
+Embedded Options Available,Yes,No,No,No,No
+
+Memory Specifications
+Max Memory Size (dependent on memory type),4 TB,4 TB,4 TB,4 TB,4 TB
+Memory Types,Up to DDR5 4800 MT/s 1DPC  Up to DDR5 4400 MT/s 2DPC,Up to DDR5 4800 MT/s 1DPC  Up to DDR5 4400 MT/s 2DPC,Up to DDR5 4800 MT/s 1DPC  Up to DDR5 4400 MT/s 2DPC,Up to DDR5 4800 MT/s 1DPC  Up to DDR5 4400 MT/s 2DPC,Up to DDR5 4800 MT/s 1DPC  Up to DDR5 4400 MT/s 2DPC
+Max # of Memory Channels,8,8,8,8,8
+Maximum High Bandwidth Memory (HBM)†,64 GB,64 GB,64 GB,64 GB,64 GB
+ECC Memory Supported   ‡,Yes,Yes,Yes,Yes,Yes
+
+Expansion Options
+Scalability,2S,2S,2S,2S,2S
+PCI Express Revision,5.0,5.0,5.0,5.0,5.0
+Max # of PCI Express Lanes,80,80,80,80,80
+
+Package Specifications
+Sockets Supported,FCLGA4677,FCLGA4677,FCLGA4677,FCLGA4677,FCLGA4677
+Package Carrier,E1C,E1C,E1C,E1C,E1C
+DTS Max,82 °C,83 °C,97 °C,94 °C,100 °C
+TCASE,64°C,64°C,77°C,77°C,77°C
+Package Size,100mm x 56.5mm,100mm x 56.5mm,100mm x 56.5mm,100mm x 56.5mm,100mm x 56.5mm
+
+Advanced Technologies
+Intel® Data Streaming Accelerator (DSA),4 default devices,4 default devices,4 default devices,4 default devices,4 default devices
+Intel® Advanced Matrix Extensions (AMX),Yes,Yes,Yes,Yes,Yes
+Intel® Speed Select Technology – Core Power,Yes,Yes,Yes,Yes,Yes
+Intel® Deep Learning Boost (Intel® DL Boost),Yes,Yes,Yes,Yes,Yes
+Intel® Resource Director Technology (Intel® RDT),Yes,Yes,Yes,Yes,Yes
+Intel® Speed Shift Technology,Yes,Yes,Yes,Yes,Yes
+Intel® Turbo Boost Technology ‡,2.0,2.0,2.0,2.0,2.0
+Intel® Hyper-Threading Technology ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Transactional Synchronization Extensions,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,Yes,Yes,Yes,Yes,Yes
+Instruction Set Extensions,Intel® AMX |  Intel® SSE4.2 |  Intel® AVX |  Intel® AVX2 |  Intel® AVX-512,Intel® AMX |  Intel® SSE4.2 |  Intel® AVX |  Intel® AVX2 |  Intel® AVX-512,Intel® AMX |  Intel® SSE4.2 |  Intel® AVX |  Intel® AVX2 |  Intel® AVX-512,Intel® AMX |  Intel® SSE4.2 |  Intel® AVX |  Intel® AVX2 |  Intel® AVX-512,Intel® AMX |  Intel® SSE4.2 |  Intel® AVX |  Intel® AVX2 |  Intel® AVX-512
+# of AVX-512 FMA Units,2,2,2,2,2
+Intel® Speed Select Technology – Turbo Frequency,,Yes,,Yes,
+Intel® Speed Select Technology - Performance Profile,,Yes,,Yes,
+
+Security & Reliability
+Intel® Crypto Acceleration,Yes,Yes,Yes,Yes,Yes
+Intel® Platform Firmware Resilience Support,Yes,Yes,Yes,Yes,Yes
+Intel® Control-Flow Enforcement Technology,Yes,Yes,Yes,Yes,Yes
+Intel® Total Memory Encryption,Yes,Yes,Yes,Yes,Yes
+Intel® AES New Instructions,Yes,Yes,Yes,Yes,Yes
+Intel® Software Guard Extensions (Intel® SGX),Yes with Intel® SPS,Yes with Intel® SPS,Yes with Intel® SPS,Yes with Intel® SPS,Yes with Intel® SPS
+Default Maximum Enclave Page Cache (EPC) Size for Intel® SGX,512 GB,512 GB,128 GB,512 GB,128 GB
+Intel® OS Guard,Yes,Yes,Yes,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes,Yes,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Boot Guard,Yes,Yes,Yes,Yes,Yes
+Intel® Run Sure Technology,Yes,Yes,Yes,Yes,Yes
+Mode-based Execute Control (MBEC),Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes,Yes,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes,Yes,Yes,Yes
+
+Intel® Speed Select Technology - Performance Profile (Intel® SST-PP)
+Intel® Speed Select Technology,,See the specifications,,See the specifications,

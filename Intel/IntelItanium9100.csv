@@ -1,0 +1,45 @@
+﻿ARK | Intel® Product Specification Comparison
+08/24/2023 09:22:40 PM
+ ,Intel® Itanium® Processor 9150M ,Intel® Itanium® Processor 9110N ,Intel® Itanium® Processor 9120N ,Intel® Itanium® Processor 9130M ,Intel® Itanium® Processor 9140M ,Intel® Itanium® Processor 9140N ,Intel® Itanium® Processor 9150N ,Intel® Itanium® Processor 9152M 
+Essentials
+Product Collection,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series,Intel® Itanium® Processor 9100 Series
+Vertical Segment,Server,Server,Server,Server,Server,Server,Server,Server
+Processor Number,9150M,9110N,9120N,9130M,9140M,9140N,9150N,9152M
+Lithography,90 nm,90 nm,90 nm,90 nm,90 nm,90 nm,90 nm,90 nm
+Recommended Customer Price,$3692.00,$696.00,$910.00,$1552.00,$1980.00,$1980.00,$3692.00,
+
+Performance Specifications
+Total Cores,2,1,2,2,2,2,2,2
+Processor Base Frequency,1.66 GHz,1.60 GHz,1.42 GHz,1.66 GHz,1.66 GHz,1.60 GHz,1.60 GHz,1.66 GHz
+Cache,24 MB L3 Cache,12 MB L3 Cache,12 MB L3 Cache,8 MB L3 Cache,18 MB L3 Cache,18 MB L3 Cache,24 MB L3 Cache,24 MB L3 Cache
+Bus Speed,667 MHz,533 MHz,533 MHz,667 MHz,667 MHz,533 MHz,533 MHz,667 MHz
+FSB Parity,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+TDP,104 W,75 W,104 W,104 W,104 W,104 W,104 W,104 W
+
+Supplemental Information
+Marketing Status,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued,Discontinued
+Launch Date,Q4'07,Q4'07,Q4'07,Q4'07,Q4'07,Q4'07,Q4'07,Q4'07
+Expected Discontinuance,Q3'2011,Q3'2011,Q3'2011,Q3'2011,Q3'2011,Q3'2011,Q3'2011,
+Servicing Status,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime,End of Servicing Lifetime
+Embedded Options Available,No,No,No,No,No,No,No,No
+
+Package Specifications
+Sockets Supported,PPGA611,PPGA611,PPGA611,PPGA611,PPGA611,PPGA611,PPGA611,
+TCASE,76°C,76°C,76°C,76°C,76°C,76°C,76°C,76°C
+Package Size,113mm x 48.26mm,113mm x 48.26mm,113mm x 48.26mm,113mm x 48.26mm,113mm x 48.26mm,113mm x 48.26mm,113mm x 48.26mm,113mm x 48.26mm
+Processing Die Size,596 mm2,596 mm2,596 mm2,596 mm2,596 mm2,596 mm2,596 mm2,596 mm2
+# of Processing Die Transistors,1720 million,1720 million,1720 million,1720 million,1720 million,1720 million,1720 million,1720 million
+
+Advanced Technologies
+Intel® Turbo Boost Technology ‡,No,No,No,No,No,No,No,No
+Intel® Hyper-Threading Technology ‡,Yes,No,Yes,No,Yes,Yes,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Intel® 64 ‡,No,No,No,No,No,No,No,No
+Instruction Set,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit,Itanium 64-bit
+Idle States,No,No,No,No,No,No,No,No
+Enhanced Intel SpeedStep® Technology,No,No,No,No,No,No,No,No
+Intel® Demand Based Switching,Yes,No,No,No,Yes,Yes,Yes,Yes
+
+Security & Reliability
+Intel® Trusted Execution Technology ‡,No,No,No,No,No,No,No,No
+Execute Disable Bit ‡,No,No,No,No,No,No,No,No
