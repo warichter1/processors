@@ -1,0 +1,96 @@
+manufacturer,processor_family,architecture ,hw_model ,Feature ,"Cache (I / D), MMU ",mips
+Digital,StrongARM,ARMv4 ,SA-110 ,5-stage pipeline ,"16 KB / 16 KB, MMU ","100–233 MHz
+1.0 DMIPS/MHz "
+Digital,StrongARM,ARMv4 ,SA-1100 ,derivative of the SA-110 ,"16 KB / 8 KB, MMU ",
+Faraday Technology,Faraday,ARMv4,FA510,6-stage pipeline,"Up to 32 KB / 32 KB cache, MPU","1.26 DMIPS/MHz 
+100–200 MHz "
+Faraday Technology,Faraday,ARMv4,FA526,6-stage pipeline,"Up to 32 KB / 32 KB cache, MMU","1.26 MIPS/MHz 
+166–300 MHz "
+Faraday Technology,Faraday,ARMv4,FA626,8-stage pipeline,"32 KB / 32 KB cache, MMU","1.35 DMIPS/MHz 
+500 MHz "
+Faraday Technology,Faraday,ARMv5TE,FA606TE,5-stage pipeline,"No cache, no MMU","1.22 DMIPS/MHz
+200 MHz "
+Faraday Technology,Faraday,ARMv5TE,FA626TE,8-stage pipeline,"32 KB / 32 KB cache, MMU","1.43 MIPS/MHz
+800 MHz "
+Faraday Technology,Faraday,ARMv5TE,FMP626TE,"8-stage pipeline, SMP","32 KB / 32 KB cache, MMU","1.43 MIPS/MHz
+500 MHz "
+Faraday Technology,Faraday,ARMv5TE,FA726TE,"13 stage pipeline, dual issue","32 KB / 32 KB cache, MMU","2.4 DMIPS/MHz
+1000 MHz "
+ Intel / Marvell,Xscale ,ARMv5TE ,XScale ,"7-stage pipeline, Thumb, enhanced DSP instructions ","32 KB / 32 KB, MMU ",133–400 MHz 
+ Intel / Marvell,Xscale ,ARMv5TE ,Bulverde ,"Wireless MMX, wireless SpeedStep added ","32 KB / 32 KB, MMU ",312–624 MHz 
+ Intel / Marvell,Xscale ,ARMv5TE ,Monahans,Wireless MMX2 added ,"32 KB / 32 KB L1, optional L2 cache up to 512 KB, MMU ",Up to 1.25 GHz 
+Marvell,Sheeva,ARMv5,Feroceon,"5–8 stage pipeline, single-issue","16 KB / 16 KB, MMU",600–2000 MHz 
+Marvell,Sheeva,ARMv5,Jolteon,"5–8 stage pipeline, dual-issue","32 KB / 32 KB, MMU ",
+Marvell,Sheeva,ARMv5,PJ1 (Mohawk),"5–8 stage pipeline, single-issue, Wireless MMX2","32 KB / 32 KB, MMU","1.46 DMIPS/MHz
+1.06 GHz "
+Marvell,Sheeva,ARMv6 / ARMv7-A,PJ4,"6–9 stage pipeline, dual-issue, Wireless MMX2, SMP","32 KB / 32 KB, MMU","2.41 DMIPS/MHz
+1.6 GHz "
+Qualcomm,Snapdragon,ARMv7-A ,Scorpion,1 or 2 cores. ARM / Thumb / Thumb-2 / DSP / SIMD / VFPv3 FPU / NEON (128-bit wide) ,256 KB L2 per core ,2.1 DMIPS/MHz per core 
+Qualcomm,Snapdragon,ARMv7-A ,Krait,"1, 2, or 4 cores. ARM / Thumb / Thumb-2 / DSP / SIMD / VFPv4 FPU / NEON (128-bit wide) ","4 KB / 4 KB L0, 16 KB / 16 KB L1, 512 KB L2 per core ",3.3 DMIPS/MHz per core 
+Qualcomm,Snapdragon,ARMv8-A ,Kryo,4 cores.,?,"Up to 2.2 GHz 
+(6.3 DMIPS/MHz) "
+Apple,Ax ,ARMv7-A ,Swift,2 cores. ARM / Thumb / Thumb-2 / DSP / SIMD / VFPv4 FPU / NEON ,"L1: 32 KB / 32 KB, L2: 1 MB shared ",3.5 DMIPS/MHz per core 
+Apple,Ax ,ARMv8-A,Cyclone,"2 cores. ARM / Thumb / Thumb-2 / DSP / SIMD / VFPv4 FPU / NEON / TrustZone / AArch64. Out-of-order, superscalar.","L1: 64 KB / 64 KB, L2: 1 MB shared
+SLC: 4 MB",1.3 or 1.4 GHz 
+Apple,Ax ,ARMv8-A,Typhoon,2 or 3 cores. ARM / Thumb / Thumb-2 / DSP / SIMD / VFPv4 FPU / NEON / TrustZone / AArch64,"L1: 64 KB / 64 KB, L2: 1 MB or 2 MB shared
+SLC: 4 MB",1.4 or 1.5 GHz 
+Apple,Ax ,ARMv8-A,Twister,2 cores. ARM / Thumb / Thumb-2 / DSP / SIMD / VFPv4 FPU / NEON / TrustZone / AArch64,"L1: 64 KB / 64 KB, L2: 2 MB shared
+SLC: 4 MB or 0 MB",1.85 or 2.26 GHz 
+Apple,Ax ,ARMv8-A,Hurricane and Zephyr,"Hurricane: 2 or 3 cores. AArch64, out-of-order, superscalar, 6-decode, 6-issue, 9-wide
+Zephyr: 2 or 3 cores. AArch64, out-of-order, superscalar.","L1: 64 KB / 64 KB, L2: 3 MB or 8 MB shared
+L1: 32 KB / 32 KB. L2: none
+SLC: 4 MB or 0 MB","2.34 or 2.38 GHz
+1.05 GHz "
+Apple,Ax ,ARMv8.2-A,Monsoon and Mistral,"Monsoon: 2 cores. AArch64, out-of-order, superscalar, 7-decode, ?-issue, 11-wide
+Mistral: 4 cores. AArch64, out-of-order, superscalar. Based on Swift.","L1I: 128 KB, L1D: 64 KB, L2: 8 MB shared
+L1: 32 KB / 32 KB, L2: 1 MB shared
+SLC: 4 MB","2.39 GHz
+1.70 GHz "
+Apple,Ax ,ARMv8.3-A,Vortex and Tempest,"Vortex: 2 or 4 cores. AArch64, out-of-order, superscalar, 7-decode, ?-issue, 11-wide
+Tempest: 4 cores. AArch64, out-of-order, superscalar, 3-decode. Based on Swift.","L1: 128 KB / 128 KB, L2: 8 MB shared
+L1: 32 KB / 32 KB, L2: 2 MB shared
+SLC: 8 MB","2.49 GHz
+1.59 GHz "
+Apple,Ax ,ARMv8.4-A,Lightning and Thunder,"Lightning: 2 cores. AArch64, out-of-order, superscalar, 7-decode, ?-issue, 11-wide
+Thunder: 4 cores. AArch64, out-of-order, superscalar.","L1: 128 KB / 128 KB, L2: 8 MB shared
+L1: 32 KB / 48 KB, L2: 4 MB shared
+SLC: 16 MB","2.66 GHz
+1.73 GHz "
+Apple,Ax ,ARMv8.5-A,Firestorm and Icestorm],"Firestorm: 2 cores. AArch64, out-of-order, superscalar, 8-decode, ?-issue, 14-wide
+Icestorm: 4 cores. AArch64, out-of-order, superscalar, 4-decode, ?-issue, 7-wide.","L1: 192 KB / 128 KB, L2: 8 MB shared
+L1: 128 KB / 64 KB, L2: 4 MB shared
+SLC: 16 MB","3.0 GHz
+1.82 GHz "
+Apple,Ax ,ARMv8.5-A,Avalanche and Blizzard,"Avalanche: 2 cores. AArch64, out-of-order, superscalar, 8-decode, ?-issue, 14-wide
+Blizzard: 4 cores. AArch64, out-of-order, superscalar, 4-decode, ?-issue, 8-wide.","L1: 192 KB / 128 KB, L2: 12 MB shared
+L1: 128 KB / 64 KB, L2: 4 MB shared
+SLC: 32 MB","2.93 or 3.23 GHz
+2.02 GHz "
+Apple,Ax ,ARMv8.5-A,Everest and Sawtooth,"Everest: 2 cores. AArch64, out-of-order, superscalar, 8-decode, ?-issue, 14-wide
+Sawtooth: 4 cores. AArch64, out-of-order, superscalar, 4-decode, ?-issue, 8-wide.","L1: 192 KB / 128 KB, L2: 16 MB shared
+L1: 128 KB / 64 KB, L2: 4 MB shared
+SLC: 24 MB","3.46 GHz
+2.02 GHz "
+Apple,Mx,ARMv8.5-A,Firestorm and Icestorm,"Firestorm: 4, 6, 8 or 16 cores. AArch64, out-of-order, superscalar, 8-decode, ?-issue, 14-wide
+Icestorm: 2 or 4 cores. AArch64, out-of-order, superscalar, 4-decode, ?-issue, 7-wide.","L1: 192 KB / 128 KB, L2: 12, 24 or 48 MB shared
+L1: 128 KB / 64 KB, L2: 4 or 8 MB shared
+SLC: 8, 24, 48 or 96 MB","3.2-3.23 GHz
+2.06 GHz "
+Apple,Mx,ARMv8.5-A,Avalanche and Blizzard,"Avalanche: 4, 6, 8 or 16 cores. AArch64, out-of-order, superscalar, 8-decode, ?-issue, 14-wide
+Blizzard: 4 or 8 cores. AArch64, out-of-order, superscalar, 4-decode, ?-issue, 8-wide.","L1: 192 KB / 128 KB, L2: 16, 32 or 64 MB shared
+L1: 128 KB / 64 KB, L2: 4 or 8 MB shared
+SLC: 8, 24, 48 or 96 MB","3.49 GHz
+2.42 GHz "
+Applied Micro,X-Gene,ARMv8-A,X-Gene,"64-bit, quad issue, SMP, 64 cores[87]","Cache, MMU, virtualization",3 GHz (4.2 DMIPS/MHz per core) 
+Nvidia,Denver,ARMv8-A,Denver,"2 cores. AArch64, 7-wide superscalar, in-order, dynamic code optimization, 128 MB optimization cache,
+Denver1: 28 nm, Denver2:16 nm",128 KB I-cache / 64 KB D-cache,Up to 2.5 GHz 
+Nvidia,Carmel ,ARMv8.2-A,Carmel,"2 cores. AArch64, 10-wide superscalar, in-order, dynamic code optimization, ? MB optimization cache,
+functional safety, dual execution, parity & ECC",? KB I-cache / ? KB D-cache,Up to ? GHz 
+Cavium,ThunderX,ARMv8-A,ThunderX,"64-bit, with two models with 8–16 or 24–48 cores (×2 w/two chips)",?,Up to 2.2 GHz 
+AMD,K12 ,ARMv8-A,K12,?,?,? 
+Samsung,Exynos,ARMv8-A,"M1 (""Mongoose"")","4 cores. AArch64, 4-wide, quad-issue, superscalar, out-of-order","64 KB I-cache / 32 KB D-cache, L2: 16-way shared 2 MB","5.1 DMIPS/MHz 
+(2.6 GHz) "
+Samsung,Exynos,ARMv8-A,"M2 (""Mongoose"")","4 cores. AArch64, 4-wide, quad-issue, superscalar, out-of-order","64 KB I-cache / 32 KB D-cache, L2: 16-way shared 2 MB",2.3 GHz 
+Samsung,Exynos,ARMv8-A ,"M3 (""Meerkat"")","4 cores, AArch64, 6-decode, 6-issue, 6-wide. superscalar, out-of-order","64 KB I-cache / 64 KB D-cache, L2: 8-way private 512 KB, L3: 16-way shared 4 MB",2.7 GHz 
+Samsung,Exynos,ARMv8.2-A ,"M4 (""Cheetah"")","2 cores, AArch64, 6-decode, 6-issue, 6-wide. superscalar, out-of-order ","64 KB I-cache / 64 KB D-cache, L2: 8-way private 1 MB, L3: 16-way shared 3 MB ",2.73 GHz 
+Samsung,Exynos,ARMv8.2-A ,"M5 (""Lion"") ","2 cores, AArch64, 6-decode, 6-issue, 6-wide. superscalar, out-of-order ","64 KB I-cache / 64 KB D-cache, L2: 8-way shared 2 MB, L3: 12-way shared 3 MB ",2.73 GHz 

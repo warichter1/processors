@@ -1,0 +1,87 @@
+family,products
+ARM1 ,ARM: Evaluation System second processor for BBC Micro;
+ARM2 ,"Acorn: Archimedes, ChessMachine;"
+ARM250 ,Acorn: Archimedes;
+ARM3 ,Acorn: Archimedes;
+ARM60 ,"3DO Interactive Multiplayer, Zarlink:GPS receiver; "
+ARM610 ,"Acorn:Risc PC 600, Apple:Newton 100 series;"
+ARM700 ,Acorn:Risc PC prototype CPU card;
+ARM710 ,Acorn:Risc PC 700;
+ARM710a ,"Acorn:Risc PC 700,A7000 (ARM7500),A7000+ (ARM7500FE); Network Computer: ARM7500FE;Apple eMate 300;Psion:Series 5 (ARM7100);"
+ARM7TDMI(-S) ,"Game Boy:Advance;Nintendo:DS,Dsi;Apple iPod;Lego NXT:Juice Box;Garmin: Navigation Devices (1990s – early 2000s); "
+ARM710T ,"Psion:Series 5mx,Revo,Revo Plus,Diamond Mako;"
+ARM720T ,Zipit:Wireless Messenger; 
+StrongARM ,"SA-110~Apple:Newton 2x00 series;Acorn:Risc PC,Rebel,Corel:Netwinder;Chalice:ATS;
+SA-1100~Psion;netBook;Empeg:Car;
+SA-1110~LART;(computer); ntel:Assabet;Ipaq:H36x0,Balloon2;Zaurus:SL-5x00;HP Jornada:7xx,560 series;"
+ARM810 ,Acorn:Risc PC prototype CPU card;
+ARM920T ,"Armadillo, GP32, GP2X (first core), Tapwave: Zodiac (Motorola i.MX1);Hewlett-Packard:HP-49/50 Calculators;Sun:SPOT,HTC TyTN,FIC;Neo: FreeRunner;Garmin:Navigation Devices (mid–late 2000s);TomTom:navigation devices;Boardcom:EM2440-III"
+ARM922T ,
+ARM940T ,GP2X:second core;Meizu: M6 Mini Player;
+ARM926EJ-S ,"Mobile phones~Sony Ericsson:K,series W series;Siemens/Benq:x65 series+;LG:Arena;GPH:Wiz,Squeezebox Duet Controller (Samsung S3C2412),Squeezebox Radio; Buffalo:TeraStation Live (NAS),Drobo FS (NAS); Western Digital: MyBook I World Edition,MyBook II World Edition; Seagate:FreeAgent,DockStar STDSD10G-RK, FreeAgent GoFlex Home; Chumby:Classic;Nintendo:Wii Hollywood Starlet,Wii U Latte Starlet,Wii U GamePad; Lego Mindstorms:EV3;"
+ARM946E-S ,"Nintendo:DS,Dsi,3DS;Nokia:N-Gage;Canon;PowerShot A470,EOS 5D Mark II;Conexant:802.11 chips;Samsung:S5L2010;"
+ARM966E-S ,
+ARM968E-S ,
+ARM1020E ,
+ARM1026EJ-S ,
+XScale ,"80219~Thecus:N2100;
+IOP321~Iyonix;
+PXA210~Zaurus:SL-5600,C700;Ipaq:H3900;Sony:CLIÉ:NX60,CLIÉ NX70V,CLIÉ NZ90;
+PXA250~Zaurus:SL-5600,C700,Ipaq:H3900;Sony:CLIÉ NX60,CLIÉ NX70V,CLIÉ NZ90;
+PXA255~Gumstix:basix,connex;Palm:Tungsten E2;Zaurus:SL-C750,760,860;Mentor:Ranger,Stryder,iRex Iliad;
+PXA263~Sony:CLIÉ NX73V,CLIÉ NX80V;
+PXA26x~Palm:Tungsten T3;
+PXA27x~Gumstix:verdex;Trizeps-Modules;eSOM270-Module:PXA270 COM;HTC:Universal;HP:hx4700;Zaurus:SL-C1000,3000,3100,3200;Dell:Axim x30,Axim x50,Axim x51;Trolltech:Greenphone;Motorola:Q,Balloon,Ezx,Platform A728, A780, A910, A1200, E680, E680i, E680g, E690, E895, Rokr E2, Rokr E6;Fujitsu Siemens:LOOX N560;Toshiba”Portégé G500;Palm:TX,Trēo 650-755pCentro;Zipit:Z2;HP:iPaq 614c Business Navigator;I-mate:PDA2;
+PXA3XX~Samsung:Omnia,SGH-i780;
+PXA900~Blackberry 8700,Pearl 8100;
+IXP42x~NSLU2;"
+ARM1136J(F)-S ,"OMAP2420~Nokia: E90,N93,N95,N82,N800,N810;Zune;BUGbase;
+MSM7200~Eten:Glofiish;HTC:TyTN II,Nike;
+Freescale i.MX31~Zune:30 GB;Toshiba:Gigabeat S; Kindle:DX;
+Freescale MXC300-30~Nokia:E63,E71, 5800,E51,6700 Classic,6120 Classic,6210 Navigator,6220 Classic,6290,6710 Navigator,6720 Classic,E75,N97,N81;
+Qualcomm MSM7201A~HTC:Dream (T-Mobile G1),Magic,Hero;Motorola:i1,Z6;Samsung:SGH-i627 (Propel Pro), Sony Ericsson:Xperia X10 Mini Pro;
+Qualcomm MSM7225~HTC:Wildfire;
+Qualcomm MSM7227!Samsung:Galaxy Ace,Galaxy Mini;ZTE:Link;HTC:Wildfire S,Legend,Aria;Viewsonic:ViewPad 7;"
+ARM1176JZ(F)-S ,"Apple~Apple:iPhone original, iPhone 3G,iPod touch 1st gen,iPod touch 2nd gen;Motorola:RIZR Z8,RIZR Z10;Nintendo:3DS;
+Broadcom BCM2835~Raspberry Pi:1;Roku:2;
+S3C6410~Samsung:Omnia II,Moment,M910 Intercept,I5700;SmartQ:5;Boardcom:SBC6410,Idea6410;
+Qualcomm MSM7627~Palm:Pixi;LG:Optimus V (VM670);Motorola:Calgary,Devour;
+Telechips TCC8900~StorageSolutions: Scroll 7"" (Resistive/Capacitive),miScroll 7"",Scroll 8"";"
+ARM11 MPCore ,
+Cortex-A5 ,
+Cortex-A7 ,"Freescale i.MX6 UltraLite~Boardcom:EM6ul SBC;EINK-IMX7:SBC;MYS-6ULX:Single Board Computer;
+Allwinner A40i~Boardcon:EMA40;
+Broadcom BCM2836~Raspberry Pi:2;
+Rockchip RK3128~Boardcom:Compact3128;"
+Cortex-A8 ,"HTC:Desire,SBM7000,Oregon State University OSWALD;Gumstix:Overo Earth;Pandora;Apple:iPhone 3GS,iPod touch 3rd Generation, iPod touch 4th Gen,iPad (A4),iPhone 4 (A4),TV Gen2 (A4);Archos:5,43;BeagleBoard:Genesi EFIKA,MX;Motorola;Droid,Droid X,Droid 2,Droid R2D2 Edition;Palm:Pre,Pre 2;HP:Veer,Pre 3; Samsung:Omnia HD,Wave S8500,i9000 Galaxy S,P1000 Galaxy Tab;Sony Ericsson: Satio,Xperia X10;Touch Book;Nokia:N900;Meizu:M9;Google:Nexus S, Galaxy:SL;Sharp:PC-Z1 ""Netwalker"";MYD-C437X:Development Board;"
+Cortex-A9 ,"Samsung:Galaxy S II (Samsung Exynos),Galaxy S III;Sony:Xperia U;Apple:iPad 2,iPhone 4S (A5);BlackBerry:PlayBook (TI OMAP4430);LG:Optimus 2X,Optimus 3D;Motorola:Atrix 4G,DROID BIONIC,Xoom;PandaBoard; PlayStation:Vita; HP:TouchPad;Acer:ICONIA;TAB:A-series;HTC:Sensation,EVO 3D;ASUS:Eee Pad Transformer, Eee Pad Transformer Prime;Lenovo:IdeaPad K2;Z-turn:Board single board computer;"
+Cortex-A12 ,
+Cortex-A15 ,Samsung Google:Nexus 10;Samsung:Chromebook XE303; 
+Cortex-A17 ,RK3288~Asus:Tinker Board;Boardcom:EM3288 SBC;
+Cortex-A32 ,
+Cortex-A35 ,
+Cortex-A53 ,"Broadcom BCM2837~Raspberry Pi:3;
+HiSilicon Kirin Series~HiSilicon Kirin:SoC;
+Mediatek MT Series~Mediatek MT:SoC;
+Qualcomm:Snapdragon Series,Snapdragon SoC;"
+Cortex-A55 ,Rockchip RK3566: Boardcom:Compact3566:
+Cortex-A57 ,
+Cortex-A72 ,"Rockchip RK3399~Boardcom:EM3399 SBC;
+Broadcom BCM2711~Raspberry Pi:4;"
+Cortex-A73 ,
+Cortex-A75 ,
+Cortex-A76 ,Rockchip RK3588~Boardcom:CM3588 SoM;Rock:5;
+Cortex-A77 ,
+Cortex-A78 ,
+Cortex-A710 ,
+Cortex-A715 ,
+Cortex-X1 ,
+Cortex-X2 ,
+Cortex-X3 ,
+Cortex-R4(F) ,
+Cortex-R5F ,
+Cortex-M0 ,
+Cortex-M0+ ,
+Cortex-M1 ,
+Cortex-M3 ,Arduino:Due;Pebble;
+Cortex-M4(F) ,Teensy;3.0;

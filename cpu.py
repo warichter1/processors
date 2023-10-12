@@ -134,7 +134,6 @@ def getASeries(cell):
         return name
 
 
-
 def processIntelFile(filename, indexStart=0):
     """Read Intel Ark export files with records as columns, convert to rows."""
     IntelIndex = 6000 + indexStart
@@ -146,7 +145,7 @@ def processIntelFile(filename, indexStart=0):
     df = df.dropna(how='all')
     df = df.dropna(how='all', axis=1)
     df['processor_id'] = [IntelIndex + i for i in range(len(df))]
-    return df # .set_index('processor_id')
+    return df
 
 
 if __name__ == "__main__":

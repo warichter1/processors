@@ -1,0 +1,145 @@
+family,soc,products
+ARM1 ,ARM1,ARM: Evaluation System second processor for BBC Micro
+ARM2 ,ARM2 ,"Acorn: Archimedes, ChessMachine;"
+ARM250 ,ARM250 ,Acorn: Archimedes
+ARM3 ,ARM3 ,Acorn: Archimedes
+ARM60 ,ARM60 ,"3DO Interactive Multiplayer, Zarlink:GPS receiver; "
+ARM610 ,ARM610 ,"Acorn:Risc PC 600, Apple:Newton 100 series;"
+ARM700 ,ARM700 ,Acorn:Risc PC prototype CPU card
+ARM710 ,ARM710 ,Acorn:Risc PC 700
+ARM710a ,"ARM7100,ARM 7500,ARM7500FE","Acorn:Risc PC 700,A7000 (ARM7500),A7000+ (ARM7500FE); Network Computer: ARM7500FE;Apple eMate 300;Psion:Series 5 (ARM7100);"
+ARM7TDMI(-S) ,"Atmel: AT91SAM7; NXP Semiconductors: LPC2xxx,LH7;Actel: CoreMP7;","Game Boy:Advance;Nintendo:DS,Dsi;Apple iPod;Lego NXT:Juice Box;Garmin: Navigation Devices (1990s – early 2000s); "
+ARM710T ,,"Psion:Series 5mx,Revo,Revo Plus,Diamond Mako;"
+ARM720T ,NXP Semiconductors: LH7952x,Zipit:Wireless Messenger
+StrongARM ,"Digital: SA-110, SA-1100, SA-1110;","SA-110~Apple:Newton 2x00 series;Acorn:Risc PC,Rebel,Corel:Netwinder;Chalice:ATS;
+SA-1100~Psion;netBook;Empeg:Car;
+SA-1110~LART;(computer); ntel:Assabet;Ipaq:H36x0,Balloon2;Zaurus:SL-5x00;HP Jornada:7xx,560 series;"
+ARM810 ,,Acorn:Risc PC prototype CPU card
+ARM920T ,"Atmel:AT91RM9200,AT91SAM9;Cirrus Logic: EP9302, EP9307, EP9312, EP9315;Samsung: S3C2442, S3C2410, S3C2440;","Armadillo, GP32, GP2X (first core), Tapwave: Zodiac (Motorola i.MX1);Hewlett-Packard:HP-49/50 Calculators;Sun:SPOT,HTC TyTN,FIC;Neo: FreeRunner;Garmin:Navigation Devices (mid–late 2000s);TomTom:navigation devices;Boardcom:EM2440-III"
+ARM922T ,NXP Semiconductors: LH7A40x,
+ARM940T ,,GP2X:second core
+ARM926EJ-S ,"Texas Instruments:OMAP1710,OMAP1610,OMAP1611,OMAP1612,OMAP-L137,OMAP-L138;Qualcomm:MSM6xxx;Freescale: i.MX21,i.MX27,i.MX28;Atmel:AT91SAM9;NXP Semiconductors:LPC3xxx;Samsung:S3C2412;NEC:C10046F5-211-PN2-A SoC (ATi Hollywood graphics chip-Wii);Telechips:TCC7801,TCC7901;ZiiLABS:ZMS-05;Rockchip:RK2806,RK2808;NeoMagic:MiMagic Family,MM6; MM6+, MM8, MTV., CSR Quatro: 4300 series ","Mobile phones~Sony Ericsson:K,series W series;Siemens/Benq:x65 series+;LG:Arena;GPH:Wiz,Squeezebox Duet Controller (Samsung S3C2412),Squeezebox Radio; Buffalo:TeraStation Live (NAS),Drobo FS (NAS); Western Digital: MyBook I World Edition,MyBook II World Edition; Seagate:FreeAgent,DockStar STDSD10G-RK, FreeAgent GoFlex Home; Chumby:Classic;Nintendo:Wii Hollywood Starlet,Wii U Latte Starlet,Wii U GamePad; Lego Mindstorms:EV3;"
+ARM946E-S ,,"Nintendo:DS,Dsi,3DS;Nokia:N-Gage;Canon;PowerShot A470,EOS 5D Mark II;Conexant:802.11 chips;Samsung:S5L2010;"
+ARM966E-S ,STMicroelectronics: STR91xF,
+ARM968E-S ,NXP Semiconductors: LPC29xx,
+ARM1020E ,Samsung: SPGPv3 Asic for laser printers,
+ARM1026EJ-S ,"Conexant: CX94610, CX94615 ADSL SoC;",
+XScale ,"Intel:80200, 80219, PXA210, PXA250, PXA255, PXA263, PXA26x, PXA27x, PXA3xx, PXA900, IXC1100, IXP42x;","80219~Thecus:N2100;
+IOP321~Iyonix;
+PXA210~Zaurus:SL-5600,C700;Ipaq:H3900;Sony:CLIÉ:NX60,CLIÉ NX70V,CLIÉ NZ90;
+PXA250~Zaurus:SL-5600,C700,Ipaq:H3900;Sony:CLIÉ NX60,CLIÉ NX70V,CLIÉ NZ90;
+PXA255~Gumstix:basix,connex;Palm:Tungsten E2;Zaurus:SL-C750,760,860;Mentor:Ranger,Stryder,iRex Iliad;
+PXA263~Sony:CLIÉ NX73V,CLIÉ NX80V;
+PXA26x~Palm:Tungsten T3;
+PXA27x~Gumstix:verdex;Trizeps-Modules;eSOM270-Module:PXA270 COM;HTC:Universal;HP:hx4700;Zaurus:SL-C1000,3000,3100,3200;Dell:Axim x30,Axim x50,Axim x51;Trolltech:Greenphone;Motorola:Q,Balloon,Ezx,Platform A728, A780, A910, A1200, E680, E680i, E680g, E690, E895, Rokr E2, Rokr E6;Fujitsu Siemens:LOOX N560;Toshiba”Portégé G500;Palm:TX,Trēo 650-755pCentro;Zipit:Z2;HP:iPaq 614c Business Navigator;I-mate:PDA2;
+PXA3XX~Samsung:Omnia,SGH-i780;
+PXA900~Blackberry 8700,Pearl 8100;
+IXP42x~NSLU2;"
+ARM1136J(F)-S ,"Texas Instruments: OMAP2420, Qualcomm MSM7200, MSM7201A, MSM7225, MSM7227;Freescale: i.MX31,MXC300-30, CSR Quatro: 4230;","OMAP2420~Nokia: E90,N93,N95,N82,N800,N810;Zune;BUGbase;
+MSM7200~Eten:Glofiish;HTC:TyTN II,Nike;
+Freescale i.MX31~Zune:30 GB;Toshiba:Gigabeat S; Kindle:DX;
+Freescale MXC300-30~Nokia:E63,E71, 5800,E51,6700 Classic,6120 Classic,6210 Navigator,6220 Classic,6290,6710 Navigator,6720 Classic,E75,N97,N81;
+Qualcomm MSM7201A~HTC:Dream (T-Mobile G1),Magic,Hero;Motorola:i1,Z6;Samsung:SGH-i627 (Propel Pro), Sony Ericsson:Xperia X10 Mini Pro;
+Qualcomm MSM7225~HTC:Wildfire;
+Qualcomm MSM7227!Samsung:Galaxy Ace,Galaxy Mini;ZTE:Link;HTC:Wildfire S,Legend,Aria;Viewsonic:ViewPad 7;"
+ARM1176JZ(F)-S ,"Broadcom: BCM2835, Conexant: CX2427X, Nvidia: GoForce 6100;Telechips: TCC9101, TCC9201, TCC8900;Fujitsu: MB86H60; Samsung: S3C6410,S3C6430;Qualcomm: MSM7627, Infineon: X-GOLD 213;","Apple~Apple:iPhone original, iPhone 3G,iPod touch 1st gen,iPod touch 2nd gen;Motorola:RIZR Z8,RIZR Z10;Nintendo:3DS;
+Broadcom BCM2835~Raspberry Pi:1;Roku:2;
+S3C6410~Samsung:Omnia II,Moment,M910 Intercept,I5700;SmartQ:5;Boardcom:SBC6410,Idea6410;
+Qualcomm MSM7627~Palm:Pixi;LG:Optimus V (VM670);Motorola:Calgary,Devour;
+Telechips TCC8900~StorageSolutions: Scroll 7"" (Resistive/Capacitive),miScroll 7"",Scroll 8"";"
+ARM11 MPCore ,"Nvidia: APX 2500 (Tegra), CSR: Quatro 4500 series, Quatro 5300 series;",
+Cortex-A5 ,"Telechips: TCC892x; Qualcomm: Snapdragon MSM7225A,Snapdragon MSM7625A,Snapdragon MSM7227,Snapdragon MSM7627A; Atmel: SAMA5 (D2/D3/D4), MYIR: development board MYD-JA5D2X;",
+Cortex-A7 ,"Freescale: i.MX6 UltraLite: Allwinner: A20,A83T,A33,A40i,A50: Broadcom BCM2836; Rockchip: RK3128;","Freescale i.MX6 UltraLite~Boardcom:EM6ul SBC;EINK-IMX7:SBC;MYS-6ULX:Single Board Computer;
+Allwinner A40i~Boardcon:EMA40;
+Broadcom BCM2836~Raspberry Pi:2;
+Rockchip RK3128~Boardcom:Compact3128;"
+Cortex-A8 ,"Allwinner: A10, Allwinner: A13, Texas Instruments: OMAP3xxx series, Freescale: i.MX51-SOC, i.MX53 QSB; Apple: A4, ZiiLABS: ZMS-08; Samsung: Hummingbird S5PC100/S5PC110, Marvell: ARMADA 500/600, Qualcomm: Snapdragon QSD8672, Snapdragon MSM8260,Snapdragon MSM8660; Rockchip: RK2918;","HTC:Desire,SBM7000,Oregon State University OSWALD;Gumstix:Overo Earth;Pandora;Apple:iPhone 3GS,iPod touch 3rd Generation, iPod touch 4th Gen,iPad (A4),iPhone 4 (A4),TV Gen2 (A4);Archos:5,43;BeagleBoard:Genesi EFIKA,MX;Motorola;Droid,Droid X,Droid 2,Droid R2D2 Edition;Palm:Pre,Pre 2;HP:Veer,Pre 3; Samsung:Omnia HD,Wave S8500,i9000 Galaxy S,P1000 Galaxy Tab;Sony Ericsson: Satio,Xperia X10;Touch Book;Nokia:N900;Meizu:M9;Google:Nexus S, Galaxy:SL;Sharp:PC-Z1 ""Netwalker"";MYD-C437X:Development Board;"
+Cortex-A9 ,"Texas Instruments: OMAP4, ST-Ericsson: NovaThor U8500, NovaThor U9500; Nvidia: Tegra2, Tegra3, Samsung: Orion, Exynos 4210, STMicroelectronics: SPEAr1310; Xilinx: Extensible Processing Platform;Trident: PNX847x,PNX848x,PNX849x STB SoC: Freescale: i.MX6;Apple: A5;","Samsung:Galaxy S II (Samsung Exynos),Galaxy S III;Sony:Xperia U;Apple:iPad 2,iPhone 4S (A5);BlackBerry:PlayBook (TI OMAP4430);LG:Optimus 2X,Optimus 3D;Motorola:Atrix 4G,DROID BIONIC,Xoom;PandaBoard; PlayStation:Vita; HP:TouchPad;Acer:ICONIA;TAB:A-series;HTC:Sensation,EVO 3D;ASUS:Eee Pad Transformer, Eee Pad Transformer Prime;Lenovo:IdeaPad K2;Z-turn:Board single board computer;"
+Cortex-A12 ,,
+Cortex-A15 ,Texas Instruments: OMAP5;Samsung:Exynos 5250;ST Ericsson:NovaThor A9600;Fujitsu: Nvidia:Tegra 4;,Samsung Google:Nexus 10;
+Cortex-A17 ,Rockchip: RK3288,RK3288~Asus:Tinker Board;
+Cortex-A32 ,,
+Cortex-A35 ,"NXP: i.MX8X; MediaTek: MT6799, MT8516, Rockchip: RK3308;",
+Cortex-A53 ,"Actions: GT7, S900, V700;
+Allwinner: A64, H5, H64, R18;
+Altera: Stratix 10;
+Amlogic: S9 Family, T96x;
+Broadcom: BCM2837;
+Ezchip: TILE-Mx100;
+HiSilicon: Kirin 620, 650, 655, 658, 659, 930, 935;
+Marvell: Armada PXA1928, Mobile PXA1908/PXA1936;
+MediaTek: MT673x, MT675x, MT6761, MT6762, MT6763, MT6765, MT6795, MT8161, MT8163, MT8165, MT8732, MT8735, MT8752;
+NXP: ARM S32, QorIQ LS1088, LS1043, i.MX8M;
+Qualcomm: Snapdragon 215, 410, 412, 415, 425, 427, 430, 435, 429, 439, 450, 610, 615, 616, 617, 625, 626, 630;
+Renesas: RZ/V2M;
+Rockchip RK3328, RK3368;
+Samsung: Exynos 7570, 7578, 7580, 7870, 7880;
+Spreadtrum: SC9860/GV, SC9836;
+Texas Instruments: Sitara AM6xxx;
+Xilinx: ZynqMP;
+1892BA018 «SCYTHIAN» (Russian: 1892ВА018 СКИФ);","Broadcom BCM2837~Raspberry Pi:3;
+HiSilicon Kirin Series~HiSilicon Kirin:SoC;
+Mediatek MT Series~Mediatek MT:SoC;
+Qualcomm:Snapdragon Series,Snapdragon SoC;"
+Cortex-A55 ,"Samsung: Exynos 850;
+UNISOC: SC9863, SC9863A;
+Rockchip: RK3566, RK3568;",Rockchip RK3566: Boardcom:Compact3566:
+Cortex-A57 ,"AMD: Opteron A1100-series;
+NXP: QorIQ LS20xx;
+Nvidia: Tegra X1,Tegra X2;
+Qualcomm: Snapdragon 808 & 810;
+Samsung: Exynos 7 5433, 7420;
+HiSilicon: Kirin Hi1610,Hi1612;",
+Cortex-A72 ,"HiSilicon: Kirin 950, 955, Kunpeng 916;
+MediaTek: MT6797, MT8173, MT8176, MT8693;
+Mstar: 6A938;
+Qualcomm: Snapdragon Snapdragon 650, Snapdragon 652, Snapdragon 653;
+Rockchip: RK3399;
+NXP: QorIQ LS2088, QorIQ LS1046A, QorIQ LX2160A, QorIQ LS1028A, i.MX8;","Rockchip RK3399~Boardcom:EM3399 SBC;
+Broadcom BCM2711~Raspberry Pi:4;"
+Cortex-A73 ,"Qualcomm: Snapdragon 460, Snapdragon 636, Snapdragon 660, Snapdragon 632, Snapdragon 662, Snapdragon 665, Snapdragon 680, Snapdragon 835;
+Samsung: Exynos 7872, Exynos 7884, Exynos 7885, Exynos 7904, Exynos 9609, Exynos 9610, Exynos 9611;
+HiSilicon: Kirin 710, 960, 970;
+MediaTek: MT6771, MT6799, MT8183;
+Amlogic: S922X;",
+Cortex-A75 ,"Qualcomm: Snapdragon 670, Snapdragon 710, Snapdragon 712, Snapdragon 845, Snapdragon 850;
+Samsung: Exynos 9820, Exynos 9825;
+MediaTek: MT6768, MT6769, MT6779;
+Unisoc: T310, T606, T610, T616, T618, T700, T710, T740;",
+Cortex-A76 ,"Google Tensor;
+HiSilicon: Kirin 810,Kirin 820,Kirin 980,Kirin 985,Kirin 990;
+QualcommL Snapdragon 480(+),Snapdragon 675,Snapdragon 678,Snapdragon 720G,Snapdragon 730(G),Snapdragon 732G,Snapdragon 765(G),Snapdragon 768G,Snapdragon 855(+), Snapdragon 860, 7c, 7c Gen 2, 8c, 8cx,8cx Gen 2;
+Microsoft: SQ1, SQ2;
+MediaTek: MT6781, MT6785, Dimensity 700, Dimensity 720, Dimensity 800(U), Dimensity 810, Dimensity 820, Dimensity 6020, Kompanio 820;
+Samsung: Exynos 990;
+Unisoc: T760, T770;
+Rockchip: RK3588;",Rockchip RK3588~Boardcom:CM3588 SoM;
+Cortex-A77 ,"MediaTek: Dimensity 1000;
+Qualcomm: Snapdragon 690, Snapdragon 750G, Snapdragon 865(+) , Snapdragon 870;
+HiSilicon: Kirin 9000;
+Samsung: Exynos 880,Exynos 980;",
+Cortex-A78 ,"Google: Tensor G2’
+MediaTek Dimensity 900, Dimensity 920, Dimensity 930, Dimensity 1050, Dimensity 1080, Dimensity 1100, Dimensity 1200, Dimensity 1300, Dimensity 8000,Dimensity 8100,Dimensity 8200, Kompanio 900T, Kompanio 1200, Kompanio 1380, Kompanio 1300T;
+Qualcomm: Snapdragon 4 Gen 1, 695, 6 Gen 1, 778G(+), 780G, 782G, 888(+);
+Samsung: Dimensity 1080,Dimensity 1280,Dimensity 1330,Dimensity 1380,Dimensity 2100;",
+Cortex-A710 ,"MediaTek: Dimensity 9000;
+Qualcomm: Snapdragon 7 Gen 1, Snapdragon 7+ Gen 2, Snapdragon 8(+) Gen 1, Snapdragon 8 Gen 2;
+Samsung: Exynos 2200; ",
+Cortex-A715 ,"MediaTek: Dimensity 7200, 9200;
+Qualcomm: Snapdragon 8 Gen 2;",
+Cortex-X1 ,"Google Tensor: Tensor G2;
+Qualcomm: Snapdragon 888(+);
+Samsung: Exynos 2100;",
+Cortex-X2 ,"MediaTek: Dimensity 9000,
+Qualcomm: Snapdragon 7+ Gen 2, Snapdragon 8(+) Gen 1;
+Samsung: Exynos 2200;",
+Cortex-X3 ,"MediaTek: Dimensity 9200;
+Qualcomm: Snapdragon 8 Gen 2;",
+Cortex-R4(F) ,"Broadcom: RM4;Texas Instruments:RM4,TMS570;",
+Cortex-R5F ,Scaleo: OLEA,
+Cortex-M0 ,"STM32: F0; NXP Semiconductors: LPC11xx, LPC12xx;Triad Semiconductor: Melfa; Chungbuk: Technopark; Nuvoton; austriamicrosystems: Rohm, Infineon; Embedded Power: TLE984x;",
+Cortex-M0+ ,NXP Semiconductors: LPC8xx Freescale Kinetis L,
+Cortex-M1 ,"Actel: ProASIC3, ProASIC3L PSC device, IGLOO PSC device, Fusion PSC device,Altera Cyclone III FPGA,Synplicity FPGA;",
+Cortex-M3 ,"Texas Instruments:Stellaris;STMicroelectronics:STM32 F1;NXP Semiconductors: LPC13xx, LPC17xx, LPC18xx;Toshiba: TMPM330,Ember EM3xx;Atmel:AT91SAM3;Europe Technologies:EasyBCU;Energy Micro:EFM32; Actel:SmartFusion, Mbed microcontroller;Cypress: PSoC5,Infineon; Embedded Power: TLE986x,TLE987x;",Arduino:Due;
+Cortex-M4,Freescale:Kinetis,Teensy: 3;
+Cortex-M4F,"NXP Semiconductors:LPC4xxx; STMicroelectronics:STM32 F4,STM32 F3;Texas Instruments: (M4F) Tiva series;",Teensy: 3;
