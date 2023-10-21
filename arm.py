@@ -39,41 +39,32 @@ class ArmDataProcessor:
     def mergeVendor(self):
         """Normalize wikipedia formatted vendor table."""
         filename = list(self.vendor.keys())[0]
-        self.df = pd.read_csv(f'{self.folder}/{filename}').set_index('family')
-        self.df.index = self.df.index.str.strip()
-        self.df.rename(columns={'soc': 'socImport', 'products': 'productsImport'}, inplace=True)
+        df = pd.read_csv(f'{self.folder}/{filename}').set_index('family')
+        df.index = df.index.str.strip()
+        df.rename(columns={'soc': 'socImport', 'products': 'productsImport'}, inplace=True)
         print(f'Processing: {filename}')
         processedList = {}
         for col in self.vendor[filename]:
-            self.df[f'{col}Import'] = self.df[f'{col}Import'].str.strip()
-            self.df[f'{col}'] = 0
-            self.df[f'{col}Buffer'] = 0
+            df[f'{col}Import'] = df[f'{col}Import'].str.strip()
+            df[f'{col}'] = 0
+            df[f'{col}Buffer'] = 0
             processedList[col] = []
-        self.df['vendor'] = 0
-        self.df = self.df.fillna(0)
-        for index in self.df.index:
+        df['vendor'] = 0
+        df = df.fillna(0)
+        for index in df.index:
             print(index)
-            # results = {}
             for col in self.vendor[filename]:
-                # processedList[col] = []
-                # self.df.at[index, f'{col}Buffer'] = str(self.df.loc[index][f'{col}Import']).replace('\n', '').split(';')
-                # results[index][col] = self.parseRow(index, f'{col}Buffer')
-                # results[index][col] = self.parseRow(index, str(self.df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
-                processedList[col] += self.parseRow(index, str(self.df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
-                # processedList[col].append(self.parseRow(index, str(self.df.loc[index][f'{col}Import']).replace('\n', '').split(';')))
-            # processedList.append(results)
+                processedList[col] += self.parseRow(index, str(df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
+        self.dfsoc = pd.DataFrame(processedList['soc']).explode('model', ignore_index=False).reset_index(drop=True)
+        self.dfprod = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
         return processedList
 
-    # def parseRow(self, family, key):
     def parseRow(self, family, row):
         """Process a row of data and store the results."""
         """{'name': None, 'soc': None, 'product': []}}"""
-        # core = {'vendor': {}}
         core = []
-        # row = self.df.loc[family, key]
-        # keyValue = key.replace('Buffer', '')
         if str(row[0]) == "0" or row[0].lower() == family.lower():
-            return row[0]
+            return [{'family': family, 'vendor': '0', 'model': '0', 'soc_used': '0'}]
         for item in row:
             if '~' in item:
                 buf = item.split('~')
@@ -82,18 +73,11 @@ class ArmDataProcessor:
                 print(buf)
             else:
                 soc = "0"
-            vendor = item.split(':') if ':' in item else [0,0]
-                # vendor = item.split(':')
-                # print(item, vendor)
-                # core['vendor'][vendor[0]] = {'model': vendor[1].split(','), 'soc_used': soc}
-            core.append({'family': family, 'vendor': vendor[0], 'model': str(vendor[1]).split(','), 'soc_used': soc})
+            vendor = item.split(':') if ':' in item else ['0','0']
+            core.append({'family': family, 'vendor': vendor[0], 'model': vendor[1].split(','), 'soc_used': soc})
         return core
 
 
 if __name__ == "__main__":
     arm = ArmDataProcessor('ARM')
     test = arm.mergeVendor()
-    df = pd.DataFrame(test)
-    # test = arm.parseRow('ARM7TDMI(-S)', 'socBuffer')
-    # vendorDf, record = mergeVendor({vendorModel: 'soc', vendorModelOther: 'products'})
-    # vendorDf, record = mergeVendor({vendorModel: ['soc','products']})
