@@ -27,7 +27,7 @@ pd.options.mode.chained_assignment = None
 
 class ArmDataProcessor:
     def __init__(self, dataFolder):
-        self.df = None
+        self.df = {}
         self.folder = dataFolder
         self.v7Details = 'ARM-7a_details.csv'
         self.v8Details = 'ARM-8a_details.csv'
@@ -55,8 +55,9 @@ class ArmDataProcessor:
             print(index)
             for col in self.vendor[filename]:
                 processedList[col] += self.parseRow(index, str(df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
-        self.dfsoc = pd.DataFrame(processedList['soc']).explode('model', ignore_index=False).reset_index(drop=True)
-        self.dfprod = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
+        self.df['soc'] = pd.DataFrame(processedList['soc']).explode('model',
+                                                                    ignore_index=False).rename(columns={'model': 'soc'}).drop('soc_used', axis=1).reset_index(drop=True)
+        self.df['products'] = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
         return processedList
 
     def parseRow(self, family, row):
