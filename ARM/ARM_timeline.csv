@@ -1,7 +1,11 @@
-Year ,architecture,Core,family
+Year ,family,core_type,architecture
 1985,ARM1,Classic,ARM1-6
 1986,ARM2,Classic ,ARM1-6
 1989,ARM3,Classic,ARM1-6
+1989,ARM4,Classic,StrongARM
+1989,ARM5TE,Classic,Faraday
+1989,ARM5,Classic,Xscale
+1993,ARM6,Classic,SheevaS
 1992,ARM250,Classic ,ARM1-6
 1993,ARM60,Classic ,ARM1-6
 1993,ARM610,Classic ,ARM1-6
@@ -22,66 +26,76 @@ Year ,architecture,Core,family
 2000,ARM922T,Classic ,ARM9
 2000,ARM946E-S,Classic ,ARM9
 2000,ARM1020T,Classic ,ARM10
+2001,ARMv7A,Classic,Snapdragon
 2001,ARM7TDMI-S,Classic ,ARM7
 2001,ARM7EJ-S,Classic ,ARM7
+2001,ARMv8A,Classic,Snapdragon
 2001,ARM9EJ-S,Classic ,ARM9
 2001,ARM926EJ-S,Classic ,ARM9
 2001,ARM1020E,Classic ,ARM10
 2001,ARM1022E,Classic ,ARM10
 2002,ARM1026EJ-S,Classic ,ARM10
+2002,ARM11,Classic ,ARM11
 2002,ARM1136J(F)-S,Classic ,ARM11
 2003,ARM1156T2(F)-S,Classic ,ARM11
 2003,ARM1176JZ(F)-S,Classic ,ARM11
 2003,ARM968E-S,Classic ,ARM11
-2004,M3,Cortex,Microcontroller
+2004,Cortex-M3,Cortex,Microcontroller
 2005,ARM11MPCore,Classic ,ARM11
-2005,A8,Cortex,Application (32-bit)
+2005,Cortex-A8,Cortex,Application (32-bit)
 2006,ARM996HS,Classic ,ARM9
-2007,M1,Cortex,Microcontroller
-2007,A9,Cortex,Application (32-bit)
-2009,M0,Cortex,Microcontroller
-2009,A5,Cortex,Application (32-bit)
-2010,M4(F),Cortex,Microcontroller
-2010,A15,Cortex,Application (32-bit)
-2011,R4,Cortex,Real-time
-2011,R5,Cortex,Real-time
-2011,R7,Cortex,Real-time
-2011,A7,Cortex,Application (32-bit)
-2012,M0+,Cortex,Microcontroller
-2012,A53,Cortex,Application (64-bit)
-2012,A57,Cortex,Application (64-bit)
-2013,A12,Cortex,Application (32-bit)
-2014,M7(F),Cortex,Microcontroller
-2014,A17,Cortex,Application (32-bit)
-2015,A35,Cortex,Application (64-bit)
-2015,A72,Cortex,Application (64-bit)
-2016,M23,Cortex,Microcontroller
-2016,M33(F),Cortex,Microcontroller
-2016,R8,Cortex,Real-time
-2016,R52,Cortex,Real-time
-2016,A32,Cortex,Application (32-bit)
-2016,A73,Cortex,Application (64-bit)
-2017,A55,Cortex,Application (64-bit)
-2017,A75,Cortex,Application (64-bit)
-2018,M35P(F),Cortex,Microcontroller
-2018,A65AE,Cortex,Application (64-bit)
-2018,A76,Cortex,Application (64-bit)
-2018,A76AE,Cortex,Application (64-bit)
-2019,A77,Cortex,Application (64-bit)
-2019,E1,Neoverse,Application (64-bit)
-2019,N1,Neoverse,Application (64-bit)
-2020,M55(F),Cortex,Real-time
-2020,R82,Cortex,Real-time
-2020,A78,Cortex,Application (64-bit)
-2020,X1,Cortex,Application (64-bit)
-2020,V1,Neoverse,Application (64-bit)
-2021,A510,Cortex,Application (64-bit)
-2021,A710,Cortex,Application (64-bit)
-2021,X2,Cortex,Application (64-bit)
-2021,N2,Neoverse,Application (64-bit)
-2022,M85(F),Cortex,Microcontroller
-2022,A715,Cortex,Application (64-bit)
-2022,X3,Cortex,Application (64-bit)
-2023,A520,Cortex,Application (64-bit)
-2023,A720,Cortex,Application (64-bit)
-2023,X4,Cortex,Application (64-bit)
+2007,Cortex-M1,Cortex,Microcontroller
+2007,Cortex-A9,Cortex,Application (32-bit)
+2009,Cortex-M0,Cortex,Microcontroller
+2009,Cortex-A5,Cortex,Application (32-bit)
+2010,Cortex-M4(F),Cortex,Microcontroller
+2010,Cortex-A15,Cortex,Application (32-bit)
+2011,Cortex-R4,Cortex,Real-time
+2011,Cortex-R5,Cortex,Real-time
+2011,Cortex-R7,Cortex,Real-time
+2011,Cortex-R4(F),Cortex,Real-time
+2011,Cortex-R5(F),Cortex,Real-time
+2011,Cortex-R7(F),Cortex,Real-time
+2011,Cortex-A7,Cortex,Application (32-bit)
+2012,Cortex-M0+,Cortex,Microcontroller
+2012,Cortex-A53,Cortex,Application (64-bit)
+2012,Cortex-A57,Cortex,Application (64-bit)
+2013,Cortex-A12,Cortex,Application (32-bit)
+2014,Cortex-M7(F),Cortex,Microcontroller
+2014,Cortex-A17,Cortex,Application (32-bit)
+2015,Cortex-A35,Cortex,Application (64-bit)
+2015,Cortex-A72,Cortex,Application (64-bit)
+2016,Cortex-M23,Cortex,Microcontroller
+2016,Cortex-M33(F),Cortex,Microcontroller
+2016,Cortex-R8,Cortex,Real-time
+2016,Cortex-R5(F),Cortex,Real-time
+2016,Cortex-R52,Cortex,Real-time
+2016,Cortex-A32,Cortex,Application (32-bit)
+2016,Cortex-R8(F),Cortex,Real-time
+2016,Cortex-R52(F),Cortex,Real-time
+2016,Cortex-A73,Cortex,Application (64-bit)
+2017,Cortex-A55,Cortex,Application (64-bit)
+2017,Cortex-A75,Cortex,Application (64-bit)
+2018,Cortex-M35P(F),Cortex,Microcontroller
+2018,Cortex-A65AE,Cortex,Application (64-bit)
+2018,Cortex-A76,Cortex,Application (64-bit)
+2018,Cortex-A76AE,Cortex,Application (64-bit)
+2019,Cortex-A77,Cortex,Application (64-bit)
+2019,Neoverse-E1,Neoverse,Application (64-bit)
+2019,Neoverse-N1,Neoverse,Application (64-bit)
+2020,Cortex-M55(F),Cortex,Real-time
+2020,Cortex-R82,Cortex,Real-time
+2020,Cortex-R82(F),Cortex,Real-time
+2020,Cortex-A78,Cortex,Application (64-bit)
+2020,Cortex-X1,Cortex,Application (64-bit)
+2020,Neoverse-V1,Neoverse,Application (64-bit)
+2021,Cortex-A510,Cortex,Application (64-bit)
+2021,Cortex-A710,Cortex,Application (64-bit)
+2021,Cortex-X2,Cortex,Application (64-bit)
+2021,Neoverse-N2,Neoverse,Application (64-bit)
+2022,Cortex-M85(F),Cortex,Microcontroller
+2022,Cortex-A715,Cortex,Application (64-bit)
+2022,Cortex-X3,Cortex,Application (64-bit)
+2023,Cortex-A520,Cortex,Application (64-bit)
+2023,Cortex-A720,Cortex,Application (64-bit)
+2023,Cortex-X4,Cortex,Application (64-bit)

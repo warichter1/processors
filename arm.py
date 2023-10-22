@@ -39,6 +39,7 @@ class ArmDataProcessor:
     def mergeVendor(self):
         """Normalize wikipedia formatted vendor table."""
         filename = list(self.vendor.keys())[0]
+        self.df['timeline'] = pd.read_csv(f'{self.folder}/{self.timeline}').set_index('family')
         df = pd.read_csv(f'{self.folder}/{filename}').set_index('family')
         df.index = df.index.str.strip()
         df.rename(columns={'soc': 'socImport', 'products': 'productsImport'}, inplace=True)
@@ -55,8 +56,9 @@ class ArmDataProcessor:
             print(index)
             for col in self.vendor[filename]:
                 processedList[col] += self.parseRow(index, str(df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
-        self.df['soc'] = pd.DataFrame(processedList['soc']).explode('model',
+        self.df['family'] = pd.DataFrame(processedList['soc']).explode('model',
                                                                     ignore_index=False).rename(columns={'model': 'soc'}).drop('soc_used', axis=1).reset_index(drop=True)
+        self.df['family'] = self.df['family'].merge(self.df['timeline'], on="family", how='outer')
         self.df['products'] = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
         return processedList
 
@@ -75,10 +77,12 @@ class ArmDataProcessor:
             else:
                 soc = "0"
             vendor = item.split(':') if ':' in item else ['0','0']
-            core.append({'family': family, 'vendor': vendor[0], 'model': vendor[1].split(','), 'soc_used': soc})
+            # core.append({'family': family, 'vendor': vendor[0], 'model': vendor[1].split(','), 'soc_used': soc})
+            core.append({'family': family, 'vendor': vendor[0], 'model': [x.strip() for x in vendor[1].split(',')], 'soc_used': soc})
         return core
 
 
 if __name__ == "__main__":
     arm = ArmDataProcessor('ARM')
     test = arm.mergeVendor()
+    # df = arm.df['family'].merge(arm.df['timeline'], on="family", how='outer')
