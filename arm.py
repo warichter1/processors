@@ -55,14 +55,14 @@ class ArmDataProcessor:
         for index in df.index:
             print(index)
             for col in self.vendor[filename]:
-                processedList[col] += self.parseRow(index, str(df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
+                processedList[col] += self.parseVendor(index, str(df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
         self.df['family'] = pd.DataFrame(processedList['soc']).explode('model',
                                                                     ignore_index=False).rename(columns={'model': 'soc'}).drop('soc_used', axis=1).reset_index(drop=True)
         self.df['family'] = self.df['family'].merge(self.df['timeline'], on="family", how='outer')
         self.df['products'] = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
         return processedList
 
-    def parseRow(self, family, row):
+    def parseVendor(self, family, row):
         """Process a row of data and store the results."""
         """{'name': None, 'soc': None, 'product': []}}"""
         core = []
@@ -80,6 +80,14 @@ class ArmDataProcessor:
             # core.append({'family': family, 'vendor': vendor[0], 'model': vendor[1].split(','), 'soc_used': soc})
             core.append({'family': family, 'vendor': vendor[0], 'model': [x.strip() for x in vendor[1].split(',')], 'soc_used': soc})
         return core
+
+    def loadThirdParty(self):
+        df = pd.read_csv(f'{self.folder}/{self.thirdPartyDesigns}').set_index('family')
+        for column in ['hw_ncores', 'hw_nthreadspercore', 'clock', 'max_clock', 'bus_width', 'transistors', 'l1_cache', 'l2_cache', 'die_size']:
+            df.insert(2, column, 1 if column == 'hw_nthreadspercore' else 0, allow_duplicates=False)
+        return df
+
+
 
 
 if __name__ == "__main__":
