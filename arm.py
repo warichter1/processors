@@ -82,15 +82,57 @@ class ArmDataProcessor:
         return core
 
     def loadThirdParty(self):
-        df = pd.read_csv(f'{self.folder}/{self.thirdPartyDesigns}').set_index('family')
-        for column in ['hw_ncores', 'hw_nthreadspercore', 'clock', 'max_clock', 'bus_width', 'transistors', 'l1_cache', 'l2_cache', 'die_size']:
-            df.insert(2, column, 1 if column == 'hw_nthreadspercore' else 0, allow_duplicates=False)
-        return df
+        """Process Feature, Cache and mips columms into standard columns."""
+        self.dfThird = pd.read_csv(f'{self.folder}/{self.thirdPartyDesigns}')  # .set_index('family')
+        self.columns = {'cores': 'strip', 'hw_nthreadspercore': None, 'clock': 0, 'max_clock': 1, 'Wireless': 'strip',
+                        'Wireless2': 'strip','decode': 'split', 'out_of_order': True, 'wide': 'split', 'issue': 'split',
+                        'superscalar': True, 'AArch64': True, 'pipeline': 'strip', 'bus_width': 'split', 'virtualization': True,
+                        'transistors': True, 'dynamic code optimization': True, 'optimization cache': 'strip',
+                        'L0:': 'strip', 'L1:': 'strip', 'L2:': 'strip', 'SLC:': 'strip', 'die_size': 'strip',
+                        'L1I:':'split','L1D:': 'strip', 'DSP': 'strip', 'SMP': True, 'Thumb': True,'Thumb-2': True,
+                        'FPU': 'strip','TrustZone': True, 'NEON': True, 'SIMD': True, 'D-cache': 'strip', 'MMU': True}
+        self.cleanColumns = {'cores': 'hw_ncores', 'L0:': 'l0_cache', 'L1:': 'l1_cache', 'L2:': 'l2_cache', 'SLC:': 'SLC'}
+        for col in list(self.columns):
+            self.dfThird[col] = '0'
+        for dfIndex in self.dfThird.index:
+            for label in ['Feature', 'Cache (ID), MMU']:
+                self.parseThirdParty(label, dfIndex)
 
+    def parseThirdParty(self, label, dfIndex):
+        for field in str(self.dfThird.loc[dfIndex][label]).strip().replace('\n', ',').split(','):
+            field = field.strip()
+            self.parseCell(field, dfIndex)
+
+    def parseCell(self, field, dfIndex):
+        for key in list(self.columns):
+            if key in field:
+                value = self.columns[key]
+                print(key, value)
+                if type(value) == bool:
+                    print('bool', value)
+                    self.dfThird.loc[dfIndex][key] = True if field != 'No MMU' else False
+                else:
+                    result = getValue(field, value, key)
+                    print(result)
+                    self.dfThird.loc[dfIndex][key] = result[0]
+
+
+def getValue(field, value, key):
+    print('Processing:', field, value, key)
+    match value:
+        # case 'superscalar':
+        #    return [field.split('superscalar')[0].strip() if 'wide' in field else True]
+        case 'strip':
+            return [field.replace(key, '').replace('-', '').strip()]
+        case 'split':
+            return [field.split('-')[0].strip()]
+        case _:
+            return ['0']
 
 
 
 if __name__ == "__main__":
     arm = ArmDataProcessor('ARM')
     test = arm.mergeVendor()
+    arm.loadThirdParty()
     # df = arm.df['family'].merge(arm.df['timeline'], on="family", how='outer')
