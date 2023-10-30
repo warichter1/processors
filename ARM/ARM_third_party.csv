@@ -32,7 +32,7 @@ Marvell,Sheeva,ARM7A,PJ4,"6–9 stage pipeline, dual-issue, Wireless MMX2, SMP",
 1.6 GHz "
 Qualcomm,Snapdragon,ARM7A ,Scorpion,"1_or_2  cores,ARM,Thumb,Thumb-2,DSP,SIMD,VFPv3 FPU,NEON (128_bit wide) ",L1: 256 KB L2 per core ,2.1 DMIPS/MHz per core 
 Qualcomm,Snapdragon,ARM7A ,Krait,"1_2_or_4 cores,ARM,Thumb,Thumb-2,DSP,SIMD,VFPv4 FPU,NEON (128_bit wide) ","L0: 4 KB,4 KB, 16 KB,L1: 16 KB, L2: 512 KB per core ",3.3 DMIPS/MHz per core 
-Qualcomm,Snapdragon,ARM8A ,Kryo,4 cores,0,"Up to 2.2 GHz 
+Qualcomm,Snapdragon,ARM8A ,Kryo,4 cores,0,"Up to 2.2 GHz 
 6.3 DMIPS/MHz"
 Apple,Ax ,ARM7A ,Swift,"2 cores,ARM,Thumb,Thumb-2,DSP,SIMD,VFPv4 FPU,NEON ","L1: 32 KB, 32 KB, L2: 1 MB shared ",3.5 DMIPS/MHz per core 
 Apple,Ax ,ARM8A,Cyclone,"2 cores,ARM,Thumb,Thumb-2,DSP,SIMD,VFPv4 FPU,NEON,TrustZone,AArch64,out_of_order, superscalar.","L1: 64 KB,64 KB, L2: 1 MB shared
@@ -115,14 +115,14 @@ SLC: 8, 24, 48 or 96 MB","3.49 GHz
 2.42 GHz "
 Applied Micro,X-Gene,ARM8A,X-Gene,"64_bit, quad-issue, SMP, 64 cores","L1: Cache, MMU, virtualization",3 GHz (4.2 DMIPS/MHz per core) 
 Nvidia,Denver,ARM8A,Denver,"2 cores,AArch64, 7-wide, superscalar, in-order, dynamic code optimization, 128 MB optimization cache,
-Denver1: 28 nm, Denver2:16 nm",L1: 128 KB I-cache64 KB D-cache,Up to 2.5 GHz 
+Denver1: 28 nm, Denver2:16 nm","L1: 128 KB I-cache,64 KB D-cache",Up to 2.5 GHz 
 Nvidia,Carmel ,ARM8.2A,Carmel,"2 cores,AArch64, 10-wide, superscalar, in-order, dynamic code optimization,0 MB optimization cache,
-functional safety, dual execution, parity & ECC",L1: 0 KB I-cache0 KB D-cache,Up to 0 GHz 
-Cavium,ThunderX,ARM8A,ThunderX,"AArch64,two models with 8–16 or 24–48 cores (×2 w/two chips)",0,Up to 2.2 GHz 
+functional safety, dual execution, parity & ECC","L1: 0 KB I-cache,0 KB D-cache",Up to 0 GHz 
+Cavium,ThunderX,ARM8A,ThunderX,"AArch64,two models with 8–16 or 24–48 cores (×2 w/two chips)",0,Up to 2.2 GHz 
 AMD,K12 ,ARM8A,K12,0,0,0
-Samsung,Exynos,ARM8A,"M1 (""Mongoose"")","4 cores,AArch64, 4-wide, quad-issue, superscalar, out_of_order","L1: 64 KB I-cache32 KB D-cache, L2: 16-way shared 2 MB","5.1 DMIPS/MHz 
-(2.6 GHz) "
-Samsung,Exynos,ARM8A,"M2 (""Mongoose"")","4 cores,AArch64, 4-wide, quad-issue, superscalar, out_of_order","L1: 64 KB I-cache32 KB D-cache, L2: 16-way shared 2 MB",2.3 GHz 
-Samsung,Exynos,ARM8A ,"M3 (""Meerkat"")","4 cores, AArch64, 6-decode, 6-issue, 6-wide,superscalar, out_of_order","L1: 64 KB I-cache64 KB D-cache, L2: 8-way private 512 KB, L3: 16-way shared 4 MB",2.7 GHz 
-Samsung,Exynos,ARM8.2A ,"M4 (""Cheetah"")","2 cores, AArch64, 6-decode, 6-issue, 6-wide,superscalar, out_of_order ","L1: 64 KB I-cache64 KB D-cache, L2: 8-way private 1 MB, L3: 16-way shared 3 MB ",2.73 GHz 
-Samsung,Exynos,ARM8.2A ,"M5 (""Lion"") ","2 cores, AArch64, 6-decode, 6-issue, 6-wide,superscalar, out_of_order ","L1: 64 KB I-cache64 KB D-cache, L2: 8-way shared 2 MB, L3: 12-way shared 3 MB ",2.73 GHz 
+Samsung,Exynos,ARM8A,"M1 (""Mongoose"")","4 cores,AArch64, 4-wide, quad-issue, superscalar, out_of_order","L1: 64 KB I-cache,32 KB D-cache, L2: 16_way shared 2 MB","5.1 DMIPS/MHz 
+2.6 GHz"
+Samsung,Exynos,ARM8A,"M2 (""Mongoose"")","4 cores,AArch64, 4-wide, quad-issue, superscalar, out_of_order","L1: 64 KB I-cache,32 KB D-cache, L2: 16_way shared 2 MB",2.3 GHz 
+Samsung,Exynos,ARM8A ,"M3 (""Meerkat"")","4 cores, AArch64, 6-decode, 6-issue, 6-wide,superscalar, out_of_order","L1: 64 KB I-cache,64 KB D-cache, L2: 8_way private 512 KB, L3: 16_way shared 4 MB",2.7 GHz 
+Samsung,Exynos,ARM8.2A ,"M4 (""Cheetah"")","2 cores, AArch64, 6-decode, 6-issue, 6-wide,superscalar, out_of_order ","L1: 64 KB I-cache,64 KB D-cache, L2: 8_way private 1 MB, L3: 16_way shared 3 MB ",2.73 GHz 
+Samsung,Exynos,ARM8.2A ,"M5 (""Lion"") ","2 cores, AArch64, 6-decode, 6-issue, 6-wide,superscalar, out_of_order ","L1: 64 KB I-cache,64 KB D-cache, L2: 8_way shared 2 MB, L3: 12_way shared 3 MB ",2.73 GHz 

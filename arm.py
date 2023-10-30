@@ -12,6 +12,7 @@ import numpy as np
 import datetime
 import time
 import copy
+import unicodedata
 
 
 v7Details = 'ARM-7a_details.csv'
@@ -26,6 +27,8 @@ pd.options.mode.chained_assignment = None
 
 
 class ArmDataProcessor:
+    """Parse wilk data for ARM processors into a standardized datafram format."""
+
     def __init__(self, dataFolder):
         self.df = {}
         self.folder = dataFolder
@@ -53,7 +56,7 @@ class ArmDataProcessor:
         df['vendor'] = 0
         df = df.fillna(0)
         for index in df.index:
-            print(index)
+            # print(index)
             for col in self.vendor[filename]:
                 processedList[col] += self.parseVendor(index, str(df.loc[index][f'{col}Import']).replace('\n', '').split(';'))
         self.df['family'] = pd.DataFrame(processedList['soc']).explode('model',
@@ -73,11 +76,10 @@ class ArmDataProcessor:
                 buf = item.split('~')
                 soc = buf[0]
                 item = buf[1]
-                print(buf)
+                # print(buf)
             else:
                 soc = "0"
             vendor = item.split(':') if ':' in item else ['0','0']
-            # core.append({'family': family, 'vendor': vendor[0], 'model': vendor[1].split(','), 'soc_used': soc})
             core.append({'family': family, 'vendor': vendor[0], 'model': [x.strip() for x in vendor[1].split(',')], 'soc_used': soc})
         return core
 
@@ -89,46 +91,66 @@ class ArmDataProcessor:
                         'superscalar': True, 'AArch64': True, 'pipeline': 'strip', 'bus_width': 'split', 'virtualization': True,
                         'transistors': True, 'dynamic code optimization': True, 'optimization cache': 'strip',
                         'L0:': 'strip', 'L1:': 'strip', 'L2:': 'strip', 'SLC:': 'strip', 'die_size': 'strip',
-                        'L1I:':'split','L1D:': 'strip', 'DSP': 'strip', 'SMP': True, 'Thumb': True,'Thumb-2': True,
+                        'L1I:':'strip','L1D:': 'strip', 'DSP': 'strip', 'L3:': 'strip', 'SMP': True, 'Thumb': True,'Thumb-2': True,
                         'FPU': 'strip','TrustZone': True, 'NEON': True, 'SIMD': True, 'D-cache': 'strip', 'MMU': True}
-        self.cleanColumns = {'cores': 'hw_ncores', 'L0:': 'l0_cache', 'L1:': 'l1_cache', 'L2:': 'l2_cache', 'SLC:': 'SLC'}
+        self.cleanColumns = {'cores': 'hw_ncores', 'L0:': 'l0_cache', 'L1:': 'l1_cache', 'L2:': 'l2_cache',
+                             'L3:': 'l3_cache', 'SLC:': 'SLC', 'L1I:': 'L1I_cache', 'L1D:': 'L1D_cache',}
+        self.labels = ['Feature', 'Cache (ID), MMU', 'mips']
         for col in list(self.columns):
             self.dfThird[col] = '0'
         for dfIndex in self.dfThird.index:
-            for label in ['Feature', 'Cache (ID), MMU']:
-                self.parseThirdParty(label, dfIndex)
+            for label in self.labels:
+                match label:
+                    case 'mips':
+                        self.parseClock(label, dfIndex)
+                    case _:
+                        self.parseThirdParty(label, dfIndex)
+        self.thirdCleanup()
+
+    def thirdCleanup(self):
+        """After values within self.labels field names are parsed, remove the original columns."""
+        self.dfThird.rename(columns=self.cleanColumns, inplace=True)
+        self.dfThird.drop(columns=self.labels, inplace=True)
+
+    def parseClock(self, label, dfIndex):
+        """Clock field (mips) is a different format, parse just this field. Can hold 1 or more entries."""
+        clock = 0
+        field = str(self.dfThird.loc[dfIndex][label]).strip().replace('\n', ',')
+        field = unicodedata.normalize('NFKD', field).split(',')
+        if clock == 0:
+            self.dfThird.loc[dfIndex]['clock'] = field[clock].strip()
+            clock += 1
+        if len(field) > 1:
+            self.dfThird.loc[dfIndex]['max_clock'] = field[clock].strip()
+
 
     def parseThirdParty(self, label, dfIndex):
+        """A generalied parser for Feature and cache columns,"""
         for field in str(self.dfThird.loc[dfIndex][label]).strip().replace('\n', ',').split(','):
             field = field.strip()
             self.parseCell(field, dfIndex)
 
     def parseCell(self, field, dfIndex):
+        """After first level parsing deal with edge cases first."""
         for key in list(self.columns):
             if key in field:
                 value = self.columns[key]
-                print(key, value)
                 if type(value) == bool:
-                    print('bool', value)
                     self.dfThird.loc[dfIndex][key] = True if field != 'No MMU' else False
                 else:
                     result = getValue(field, value, key)
-                    print(result)
                     self.dfThird.loc[dfIndex][key] = result[0]
 
 
 def getValue(field, value, key):
-    print('Processing:', field, value, key)
+    """Using case types strip, split or _ (default), determine how to extract each value from a column."""
     match value:
-        # case 'superscalar':
-        #    return [field.split('superscalar')[0].strip() if 'wide' in field else True]
         case 'strip':
             return [field.replace(key, '').replace('-', '').strip()]
         case 'split':
             return [field.split('-')[0].strip()]
         case _:
             return ['0']
-
 
 
 if __name__ == "__main__":
