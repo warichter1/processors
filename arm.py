@@ -30,7 +30,25 @@ class ArmDataProcessor:
     """Parse wilk data for ARM processors into a standardized datafram format."""
 
     def __init__(self, dataFolder):
+        self.designColumns = {'cores': 'strip', 'hw_nthreadspercore': None, 'clock': 0, 'max_clock': 1,
+                              'Wireless': 'strip', 'Wireless2': 'strip', 'decode': 'split', 'out_of_order': True,
+                              'wide': 'split', 'issue': 'split', 'superscalar': True, 'AArch64': True,
+                              'addressing': 'strip', 'memory': 'strip', 'system timer': 'strip', 'Saturated': True,
+                              'branch prediction': 'strip', 'instruction fetch': 'strip', 'AArch32': True,
+                              'pipeline': 'strip', 'bus_width': 'split', 'virtualization': True, 'transistors': True,
+                              'dynamic code optimization': True, 'optimization cache': 'strip', 'L0:': 'strip',
+                              'L1:': 'strip', 'L2:': 'strip', 'SLC:': 'strip', 'die_size': 'strip', 'L1I:': 'strip',
+                              'L1D:': 'strip', 'DSP': 'strip', 'L3:': 'strip', 'SMP': 'strip', 'Thumb': True,
+                              'Thumb-1': True, 'Thumb-2': True, 'coprocessor bus': False, 'floating-point unit': True,
+                              'profile': 'strip', 'DBX': 'strip', 'Co-processor': True, 'FPU': 'strip',
+                              'instruction': 'strip', 'Divide': True, 'FPU': 'strip', 'TrustZone': True, 'NEON': True,
+                              'SIMD': True, 'D-cache': 'strip', 'MMU': True, 'notes': None, 'cache': True, 'VFP': True,
+                              'ACP': True, 'GIC': True, 'SCU': True, 'GIC': True, 'VFPv3': 'split', 'VFPv4': True,
+                              'VFPv5': 'split', 'LLPP': True, 'TCM': True}
+        self.cleanColumns = {'cores': 'hw_ncores', 'L0:': 'l0_cache', 'L1:': 'l1_cache', 'L2:': 'l2_cache',
+                             'L3:': 'l3_cache', 'SLC:': 'SLC', 'L1I:': 'L1I_cache', 'L1D:': 'L1D_cache'}
         self.df = {}
+        self.dfDesign = {}
         self.folder = dataFolder
         self.v7Details = 'ARM-7a_details.csv'
         self.v8Details = 'ARM-8a_details.csv'
@@ -83,63 +101,59 @@ class ArmDataProcessor:
             core.append({'family': family, 'vendor': vendor[0], 'model': [x.strip() for x in vendor[1].split(',')], 'soc_used': soc})
         return core
 
-    def loadThirdParty(self):
+    def loadArmDesign(self):
+        self.dfDesign['arm'] = pd.read_csv(f'{self.folder}/{self.designs}')
+        self.armColumns = {'notes': None, 'cache': True, 'MMU': True, 'DSP': 'strip', 'coprocessor bus': False,
+                           'floating-point unit': True, 'profile': 'strip', 'DBX': 'strip', 'Co-processor': True,
+                           'FPU': 'strip', 'instruction': 'strip', 'Divide': True, }
+
+    def loadThirdParty(self, key='third'):
         """Process Feature, Cache and mips columms into standard columns."""
-        self.dfThird = pd.read_csv(f'{self.folder}/{self.thirdPartyDesigns}')  # .set_index('family')
-        self.columns = {'cores': 'strip', 'hw_nthreadspercore': None, 'clock': 0, 'max_clock': 1, 'Wireless': 'strip',
-                        'Wireless2': 'strip','decode': 'split', 'out_of_order': True, 'wide': 'split', 'issue': 'split',
-                        'superscalar': True, 'AArch64': True, 'pipeline': 'strip', 'bus_width': 'split', 'virtualization': True,
-                        'transistors': True, 'dynamic code optimization': True, 'optimization cache': 'strip',
-                        'L0:': 'strip', 'L1:': 'strip', 'L2:': 'strip', 'SLC:': 'strip', 'die_size': 'strip',
-                        'L1I:':'strip','L1D:': 'strip', 'DSP': 'strip', 'L3:': 'strip', 'SMP': True, 'Thumb': True,'Thumb-2': True,
-                        'FPU': 'strip','TrustZone': True, 'NEON': True, 'SIMD': True, 'D-cache': 'strip', 'MMU': True}
-        self.cleanColumns = {'cores': 'hw_ncores', 'L0:': 'l0_cache', 'L1:': 'l1_cache', 'L2:': 'l2_cache',
-                             'L3:': 'l3_cache', 'SLC:': 'SLC', 'L1I:': 'L1I_cache', 'L1D:': 'L1D_cache',}
+        self.dfDesign['third'] = pd.read_csv(f'{self.folder}/{self.thirdPartyDesigns}')  # .set_index('family')
         self.labels = ['Feature', 'Cache (ID), MMU', 'mips']
-        for col in list(self.columns):
-            self.dfThird[col] = '0'
-        for dfIndex in self.dfThird.index:
+        for col in list(self.designColumns):
+            self.dfDesign[key][col] = '0'
+        for dfIndex in self.dfDesign[key].index:
             for label in self.labels:
                 match label:
                     case 'mips':
-                        self.parseClock(label, dfIndex)
+                        self.parseClock(key, label, dfIndex)
                     case _:
-                        self.parseThirdParty(label, dfIndex)
-        self.thirdCleanup()
+                        self.parseDesign(key, label, dfIndex)
+        self.designCleanup(key)
 
-    def thirdCleanup(self):
+    def designCleanup(self, key):
         """After values within self.labels field names are parsed, remove the original columns."""
-        self.dfThird.rename(columns=self.cleanColumns, inplace=True)
-        self.dfThird.drop(columns=self.labels, inplace=True)
+        self.dfDesign[key].rename(columns=self.cleanColumns, inplace=True)
+        self.dfDesign[key].drop(columns=self.labels, inplace=True)
 
-    def parseClock(self, label, dfIndex):
+    def parseClock(self, key, label, dfIndex):
         """Clock field (mips) is a different format, parse just this field. Can hold 1 or more entries."""
         clock = 0
-        field = str(self.dfThird.loc[dfIndex][label]).strip().replace('\n', ',')
+        field = str(self.dfDesign[key].loc[dfIndex][label]).strip().replace('\n', ',')
         field = unicodedata.normalize('NFKD', field).split(',')
         if clock == 0:
-            self.dfThird.loc[dfIndex]['clock'] = field[clock].strip()
+            self.dfDesign[key].loc[dfIndex]['clock'] = field[clock].strip()
             clock += 1
         if len(field) > 1:
-            self.dfThird.loc[dfIndex]['max_clock'] = field[clock].strip()
+            self.dfDesign[key].loc[dfIndex]['max_clock'] = field[clock].strip()
 
-
-    def parseThirdParty(self, label, dfIndex):
-        """A generalied parser for Feature and cache columns,"""
-        for field in str(self.dfThird.loc[dfIndex][label]).strip().replace('\n', ',').split(','):
+    def parseDesign(self, key, label, dfIndex):
+        """Generalied parser for Feature and cache columns."""
+        for field in str(self.dfDesign[key].loc[dfIndex][label]).strip().replace('\n', ',').split(','):
             field = field.strip()
-            self.parseCell(field, dfIndex)
+            self.parseCell(key, field, dfIndex)
 
-    def parseCell(self, field, dfIndex):
+    def parseCell(self, design, field, dfIndex):
         """After first level parsing deal with edge cases first."""
-        for key in list(self.columns):
+        for key in list(self.designColumns):
             if key in field:
-                value = self.columns[key]
+                value = self.designColumns[key]
                 if type(value) == bool:
-                    self.dfThird.loc[dfIndex][key] = True if field != 'No MMU' else False
+                    self.dfDesign[design].loc[dfIndex][key] = True if field != 'No MMU' else False
                 else:
                     result = getValue(field, value, key)
-                    self.dfThird.loc[dfIndex][key] = result[0]
+                    self.dfDesign[design].loc[dfIndex][key] = result[0]
 
 
 def getValue(field, value, key):
