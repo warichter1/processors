@@ -1,7 +1,7 @@
-manufacturer,hw_model,date,Revision ,Decode ,Pipeline depth ,Out-of-orderexecution-Have ,Out-of-orderexecution-Entries,Branchprediction ,big.LITTLE role ,Execports ,SIMD ,Fab (in nm) ,Simult. MT ,L0 cache ,L1 cache Instr + Data (in KiB) ,L2 cache ,L3 cache ,Core configurations ,DMIPS/MHz ,ARM part number (in the main ID register) 
-ARM ,Cortex-A32 (32-bit) ,2017,"ARMv8.0-A
+manufacturer,hw_model,date,Revision ,Decode ,Pipeline depth ,Out-of-orderexecution-Have ,Out-of-orderexecution-Entries,Branchprediction ,big.LITTLE role ,Execports ,SIMD ,Processor Technology,Simult. MT ,L0 cache,L1 cache,L2 cache,L3 cache,Core configurations ,DMIPS,ARM part number (in the main ID register) 
+ARM ,Cortex-A32,2017,"ARMv8.0-A
 (only 32-bit)",2-wide,8,No,0,?,LITTLE,?,? ,28,No,No,8–64 + 8–64,0–1 MiB,No,1–4+,?,0xD01 
-ARM ,Cortex-A34 (64-bit) ,2019,"ARMv8.0-A
+ARM ,Cortex-A34,2019,"ARMv8.0-A
 (only 64-bit)",2-wide,8,No,0,?,LITTLE,?,? ,?,No,No,8–64 + 8–64,0–1 MiB,No,1–4+,?,0xD02 
 ARM ,Cortex-A35 ,2017,ARMv8.0-A,2-wide,8,No,0,Yes,LITTLE,?,? ,"28 / 16 /
 14 / 10",No,No,8–64 + 8–64,0 / 128 KiB–1 MiB,No,1–4+,1.78,0xD04 

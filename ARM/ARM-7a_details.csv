@@ -1,17 +1,17 @@
-Core,Decode width,Execution ports,Pipeline depth,Out-of-order execution,FPU,Pipelined VFP,FPU registers,NEON (SIMD),big.LITTLE role,Virtualization[2],Processtechnology,L0 cache,L1 cache,L2 cache,Core configurations,Speed per core (DMIPS/ MHz),ARM part number 
-ARM Cortex-A5 ,1,,8,No ,VFPv4 (optional),,16 × 64-bit,64-bit wide (optional) ,No ,No ,40/28 nm ,,4–64 KiB / core,,"1, 2, 4 ",1.57,0xC05 
-ARM Cortex-A7 ,2,5,8,No ,VFPv4,Yes,16 × 64-bit,64-bit wide ,LITTLE ,Yes[4] ,40/28 nm ,,8–64 KiB / core,up to 1 MiB (optional) ,"1, 2, 4, 8 ",1.9,0xC07 
-ARM Cortex-A8 ,2,2,13,No ,VFPv3,No,32 × 64-bit,64-bit wide ,No ,No ,65/55/45 nm ,,32 KiB + 32 KiB,256 or 512 (typical) KiB ,1,2,0xC08 
-ARM Cortex-A9 ,2,3,8–11[7],Yes ,VFPv3 (optional),Yes,(16 or 32) × 64-bit,64-bit wide (optional) ,Companion Core ,No[7] ,65/45/40/32/28 nm ,,32 KiB + 32 KiB,1 MiB ,"1, 2, 4 ",2.5,0xC09 
-ARM Cortex-A12 ,2,,11,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,No[8] ,Yes ,28 nm ,,32–64 KiB + 32 KiB,"256 KiB, to 8 MiB ","1, 2, 4 ",3,0xC0D 
-ARM Cortex-A15 ,3,8,15/17-25,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,big ,Yes[9] ,32/28/20 nm ,,32 KiB + 32 KiB per core,"up to 4 MiB per cluster, up to 8 MiB per chip ","2, 4, 8 (4×2) ",3.5 to 4.01 ,0xC0F 
-ARM Cortex-A17 ,2,,11+,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,big ,Yes ,28 nm ,,32 KiB + 32 KiB per core,"256 KiB, up to 8 MiB ",up to 4 ,4,0xC0E 
-Qualcomm Scorpion ,2,3,10,Yes (FXU&LSU only)[12] ,VFPv3,Yes,,128-bit wide ,No ,,65/45 nm ,,32 KiB + 32 KiB,"256 KiB (single-core)
+hw_model,manufacturer,Decode width,Execution ports,Pipeline depth,Out-of-order execution,FPU,Pipelined VFP,FPU registers,NEON (SIMD),big.LITTLE role,Virtualization,Processor Technology,L0 cache,L1 cache,L2 cache,Core configurations,DMIPS,ARM part number 
+Cortex-A5 ,ARM,1,,8,No ,VFPv4 (optional),,16 × 64-bit,64-bit wide (optional) ,No ,No ,40/28 nm ,,4–64 KiB per core,,"1, 2, 4 ",1.57,0xC05 
+Cortex-A7 ,ARM,2,5,8,No ,VFPv4,Yes,16 × 64-bit,64-bit wide ,LITTLE ,Yes,40/28 nm ,,8–64 KiB per core,up to 1 MiB (optional) ,"1, 2, 4, 8 ",1.9,0xC07 
+Cortex-A8 ,ARM,2,2,13,No ,VFPv3,No,32 × 64-bit,64-bit wide ,No ,No ,65/55/45 nm ,,32 KiB + 32 KiB,256 or 512 (typical) KiB ,1,2,0xC08 
+Cortex-A9 ,ARM,2,3,8–11,Yes ,VFPv3 (optional),Yes,(16 or 32) × 64-bit,64-bit wide (optional) ,Companion Core ,No,65/45/40/32/28 nm ,,32 KiB + 32 KiB,1 MiB ,"1, 2, 4 ",2.5,0xC09 
+Cortex-A12 ,ARM,2,,11,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,No,Yes ,28 nm ,,32–64 KiB + 32 KiB,"256 KiB, to 8 MiB ","1, 2, 4 ",3,0xC0D 
+Cortex-A15 ,ARM,3,8,15/17-25,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,big ,Yes,32/28/20 nm ,,32 KiB + 32 KiB per core,"up to 4 MiB per cluster, up to 8 MiB per chip ","2, 4, 8 (4×2) ",3.5 to 4.01 ,0xC0F 
+Cortex-A17 ,ARM,2,,11+,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,big ,Yes ,28 nm ,,32 KiB + 32 KiB per core,"256 KiB, up to 8 MiB ",up to 4 ,4,0xC0E 
+Scorpion ,Qualcomm ,2,3,10,Yes (FXU&LSU only),VFPv3,Yes,,128-bit wide ,No ,,65/45 nm ,,32 KiB + 32 KiB,"256 KiB (single-core)
 512 KiB (dual-core) ","1, 2 ",2.1,0x00F 
-Qualcomm Krait ,3,7,11,Yes ,VFPv4[14],Yes,,128-bit wide ,No ,,28 nm ,4 KiB + 4 KiB direct mapped,16 KiB + 16 KiB 4-way set associative,1 MiB 8-way set associative (dual-core) / 2 MiB (quad-core) ,"2, 4 ","3.3 (Krait 200)
+Krait ,Qualcomm,3,7,11,Yes ,VFPv4,Yes,,128-bit wide ,No ,,28 nm ,4 KiB + 4 KiB direct mapped,16 KiB + 16 KiB 4-way set associative,1 MiB 8-way set associative (dual-core) / 2 MiB (quad-core) ,"2, 4 ","3.3 (Krait 200)
 3.39 (Krait 300)
 3.39 (Krait 400)
 3.51 (Krait 450) ","0x04D
 
 0x06F "
-Swift ,3,5,12,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,No ,,32 nm ,,32 KiB + 32 KiB,1 MiB ,2,3.5,? 
+Swift ,,3,5,12,Yes ,VFPv4,Yes,32 × 64-bit,128-bit wide ,No ,,32 nm ,,32 KiB + 32 KiB,1 MiB ,2,3.5,

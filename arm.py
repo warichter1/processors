@@ -14,15 +14,6 @@ import time
 import copy
 import unicodedata
 
-
-v7Details = 'ARM-7a_details.csv'
-v8Details = 'ARM-8a_details.csv'
-designs = 'ARM-designs.csv'
-thrdPartyDesigns = 'ARM_third_party.csv'
-timeline = 'ARM_timeline.csv'
-vendorModel = 'ARM_vendor.csv'
-vendorModelOther = 'ARM_vendor_model_other.csv'
-
 pd.options.mode.chained_assignment = None
 
 
@@ -80,7 +71,9 @@ class ArmDataProcessor:
         self.df['family'] = pd.DataFrame(processedList['soc']).explode('model',
                                                                     ignore_index=False).rename(columns={'model': 'soc'}).drop('soc_used', axis=1).reset_index(drop=True)
         self.df['family'] = self.df['family'].merge(self.df['timeline'], on="family", how='outer')
+        self.df['family'] = self.df['family'].fillna(0)
         self.df['products'] = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
+        self.df['products'].fillna(0)
         return processedList
 
     def parseVendor(self, family, row):
@@ -98,19 +91,34 @@ class ArmDataProcessor:
             else:
                 soc = "0"
             vendor = item.split(':') if ':' in item else ['0','0']
-            core.append({'family': family, 'vendor': vendor[0], 'model': [x.strip() for x in vendor[1].split(',')], 'soc_used': soc})
+            core.append({'family': family, 'vendor': vendor[0], 'model': [x.strip() for x in vendor[1].split(',')],
+                         'soc_used': soc})
         return core
 
-    def loadArmDesign(self):
+    def loadArmDetails(self):
+        """Import 7/8 Details."""
+        df = pd.read_csv(f'{self.folder}/{self.v7Details}')
+        df = pd.concat([df, pd.read_csv(f'{self.folder}/{self.v8Details}')], join='outer', ignore_index=True)
+        self.df['Details'] = df.fillna(0)
+
+
+    def loadArmDesign(self, key='arm'):
+        """Process design files."""
         self.dfDesign['arm'] = pd.read_csv(f'{self.folder}/{self.designs}')
-        self.armColumns = {'notes': None, 'cache': True, 'MMU': True, 'DSP': 'strip', 'coprocessor bus': False,
-                           'floating-point unit': True, 'profile': 'strip', 'DBX': 'strip', 'Co-processor': True,
-                           'FPU': 'strip', 'instruction': 'strip', 'Divide': True, }
+        labels = ['Features', 'mips']
+        self.processDesign(key, labels)
+        self.loadThirdParty()
 
     def loadThirdParty(self, key='third'):
         """Process Feature, Cache and mips columms into standard columns."""
         self.dfDesign['third'] = pd.read_csv(f'{self.folder}/{self.thirdPartyDesigns}')  # .set_index('family')
-        self.labels = ['Feature', 'Cache (ID), MMU', 'mips']
+        labels = ['Feature', 'Cache (ID), MMU', 'mips']
+        self.processDesign(key, labels)
+
+    def processDesign(self, key, labels):
+        """Parse designs."""
+        print("Process Designs:", key, labels)
+        self.labels = labels
         for col in list(self.designColumns):
             self.dfDesign[key][col] = '0'
         for dfIndex in self.dfDesign[key].index:
@@ -126,6 +134,7 @@ class ArmDataProcessor:
         """After values within self.labels field names are parsed, remove the original columns."""
         self.dfDesign[key].rename(columns=self.cleanColumns, inplace=True)
         self.dfDesign[key].drop(columns=self.labels, inplace=True)
+        self.dfDesign[key] = self.dfDesign[key].fillna(0)
 
     def parseClock(self, key, label, dfIndex):
         """Clock field (mips) is a different format, parse just this field. Can hold 1 or more entries."""
@@ -170,5 +179,5 @@ def getValue(field, value, key):
 if __name__ == "__main__":
     arm = ArmDataProcessor('ARM')
     test = arm.mergeVendor()
-    arm.loadThirdParty()
-    # df = arm.df['family'].merge(arm.df['timeline'], on="family", how='outer')
+    arm.loadArmDesign()
+    arm.loadArmDetails()
