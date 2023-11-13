@@ -26,11 +26,15 @@ cleanColumns = {'Model Model': 'model', 'Launch Launch': 'launch', 'Code name Co
                   'MFLOPS FP32 MFLOPS FP32': 'mflops_fp32', 'Latest API support Direct3D': 'api_support_direct3d',
                   'Latest API support.1 OpenGL': 'api_support_opengl'}
 
+
 class NvidiaImport:
+    """Export Nvidia data from wikipedia and import into a pandas dataframe."""
+
     def __init__(self, folder, uri):
         self.df = self.process(pd.read_html(uri), folder)
 
     def process(self, dfRaw, folder, fileTemplate='nvidia'):
+        """Perform the initial export and data normaization."""
         df = []
         for num in range(len(dfRaw)):
             df.append(self.cleanup(dfRaw[num]))
@@ -38,6 +42,7 @@ class NvidiaImport:
         return df
 
     def normalizeHeader(self, columns):
+        """Headers are 1-3 rows, detect and merge into one row."""
         headers = list(columns)
         mergedRow = []
         for num in range(len(headers)):
@@ -50,6 +55,7 @@ class NvidiaImport:
         return mergedRow
 
     def cleanup(self, df):
+        """Detect if a fotter exists and remove if True."""
         if 'MultiIndex' in str(type(df.columns)):
             df.columns = self.normalizeHeader(df.columns)
             if df.iloc[-1:, 0].values[0] == 'Model':
