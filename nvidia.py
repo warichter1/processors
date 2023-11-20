@@ -123,7 +123,6 @@ class NvidiaImport:
             df = df.rename(columns=self.cleanColumns)
         if 'Features' not in list(df.columns) and 'Code name' not in list(df.columns):
             df['Features'] = 'Yes'
-            # self.tableType = 'features
         if self.tableType is None:
             self.getType(df.columns)
         return df.fillna(0)
