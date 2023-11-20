@@ -53,20 +53,6 @@ class NvidiaImport:
                              'GeForce (List of GPUs)': 'Features', 'GeForce (List of GPUs).1': 'gpu',
                              'Other products': 'Features', 'Other products.1': 'other_products',
                              'Software and technologies': 'Features', 'Features nFiniteFX II Engine': 'Features',
-                             # 'Features Video Processing Engine (VPE)': 'Video Processing Engine (VPE)',
-                             # 'Features OpenEXR HDR': 'Features', 'Features TurboCache': 'TurboCache',
-                             # 'Features PureVideo WMV9 Decoding': 'PureVideo WMV9 Decoding',
-                             # 'Features Scalable Link Interface (SLI)': 'Scalable Link Interface (SLI)',
-                             # 'Features Gamma-correct antialiasing': 'Features',
-                             # 'Features 64-bit OpenEXR HDR': '64-bit OpenEXR HDR',
-                             # 'Features Dual Link DVI': 'Dual Link DVI',
-                             # 'Features ScalableLinkInterface(SLI)': 'Features', 'Features 3-WaySLI': '3-WaySLI',
-                             # 'Features PureVideo HDwith VP1': 'PureVideo HDwith VP1',
-                             # 'Features PureVideo 2 with VP2,BSP Engine, and AES128 Engine': 'PureVideo 2 with VP2,BSP Engine, and AES128 Engine',
-                             # 'Features PureVideo 2 with VP2Engine: (BSP and 240 AES)': 'Features',
-                             # 'Features PureVideo 3 with VP3,BSP Engine, and AES128 Engine': 'PureVideo 3 with VP3,BSP Engine, and AES128 Engine',
-                             # 'Features PureVideo 4 with VP4': 'PureVideo 4 with VP4',
-                             # 'Features Computeability': 'Computeability',
                              'Software and technologies.1': 'software_technologies', 'vteNvidia': 'Features',
                              'vteNvidia.1': 'gpu', 'vteGraphics processing unit': 'category',
                              'vteGraphics processing unit.1': 'Features'}
@@ -77,7 +63,6 @@ class NvidiaImport:
     def process(self, dfRaw, folder, fileTemplate='nvidia'):
         """Perform the initial export and data normaization."""
         df = {'models': [], 'features': [], 'architecture': [], 'other': []}
-        # df = []
         for num in range(len(dfRaw)):
             print(f'ID: {num}')
             buffer = self.cleanup(copy(dfRaw[num]))
@@ -127,8 +112,6 @@ class NvidiaImport:
         print(list(df.columns))
         if type(list(df.columns)[0]) is not int:
             if 'Features' in list(df.columns)[1] or 'List of GPUs' in list(df.columns)[1]:
-                # if 'Features' not in list(df.columns):
-                # df['Features'] = 'Yes'
                 self.tableType = 'features'
         else:
             return self.findHeader(df)
@@ -148,7 +131,6 @@ class NvidiaImport:
     def getType(self, columns):
         """Determine the category for a table."""
         header = list(columns)
-        # print(header)
         if 'architecture' in header:
             self.tableType = 'architecture'
         elif 'Archi-' in header:
