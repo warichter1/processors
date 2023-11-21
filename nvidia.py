@@ -102,6 +102,10 @@ class NvidiaImport:
             df = df.drop(index=[0, 1])
             self.tableType = 'models'
             return df
+        elif df.iloc[0][0] != 'Key people':
+            df.columns = ['category', 'Features']
+            self.tableType = 'features'
+            return df
         else:
             self.tableType = 'other'
             return df
