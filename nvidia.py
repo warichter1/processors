@@ -62,12 +62,17 @@ class NvidiaImport:
 
     def process(self, dfRaw, folder, fileTemplate='nvidia'):
         """Perform the initial export and data normaization."""
-        df = {'models': [], 'features': [], 'architecture': [], 'other': []}
+        df = {'models': None, 'features': None, 'architecture': None, 'other': None}
         for num in range(len(dfRaw)):
             print(f'ID: {num}')
             buffer = self.cleanup(copy(dfRaw[num]))
-            df[self.tableType].append(buffer)
-            buffer.to_csv(f'{folder}/{fileTemplate}_{num}.csv', index=False)
+            if df[self.tableType] is None:
+                df[self.tableType] = buffer
+            else:
+                df[self.tableType] = pd.concat([df[self.tableType], buffer], join='outer', ignore_index=True).fillna(0)
+            # df[self.tableType].append(buffer)
+        for key in list(df.keys()):
+            df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
         return df
 
     def normalizeHeader(self, columns):
