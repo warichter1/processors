@@ -69,8 +69,11 @@ class NvidiaImport:
             if df[self.tableType] is None:
                 df[self.tableType] = buffer
             else:
-                df[self.tableType] = pd.concat([df[self.tableType], buffer], join='outer', ignore_index=True).fillna(0)
-            # df[self.tableType].append(buffer)
+                # print(buffer.columns)
+                if 'Company' in str(buffer.columns) or 'people' in str(buffer.iloc[0].values) or 'Company' in str(buffer.iloc[0].values):
+                    print('Skip:', str(buffer.iloc[0]))
+                else:
+                    df[self.tableType] = pd.concat([df[self.tableType], buffer], join='outer', ignore_index=True).fillna(0)
         for key in list(df.keys()):
             df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
         return df
@@ -81,7 +84,7 @@ class NvidiaImport:
         return self.mergeRows(headers)
 
     def mergeRows(self, headers):
-        print('Premerge:', headers)
+        # print('Premerge:', headers)
         mergedRow = []
         for num in range(len(headers)):
             skipRow = False
@@ -93,11 +96,11 @@ class NvidiaImport:
                     mergedRow.append(cell)
                 elif cell not in mergedRow[num] and skipRow is False:
                     mergedRow[num] = f'{mergedRow[num]} {cell}'
-        print('Merged:', mergedRow)
+        # print('Merged:', mergedRow)
         return mergedRow
 
     def findHeader(self, df):
-        print('Missing Header:', len(df.columns))
+        # print('Missing Header:', len(df.columns))
         if len(df.columns) > 2:
             headers = []
             for num in range(len(df.columns)):
@@ -107,7 +110,13 @@ class NvidiaImport:
             df = df.drop(index=[0, 1])
             self.tableType = 'models'
             return df
-        elif df.iloc[0][0] != 'Key people':
+        elif 'Company' in str(df.columns):
+            self.tableType = 'other'
+            return df
+        elif 'Key people' in df.iloc[0][0]:
+            self.tableType = 'other'
+            return df
+        elif 'people' not in df.iloc[0][0]:
             df.columns = ['category', 'Features']
             self.tableType = 'features'
             return df
@@ -118,17 +127,20 @@ class NvidiaImport:
     def cleanup(self, df):
         """Detect if a fotter exists and remove if True."""
         self.tableType = None
-        print(list(df.columns))
-        if type(list(df.columns)[0]) is not int:
+        # print(list(df.columns))
+        if type(df.columns[0]) is not np.int64:
             if 'Features' in list(df.columns)[1] or 'List of GPUs' in list(df.columns)[1]:
                 self.tableType = 'features'
+        elif type(df.columns[0]) is np.int64 and 'people' in df.iloc[0][0]:
+            print(df)
+            self.tableType = 'other'
         else:
             return self.findHeader(df)
         if 'MultiIndex' in str(type(df.columns)):
             df.columns = self.normalizeHeader(df.columns)
             if df.iloc[-1:, 0].values[0] == 'Model':
                 df = df.head(-2)
-        if type(list(df.columns)[0]) is not int:
+        if type(list(df.columns)[0]) is not np.int64:
             df = df.rename(columns=self.cleanColumns)
         if 'Features' not in list(df.columns) and 'Code name' not in list(df.columns):
             df['Features'] = 'Yes'
@@ -147,6 +159,8 @@ class NvidiaImport:
             self.tableType = 'architecture'
         elif 'Model Units' in header:
             self.tableType = 'architecture'
+        elif 'Company' in header:
+                self.tableType = 'other'
         elif 'Features' in header and 'Launch' not in header:
             self.tableType = 'features'
         elif 'Code name' in header or 'Code name(s)' in header or 'clock' in header:
