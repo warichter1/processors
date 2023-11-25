@@ -61,22 +61,28 @@ class NvidiaImport:
         self.df = self.process(pd.read_html(uri), folder)
 
     def process(self, dfRaw, folder, fileTemplate='nvidia'):
-        """Perform the initial export and data normaization."""
+        """Perform the initial export and data normalization."""
         df = {'models': None, 'features': None, 'architecture': None, 'other': None}
         for num in range(len(dfRaw)):
             print(f'ID: {num}')
-            buffer = self.cleanup(copy(dfRaw[num]))
+            results = self.cleanup(copy(dfRaw[num]))
             if df[self.tableType] is None:
-                df[self.tableType] = buffer
+                df[self.tableType] = results
             else:
-                # print(buffer.columns)
-                if 'Company' in str(buffer.columns) or 'people' in str(buffer.iloc[0].values) or 'Company' in str(buffer.iloc[0].values):
-                    print('Skip:', str(buffer.iloc[0]))
+                # print(results.columns)
+                if 'Company' in str(results.columns) or 'people' in str(results.iloc[0].values) or 'Company' in str(results.iloc[0].values):
+                    print('Skip:', str(results.iloc[0]))
                 else:
-                    df[self.tableType] = pd.concat([df[self.tableType], buffer], join='outer', ignore_index=True).fillna(0)
+                    df[self.tableType] = pd.concat([df[self.tableType], results], join='outer', ignore_index=True).fillna(0)
+        df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'])
+        df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='(')
+        df['architecture']['architecture'] = self.stripColumn(df['architecture']['architecture'])
         for key in list(df.keys()):
             df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
         return df
+
+    def stripColumn(self,column, key='['):
+        return [cell.split(key)[0].strip() for cell in column]
 
     def normalizeHeader(self, columns):
         """Headers are 1-3 rows, detect and merge into one row."""
