@@ -53,8 +53,10 @@ class NvidiaImport:
                              'GeForce (List of GPUs)': 'Features', 'GeForce (List of GPUs).1': 'gpu',
                              'Other products': 'Features', 'Other products.1': 'other_products',
                              'Software and technologies': 'Features', 'Features nFiniteFX II Engine': 'Features',
-                             'Software and technologies.1': 'software_technologies', 'vteNvidia': 'Features',
-                             'vteNvidia.1': 'gpu', 'vteGraphics processing unit': 'category',
+                             'Software and technologies.1': 'software_technologies',
+                             # 'vteNvidia': 'Features',
+                             # 'vteNvidia.1': 'gpu',
+                             'vteGraphics processing unit': 'category',
                              'vteGraphics processing unit.1': 'Features'}
         self.cleanDrop = ['Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1']
         self.tableType = 'other'
@@ -62,7 +64,7 @@ class NvidiaImport:
 
     def process(self, dfRaw, folder, fileTemplate='nvidia'):
         """Perform the initial export and data normalization."""
-        df = {'models': None, 'features': None, 'architecture': None, 'other': None}
+        df = {'models': None, 'features': None, 'features1': None, 'architecture': None, 'technology': None, 'other': None}
         for num in range(len(dfRaw)):
             print(f'ID: {num}')
             results = self.cleanup(copy(dfRaw[num]))
@@ -70,19 +72,25 @@ class NvidiaImport:
                 df[self.tableType] = results
             else:
                 # print(results.columns)
-                if 'Company' in str(results.columns) or 'people' in str(results.iloc[0].values) or 'Company' in str(results.iloc[0].values):
-                    print('Skip:', str(results.iloc[0]))
+                if 'Company' in str(results.columns) or 'Key people' in str(results.iloc[0].values) or 'Company' in str(results.iloc[0].values):
+                    print('Skip:', self.tableType, results)
                 else:
+                    # print(self.tableType, list(results.columns))
                     df[self.tableType] = pd.concat([df[self.tableType], results], join='outer', ignore_index=True).fillna(0)
-        df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'])
+        for heading in list(df['models'].columns):
+            # print(heading)
+            df['models'][heading] = self.stripColumn(df['models'][heading])
         df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='(')
-        df['architecture']['architecture'] = self.stripColumn(df['architecture']['architecture'])
+        for heading in list(df['architecture'].columns):
+            df['architecture'][heading] = self.stripColumn(df['architecture'][heading])
         for key in list(df.keys()):
-            df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
+            if df[key] is not None:
+                df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
         return df
 
-    def stripColumn(self,column, key='['):
-        return [cell.split(key)[0].strip() for cell in column]
+    def stripColumn(self,column, key='[', position=0):
+        "Clear extra character substrings by returning the desired array position."
+        return [str(cell).split(key)[position].strip() for cell in column]
 
     def normalizeHeader(self, columns):
         """Headers are 1-3 rows, detect and merge into one row."""
@@ -90,7 +98,7 @@ class NvidiaImport:
         return self.mergeRows(headers)
 
     def mergeRows(self, headers):
-        # print('Premerge:', headers)
+        """Called by normaizeHeader to identify and merge the header rows."""
         mergedRow = []
         for num in range(len(headers)):
             skipRow = False
@@ -123,6 +131,7 @@ class NvidiaImport:
             self.tableType = 'other'
             return df
         elif 'people' not in df.iloc[0][0]:
+            # print('f', list(df.columns), df.iloc[0])
             df.columns = ['category', 'Features']
             self.tableType = 'features'
             return df
@@ -137,8 +146,11 @@ class NvidiaImport:
         if type(df.columns[0]) is not np.int64:
             if 'Features' in list(df.columns)[1] or 'List of GPUs' in list(df.columns)[1]:
                 self.tableType = 'features'
-        elif type(df.columns[0]) is np.int64 and 'people' in df.iloc[0][0]:
-            print(df)
+        elif type(df.columns[0]) is np.int64 and 'people' in str(df.iloc[0][0]):
+            # print('People', df)
+            self.tableType = 'other'
+        elif 'Key people' in str(df.iloc[0][0]) or 'Company' in str(df.iloc[0][0]):
+            # print('Key People', df)
             self.tableType = 'other'
         else:
             return self.findHeader(df)
@@ -157,6 +169,7 @@ class NvidiaImport:
     def getType(self, columns):
         """Determine the category for a table."""
         header = list(columns)
+        print(self.tableType)
         if 'architecture' in header:
             self.tableType = 'architecture'
         elif 'Archi-' in header:
@@ -166,9 +179,18 @@ class NvidiaImport:
         elif 'Model Units' in header:
             self.tableType = 'architecture'
         elif 'Company' in header:
+            print('Found company')
+            self.tableType = 'other'
+        elif 'category' in header or 'other_products' in header or 'software_technologies' in header:
+            self.tableType = 'technology'
+        elif 'Features' in header and 'gpu' in header:
+            print('f1', header)
+            if 'Launch' in header:
+                self.tableType = 'models'
+            elif 'software_technologies' or 'other_products' in header:
                 self.tableType = 'other'
-        elif 'Features' in header and 'Launch' not in header:
-            self.tableType = 'features'
+            else:
+                self.tableType = 'features1'
         elif 'Code name' in header or 'Code name(s)' in header or 'clock' in header:
             self.tableType = 'models'
         else:
