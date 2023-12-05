@@ -11,6 +11,7 @@ Nvidia processor builder script
 import pandas as pd
 import numpy as np
 from copy import copy
+from datetime import datetime
 
 num = 0
 
@@ -27,6 +28,8 @@ num = 0
 #                   'MFLOPS FP32 MFLOPS FP32': 'mflops_fp32', 'Latest API support Direct3D': 'api_support_direct3d',
 #                   'Latest API support.1 OpenGL': 'api_support_opengl'}
 
+months = {'Jan': 'January', 'Feb': 'February', 'Mar': 'March', 'Apr': 'April', 'May': 'May', 'Jun': 'June',
+          'Jul': 'July', 'Aug': 'August', 'Sep': 'September', 'Oct': 'October', 'Nov': 'November', 'Dec': 'December'}
 
 class NvidiaImport:
     """Export Nvidia data from wikipedia and import into a pandas dataframe."""
@@ -81,16 +84,52 @@ class NvidiaImport:
             # print(heading)
             df['models'][heading] = self.stripColumn(df['models'][heading])
         df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='(')
+        df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='*')
         for heading in list(df['architecture'].columns):
             df['architecture'][heading] = self.stripColumn(df['architecture'][heading])
+        df['models'] = self.splitHw_model(copy(df['models']))
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
         return df
 
+    def convertDate(strDate):
+        strDate = str(strDate).split('/')[0].strip().replace('\xa0', ' ')
+        if strDate in ['0', '0.0', '?', 'Unknown', 'Unlaunched']:
+            return '1995-01-01'
+        for key in ['(PCIe)', 'AGP', '(']:
+            if key in strDate:
+                strDate = strDate.split(key)[0].strip()
+        arrDate = str(strDate).split(' ')
+        arrDate[0] = arrDate[0].replace(',', '')
+        print(strDate)
+        match len(arrDate):
+            case 1:
+                return f'{strDate}-01-01'
+            case 2:
+                strDate = f'{arrDate[0]} 01, {arrDate[1]}'
+            case 3:
+                # arrDate[2] = arrDate[2][:4]
+                if len(arrDate[0]) == 3:
+                    strDate = f'{months[arrDate[0]]} {arrDate[1].replace(",", "")}, {arrDate[2]}'
+            case _:
+                if len(arrDate) > 3:
+                    strDate = f'{arrDate[0]} {arrDate[1].replace(",", "")}, {arrDate[2][:4]}'
+        print(strDate)
+        return datetime.strptime(strDate, '%B %d, %Y').strftime('%Y-%m-%d')
+
     def stripColumn(self,column, key='[', position=0):
         "Clear extra character substrings by returning the desired array position."
         return [str(cell).split(key)[position].strip() for cell in column]
+
+    def splitHw_model(self, df, key='+'):
+        for idx in range(len(df)):
+            row = copy(df.iloc[idx])
+            if key in row['hw_model']:
+                models = row['hw_model'].split(key)
+                df.iloc[idx]['hw_model'] = models[0].strip()
+                pd.concat([df, row.to_frame().T], ignore_index=True)
+        return df
 
     def normalizeHeader(self, columns):
         """Headers are 1-3 rows, detect and merge into one row."""
