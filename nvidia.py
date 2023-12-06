@@ -38,7 +38,7 @@ class NvidiaImport:
         self.cleanColumns = {'Model': 'hw_model', 'Model': 'hw_model', 'Core clock (MHz)': 'clock', 'Model(Architecture)': 'architecture',
                              'Archi-tecture': 'architecture', 'Model Units': 'model',
                              'Micro-architecture Unnamed: 1_level_2': 'architecture',
-                             'Launch Unnamed: 2_level_2': 'launch', 'Chips Unnamed: 3_level_2': 'chips',
+                             'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'chips',
                              'Core clock(MHz) Unnamed: 4_level_2': 'clock',
                              'Shaders Cuda cores(total) Unnamed: 5_level_2': 'shaders_cuda_cores',
                              'Shaders Base clock (MHz)': 'shaders_clock',
@@ -74,26 +74,25 @@ class NvidiaImport:
             if df[self.tableType] is None:
                 df[self.tableType] = results
             else:
-                # print(results.columns)
                 if 'Company' in str(results.columns) or 'Key people' in str(results.iloc[0].values) or 'Company' in str(results.iloc[0].values):
                     print('Skip:', self.tableType, results)
                 else:
-                    # print(self.tableType, list(results.columns))
                     df[self.tableType] = pd.concat([df[self.tableType], results], join='outer', ignore_index=True).fillna(0)
         for heading in list(df['models'].columns):
-            # print(heading)
             df['models'][heading] = self.stripColumn(df['models'][heading])
         df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='(')
         df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='*')
         for heading in list(df['architecture'].columns):
             df['architecture'][heading] = self.stripColumn(df['architecture'][heading])
         df['models'] = self.splitHw_model(copy(df['models']))
+        df['models']['Launch'] = [self.convertDate(df['models']['Launch'].iloc[idx]) for idx in range(len(df['models']))]
+        df['architecture']['Launch'] = [self.convertDate(df['architecture']['Launch'].iloc[idx]) for idx in range(len(df['architecture']))]
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
         return df
 
-    def convertDate(strDate):
+    def convertDate(self, strDate):
         strDate = str(strDate).split('/')[0].strip().replace('\xa0', ' ')
         if strDate in ['0', '0.0', '?', 'Unknown', 'Unlaunched']:
             return '1995-01-01'
@@ -102,11 +101,13 @@ class NvidiaImport:
                 strDate = strDate.split(key)[0].strip()
         arrDate = str(strDate).split(' ')
         arrDate[0] = arrDate[0].replace(',', '')
-        print(strDate)
+        # print(strDate)
         match len(arrDate):
             case 1:
                 return f'{strDate}-01-01'
             case 2:
+                if len(arrDate[0]) == 3:
+                    arrDate[0] = months[arrDate[0]]
                 strDate = f'{arrDate[0]} 01, {arrDate[1]}'
             case 3:
                 # arrDate[2] = arrDate[2][:4]
@@ -115,7 +116,7 @@ class NvidiaImport:
             case _:
                 if len(arrDate) > 3:
                     strDate = f'{arrDate[0]} {arrDate[1].replace(",", "")}, {arrDate[2][:4]}'
-        print(strDate)
+        # print(datetime.strptime(strDate, '%B %d, %Y').strftime('%Y-%m-%d'))
         return datetime.strptime(strDate, '%B %d, %Y').strftime('%Y-%m-%d')
 
     def stripColumn(self,column, key='[', position=0):
