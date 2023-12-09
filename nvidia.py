@@ -87,9 +87,26 @@ class NvidiaImport:
         df['models'] = self.splitHw_model(copy(df['models']))
         df['models']['Launch'] = [self.convertDate(df['models']['Launch'].iloc[idx]) for idx in range(len(df['models']))]
         df['architecture']['Launch'] = [self.convertDate(df['architecture']['Launch'].iloc[idx]) for idx in range(len(df['architecture']))]
+        df['architecture'] = self.splitArch(df['architecture'])
+        df['full'] = test = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
+        return df
+
+    def splitArch(self, df):
+        model = []
+        architecture = []
+        for idx in range(len(df)):
+            field = df.iloc[idx]['architecture'].split('(')
+            if len(field) == 1:
+                architecture.append(field[0])
+                model.append(0)
+            else:
+                architecture.append(field[1].replace(')', ''))
+                model.append(field[0])
+        df['architecture'] = architecture
+        df['model'] = model
         return df
 
     def convertDate(self, strDate):
