@@ -173,7 +173,7 @@ class NvidiaImport:
         elif 'people' not in df.iloc[0][0]:
             # print('f', list(df.columns), df.iloc[0])
             df.columns = ['category', 'Features']
-            self.tableType = 'features'
+            self.tableType = 'technology'
             return df
         else:
             self.tableType = 'other'
@@ -184,7 +184,7 @@ class NvidiaImport:
         self.tableType = None
         # print(list(df.columns))
         if type(df.columns[0]) is not np.int64:
-            if 'Features' in list(df.columns)[1] or 'List of GPUs' in list(df.columns)[1]:
+            if 'Features' in list(df.columns)[1]: # or 'List of GPUs' in list(df.columns)[1]:
                 self.tableType = 'features'
         elif type(df.columns[0]) is np.int64 and 'people' in str(df.iloc[0][0]):
             # print('People', df)
