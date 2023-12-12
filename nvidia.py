@@ -121,10 +121,10 @@ class NvidiaImport:
             for row in keys:
                 field = df[table][row].iloc[inx]
                 charKey = ('(', 0) if '(' in field else (' ', 1)
-                print(inx, row, field, charKey)
+                # print(inx, row, field, charKey)
                 if len(df[table][row].iloc[inx]) > 0:
                     cellArr = df[table][row].iloc[inx].split(charKey[0])
-                    print(cellArr)
+                    # print(cellArr)
                     if cellArr[0] != "0":
                         code = cellArr[charKey[1]]
                         break
