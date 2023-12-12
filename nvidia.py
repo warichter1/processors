@@ -88,7 +88,9 @@ class NvidiaImport:
         df['models']['Launch'] = [self.convertDate(df['models']['Launch'].iloc[idx]) for idx in range(len(df['models']))]
         df['architecture']['Launch'] = [self.convertDate(df['architecture']['Launch'].iloc[idx]) for idx in range(len(df['architecture']))]
         df['architecture'] = self.splitArch(df['architecture'])
-        df['architecture']['codes'], df['architecture']['codes2'] = self.getArchCode(df, 'architecture', ['Code name(s)', 'chips', 'Chips'])
+        df['architecture']['codes'], df['architecture']['codes2'] = self.mergeArchCode(df, 'architecture',
+                                                                                       ['Code name(s)', 'chips',
+                                                                                        'Chips'])
 
         df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
         for key in list(df.keys()):
@@ -111,7 +113,7 @@ class NvidiaImport:
         df['model'] = model
         return df
 
-    def getArchCode(self, df, table, keys):
+    def mergeArchCode(self, df, table, keys):
         codes = []
         options = []
         for inx in range(len(df[table])):
