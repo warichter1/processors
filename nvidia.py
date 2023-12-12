@@ -88,7 +88,9 @@ class NvidiaImport:
         df['models']['Launch'] = [self.convertDate(df['models']['Launch'].iloc[idx]) for idx in range(len(df['models']))]
         df['architecture']['Launch'] = [self.convertDate(df['architecture']['Launch'].iloc[idx]) for idx in range(len(df['architecture']))]
         df['architecture'] = self.splitArch(df['architecture'])
-        df['full'] = test = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
+        df['architecture']['codes'], df['architecture']['codes2'] = self.getArchCode(df, 'architecture', ['Code name(s)', 'chips', 'Chips'])
+
+        df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
@@ -108,6 +110,29 @@ class NvidiaImport:
         df['architecture'] = architecture
         df['model'] = model
         return df
+
+    def getArchCode(self, df, table, keys):
+        codes = []
+        options = []
+        for inx in range(len(df[table])):
+            code = '0'
+            option = []
+            cellArr = []
+            for row in keys:
+                field = df[table][row].iloc[inx]
+                charKey = ('(', 0) if '(' in field else (' ', 1)
+                print(inx, row, field, charKey)
+                if len(df[table][row].iloc[inx]) > 0:
+                    cellArr = df[table][row].iloc[inx].split(charKey[0])
+                    print(cellArr)
+                    if cellArr[0] != "0":
+                        code = cellArr[charKey[1]]
+                        break
+            for i in range(1, len(cellArr)):
+                option.append(cellArr[i].replace(')', '').strip())
+            codes.append(code)
+            options.append(option)
+        return [codes, options]
 
     def convertDate(self, strDate):
         strDate = str(strDate).split('/')[0].strip().replace('\xa0', ' ')
