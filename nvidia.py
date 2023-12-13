@@ -86,6 +86,7 @@ class NvidiaImport:
             df['architecture'][heading] = self.stripColumn(df['architecture'][heading])
         df['models'] = self.splitHw_model(copy(df['models']))
         df['models']['Launch'] = [self.convertDate(df['models']['Launch'].iloc[idx]) for idx in range(len(df['models']))]
+        df['models']['Code name'] = [df['models']['Code name'].iloc[idx].replace('2x', '').strip() for idx in range(len(df['models']))]
         df['architecture']['Launch'] = [self.convertDate(df['architecture']['Launch'].iloc[idx]) for idx in range(len(df['architecture']))]
         df['architecture'] = self.splitArch(df['architecture'])
         df['architecture']['codes'], df['architecture']['codes2'] = self.mergeArchCode(df, 'architecture',
@@ -93,6 +94,7 @@ class NvidiaImport:
                                                                                         'Chips'])
 
         df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
+        df['full'] = df['full'].merge(df['architecture'], how='left', left_on='Code name', right_on='codes').fillna(0)
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
@@ -128,7 +130,7 @@ class NvidiaImport:
                     cellArr = df[table][row].iloc[inx].split(charKey[0])
                     # print(cellArr)
                     if cellArr[0] != "0":
-                        code = cellArr[charKey[1]]
+                        code = cellArr[charKey[1]].replace('2x', '').strip()
                         break
             for i in range(1, len(cellArr)):
                 option.append(cellArr[i].replace(')', '').strip())
