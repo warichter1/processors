@@ -13,29 +13,21 @@ import numpy as np
 from copy import copy
 from datetime import datetime
 
+importNvidia = False
 num = 0
-
-# cleanColumns = {'Model Model': 'model', 'Launch Launch': 'launch', 'Code name Code name': 'code_name',
-#                   'Fab (nm)[2] Fab (nm)[2]': 'fsb (nm)',
-#                   'Transistors (million) Transistors (million)': 'Transistors(million)',
-#                   'Die size (mm2) Die size (mm2)': 'die', 'Bus interface Bus interface': 'bus_interface',
-#                   'Core clock (MHz) Core clock (MHz)': 'clock',
-#                   'Memory clock (MHz) Memory clock (MHz)': 'Memory_clock(MHz)',
-#                   'Core config[a] Core config[a]': 'core_config', 'Fillrate.1 MPixels/s': 'Fillrate MPixels/s',
-#                   'Fillrate.2 MTexels/s': 'Fillrate MTexels/s', 'Fillrate.3 MVertices/s': 'Fillrate MVertices/s',
-#                   'Memory Size (MB)': 'memory', 'Memory.1 Bandwidth (GB/s)': 'memory_bandwidth(GB/s)',
-#                   'Memory.2 Bus type': 'memory_bus_type', 'Memory.3 Bus width (bit)': 'memory_bus_width(bit)',
-#                   'MFLOPS FP32 MFLOPS FP32': 'mflops_fp32', 'Latest API support Direct3D': 'api_support_direct3d',
-#                   'Latest API support.1 OpenGL': 'api_support_opengl'}
-
 months = {'Jan': 'January', 'Feb': 'February', 'Mar': 'March', 'Apr': 'April', 'May': 'May', 'Jun': 'June',
           'Jul': 'July', 'Aug': 'August', 'Sep': 'September', 'Oct': 'October', 'Nov': 'November', 'Dec': 'December'}
+
+
+def nvidiaLoader(folder, key='full', fileTemplate='nvidia'):
+    return pd.read_csv(f'{folder}/{fileTemplate}_{key}.csv')
 
 class NvidiaImport:
     """Export Nvidia data from wikipedia and import into a pandas dataframe."""
 
     def __init__(self, folder, uri):
-        self.cleanColumns = {'Model': 'hw_model', 'Model': 'hw_model', 'Core clock (MHz)': 'clock', 'Model(Architecture)': 'architecture',
+        self.cleanColumns = {'Model': 'hw_model', 'Core clock (MHz)': 'clock',
+                             'Model(Architecture)': 'architecture',
                              'Archi-tecture': 'architecture', 'Model Units': 'model',
                              'Micro-architecture Unnamed: 1_level_2': 'architecture',
                              'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'chips',
@@ -57,11 +49,13 @@ class NvidiaImport:
                              'Other products': 'Features', 'Other products.1': 'other_products',
                              'Software and technologies': 'Features', 'Features nFiniteFX II Engine': 'Features',
                              'Software and technologies.1': 'software_technologies',
-                             # 'vteNvidia': 'Features',
-                             # 'vteNvidia.1': 'gpu',
                              'vteGraphics processing unit': 'category',
                              'vteGraphics processing unit.1': 'Features'}
         self.cleanDrop = ['Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1']
+        self.fullColumns = {'hw_model_x': 'hw_model', 'Launch_x': 'launch', 'Bus interface_x': 'bus',
+                            'clock_x': 'clock',
+                            }
+        self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y',]
         self.tableType = 'other'
         self.df = self.process(pd.read_html(uri), folder)
 
@@ -78,21 +72,27 @@ class NvidiaImport:
                     print('Skip:', self.tableType, results)
                 else:
                     df[self.tableType] = pd.concat([df[self.tableType], results], join='outer', ignore_index=True).fillna(0)
-        for heading in list(df['models'].columns):
-            df['models'][heading] = self.stripColumn(df['models'][heading])
-        df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='(')
-        df['models']['hw_model'] = self.stripColumn(df['models']['hw_model'], key='*')
-        for heading in list(df['architecture'].columns):
-            df['architecture'][heading] = self.stripColumn(df['architecture'][heading])
-        df['models'] = self.splitHw_model(copy(df['models']))
-        df['models']['Launch'] = [self.convertDate(df['models']['Launch'].iloc[idx]) for idx in range(len(df['models']))]
-        df['models']['Code name'] = [df['models']['Code name'].iloc[idx].replace('2x', '').strip() for idx in range(len(df['models']))]
-        df['architecture']['Launch'] = [self.convertDate(df['architecture']['Launch'].iloc[idx]) for idx in range(len(df['architecture']))]
-        df['architecture'] = self.splitArch(df['architecture'])
-        df['architecture']['codes'], df['architecture']['codes2'] = self.mergeArchCode(df, 'architecture',
+        models = copy(df['models'])
+        for heading in list(models.columns):
+            models[heading] = self.stripColumn(models[heading])
+        models['hw_model'] = self.stripColumn(models['hw_model'], key='(')
+        models['hw_model'] = self.stripColumn(models['hw_model'], key='*')
+        df['models'] = models
+        architecture = copy(df['architecture'])
+        for heading in list(architecture.columns):
+            architecture[heading] = self.stripColumn(architecture[heading])
+        df['architecture'] = architecture
+        models = self.splitHw_model(copy(df['models']))
+        models['Launch'] = [self.convertDate(models['Launch'].iloc[idx]) for idx in range(len(models))]
+        models['Code name'] = [models['Code name'].iloc[idx].replace('2x', '').strip() for idx in range(len(models))]
+        df['models'] = models
+        architecture = copy(df['architecture'])
+        architecture['Launch'] = [self.convertDate(architecture['Launch'].iloc[idx]) for idx in range(len(architecture))]
+        architecture = self.splitArch(architecture)
+        architecture['codes'], architecture['codes2'] = self.mergeArchCode(df, 'architecture',
                                                                                        ['Code name(s)', 'chips',
                                                                                         'Chips'])
-
+        df['architecture'] = architecture
         df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
         df['full'] = df['full'].merge(df['architecture'], how='left', left_on='Code name', right_on='codes').fillna(0)
         for key in list(df.keys()):
@@ -125,10 +125,8 @@ class NvidiaImport:
             for row in keys:
                 field = df[table][row].iloc[inx]
                 charKey = ('(', 0) if '(' in field else (' ', 1)
-                # print(inx, row, field, charKey)
                 if len(df[table][row].iloc[inx]) > 0:
                     cellArr = df[table][row].iloc[inx].split(charKey[0])
-                    # print(cellArr)
                     if cellArr[0] != "0":
                         code = cellArr[charKey[1]].replace('2x', '').strip()
                         break
@@ -147,7 +145,6 @@ class NvidiaImport:
                 strDate = strDate.split(key)[0].strip()
         arrDate = str(strDate).split(' ')
         arrDate[0] = arrDate[0].replace(',', '')
-        # print(strDate)
         match len(arrDate):
             case 1:
                 return f'{strDate}-01-01'
@@ -156,13 +153,11 @@ class NvidiaImport:
                     arrDate[0] = months[arrDate[0]]
                 strDate = f'{arrDate[0]} 01, {arrDate[1]}'
             case 3:
-                # arrDate[2] = arrDate[2][:4]
                 if len(arrDate[0]) == 3:
                     strDate = f'{months[arrDate[0]]} {arrDate[1].replace(",", "")}, {arrDate[2]}'
             case _:
                 if len(arrDate) > 3:
                     strDate = f'{arrDate[0]} {arrDate[1].replace(",", "")}, {arrDate[2][:4]}'
-        # print(datetime.strptime(strDate, '%B %d, %Y').strftime('%Y-%m-%d'))
         return datetime.strptime(strDate, '%B %d, %Y').strftime('%Y-%m-%d')
 
     def stripColumn(self,column, key='[', position=0):
@@ -228,15 +223,12 @@ class NvidiaImport:
     def cleanup(self, df):
         """Detect if a fotter exists and remove if True."""
         self.tableType = None
-        # print(list(df.columns))
         if type(df.columns[0]) is not np.int64:
             if 'Features' in list(df.columns)[1]: # or 'List of GPUs' in list(df.columns)[1]:
                 self.tableType = 'features'
         elif type(df.columns[0]) is np.int64 and 'people' in str(df.iloc[0][0]):
-            # print('People', df)
             self.tableType = 'other'
         elif 'Key people' in str(df.iloc[0][0]) or 'Company' in str(df.iloc[0][0]):
-            # print('Key People', df)
             self.tableType = 'other'
         else:
             return self.findHeader(df)
@@ -285,8 +277,11 @@ class NvidiaImport:
 
 if __name__ == "__main__":
     folder = 'nvidia'
-    source = 'https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units'
-    nvidia = NvidiaImport(folder, source)
+    if importNvidia is True:
+        source = 'https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units'
+        nvidia = NvidiaImport(folder, source)
+    else:
+        full = nvidiaLoader(folder)
     # dfNvidia = process(pd.read_html(source), folder)
     # dfRaw = pd.read_html(source)
     # df = pd.read_csv(f'{folder}/nvidia_{num}.csv')
