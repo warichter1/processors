@@ -13,7 +13,7 @@ import numpy as np
 from copy import copy
 from datetime import datetime
 
-importNvidia = False
+importNvidia = True
 num = 0
 months = {'Jan': 'January', 'Feb': 'February', 'Mar': 'March', 'Apr': 'April', 'May': 'May', 'Jun': 'June',
           'Jul': 'July', 'Aug': 'August', 'Sep': 'September', 'Oct': 'October', 'Nov': 'November', 'Dec': 'December'}
@@ -53,9 +53,14 @@ class NvidiaImport:
                              'vteGraphics processing unit.1': 'Features'}
         self.cleanDrop = ['Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1']
         self.fullColumns = {'hw_model_x': 'hw_model', 'Launch_x': 'launch', 'Bus interface_x': 'bus',
-                            'clock_x': 'clock',
+                            'clock_x': 'clock', 'L2 Cache(MB)_x': 'L2 Cache(MB)',
+                            'Memory Size (GB)_x': 'Memory Size (GB)', 'Memory Bus type_x': 'Memory Bus type',
                             }
-        self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y',]
+        self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y','codes2', 'Unnamed: 1_level_0 Launch',
+                         'Unnamed: 1_level_0 Unnamed: 1_level_1', 'Features_y', 'hw_model_y', 'clock_y',
+                         'Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1',
+                         'Bus interface_y', 'Memory Bus type_y', 'Memory Size (GB)_y', 'TDP (Watts)_y',
+                         'L2 Cache(MB)_y', 'Process_y', 'Notes, form factor Unnamed: 18_level_2', 'Features_x']
         self.tableType = 'other'
         self.df = self.process(pd.read_html(uri), folder)
 
@@ -63,7 +68,7 @@ class NvidiaImport:
         """Perform the initial export and data normalization."""
         df = {'models': None, 'features': None, 'features1': None, 'architecture': None, 'technology': None, 'other': None}
         for num in range(len(dfRaw)):
-            print(f'ID: {num}')
+            # print(f'ID: {num}')
             results = self.cleanup(copy(dfRaw[num]))
             if df[self.tableType] is None:
                 df[self.tableType] = results
@@ -95,6 +100,9 @@ class NvidiaImport:
         df['architecture'] = architecture
         df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
         df['full'] = df['full'].merge(df['architecture'], how='left', left_on='Code name', right_on='codes').fillna(0)
+        df['full'] = df['full'].rename(columns=self.fullColumns)
+        df['full'] = df['full'].drop(columns=self.fullDrop)
+
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
@@ -191,11 +199,9 @@ class NvidiaImport:
                     mergedRow.append(cell)
                 elif cell not in mergedRow[num] and skipRow is False:
                     mergedRow[num] = f'{mergedRow[num]} {cell}'
-        # print('Merged:', mergedRow)
         return mergedRow
 
     def findHeader(self, df):
-        # print('Missing Header:', len(df.columns))
         if len(df.columns) > 2:
             headers = []
             for num in range(len(df.columns)):
@@ -212,7 +218,6 @@ class NvidiaImport:
             self.tableType = 'other'
             return df
         elif 'people' not in df.iloc[0][0]:
-            # print('f', list(df.columns), df.iloc[0])
             df.columns = ['category', 'Features']
             self.tableType = 'technology'
             return df
@@ -224,7 +229,7 @@ class NvidiaImport:
         """Detect if a fotter exists and remove if True."""
         self.tableType = None
         if type(df.columns[0]) is not np.int64:
-            if 'Features' in list(df.columns)[1]: # or 'List of GPUs' in list(df.columns)[1]:
+            if 'Features' in list(df.columns)[1]:  # or 'List of GPUs' in list(df.columns)[1]:
                 self.tableType = 'features'
         elif type(df.columns[0]) is np.int64 and 'people' in str(df.iloc[0][0]):
             self.tableType = 'other'
@@ -247,7 +252,7 @@ class NvidiaImport:
     def getType(self, columns):
         """Determine the category for a table."""
         header = list(columns)
-        print(self.tableType)
+        # print(self.tableType)
         if 'architecture' in header:
             self.tableType = 'architecture'
         elif 'Archi-' in header:
@@ -262,7 +267,7 @@ class NvidiaImport:
         elif 'category' in header or 'other_products' in header or 'software_technologies' in header:
             self.tableType = 'technology'
         elif 'Features' in header and 'gpu' in header:
-            print('f1', header)
+            # print('f1', header)
             if 'Launch' in header:
                 self.tableType = 'models'
             elif 'software_technologies' or 'other_products' in header:
