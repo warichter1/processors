@@ -26,11 +26,11 @@ class NvidiaImport:
     """Export Nvidia data from wikipedia and import into a pandas dataframe."""
 
     def __init__(self, folder, uri):
-        self.cleanColumns = {'Model': 'hw_model', 'Core clock (MHz)': 'clock',
-                             'Model(Architecture)': 'architecture',
-                             'Archi-tecture': 'architecture', 'Model Units': 'model',
+        self.cleanColumns = {'Model': 'hw_model', 'model': 'hw_model', 'Core clock (MHz)': 'clock', 'Businterface': 'Bus Interface',
+                             'Model(Architecture)': 'architecture', 'Bus interface': 'Bus Interface',
+                             'Archi-tecture': 'architecture', 'Model Units': 'hw_model',
                              'Micro-architecture Unnamed: 1_level_2': 'architecture',
-                             'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'chips',
+                             'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'Chips',
                              'Core clock(MHz) Unnamed: 4_level_2': 'clock',
                              'Shaders Cuda cores(total) Unnamed: 5_level_2': 'shaders_cuda_cores',
                              'Shaders Base clock (MHz)': 'shaders_clock',
@@ -44,7 +44,9 @@ class NvidiaImport:
                              'Processing power (GFLOPS) Single precision(MAD or FMA) Unnamed: 14_level_2': 'processing(GFLOPS)_single_precision',
                              'Processing power (GFLOPS) Double precision(FMA) Unnamed: 15_level_2': 'processing(GFLOPS)_double_precision',
                              'CUDAcomputecapability Unnamed: 16_level_2': 'cuda_compute_capability',
-                             'TDP(watts) W': 'tdp', 'form factor Unnamed: 18_level_2': 'form_factor',
+                             'Transistors (million)Die size (mm2)': 'Transistors (million)',
+                             'Transistors(billion)': 'Transistors (billion)', 'TDP (watts)': 'tdp', 'TDP(Watts)': 'tdp',
+                             'TDP(watts) W': 'tdp', 'TDP(watts)': 'tdp', 'form factor Unnamed: 18_level_2': 'form_factor',
                              'GeForce (List of GPUs)': 'Features', 'GeForce (List of GPUs).1': 'gpu',
                              'Other products': 'Features', 'Other products.1': 'other_products',
                              'Software and technologies': 'Features', 'Features nFiniteFX II Engine': 'Features',
@@ -52,15 +54,19 @@ class NvidiaImport:
                              'vteGraphics processing unit': 'category',
                              'vteGraphics processing unit.1': 'Features'}
         self.cleanDrop = ['Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1']
-        self.fullColumns = {'hw_model_x': 'hw_model', 'Launch_x': 'launch', 'Bus interface_x': 'bus',
+        self.fullColumns = {'hw_model_x': 'hw_model', 'Launch_x': 'launch', 'Bus Interface_x': 'bus',
                             'clock_x': 'clock', 'L2 Cache(MB)_x': 'L2 Cache(MB)',
                             'Memory Size (GB)_x': 'Memory Size (GB)', 'Memory Bus type_x': 'Memory Bus type',
                             }
-        self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y','codes2', 'Unnamed: 1_level_0 Launch',
-                         'Unnamed: 1_level_0 Unnamed: 1_level_1', 'Features_y', 'hw_model_y', 'clock_y',
+        self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y', 'codes2', 'Unnamed: 1_level_0 Launch',
+                         'Unnamed: 1_level_0 Unnamed: 1_level_1', 'Features_y', 'hw_model_y', 'clock_y', 'Bus interface',
                          'Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1',
-                         'Bus interface_y', 'Memory Bus type_y', 'Memory Size (GB)_y', 'TDP (Watts)_y',
-                         'L2 Cache(MB)_y', 'Process_y', 'Notes, form factor Unnamed: 18_level_2', 'Features_x']
+                         'Bus Interface_y', 'Memory Bus type_y', 'Memory Size (GB)_y', 'TDP (Watts)_y',
+                         'L2 Cache(MB)_y', 'Process_y', 'Notes, form factor Unnamed: 18_level_2', 'Features_x',
+                         'MFLOPS FP32', 'MFLOPSFP32', 'Features',
+                         'Latest API support Direct3D', 'Latest API support OpenGL',
+                         'Latest supported API version Direct3D', 'Latest supported API version OpenGL',
+                         'Latest supported API version Other', 'Latest supported API version Vulkan',]
         self.tableType = 'other'
         self.df = self.process(pd.read_html(uri), folder)
 
@@ -95,7 +101,7 @@ class NvidiaImport:
         architecture['Launch'] = [self.convertDate(architecture['Launch'].iloc[idx]) for idx in range(len(architecture))]
         architecture = self.splitArch(architecture)
         architecture['codes'], architecture['codes2'] = self.mergeArchCode(df, 'architecture',
-                                                                                       ['Code name(s)', 'chips',
+                                                                                       ['Code name(s)', # 'chips',
                                                                                         'Chips'])
         df['architecture'] = architecture
         df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
