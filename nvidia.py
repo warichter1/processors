@@ -38,7 +38,7 @@ class NvidiaImport:
     def __init__(self, folder, uri):
         self.cleanColumns = {'Model': 'hw_model', 'model': 'hw_model', 'Core clock (MHz)': 'clock', 'Businterface': 'Bus Interface',
                              'Model(Architecture)': 'architecture', 'Bus interface': 'Bus Interface',
-                             'Archi-tecture': 'architecture', 'Model Units': 'hw_model',
+                             'Archi-tecture': 'architecture', 'Archi- tecture': 'architecture', 'Model Units': 'hw_model',
                              'Micro-architecture Unnamed: 1_level_2': 'architecture',
                              'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'Chips',
                              'Core clock(MHz) Unnamed: 4_level_2': 'clock',
@@ -126,20 +126,23 @@ class NvidiaImport:
                     print('Skip:', self.tableType, results)
                 else:
                     df[self.tableType] = pd.concat([df[self.tableType], results], join='outer', ignore_index=True).fillna(0)
-        models = copy(df['models'])
-        for heading in list(models.columns):
-            models[heading] = self.stripColumn(models[heading])
-        models['hw_model'] = self.stripColumn(models['hw_model'], key='(')
-        models['hw_model'] = self.stripColumn(models['hw_model'], key='*')
-        df['models'] = models
-        architecture = copy(df['architecture'])
-        for heading in list(architecture.columns):
-            architecture[heading] = self.stripColumn(architecture[heading])
-        df['architecture'] = architecture
+        # models = copy(df['models'])
+        # for heading in list(models.columns):
+        #     models[heading] = self.stripColumn(models[heading])
+        # models['hw_model'] = self.stripColumn(models['hw_model'], key='(')
+        # models['hw_model'] = self.stripColumn(models['hw_model'], key='*')
+        # df['models'] = models
+        df['models'] = self.cleanHeader(copy(df['models']), columnName='hw_model', keys=['(', '*'])
+        # architecture = copy(df['architecture'])
+        # for heading in list(architecture.columns):
+        #     architecture[heading] = self.stripColumn(architecture[heading])
+        # df['architecture'] = architecture
+        df['architecture'] = self.cleanHeader(copy(df['architecture']))
         models = self.splitHw_model(copy(df['models']))
         models['Launch'] = [self.convertDate(models['Launch'].iloc[idx]) for idx in range(len(models))]
         models['Code name'] = [models['Code name'].iloc[idx].replace('2x', '').strip() for idx in range(len(models))]
         df['models'] = models
+        self.df1 = df
         architecture = copy(df['architecture'])
         architecture['Launch'] = [self.convertDate(architecture['Launch'].iloc[idx]) for idx in range(len(architecture))]
         architecture = self.splitArch(architecture)
@@ -155,6 +158,14 @@ class NvidiaImport:
         for key in list(df.keys()):
             if df[key] is not None:
                 df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
+        return df
+
+    def cleanHeader(self, df, columnName=None, keys=None):
+        for heading in list(df.columns):
+            df[heading] = self.stripColumn(df[heading])
+        if columnName is not None:
+            for key in keys:
+                df['hw_model'] = self.stripColumn(df['hw_model'], key=key)
         return df
 
     def splitArch(self, df):
