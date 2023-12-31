@@ -111,6 +111,7 @@ class NvidiaImport:
                          'Latest supported API version Direct3D', 'Latest supported API version OpenGL',
                          'Latest supported API version Other', 'Latest supported API version Vulkan',]
         self.tableType = 'other'
+        print(f'Import page tables: {uri} to {folder}')
         self.df = self.process(pd.read_html(uri), folder)
 
     def process(self, dfRaw, folder, fileTemplate='nvidia'):
