@@ -38,8 +38,10 @@ class NvidiaImport:
     def __init__(self, folder, uri):
         self.cleanColumns = {'Model': 'hw_model', 'model': 'hw_model', 'Core clock (MHz)': 'clock', 'Businterface': 'Bus Interface',
                              'Model(Architecture)': 'architecture', 'Bus interface': 'Bus Interface',
-                             'Archi-tecture': 'architecture', 'Archi- tecture': 'architecture', 'Model Units': 'hw_model',
+                             'Archi-tecture': 'architecture', 'Archi- tecture': 'architecture',
+                             'Model (Architecture)': 'architecture', 'Model Units': 'hw_model',
                              'Micro-architecture Unnamed: 1_level_2': 'architecture',
+                             'Micro- architecture Unnamed: 1_level_2': 'architecture',
                              'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'Chips',
                              'Core clock(MHz) Unnamed: 4_level_2': 'clock',
                              'Shaders Cuda cores(total) Unnamed: 5_level_2': 'shaders_cuda_cores',
@@ -118,7 +120,6 @@ class NvidiaImport:
         """Perform the initial export and data normalization."""
         df = {'models': None, 'features': None, 'features1': None, 'architecture': None, 'technology': None, 'other': None}
         for num in range(len(dfRaw)):
-            # print(f'ID: {num}')
             results = self.cleanup(copy(dfRaw[num]))
             if df[self.tableType] is None:
                 df[self.tableType] = results
@@ -127,29 +128,21 @@ class NvidiaImport:
                     print('Skip:', self.tableType, results)
                 else:
                     df[self.tableType] = pd.concat([df[self.tableType], results], join='outer', ignore_index=True).fillna(0)
-        # models = copy(df['models'])
-        # for heading in list(models.columns):
-        #     models[heading] = self.stripColumn(models[heading])
-        # models['hw_model'] = self.stripColumn(models['hw_model'], key='(')
-        # models['hw_model'] = self.stripColumn(models['hw_model'], key='*')
-        # df['models'] = models
         df['models'] = self.cleanHeader(copy(df['models']), columnName='hw_model', keys=['(', '*'])
-        # architecture = copy(df['architecture'])
-        # for heading in list(architecture.columns):
-        #     architecture[heading] = self.stripColumn(architecture[heading])
-        # df['architecture'] = architecture
         df['architecture'] = self.cleanHeader(copy(df['architecture']))
         models = self.splitHw_model(copy(df['models']))
         models['Launch'] = [self.convertDate(models['Launch'].iloc[idx]) for idx in range(len(models))]
         models['Code name'] = [models['Code name'].iloc[idx].replace('2x', '').strip() for idx in range(len(models))]
         df['models'] = models
         self.df1 = df
+        return df
         architecture = copy(df['architecture'])
         architecture['Launch'] = [self.convertDate(architecture['Launch'].iloc[idx]) for idx in range(len(architecture))]
         architecture = self.splitArch(architecture)
-        architecture['codes'], architecture['codes2'] = self.mergeArchCode(df, 'architecture',
-                                                                                       ['Code name(s)', # 'chips',
-                                                                                        'Chips'])
+        architecture['codes'], architecture['codes2'] = self.mergeArchCode(df,
+                                                                           'architecture',
+                                                                           ['Code name(s)',
+                                                                           'Chips'])
         df['architecture'] = architecture
         df['full'] = df['models'].merge(df['features'], how='left', on='hw_model').fillna(0)
         df['full'] = df['full'].merge(df['architecture'], how='left', left_on='Code name', right_on='codes').fillna(0)
