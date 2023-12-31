@@ -11,6 +11,7 @@ Nvidia processor builder script
 import pandas as pd
 import numpy as np
 from copy import copy
+import csv
 from datetime import datetime
 
 importNvidia = True
@@ -19,8 +20,17 @@ months = {'Jan': 'January', 'Feb': 'February', 'Mar': 'March', 'Apr': 'April', '
           'Jul': 'July', 'Aug': 'August', 'Sep': 'September', 'Oct': 'October', 'Nov': 'November', 'Dec': 'December'}
 
 
-def nvidiaLoader(folder, key='full', fileTemplate='nvidia'):
+def nvidiaLoader(folder, key='full', fileTemplate='nvidia', columns=None):
     return pd.read_csv(f'{folder}/{fileTemplate}_{key}.csv')
+
+
+def nvidiaHeader(folder, key='full', fileTemplate='nvidia'):
+    with open(f'{folder}/{fileTemplate}_{key}.csv', newline='') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            header = row
+            break
+    return header
 
 class NvidiaImport:
     """Export Nvidia data from wikipedia and import into a pandas dataframe."""
@@ -33,16 +43,47 @@ class NvidiaImport:
                              'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'Chips',
                              'Core clock(MHz) Unnamed: 4_level_2': 'clock',
                              'Shaders Cuda cores(total) Unnamed: 5_level_2': 'shaders_cuda_cores',
-                             'Shaders Base clock (MHz)': 'shaders_clock',
-                             'Shaders Max boostclock (MHz)': 'shaders_max_clock',
+                             'Shaders Base clock (MHz)': 'shaders_clock', 'Die\xa0size(mm2)': 'Die size (mm2)',
+                             'Shaders Max boostclock (MHz)': 'shaders_max_clock', 'Core\xa0config':'Core config',
+                             'Memory Size (MB)': 'memory_size',
+                             'Memory Bandwidth (GB/s)': 'memory_bandwidth',
+                             'Memory Bus type': 'memory_bus',
+                             'Memory Bus width (bit)': 'memory_bus_width',
                              'Memory Bus type Unnamed: 8_level_2': 'memory_bus',
                              'Memory Bus width(bit) Unnamed: 9_level_2': 'memory_bus_width',
                              'Memory Size(GB) Unnamed: 10_level_2': 'memory_size',
-                             'Memory Clock(MT/s) Unnamed: 11_level_2': 'memory_clock',
+                             'Memory Clock(MT/s) Unnamed: 11_level_2': 'memory_clock', 'Memory clock (MHz)': 'memory_clock',
                              'Memory Bandwidth(GB/s) Unnamed: 12_level_2': 'memory_bandwidth',
-                             'Processing power (GFLOPS) Half precisionTensor Core FP32 Accumulate Unnamed: 13_level_2': 'processing(GFLOPS)_Half_precision_tensor',
-                             'Processing power (GFLOPS) Single precision(MAD or FMA) Unnamed: 14_level_2': 'processing(GFLOPS)_single_precision',
-                             'Processing power (GFLOPS) Double precision(FMA) Unnamed: 15_level_2': 'processing(GFLOPS)_double_precision',
+                             'Processing power (GFLOPS)2': 'processing power (GFLOPS)',
+                             'Processing power (GFLOPS)': 'processing power (GFLOPS)',
+                             'Processing power (GFLOPS)3 Half precision': 'processing power (GFLOPS)_half_precision',
+                             'Processing power (GFLOPS) Double precision': 'processing power (GFLOPS)_double_precision',
+                             'Processing power (GFLOPS) Half Precision': 'processing power (GFLOPS)_half_precision',
+                             'Processing power (GFLOPS) Half precision': 'processing power (GFLOPS)_half_precision',
+                             'Processing power (GFLOPS) HalfPrecision': 'processing power (GFLOPS)_half_precision',
+                             'Processing power (GFLOPS) Single precision': 'processing power (GFLOPS)_single_precision',
+                             'Processing power (GFLOPS) Single precision (Boost)': 'processing power (GFLOPS)_single_precision (boost)',
+                             'Processing power (GFLOPS)3 Ray Tracing Performance': 'processing power (GFLOPS) Ray Tracing Performance',
+                             'Processing power (GFLOPS)3 Single precision': 'processing power (GFLOPS)_single_precision',
+                             'Processing power (GFLOPS) Half precisionTensor Core FP32 Accumulate Unnamed: 13_level_2': 'processing power (GFLOPS)_half_precision_tensor',
+                             'Processing power (GFLOPS) Single precision(MAD or FMA) Unnamed: 14_level_2': 'processing power (GFLOPS)_single_precision',
+                             'Processing power (GFLOPS) Double precision(FMA) Unnamed: 15_level_2': 'processing power (GFLOPS)_double_precision',
+                             'Processing power (TFLOPS) Tensor compute (FP16) (2:1\xa0sparse)': 'processing power (TFLOPS) Tensor compute (FP16) (2:1 sparse)',
+                             'Processing power (GFLOPS) Tensor': 'processing power (GFLOPS) Tensor',
+                             'Processing power (GFLOPS) Tensor compute (FP16)': 'processing power (GFLOPS) Tensor compute (FP16)',
+                             'Processing power (GFLOPS) Tensor compute (FP16) (sparse)': 'processing power (GFLOPS) Tensor compute (FP16) (sparse)',
+                             'Processing power (GFLOPS) Tensor compute + Single precision': 'processing power (GFLOPS) Tensor compute + Single precision',
+                             'Processing power (TFLOPS) Tensor compute (FP16)': 'processing power (TFLOPS) Tensor compute (FP16)',
+                             'Processing power (TFLOPS) Tensor compute (FP16) (2:1 sparse)': 'processing power (TFLOPS) Tensor compute (FP16) (2:1 sparse)',
+                             'Processing power (GFLOPS) Tensor compute (FP16) (sparse)': 'processing power (GFLOPS) Tensor compute (FP16) (sparse)',
+                             'Processing\xa0power\xa0(GFLOPS) Doubleprecision': 'processing power (GFLOPS)_double_precision',
+                             'Processing\xa0power\xa0(GFLOPS) Halfprecision': 'processing power (GFLOPS)_half_precision',
+                             'Processing\xa0power\xa0(GFLOPS) Singleprecision': 'processing power (GFLOPS)_single_precision',
+                             'Processing\xa0power\xa0(GFLOPS) Tensorcompute(FP16)': 'processing power (TFLOPS) Tensor compute (FP16)',
+                             'Processing power (TFLOPS) Double precision': 'processing power (TFLOPS)_double_precision',
+                             'Processing power (TFLOPS) Half precision': 'processing power (TFLOPS)_half_precision',
+                             'Processing power (TFLOPS) Single precision': 'processing power (TFLOPS)_single_precision',
+                             'Ray\xa0tracing Performance RTX\xa0OPS(Trillions)': 'Ray-tracing Performance RTX OPS/s (Trillions)',
                              'CUDAcomputecapability Unnamed: 16_level_2': 'cuda_compute_capability',
                              'Transistors (million)Die size (mm2)': 'Transistors (million)',
                              'Transistors(billion)': 'Transistors (billion)', 'TDP (watts)': 'tdp', 'TDP(Watts)': 'tdp',
@@ -55,16 +96,18 @@ class NvidiaImport:
                              'vteGraphics processing unit.1': 'Features'}
         self.cleanDrop = ['Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1']
         self.fullColumns = {'hw_model_x': 'hw_model', 'Launch_x': 'launch', 'Bus Interface_x': 'bus',
-                            'clock_x': 'clock', 'L2 Cache(MB)_x': 'L2 Cache(MB)',
+                            'clock_x': 'clock', 'L2 Cache(MB)_x': 'L2 Cache(MB)', 'memory_clock_x': 'memory_clock',
                             'Memory Size (GB)_x': 'Memory Size (GB)', 'Memory Bus type_x': 'Memory Bus type',
-                            }
+                            'memory_size_x': 'memory_size', 'memory_bus_x': 'memory_bus', 'tdp_x': 'tdp',
+                            'memory_bandwidth_x': 'memory_bandwidth', 'memory_bus_width_x': 'memory_bus_width',
+                            'Transistors (billion)_x': 'Transistors (billion)',}
         self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y', 'codes2', 'Unnamed: 1_level_0 Launch',
                          'Unnamed: 1_level_0 Unnamed: 1_level_1', 'Features_y', 'hw_model_y', 'clock_y', 'Bus interface',
                          'Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1',
-                         'Bus Interface_y', 'Memory Bus type_y', 'Memory Size (GB)_y', 'TDP (Watts)_y',
+                         'Memory Size (GB)_y', 'TDP (Watts)_y', 'memory_bandwidth_y',  'memory_bus_width_y', 'memory_bus_y', 'memory_size_y',
                          'L2 Cache(MB)_y', 'Process_y', 'Notes, form factor Unnamed: 18_level_2', 'Features_x',
-                         'MFLOPS FP32', 'MFLOPSFP32', 'Features',
-                         'Latest API support Direct3D', 'Latest API support OpenGL',
+                         'MFLOPS FP32', 'MFLOPSFP32', 'Features', 'memory_clock_y', 'tdp_y',
+                         'Latest API support Direct3D', 'Latest API support OpenGL', 'Transistors (billion)_y',
                          'Latest supported API version Direct3D', 'Latest supported API version OpenGL',
                          'Latest supported API version Other', 'Latest supported API version Vulkan',]
         self.tableType = 'other'
@@ -293,6 +336,7 @@ if __name__ == "__main__":
         nvidia = NvidiaImport(folder, source)
     else:
         full = nvidiaLoader(folder)
+        header = nvidiaHeader(folder)
     # dfNvidia = process(pd.read_html(source), folder)
     # dfRaw = pd.read_html(source)
     # df = pd.read_csv(f'{folder}/nvidia_{num}.csv')

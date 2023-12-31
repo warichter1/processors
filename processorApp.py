@@ -16,10 +16,13 @@ import numpy as np
 from numpy import random
 import base64
 
-from nvidia import nvidiaLoader
+from nvidia import nvidiaLoader, nvidiaHeader
 
+nvidiaColumns = [ 'launch', 'Code name', 'Fab (nm)', 'Transistors (million)', 'Die size (mm2)', 'bus', 'clock',
+                 'Memory Size (MB)', 'Memory Bandwidth (GB/s)', 'Memory Bus type', 'Memory Bus width (bit)', 'Notes', 'Chips', 'architecture',]
 df = nvidiaLoader('nvidia')
 df[' index'] = range(1, len(df) + 1)
+header = nvidiaHeader('nvidia')
 
 app = Dash(__name__)
 
