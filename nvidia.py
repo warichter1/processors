@@ -21,7 +21,8 @@ months = {'Jan': 'January', 'Feb': 'February', 'Mar': 'March', 'Apr': 'April', '
 
 
 def nvidiaLoader(folder, key='full', fileTemplate='nvidia', columns=None):
-    return pd.read_csv(f'{folder}/{fileTemplate}_{key}.csv')
+    source = f'{folder}/{fileTemplate}_{key}.csv'
+    return pd.read_csv(source) if columns is None else pd.read_csv(source, usecols=columns)
 
 
 def nvidiaHeader(folder, key='full', fileTemplate='nvidia'):
@@ -38,22 +39,24 @@ class NvidiaImport:
     def __init__(self, folder, uri):
         self.cleanColumns = {'Model': 'hw_model', 'model': 'hw_model', 'Core clock (MHz)': 'clock', 'Businterface': 'Bus Interface',
                              'Model(Architecture)': 'architecture', 'Bus interface': 'Bus Interface',
-                             'Archi-tecture': 'architecture', 'Archi- tecture': 'architecture',
-                             'Model (Architecture)': 'architecture', 'Model Units': 'hw_model',
+                             'Archi-tecture': 'architecture', 'Archi- tecture': 'architecture', 'MFLOPSFP32': 'MFLOPS FP32',
+                             'Model (Architecture)': 'architecture', 'Model Units': 'hw_model', 'GFLOPSFP32': 'GFLOPS FP32',
                              'Micro-architecture Unnamed: 1_level_2': 'architecture',
                              'Micro- architecture Unnamed: 1_level_2': 'architecture',
                              'Launch Unnamed: 2_level_2': 'Launch', 'Chips Unnamed: 3_level_2': 'Chips',
-                             'Core clock(MHz) Unnamed: 4_level_2': 'clock',
+                             'Core clock(MHz) Unnamed: 4_level_2': 'clock', 'Die size (mm2)': 'Node',
                              'Shaders Cuda cores(total) Unnamed: 5_level_2': 'shaders_cuda_cores',
-                             'Shaders Base clock (MHz)': 'shaders_clock', 'Die\xa0size(mm2)': 'Die size (mm2)',
-                             'Shaders Max boostclock (MHz)': 'shaders_max_clock', 'Core\xa0config':'Core config',
-                             'Memory Size (MB)': 'memory_size',
-                             'Memory Bandwidth (GB/s)': 'memory_bandwidth',
+                             'Shaders Base clock (MHz)': 'shaders_clock', 'Die\xa0size(mm2)': 'node',
+                             'Shaders Max boostclock (MHz)': 'shaders_max_clock', 'Core\xa0config': 'Core config',
+                             'Core config1': 'Core config', 'Core config1*': 'Core config', 'Fab (nm)': 'Fab',
+                             'Core config1,2,3': 'Core config', 'Core config12': 'Core config',
+                             'Core config12*': 'Core config', 'Memory Size (MB)': 'memory_size',
+                             'Memory Bandwidth (GB/s)': 'memory_bandwidth', 'L2 Cache(MB)': 'L2 Cache (MB)',
                              'Memory Bus type': 'memory_bus',
                              'Memory Bus width (bit)': 'memory_bus_width',
                              'Memory Bus type Unnamed: 8_level_2': 'memory_bus',
                              'Memory Bus width(bit) Unnamed: 9_level_2': 'memory_bus_width',
-                             'Memory Size(GB) Unnamed: 10_level_2': 'memory_size',
+                             'Memory Size(GB) Unnamed: 10_level_2': 'memory_size', 'Memory Size (GB)': 'memory_size',
                              'Memory Clock(MT/s) Unnamed: 11_level_2': 'memory_clock', 'Memory clock (MHz)': 'memory_clock',
                              'Memory Bandwidth(GB/s) Unnamed: 12_level_2': 'memory_bandwidth',
                              'Processing power (GFLOPS)2': 'processing power (GFLOPS)',
@@ -89,7 +92,7 @@ class NvidiaImport:
                              'CUDAcomputecapability Unnamed: 16_level_2': 'cuda_compute_capability',
                              'Transistors (million)Die size (mm2)': 'Transistors (million)',
                              'Transistors(billion)': 'Transistors (billion)', 'TDP (watts)': 'tdp', 'TDP(Watts)': 'tdp',
-                             'TDP(watts) W': 'tdp', 'TDP(watts)': 'tdp', 'form factor Unnamed: 18_level_2': 'form_factor',
+                             'TDP(watts) W': 'tdp', 'TDP (Watts)': 'tdp', 'form factor Unnamed: 18_level_2': 'form_factor',
                              'GeForce (List of GPUs)': 'Features', 'GeForce (List of GPUs).1': 'gpu',
                              'Other products': 'Features', 'Other products.1': 'other_products',
                              'Software and technologies': 'Features', 'Features nFiniteFX II Engine': 'Features',
@@ -103,12 +106,12 @@ class NvidiaImport:
                             'memory_size_x': 'memory_size', 'memory_bus_x': 'memory_bus', 'tdp_x': 'tdp',
                             'memory_bandwidth_x': 'memory_bandwidth', 'memory_bus_width_x': 'memory_bus_width',
                             'Transistors (billion)_x': 'Transistors (billion)',}
-        self.fullDrop = ['TDP (Watts)_x', 'Core config1', 'Launch_y', 'codes2', 'Unnamed: 1_level_0 Launch',
-                         'Unnamed: 1_level_0 Unnamed: 1_level_1', 'Features_y', 'hw_model_y', 'clock_y', 'Bus interface',
+        self.fullDrop = ['Launch_y', 'codes2', 'Unnamed: 1_level_0 Launch',
+                         'Unnamed: 1_level_0 Unnamed: 1_level_1', 'Features_y', 'hw_model_y', 'clock_y',
                          'Unnamed: 4_level_0 Unnamed: 4_level_1', 'Unnamed: 5_level_0 Unnamed: 5_level_1',
-                         'Memory Size (GB)_y', 'TDP (Watts)_y', 'memory_bandwidth_y',  'memory_bus_width_y', 'memory_bus_y', 'memory_size_y',
-                         'L2 Cache(MB)_y', 'Process_y', 'Notes, form factor Unnamed: 18_level_2', 'Features_x',
-                         'MFLOPS FP32', 'MFLOPSFP32', 'Features', 'memory_clock_y', 'tdp_y',
+                         'memory_bandwidth_y',  'memory_bus_width_y', 'memory_bus_y', 'memory_size_y',
+                         'Process_y', 'Notes, form factor Unnamed: 18_level_2', 'Features_x',
+                         'MFLOPS FP32', 'Features', 'memory_clock_y', 'tdp_y',
                          'Latest API support Direct3D', 'Latest API support OpenGL', 'Transistors (billion)_y',
                          'Latest supported API version Direct3D', 'Latest supported API version OpenGL',
                          'Latest supported API version Other', 'Latest supported API version Vulkan',]
@@ -135,7 +138,7 @@ class NvidiaImport:
         models['Code name'] = [models['Code name'].iloc[idx].replace('2x', '').strip() for idx in range(len(models))]
         df['models'] = models
         self.df1 = df
-        return df
+        # return df
         architecture = copy(df['architecture'])
         architecture['Launch'] = [self.convertDate(architecture['Launch'].iloc[idx]) for idx in range(len(architecture))]
         architecture = self.splitArch(architecture)
@@ -151,7 +154,9 @@ class NvidiaImport:
 
         for key in list(df.keys()):
             if df[key] is not None:
-                df[key].to_csv(f'{folder}/{fileTemplate}_{key}.csv', index=False)
+                export = f'{folder}/{fileTemplate}_{key}.csv'
+                print(f'Writing: {export}')
+                df[key].to_csv(export, index=False)
         return df
 
     def cleanHeader(self, df, columnName=None, keys=None):

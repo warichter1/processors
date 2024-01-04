@@ -18,9 +18,11 @@ import base64
 
 from nvidia import nvidiaLoader, nvidiaHeader
 
-nvidiaColumns = [ 'launch', 'Code name', 'Fab (nm)', 'Transistors (million)', 'Die size (mm2)', 'bus', 'clock',
-                 'Memory Size (MB)', 'Memory Bandwidth (GB/s)', 'Memory Bus type', 'Memory Bus width (bit)', 'Notes', 'Chips', 'architecture',]
-df = nvidiaLoader('nvidia')
+nvidiaColumns = ['hw_model', 'launch', 'Code name', 'Transistors (million)', 'bus',
+                 'clock', 'bus', 'memory_bandwidth', 'memory_bus', 'memory_bus_width', 'memory_size',
+                 'Notes', 'Chips', 'architecture', 'Fab', 'Node', 'Code name']
+
+df = nvidiaLoader('nvidia', columns=nvidiaColumns)
 df[' index'] = range(1, len(df) + 1)
 header = nvidiaHeader('nvidia')
 
