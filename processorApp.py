@@ -17,6 +17,7 @@ from numpy import random
 import base64
 
 from nvidia import nvidiaLoader, nvidiaHeader
+from dashConf import dashConfig as conf, dashStyles as style
 
 nvidiaColumns = ['hw_model', 'launch', 'Code name', 'Transistors (million)', 'bus',
                  'clock', 'bus', 'memory_bandwidth', 'memory_bus', 'memory_bus_width', 'memory_size',
@@ -31,69 +32,96 @@ app = Dash(__name__)
 PAGE_SIZE = 10
 
 
-app.layout = html.Div(
-    className="row",
-    children=[
-        html.Div(
-            dash_table.DataTable(
-                id='datatable-interactivity',
-                columns=[
-                    {"name": i, "id": i, "deletable": True, "selectable": True} for i in sorted(df.columns)
-                ],
+def tableTemplate(tableDf, className):
+    return html.Div(
+        dash_table.DataTable(
+            data=tableDf.to_dict('records'),
+            id=f'datatable-interactivity',
+            columns=[
+                {"name": i, "id": i, "deletable": False, "selectable": True} for i in sorted(tableDf.columns)
+            ],
+            style_table=style['table'],
+            fixed_rows={'headers': True, 'data': 0},
+            fixed_columns={'headers': True, 'data': 1},
+            style_cell=style['cell'],
+            style_data=style['data'],
+            style_data_conditional=style['data_conditional'],
+            style_header=style['header'],
+            page_current=0,
+            page_size=conf['psize'],
+            page_action=conf['paction'],
 
-                fixed_rows={'headers': True, 'data': 0},
-                # fixed_columns={'headers': True, 'data': 1},
-                style_header={
-                    'backgroundColor': 'rgb(210, 210, 210)',
-                    'border': 'thin lightgrey solid',
-                    'color': 'black',
-                    'fontWeight': 'bold'
-                },
-                style_cell={
-                    'fontFamily': 'Open Sans',
-                    'textAlign': 'left',
-                    'width': '150px',
-                    'minWidth': '180px',
-                    'maxWidth': '180px',
-                    'whiteSpace': 'no-wrap',
-                    'overflow': 'hidden',
-                    'textOverflow': 'ellipsis',
-                    'backgroundColor': 'Rgb(230,230,250)'
-                },
-                style_data={
-                    'color': 'black',
-                    'backgroundColor': 'white'
-                },
-                style_data_conditional=[
-                    {
-                        'if': {'row_index': 'odd'},
-                        'backgroundColor': 'rgb(220, 220, 220)',
-                    }
-                ],
-                data=df.to_dict('records'),
-                page_current=0,
-                page_size=20,
-                page_action='custom',
+            column_selectable=conf['col_select'],
+            row_selectable=conf["row_select"],
+            row_deletable=conf['row_delete'],
+            # selected_columns=[],
+            # selected_rows=[],
 
-                column_selectable="single",
-                row_selectable="multi",
-                row_deletable=True,
-                selected_columns=[],
-                selected_rows=[],
+            filter_action=conf['fil_action'],
+            filter_query='',
 
-                filter_action='custom',
-                filter_query='',
-
-                sort_action='custom',
-                sort_mode='multi',
-                sort_by=[]
-            ),
-            style={'height': 750, 'overflowY': 'scroll'},
-            className='six columns'
+            sort_action=conf['sort_action'],
+            sort_mode=conf['sort_mode'],
+            sort_by=[]
         ),
-        html.Div(id='datatable-interactivity-container')
-    ]
-)
+        style=style['style'],
+        className=f'{className}-datatable-interactivity-container'
+    )
+
+table1 = tableTemplate(df, 'one')
+table2 = tableTemplate(df, 'two')
+
+
+
+app.layout = html.Div([
+    html.H1('Processor Info'),
+    dcc.Tabs(
+        id="tabs-with-classes",
+        value='tab-2',
+        parent_className='custom-tabs',
+        className='custom-tabs-container',
+        children=[
+            dcc.Tab(
+                label='Tab one',
+                value='tab-1',
+                className='custom-tab',
+                selected_className='custom-tab--selected'
+            ),
+            dcc.Tab(
+                label='Tab two',
+                value='tab-2',
+                className='custom-tab',
+                selected_className='custom-tab--selected'
+            ),
+        ]),
+    html.Div(id='tabs-content-classes')
+])
+
+@callback(Output('tabs-content-classes', 'children'),
+              Input('tabs-with-classes', 'value'))
+def render_content(tab):
+    if tab == 'tab-1':
+        return html.Div([
+            html.H3('Tab content 1'),
+            table1,
+            html.Div(id='datatable-interactivity-container')
+        ])
+    elif tab == 'tab-2':
+        return html.Div([
+            html.H3('Tab content 2'),
+            table2,
+            html.Div(id='datatable-interactivity-container')
+        ])
+
+
+# app.layout = html.Div(
+#     className="row",
+#     children=[
+#         html.H1('Processor Info'),
+#         table1,
+#         html.Div(id='datatable-interactivity-container')
+#     ]
+# )
 
 operators = [['ge ', '>='],
              ['le ', '<='],
@@ -103,7 +131,6 @@ operators = [['ge ', '>='],
              ['eq ', '='],
              ['contains '],
              ['datestartswith ']]
-
 
 def split_filter_part(filter_part):
     for operator_type in operators:
@@ -139,7 +166,8 @@ def update_styles(selected_columns):
     } for i in selected_columns]
 
 @callback(
-    Output('datatable-interactivity-container', "children"),
+    Output('one-datatable-interactivity-container', "children"),
+    Output('two-datatable-interactivity-container', "children"),
     Input('datatable-interactivity', "derived_virtual_data"),
     Input('datatable-interactivity', "derived_virtual_selected_rows"))
 def update_graphs(rows, derived_virtual_selected_rows):
