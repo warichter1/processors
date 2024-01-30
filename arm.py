@@ -13,6 +13,7 @@ import datetime
 import time
 import copy
 import unicodedata
+from copy import copy
 
 pd.options.mode.chained_assignment = None
 
@@ -87,7 +88,6 @@ class ArmDataProcessor:
                 buf = item.split('~')
                 soc = buf[0]
                 item = buf[1]
-                # print(buf)
             else:
                 soc = "0"
             vendor = item.split(':') if ':' in item else ['0','0']
@@ -108,6 +108,10 @@ class ArmDataProcessor:
         labels = ['Features', 'mips']
         self.processDesign(key, labels)
         self.loadThirdParty()
+        df1 = copy(self.dfDesign['arm'].rename({'family ': 'family'}, axis=1))
+        df1['manufacturer'] = 'arm'
+        self.df['designs'] = pd.concat([df1, copy(arm.dfDesign['third'])], join='outer', ignore_index=True)
+        self.df['designs'] = self.df['designs'].fillna(0)
 
     def loadThirdParty(self, key='third'):
         """Process Feature, Cache and mips columms into standard columns."""
@@ -132,6 +136,7 @@ class ArmDataProcessor:
 
     def designCleanup(self, key):
         """After values within self.labels field names are parsed, remove the original columns."""
+        self.dfDesign[key]['source'] = key
         self.dfDesign[key].rename(columns=self.cleanColumns, inplace=True)
         self.dfDesign[key].drop(columns=self.labels, inplace=True)
         self.dfDesign[key] = self.dfDesign[key].fillna(0)
@@ -164,6 +169,12 @@ class ArmDataProcessor:
                     result = getValue(field, value, key)
                     self.dfDesign[design].loc[dfIndex][key] = result[0]
 
+    def mergeTables(self):
+        df1 = copy(self.df['family'])
+        df1.drop('Year ', axis=1, inplace=True)
+        df1 = df1.merge(copy(self.df['timeline'].drop(['core_type', 'architecture'], axis=1)), how='left', left_on='family', right_on='family')
+        df1.rename({'Year ': 'Year'})
+        df1 = df1.merge(copy(self.df['products']), how='left', left_on='family', right_on='productfamily').drop('productfamily', axis=1)
 
 def getValue(field, value, key):
     """Using case types strip, split or _ (default), determine how to extract each value from a column."""
