@@ -110,7 +110,8 @@ class ArmDataProcessor:
         self.loadThirdParty()
         df1 = copy(self.dfDesign['arm'].rename({'family ': 'family'}, axis=1))
         df1['manufacturer'] = 'arm'
-        self.df['designs'] = pd.concat([df1, copy(arm.dfDesign['third'])], join='outer', ignore_index=True)
+        df1.rename(columns={'version': 'hw_model'}, inplace=True)
+        self.df['designs'] = pd.concat([df1, copy(self.dfDesign['third'])], join='outer', ignore_index=True)
         self.df['designs'] = self.df['designs'].fillna(0)
 
     def loadThirdParty(self, key='third'):
