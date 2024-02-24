@@ -20,6 +20,10 @@ months = {'Jan': 'January', 'Feb': 'February', 'Mar': 'March', 'Apr': 'April', '
           'Jul': 'July', 'Aug': 'August', 'Sep': 'September', 'Oct': 'October', 'Nov': 'November', 'Dec': 'December'}
 
 
+nvidiaSelect = ['hw_model', 'launch', 'Code name', 'Transistors (million)', 'bus',
+                 'clock', 'bus', 'memory_bandwidth', 'memory_bus', 'memory_bus_width', 'memory_size',
+                 'Notes', 'Chips', 'architecture', 'Fab', 'Node', 'Code name']
+
 def nvidiaLoader(folder, key='full', fileTemplate='nvidia', columns=None):
     source = f'{folder}/{fileTemplate}_{key}.csv'
     return pd.read_csv(source) if columns is None else pd.read_csv(source, usecols=columns)

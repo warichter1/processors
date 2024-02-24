@@ -17,6 +17,11 @@ from copy import copy
 
 pd.options.mode.chained_assignment = None
 
+armSelect = ['family', 'vendor', 'soc',	'core_type', 'architecture_x', 'Year', 'productvendor', 'productmodel', 'productsoc_used', 'hw_model']
+
+def armLoader(folder, key='merged', fileTemplate='arm', columns=None):
+    source = f'{folder}/{fileTemplate}_{key}.csv'
+    return pd.read_csv(source) if columns is None else pd.read_csv(source, usecols=columns)
 
 class ArmDataProcessor:
     """Parse wilk data for ARM processors into a standardized datafram format."""
@@ -38,7 +43,7 @@ class ArmDataProcessor:
                               'ACP': True, 'GIC': True, 'SCU': True, 'GIC': True, 'VFPv3': 'split', 'VFPv4': True,
                               'VFPv5': 'split', 'LLPP': True, 'TCM': True}
         self.cleanColumns = {'cores': 'hw_ncores', 'L0:': 'l0_cache', 'L1:': 'l1_cache', 'L2:': 'l2_cache',
-                             'L3:': 'l3_cache', 'SLC:': 'SLC', 'L1I:': 'L1I_cache', 'L1D:': 'L1D_cache'}
+                             'L3:': 'l3_cache', 'SLC:': 'SLC', 'L1I:': 'L1I_cache', 'L1D:': 'L1D_cache', 'Year ': 'Year'}
         self.df = {}
         self.dfDesign = {}
         self.folder = dataFolder
@@ -75,7 +80,7 @@ class ArmDataProcessor:
         self.df['family'] = self.df['family'].fillna(0)
         self.df['products'] = pd.DataFrame(processedList['products']).explode('model', ignore_index=False).reset_index(drop=True).add_prefix('product')
         self.df['products'].fillna(0)
-        return processedList
+        # return processedList
 
     def parseVendor(self, family, row):
         """Process a row of data and store the results."""
@@ -99,7 +104,7 @@ class ArmDataProcessor:
         """Import 7/8 Details."""
         df = pd.read_csv(f'{self.folder}/{self.v7Details}')
         df = pd.concat([df, pd.read_csv(f'{self.folder}/{self.v8Details}')], join='outer', ignore_index=True)
-        self.df['Details'] = df.fillna(0)
+        self.df['details'] = df.fillna(0)
 
 
     def loadArmDesign(self, key='arm'):
@@ -170,12 +175,26 @@ class ArmDataProcessor:
                     result = getValue(field, value, key)
                     self.dfDesign[design].loc[dfIndex][key] = result[0]
 
+    def process(self, folder='ARM', fileTemplate='arm'):
+        key = 'merged'
+        self.mergeVendor()
+        self.loadArmDesign()
+        self.loadArmDetails()
+        self.mergeTables()
+        export = f'{folder}/{fileTemplate}_{key}.csv'
+        print(f'Writing: {export}')
+        self.df[key].to_csv(export, index=False)
+
     def mergeTables(self):
         df1 = copy(self.df['family'])
         df1.drop('Year ', axis=1, inplace=True)
         df1 = df1.merge(copy(self.df['timeline'].drop(['core_type', 'architecture'], axis=1)), how='left', left_on='family', right_on='family')
         df1.rename({'Year ': 'Year'})
         df1 = df1.merge(copy(self.df['products']), how='left', left_on='family', right_on='productfamily').drop('productfamily', axis=1)
+        df1 = df1.merge(copy(self.df['designs']), how='left', left_on='family', right_on='family')
+        self.df['merged'] = df1.merge(copy(self.df['details']), how='left', left_on='hw_model', right_on='hw_model')
+        self.df['merged'].rename(columns=self.cleanColumns, inplace=True)
+
 
 def getValue(field, value, key):
     """Using case types strip, split or _ (default), determine how to extract each value from a column."""
@@ -190,6 +209,4 @@ def getValue(field, value, key):
 
 if __name__ == "__main__":
     arm = ArmDataProcessor('ARM')
-    test = arm.mergeVendor()
-    arm.loadArmDesign()
-    arm.loadArmDetails()
+    arm.process()

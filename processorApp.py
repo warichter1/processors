@@ -6,37 +6,42 @@ Created on Mon Dec 25 17:37:51 2023
 @author: wrichter
 """
 
+import base64
 from dash import Dash, dash_table, html, dcc, callback
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, State #, Event
 import plotly.graph_objs as go
 from flask import Flask, redirect, render_template, request, session, abort, url_for, json, make_response
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 import pandas as pd
 import numpy as np
 from numpy import random
-import base64
 
-from nvidia import nvidiaLoader, nvidiaHeader
+from nvidia import nvidiaLoader, nvidiaHeader, nvidiaSelect
+from arm import armLoader, armSelect # ArmDataProcessor
 from dashConf import dashConfig as conf, dashStyles as style
 
-nvidiaColumns = ['hw_model', 'launch', 'Code name', 'Transistors (million)', 'bus',
-                 'clock', 'bus', 'memory_bandwidth', 'memory_bus', 'memory_bus_width', 'memory_size',
-                 'Notes', 'Chips', 'architecture', 'Fab', 'Node', 'Code name']
 
-df = nvidiaLoader('nvidia', columns=nvidiaColumns)
+df = nvidiaLoader('nvidia', columns=nvidiaSelect)
 df[' index'] = range(1, len(df) + 1)
-header = nvidiaHeader('nvidia')
+nHeader = nvidiaHeader('nvidia')
 
-app = Dash(__name__)
+armTest = armLoader('ARM')
+armDf = armLoader('ARM', columns=armSelect)
+# arm.process()
+# armDf = arm.df['merged']
+armDf[' index'] = range(1, len(armDf) + 1)
+armHeader = list(armDf.keys())
+
+app = Dash(__name__, title='Processors', suppress_callback_exceptions=True)
 
 PAGE_SIZE = 10
 
 
-def tableTemplate(tableDf, className):
+def tableTemplate(tableDf, className, header):
     return html.Div(
         dash_table.DataTable(
             data=tableDf.to_dict('records'),
-            id=f'datatable-interactivity',
+            id=f'{className}-datatable-interactivity',
             columns=[
                 {"name": i, "id": i, "deletable": False, "selectable": True} for i in sorted(tableDf.columns)
             ],
@@ -54,8 +59,8 @@ def tableTemplate(tableDf, className):
             column_selectable=conf['col_select'],
             row_selectable=conf["row_select"],
             row_deletable=conf['row_delete'],
-            # selected_columns=[],
-            # selected_rows=[],
+            selected_columns=[],
+            selected_rows=[],
 
             filter_action=conf['fil_action'],
             filter_query='',
@@ -68,21 +73,21 @@ def tableTemplate(tableDf, className):
         className=f'{className}-datatable-interactivity-container'
     )
 
-table1 = tableTemplate(df, 'one')
-table2 = tableTemplate(df, 'two')
+table1 = tableTemplate(df, 'one', nHeader)
+table2 = tableTemplate(df, 'two', armHeader)
 
 
 
-app.layout = html.Div([
+app.layout = dcc.Loading(html.Div([
     html.H1('Processor Info'),
     dcc.Tabs(
         id="tabs-with-classes",
-        value='tab-2',
+        value='tab-1',
         parent_className='custom-tabs',
         className='custom-tabs-container',
         children=[
             dcc.Tab(
-                label='Tab one',
+                label='Nvidia GPUs',
                 value='tab-1',
                 className='custom-tab',
                 selected_className='custom-tab--selected'
@@ -95,22 +100,22 @@ app.layout = html.Div([
             ),
         ]),
     html.Div(id='tabs-content-classes')
-])
+]))
 
 @callback(Output('tabs-content-classes', 'children'),
               Input('tabs-with-classes', 'value'))
 def render_content(tab):
     if tab == 'tab-1':
         return html.Div([
-            html.H3('Tab content 1'),
+            html.H3('Nvidia'),
             table1,
-            html.Div(id='datatable-interactivity-container')
+            html.Div(id='one-datatable-interactivity-container')
         ])
     elif tab == 'tab-2':
         return html.Div([
-            html.H3('Tab content 2'),
+            html.H3('ARM'),
             table2,
-            html.Div(id='datatable-interactivity-container')
+            html.Div(id='two-datatable-interactivity-container')
         ])
 
 
@@ -156,8 +161,10 @@ def split_filter_part(filter_part):
     return [None] * 3
 
 @callback(
-    Output('datatable-interactivity', 'style_data_conditional'),
-    Input('datatable-interactivity', 'selected_columns')
+    Output('one-datatable-interactivity', 'style_data_conditional'),
+    Output('two-datatable-interactivity', 'style_data_conditional'),
+    Input('one-datatable-interactivity', 'selected_columns'),
+    Input('two-datatable-interactivity', 'selected_columns')
 )
 def update_styles(selected_columns):
     return [{
@@ -166,10 +173,12 @@ def update_styles(selected_columns):
     } for i in selected_columns]
 
 @callback(
-    Output('one-datatable-interactivity-container', "children"),
     Output('two-datatable-interactivity-container', "children"),
-    Input('datatable-interactivity', "derived_virtual_data"),
-    Input('datatable-interactivity', "derived_virtual_selected_rows"))
+    Output('one-datatable-interactivity-container', "children"),
+    Input('one-datatable-interactivity', "derived_virtual_data"),
+    Input('two-datatable-interactivity', "derived_virtual_data"),
+    Input('one-datatable-interactivity', "derived_virtual_selected_rows"),
+    Input('two-datatable-interactivity', "derived_virtual_selected_rows"))
 def update_graphs(rows, derived_virtual_selected_rows):
     # When the table is first rendered, `derived_virtual_data` and
     # `derived_virtual_selected_rows` will be `None`. This is due to an
