@@ -337,7 +337,7 @@ ufoLib2==0.16.0
 ufw==0.36.2
 unattended-upgrades==0.1
 unicodedata2==15.1.0
-urllib3==2.0.7
+urllib3==2.5.0
 usb-creator==0.3.16
 vboxapi==1
 vobject==0.9.6.1
