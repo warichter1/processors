@@ -1,0 +1,21 @@
+category,Features
+Fixed pixel pipeline,Pre-GeForce NV1 NV2  RIVA 128 RIVA TNT TNT2  GeForce 256 2 4 MX
+Pre-GeForce,NV1 NV2  RIVA 128 RIVA TNT TNT2
+Vertex and pixel shaders,GeForce 3 4 Ti FX 6 7
+Unified shaders,GeForce 8 9 100 200 300 400 500
+Unified shaders & NUMA,GeForce 600 700 800M 900 10 16
+Ray tracing & Tensor cores,GeForce 20 30 40
+Pre-GeForce,NV1 NV2  RIVA 128 RIVA TNT TNT2
+Multimedia acceleration,NVENC (video encoding) NVDEC (video decoding) PureVideo (video decoding)
+Software,Cg (shading language) CUDA Nvidia GameWorks OptiX (ray tracing API) PhysX (physics SDK) Nvidia Omniverse (3D graphics) Nvidia RTX (ray tracing platform) Nvidia System Tools VDPAU (video decode API)
+Technologies,Nvidia 3D Vision (stereo 3D) Nvidia G-Sync (variable refresh rate) Nvidia Optimus (GPU switching) Nvidia Surround (multi-monitor) MXM (module/socket) SXM (module/socket) NVLink (protocol) Scalable Link Interface (multi-GPU) TurboCache (framebuffer in system memory) Video Super Resolution (live video upscaling)
+GPU microarchitectures,Fahrenheit Celsius Kelvin Rankine Curie Tesla Fermi Kepler Maxwell Pascal Volta Turing Ampere Hopper Ada Lovelace
+Graphics processing,Nvidia Quadro Quadro Plex
+GPGPU,Nvidia Tesla DGX
+Console components,NV2A (Xbox) RSX 'Reality Synthesizer' (PlayStation 3) Tegra NX-SoC (Nintendo Switch)
+Nvidia Shield,Shield Portable Shield Tablet Shield Android TV GeForce Now
+SoCs and embedded,GoForce Drive Jetson Tegra
+CPUs,Project Denver
+Computer chipsets,nForce
+Desktop,Intel Arc GT Nvidia GeForce Quadro Tesla Tegra AMD Radeon Radeon Pro Radeon Instinct Matrox InfiniteReality NEC µPD7220 3dfx Voodoo S3 Glaze3D Apple silicon
+Mobile,Adreno Apple silicon Mali PowerVR VideoCore Vivante Imageon Intel 2700G

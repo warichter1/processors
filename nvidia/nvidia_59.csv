@@ -1,0 +1,9 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Shader clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Processing power (GFLOPS) Double precision,Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro FX 380,"Mar 30, 2009",G96-850-C1,65,PCIe 2.0 x16,450,1100,1400,16:8:8,3.6,3.6,256,22.4,GDDR3,128,52.8,-,10.0,3.3,34,"Two Dual Link DVI, no DisplayPort"
+Quadro FX 380 LP,"Dec 1, 2009",GT218GL,40,PCIe 2.0 x16,589,1402,1600,16:8:4,2.356,4.712,512,12.8,GDDR3,64,67.296,-,10.0,3.3,28,"DisplayPort, Dual Link DVI"
+Quadro FX 580,"Apr 9, 2009",G96-875-C1,65,PCIe 2.0 x16,450,1125,1600,32:16:8,3.6,7.2,512,25.6,GDDR3,128,108.0,-,10.0,3.3,40,"Dual DisplayPort, Dual Link DVI"
+Quadro FX 1800,"Mar 30, 2009",G100GL-U(G94),65,PCIe 2.0 x16,550,1375,1600,64:32:12,6.6,17.6,768,38.4,GDDR3,192,264.0,-,10.0,3.3,59,"Stereo DP Dual Link DVI, Dual DisplayPort, SLI"
+Quadro FX 3800,"Mar 30, 2009",G200-835-B3 + NVIO2-A2,55,PCIe 2.0 x16,600,1204,1600,192:64:16,9.632,38.528,1024,51.2,GDDR3,256,691.2,86.4,10.0,3.3,108,"Stereo DP Dual Link DVI, Dual DisplayPort, SLI"
+Quadro FX 4800,"Nov 11, 2008",G200-850-B3 + NVIO2-A2,55,PCIe 2.0 x16,602,1204,1600,192:64:24,14.448,38.528,1536,76.8,GDDR3,384,693.504,86.688,10.0,3.3,150,"Stereo DP Dual Link DVI, Dual DisplayPort, SLI"
+Quadro FX 5800,"Nov 11, 2008",G200-875-B2 + NVIO2-A2,55,PCIe 2.0 x16,610,1296,1600,240:80:32,20.736,51.84,4096,102.4,GDDR3,512,878.4,109.8,10.0,3.3,189,"Stereo DP Dual Link DVI, Dual DisplayPort, SLI"
+Quadro CX[292],"Nov 11, 2008",GT200GL + NVIO2,55,PCIe 2.0 x16,602,1204,1600,192:64:24,14.448,38.528,1536,76.8,GDDR3,384,693.504,86.688,10.0,3.3,150,"Display Port and dual-link DVI Output, optimised for Adobe Creative Suite 4"

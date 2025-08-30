@@ -1,0 +1,6 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL Hardware,Supported API version OpenGL Drivers (Software),TDP (Watts)
+GeForce FX Go 5100*,March 2003,NV34M,150,AGP 8x,200,400,4:2:4:4,0.8,0.8,64,3.2,DDR,64,9.0,1.5,2.1**,Un­known
+GeForce FX Go 5500*,March 2003,NV34M,150,AGP 8x,300,600,4:2:4:4,1.2,1.2,3264,9.6,DDR,128,9.0,1.5,2.1**,Un­known
+GeForce FX Go 5600*,March 2003,NV31M,130,AGP 8x,350,600,4:2:4:4,1.4,1.4,32,9.6,DDR,128,9.0,1.5,2.1**,Un­known
+GeForce FX Go 5650*,March 2003,NV31M,130,AGP 8x,350,600,4:2:4:4,1.4,1.4,32,9.6,DDR,128,9.0,1.5,2.1**,Un­known
+GeForce FX Go 5700*,"February 1, 2005",NV36M,130,AGP 8x,450,550,4:3:4:4,1.8,1.8,32,8.8,DDR,128,9.0,1.5,2.1**,Un­known

@@ -1,0 +1,5 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Boost clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Supported API version Direct3D,Supported API version OpenGL,Nvidia Optimustechnology,TDP (Watts)
+Quadro M520,"Jan 11, 2017",GM108,28,PCIe 3.0 x16,965,1176,5000,384:24:8(3 SMM),9.4,18.8,1024,40.0,GDDR5,64,840,12.1,4.5,Yes,25
+Quadro M620,"Jan 11, 2017",GM107,28,PCIe 3.0 x16,756,1018,5012,512:32:16(4 SMM),16.3,32.6,2048,80.2,GDDR5,128,1000,12.1,4.5,Yes,30
+Quadro M1200,"Jan 11, 2017",GM107,28,PCIe 3.0 x16,991,1148,5012,640:40:16(5 SMM),18.4,45.9,4096,80.2,GDDR5,128,1400,12.1,4.5,Yes,45
+Quadro M2200,"Jan 11, 2017",GM206,28,PCIe 3.0 x16,695,1037,5508,1024:64:32(8 SMM),33.2,66.3,4096,88.1,GDDR5,128,2100,12.1,4.5,Yes,55

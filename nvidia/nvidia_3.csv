@@ -1,0 +1,4 @@
+hw_model,Launch,Code name,Transistors (million),Die size (mm2),Bus interface,clock,Memory clock (MHz),Core config,Fillrate MOperations/s,Fillrate MPixels/s,Fillrate MTexels/s,Fillrate MVertices/s,Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),GFLOPSFP32
+GeForce3 Ti200,"October 1, 2001",NV20,57,128,"AGP 4x, PCI",175,200,4:1:8:4,700,700,1400,43.75,64128,6.4,DDR,128,8.75
+GeForce3,"February 27, 2001",NV20,57,128,"AGP 4x, PCI",200,230,4:1:8:4,800,800,1600,50.0,64,7.36,DDR,128,10.0
+GeForce3 Ti500,"October 1, 2001",NV20,57,128,"AGP 4x, PCI",240,250,4:1:8:4,960,960,1920,60.0,64128,8.0,DDR,128,12.0

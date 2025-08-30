@@ -1,0 +1,2 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Boost clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Processing power (GFLOPS) Double precision,Supported API version Direct3D,Supported API version OpenGL,Nvidia Optimustechnology,TDP (Watts)
+Quadro K2200M,"Jul 19, 2014",GM107,28,PCIe 3.0 x16,1150,1150,1253(5012),640:40:16(5 SMM),18.4,46,2048,80.2,GDDR5,128,1472,46,12.1,4.5,Yes,65

@@ -1,0 +1,5 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Shader clock (MHz),Memory clock (MHz),Core config12,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Processing power (GFLOPS) Double precision,Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro FX 560,"Apr 20, 2006",G73GL,90,PCIe x16,350,350,1200,5:12:12:8,2.8,4.2,128,19.2,GDDR3,128,0.0,0,9.0c,2.1,30,0
+Quadro FX 46002,"Mar 5, 2007",G80-850-A2 + NVIO-1-A3,90,PCIe x16,500,1200,1400,96:24:24,12.0,24.0,768,67.2,GDDR3,384,345.0,-,10.0,3.3,134,"Stereo display, SLI, Genlock"
+Quadro FX 4600 SDI2,"Mar 5, 2007",G80-850-A2 + NVIO-1-A3,90,PCIe x16,500,1200,1400,96:24:24,12.0,24.0,768,67.2,GDDR3,384,345.0,-,10.0,3.3,154,"Stereo display, SLI, Genlock"
+Quadro FX 56002,"Mar 5, 2007",G80-875-A2 + NVIO-1-A3,90,PCIe 2.0 x16,600,1350,1600,128:32:24,14.4,38.4,1536,76.8,GDDR3,384,518.4,-,10.0,3.3,171,"Stereo display, SLI, Genlock"

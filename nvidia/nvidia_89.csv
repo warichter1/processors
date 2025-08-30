@@ -1,0 +1,7 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Shader clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+NVS 2100M,"Jan 7, 2010",GT218M,40,PCIe 2.0 x16,535,1230,1600,16:8:4,2.14,4.28,Up to 512,12.8,GDDR3,64,59.04,10.1,3.3,14.0,0
+NVS 3100M,"Jan 7, 2010",GT218M,40,PCIe 2.0 x16,600,1470,1600,16:8:4,2.4,4.8,Up to 512,12.8,GDDR3,64,70.56,10.1,3.3,14.0,based on G210M/310M
+NVS 4200M,"Jan 7, 2010",GF119,40,PCIe 2.0 x16,810,1620,1600,48:8:4,3.24,6.48,Up to 1024,12.8,GDDR3,64,155.52,11.0,4.5,0.0,based on GT 520M
+NVS 5100M,"Feb 22, 2011",GT216M,40,PCIe 2.0 x16,550,1210,1600,48:16:8,4.4,8.8,Up to 1024,25.6,GDDR3,128,174.24,10.1,3.3,35.0,0
+NVS 5200M,"Jun 1, 2012",GF108 GF117[352],40/28,PCIe 2.0 x16,625,1250,1800,96:16:4,2.5,10.0,Up to 1024,14.4,GDDR3,64,240.0,11.0,4.5,35.0,0
+NVS 5400M,"Jun 1, 2012",GF108 GF117[352],40/28,PCIe 2.0 x16,660,1320,1800,96:16:4,2.64,10.56,Up to 1024,28.8,GDDR3,128,253.44,11.0,4.5,35.0,0

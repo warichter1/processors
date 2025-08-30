@@ -1,0 +1,6 @@
+hw_model,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro FX 540,NV43GL,90,PCIe x16,300,550,4:8:8:8,2.4,2.4,128,8.8,GDDR3,128,9.0c,2.1,35,0
+Quadro FX 1400,NV41,130,PCIe x16,350,600,5:8:8:8,2.8,2.8,128,19.2,DDR,256,9.0c,2.1,75,"Stereo display, SLI"
+Quadro FX 3400,NV45GL/ NV40,130,PCIe x16,350,900,5:12:12:12,4.2,4.2,256,28.8,GDDR3,256,9.0c,2.1,101,"Stereo display, SLI"
+Quadro FX 3450,NV41,110,PCIe x16,425,1000,5:12:12:12,5.1,5.1,256,32.0,GDDR3,256,9.0c,2.1,83,"Stereo display, SLI"
+Quadro FX 4400,NV45GL A3/ NV40,130,PCIe x16,400,1050,6:16:16:16,6.4,6.4,512,33.7,GDDR3,256,9.0c,2.1,110,"Stereo display, SLI"

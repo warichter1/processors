@@ -1,0 +1,9 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Shader clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Processing power (GFLOPS) Double precision,Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro 400,"Apr 5, 2011",GT216GL,40,PCIe 2.0 x16,450,1125,1540,48:16:4,1.8,7.2,512,12.3,DDR3,64,108,-,10.1,4.5,32,"DisplayPort, Dual Link DVI"
+Quadro 600,"Dec 13, 2010",GF108GL,40,PCIe 2.0 x16,640,1280,1600,96:164:4,2.56,10.24,1024,25.6,DDR3,128,245.76,15,11.0,4.6,40,"DisplayPort, Dual Link DVI"
+Quadro 2000,"Dec 24, 2010",GF106GL (GF106-875),40,PCIe 2.0 x16,625,1250,2600,192:324:16,10,20,1024,41.6,GDDR5,128,480,30,11.0,4.6,62,"Stereo DP Dual Link DVI, Dual DisplayPort"
+Quadro 4000,"Nov 2, 2010",GF100,40,PCIe 2.0 x16,475,950,2800,256:324:32,15.2,15.2,2048,89.6,GDDR5,256,486.4,243,11.0,4.6,142,0
+Quadro 5000,"Feb 23, 2011",GF100,40,PCIe 2.0 x16,513,1026,3000,352:444:40,20.53,22.572,2560,120,GDDR5,320,722.304,359,11.0,4.6,152,0
+Quadro 6000,"Dec 10, 2010",GF100,40,PCIe 2.0 x16,574,1148,3000,448:564:48,27.552,32.144,6144,144,GDDR5,384,1028.608,515,11.0,4.6,204,0
+Quadro 7000,"May 2, 2012",GF110,40,PCIe 2.0 x16,651,1301,3696,512:644:48,31.248,41.7,6144,177,GDDR5,384,1332,667,11.0,4.6,204,0
+Quadro Plex 7000[293],"July 25, 2011",2x GF100,40,PCIe 2.0 x16,574,1148,3000,2x 512:644:48,2x 18.37,2x 36.74,2x 6144,2x 144,GDDR5,2x 384,2x 1176,2x 588,11.0,4.6,600,0

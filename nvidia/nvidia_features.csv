@@ -1,0 +1,86 @@
+hw_model,Features,Features Video Processing Engine (VPE),Features OpenEXR HDR,Features Scalable Link Interface (SLI),Features TurboCache,Features PureVideo WMV9 Decoding,Features Gamma-correct antialiasing,Features 64-bit OpenEXR HDR,Features Dual Link DVI,Features ScalableLinkInterface(SLI),Features 3-WaySLI,Features PureVideo HDwith VP1,"Features PureVideo 2 with VP2,BSP Engine, and AES128 Engine","Features PureVideo 3 with VP3,BSP Engine, and AES128 Engine",Features PureVideo 4 with VP4,Features Computeability,Features PureVideo 2 with VP2Engine: (BSP and 240 AES),Features PureVideo 4 with VP4 Engine,Unnamed: 4_level_0 Unnamed: 4_level_1,Unnamed: 5_level_0 Unnamed: 5_level_1
+GeForce4 MX420,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 MX440 SE,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 MX4000,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 PCX4300,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 MX440,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 MX440 8X,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 MX460,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 Ti4200,Yes,No,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 Ti4200 8x,Yes,No,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 Ti4400,Yes,No,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 Ti4400 8x,Yes,No,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 Ti4600,Yes,No,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce4 Ti4600 8x,Yes,No,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6100,Yes,0,No,No,No,Limited,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6150 SE,Yes,0,No,No,Driver-Side Only,Limited,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6150,Yes,0,No,No,No,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6150 LE,Yes,0,No,No,Driver-Side Only,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6200,Yes,0,No,No,Yes (PCIe only),Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6500,Yes,0,No,Yes,Yes,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6600 LE,Yes,0,Yes,Yes (No SLI Connector),No,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6600,Yes,0,Yes,Yes (SLI Connector or PCIe Interface),No,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6600 DDR2,Yes,0,Yes,Yes (SLI Connector or PCIe Interface),No,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6600 GT,Yes,0,Yes,Yes,No,Yes,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800 LE,Yes,0,Yes,No,No,No,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800 XT,Yes,0,Yes,Yes (PCIe only),No,Yes (NV42 only),0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800,Yes,0,Yes,Yes (PCIe only),No,"Yes (NV41, NV42 only)",0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800 GTO,Yes,0,Yes,Yes,No,No,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800 GS,Yes,0,Yes,Yes (PCIe only),No,Yes (NV42 only),0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800 GT,Yes,0,Yes,Yes (PCIe only),No,No,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 6800 Ultra,Yes,0,Yes,Yes (PCIe only),No,No,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7100 GS,Yes,0,0,"Yes (PCIe only, No SLI bridge)",Yes,0,No,No,No,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7200 GS,Yes,0,0,No,Yes,0,Yes,Yes,No,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7300 SE,Yes,0,0,No,Yes,0,Yes,Yes,No,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7300 LE,Yes,0,0,No,Yes,0,Yes,Yes,No,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7300 GS,Yes,0,0,Yes (PCIe only),Yes,0,Yes,Yes,No,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7300 GT,Yes,0,0,"Yes (PCIe only, No SLI bridge)",No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7600 GS,Yes,0,0,Yes (PCIe only),No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7600 GT,Yes,0,0,Yes (PCIe only),No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7600 GT (80 nm),Yes,0,0,Yes,No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7650 GS (80 nm),Yes,0,0,Yes (Depending on OEM Design),No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7800 GS,Yes,0,0,No,No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7800 GT,Yes,0,0,Yes,No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7800 GTX,Yes,0,0,Yes,No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7800 GTX 512,Yes,0,0,Yes,No,0,Yes,Yes,One port,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7900 GS,Yes,0,0,Yes (PCIe only),No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7900 GT,Yes,0,0,Yes,No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7900 GTO,Yes,0,0,Yes,No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7900 GTX,Yes,0,0,Yes,No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7900 GX2 (GTX Duo),Yes,0,0,Yes,No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7950 GT,Yes,0,0,Yes (PCIe only),No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 7950 GX2,Yes,0,0,Yes,No,0,Yes,Yes,Two ports,0,0,0,0,0,0,0.0,0,0,0,0
+GeForce 8300 GS (G86),Yes,0,0,0,0,0,0,0,0,No,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8400 GS Rev. 2 (G98),Yes,0,0,0,0,0,0,0,0,No,No,No,No,Yes,No,1.1,0,0,0,0
+GeForce 8400 GS Rev. 3 (GT218),Yes,0,0,0,0,0,0,0,0,No,No,No,No,No,Yes,1.2,0,0,0,0
+GeForce 8500 GT,Yes,0,0,0,0,0,0,0,0,Yes,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8600 GT,Yes,0,0,0,0,0,0,0,0,Yes,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8600 GTS,Yes,0,0,0,0,0,0,0,0,Yes,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8800 GS (G92),Yes,0,0,0,0,0,0,0,0,Yes,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8800 GTS (G80),Yes,0,0,0,0,0,0,0,0,Yes,No,Yes,No,No,No,1.0,0,0,0,0
+GeForce 8800 GTS Rev. 2 (G80),Yes,0,0,0,0,0,0,0,0,Yes,No,Yes,No,No,No,1.0,0,0,0,0
+GeForce 8800 GT (G92),Yes,0,0,0,0,0,0,0,0,Yes,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8800 GTS (G92),Yes,0,0,0,0,0,0,0,0,Yes,No,No,Yes,No,No,1.1,0,0,0,0
+GeForce 8800 GTX,Yes,0,0,0,0,0,0,0,0,Yes,Yes,Yes,No,No,No,1.0,0,0,0,0
+GeForce 8800 Ultra,Yes,0,0,0,0,0,0,0,0,Yes,Yes,Yes,No,No,No,1.0,0,0,0,0
+GeForce 9300 GE (G98),Yes,0,0,Yes,0,0,0,0,0,0,0,0,No,Yes,0,0.0,0,0,0,0
+GeForce 9300 GS (G98),Yes,0,0,Yes,0,0,0,0,0,0,0,0,No,Yes,0,0.0,0,0,0,0
+GeForce 9400 GT,Yes,0,0,Yes,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9500 GT,Yes,0,0,Yes,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9600 GSO,Yes,0,0,Yes,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9600 GT,Yes,0,0,Yes,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9800 GT,Yes,0,0,Yes,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9800 GTX,Yes,0,0,Yes3-way,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9800 GTX+,Yes,0,0,Yes3-way,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 9800 GX2,Yes,0,0,Yes,0,0,0,0,0,0,0,0,Yes,No,0,0.0,0,0,0,0
+GeForce 210,Yes,0,0,No,0,0,0,0,0,0,0,0,0,0,0,0.0,No,Yes,Yes,Yes
+GeForce GT 220,Yes,0,0,No,0,0,0,0,0,0,0,0,0,0,0,0.0,No,Yes,Yes,Yes
+GeForce GT 240,Yes,0,0,No,0,0,0,0,0,0,0,0,0,0,0,0.0,No,Yes,Yes,Yes
+GeForce GTS 250,Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 260,Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 260 Core 216,Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 260 Core 216 (55 nm),Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 275,Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 280,Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 285,Yes,0,0,Yes3-Way (4-way for EVGA 285 Classified),0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0
+GeForce GTX 295,Yes,0,0,Yes,0,0,0,0,0,0,0,0,0,0,0,0.0,Yes,No,0,0

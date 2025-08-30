@@ -1,0 +1,43 @@
+category,Features,software_technologies,other_products
+Fixed pixel pipeline,Pre-GeForce NV1 NV2  RIVA 128 RIVA TNT TNT2  GeForce 256 2 4 MX,0,0
+Pre-GeForce,NV1 NV2  RIVA 128 RIVA TNT TNT2,0,0
+Vertex and pixel shaders,GeForce 3 4 Ti FX 6 7,0,0
+Unified shaders,GeForce 8 9 100 200 300 400 500,0,0
+Unified shaders & NUMA,GeForce 600 700 800M 900 10 16,0,0
+Ray tracing & tensor cores,GeForce 20 30 40,0,0
+Pre-GeForce,NV1 NV2  RIVA 128 RIVA TNT TNT2,0,0
+0,Multimedia acceleration NVENC (video encoding) NVDEC (video decoding) PureVideo (video decoding) Software Cg (shading language) CUDA Nvidia GameWorks OptiX (ray tracing API) PhysX (physics SDK) Nvidia Omniverse (3D graphics) Nvidia RTX (ray tracing platform) Nvidia System Tools VDPAU (video decode API) Technologies Nvidia 3D Vision (stereo 3D) Nvidia G-Sync (variable refresh rate) Nvidia Optimus (GPU switching) Nvidia Surround (multi-monitor) MXM (module/socket) SXM (module/socket) NVLink (protocol) Scalable Link Interface (multi-GPU) TurboCache (framebuffer in system memory) Video Super Resolution (live video upscaling) GPU microarchitectures Fahrenheit Celsius Kelvin Rankine Curie Tesla Fermi Kepler Maxwell Pascal Volta Turing Ampere Hopper Ada Lovelace,Multimedia acceleration NVENC (video encoding) NVDEC (video decoding) PureVideo (video decoding) Software Cg (shading language) CUDA Nvidia GameWorks OptiX (ray tracing API) PhysX (physics SDK) Nvidia Omniverse (3D graphics) Nvidia RTX (ray tracing platform) Nvidia System Tools VDPAU (video decode API) Technologies Nvidia 3D Vision (stereo 3D) Nvidia G-Sync (variable refresh rate) Nvidia Optimus (GPU switching) Nvidia Surround (multi-monitor) MXM (module/socket) SXM (module/socket) NVLink (protocol) Scalable Link Interface (multi-GPU) TurboCache (framebuffer in system memory) Video Super Resolution (live video upscaling) GPU microarchitectures Fahrenheit Celsius Kelvin Rankine Curie Tesla Fermi Kepler Maxwell Pascal Volta Turing Ampere Hopper Ada Lovelace,0
+0,Multimedia acceleration,NVENC (video encoding) NVDEC (video decoding) PureVideo (video decoding),0
+0,Software,Cg (shading language) CUDA Nvidia GameWorks OptiX (ray tracing API) PhysX (physics SDK) Nvidia Omniverse (3D graphics) Nvidia RTX (ray tracing platform) Nvidia System Tools VDPAU (video decode API),0
+0,Technologies,Nvidia 3D Vision (stereo 3D) Nvidia G-Sync (variable refresh rate) Nvidia Optimus (GPU switching) Nvidia Surround (multi-monitor) MXM (module/socket) SXM (module/socket) NVLink (protocol) Scalable Link Interface (multi-GPU) TurboCache (framebuffer in system memory) Video Super Resolution (live video upscaling),0
+0,GPU microarchitectures,Fahrenheit Celsius Kelvin Rankine Curie Tesla Fermi Kepler Maxwell Pascal Volta Turing Ampere Hopper Ada Lovelace,0
+Multimedia acceleration,NVENC (video encoding) NVDEC (video decoding) PureVideo (video decoding),0,0
+Software,Cg (shading language) CUDA Nvidia GameWorks OptiX (ray tracing API) PhysX (physics SDK) Nvidia Omniverse (3D graphics) Nvidia RTX (ray tracing platform) Nvidia System Tools VDPAU (video decode API),0,0
+Technologies,Nvidia 3D Vision (stereo 3D) Nvidia G-Sync (variable refresh rate) Nvidia Optimus (GPU switching) Nvidia Surround (multi-monitor) MXM (module/socket) SXM (module/socket) NVLink (protocol) Scalable Link Interface (multi-GPU) TurboCache (framebuffer in system memory) Video Super Resolution (live video upscaling),0,0
+GPU microarchitectures,Fahrenheit Celsius Kelvin Rankine Curie Tesla Fermi Kepler Maxwell Pascal Volta Turing Ampere Hopper Ada Lovelace,0,0
+0,Graphics processing Nvidia Quadro Quadro Plex GPGPU Nvidia Tesla DGX Console components NV2A (Xbox) RSX 'Reality Synthesizer' (PlayStation 3) Tegra NX-SoC (Nintendo Switch) Nvidia Shield Shield Portable Shield Tablet Shield Android TV GeForce Now SoCs and embedded GoForce Drive Jetson Tegra CPUs Project Denver Computer chipsets nForce,0,Graphics processing Nvidia Quadro Quadro Plex GPGPU Nvidia Tesla DGX Console components NV2A (Xbox) RSX 'Reality Synthesizer' (PlayStation 3) Tegra NX-SoC (Nintendo Switch) Nvidia Shield Shield Portable Shield Tablet Shield Android TV GeForce Now SoCs and embedded GoForce Drive Jetson Tegra CPUs Project Denver Computer chipsets nForce
+0,Graphics processing,0,Nvidia Quadro Quadro Plex
+0,GPGPU,0,Nvidia Tesla DGX
+0,Console components,0,NV2A (Xbox) RSX 'Reality Synthesizer' (PlayStation 3) Tegra NX-SoC (Nintendo Switch)
+0,Nvidia Shield,0,Shield Portable Shield Tablet Shield Android TV GeForce Now
+0,SoCs and embedded,0,GoForce Drive Jetson Tegra
+0,CPUs,0,Project Denver
+0,Computer chipsets,0,nForce
+Graphics processing,Nvidia Quadro Quadro Plex,0,0
+GPGPU,Nvidia Tesla DGX,0,0
+Console components,NV2A (Xbox) RSX 'Reality Synthesizer' (PlayStation 3) Tegra NX-SoC (Nintendo Switch),0,0
+Nvidia Shield,Shield Portable Shield Tablet Shield Android TV GeForce Now,0,0
+SoCs and embedded,GoForce Drive Jetson Tegra,0,0
+CPUs,Project Denver,0,0
+Computer chipsets,nForce,0,0
+GPU,Desktop Intel Arc GT Nvidia GeForce Quadro Tesla Tegra AMD Radeon Radeon Pro Radeon Instinct Matrox InfiniteReality NEC µPD7220 3dfx Voodoo S3 Glaze3D Apple silicon Mobile Adreno Apple silicon Mali PowerVR VideoCore Vivante Imageon Intel 2700G,0,0
+Desktop,Intel Arc GT Nvidia GeForce Quadro Tesla Tegra AMD Radeon Radeon Pro Radeon Instinct Matrox InfiniteReality NEC µPD7220 3dfx Voodoo S3 Glaze3D Apple silicon,0,0
+Mobile,Adreno Apple silicon Mali PowerVR VideoCore Vivante Imageon Intel 2700G,0,0
+Architecture,Compute kernel Fabrication CMOS FinFET MOSFET Graphics pipeline Geometry Vertex HDR rendering MAC Rasterisation Shading Ray-tracing SIMD SIMT Tessellation T&L Tiled rendering Unified shader model,0,0
+Components,Blitter Geometry processor Input–output memory management unit Render output unit Shader unit Stream processor Tensor unit Texture mapping unit Video display controller Video processing unit,0,0
+Memory,DMA Framebuffer SGRAM GDDR GDDR2 GDDR3 GDDR4 GDDR5 GDDR6 GDDR7 HBM HBM2 HBM2E HBM3 HBM-PIM HBM3E Memory bandwidth Memory controller Shared graphics memory Texture memory VRAM,0,0
+Form factor,IP core Discrete graphics Clustering Switching External graphics Integrated graphics System on a chip,0,0
+Performance,Clock rate Display resolution Fillrate Pixel/s Texel/s FLOP/s Frame rate Performance per watt Transistor count,0,0
+Misc,2D Scrolling Sprite Tile 3D GI Texture ASIC GPGPU Graphics library Hardware acceleration Image processing Compression Parallel computing Vector processor Video coding Codec VLIW,0,0
+Desktop,Intel Arc GT Nvidia GeForce Quadro Tesla Tegra AMD Radeon Radeon Pro Radeon Instinct Matrox InfiniteReality NEC µPD7220 3dfx Voodoo S3 Glaze3D Apple silicon,0,0
+Mobile,Adreno Apple silicon Mali PowerVR VideoCore Vivante Imageon Intel 2700G,0,0

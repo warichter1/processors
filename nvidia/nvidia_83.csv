@@ -1,0 +1,9 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Boost clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Supported API version Direct3D,Supported API version OpenGL,Nvidia Optimustechnology,TDP (Watts)
+Quadro P500,"Jan 5, 2018",GP108,14,PCIe 3.0 x16,0.0,0.0,0.0,256:16:16:2,0.0,0.0,2048,40,GDDR5,64,750.0,12.1,4.5,Yes,18
+Quadro P600,"Feb 7, 2017",GP107,14,PCIe 3.0 x16,0.0,0.0,0.0,384:24:16:3,0.0,0.0,2048,80,GDDR5,128,1200.0,12.1,4.5,Yes,25
+Quadro P1000,"Feb 7, 2017",GP107(N18P-Q1-A1),14,PCIe 3.0 x16,0.0,0.0,0.0,512:32:16:4,0.0,0.0,4096,96,GDDR5,128,1600.0,12.1,4.5,Yes,40
+Quadro P2000,"Feb 6, 2017",GP107(N18P-Q3-A1),14,PCIe 3.0 x16,0.0,0.0,0.0,768:64:32:6,0.0,0.0,4096,96,GDDR5,128,2400.0,12.1,4.5,Yes,50
+Quadro P3000,"Jan 11, 2017",GP106,16,PCIe 3.0 x16,0.0,0.0,0.0,1280:80:48:10,0.0,0.0,6144,168,GDDR5,192,3098.0,12.1,4.5,Yes,75
+Quadro P4000,"Jan 11, 2017",GP104,16,PCIe 3.0 x16,0.0,0.0,0.0,1792:112:64:14,0.0,0.0,8192,192,GDDR5,256,4398.0,12.1,4.5,Yes,100
+Quadro P4000 Max-Q,"Jan 11, 2017",GP104,16,PCIe 3.0 x16,0.0,0.0,0.0,1792:112:64:14,0.0,0.0,8192,192,GDDR5,256,0.0,12.1,4.5,Yes,80
+Quadro P5000,"Jan 11, 2017",GP104,16,PCIe 3.0 x16,0.0,0.0,0.0,2048:128:64:16,0.0,0.0,16384,192,GDDR5,256,6197.0,12.1,4.5,Yes,100

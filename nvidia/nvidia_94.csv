@@ -1,0 +1,8 @@
+Features,gpu
+Fixed pixel pipelinePre-GeForce NV1 NV2  RIVA 128 RIVA TNT TNT2  GeForce 256 2 4 MXVertex and pixel shaders GeForce 3 4 Ti FX 6 7 Unified shaders GeForce 8 9 100 200 300 400 500 Unified shaders & NUMA GeForce 600 700 800M 900 10 16 Ray tracing & Tensor cores GeForce 20 30 40,Fixed pixel pipelinePre-GeForce NV1 NV2  RIVA 128 RIVA TNT TNT2  GeForce 256 2 4 MXVertex and pixel shaders GeForce 3 4 Ti FX 6 7 Unified shaders GeForce 8 9 100 200 300 400 500 Unified shaders & NUMA GeForce 600 700 800M 900 10 16 Ray tracing & Tensor cores GeForce 20 30 40
+Fixed pixel pipeline,Pre-GeForce NV1 NV2  RIVA 128 RIVA TNT TNT2  GeForce 256 2 4 MX
+Pre-GeForce,NV1 NV2  RIVA 128 RIVA TNT TNT2
+Vertex and pixel shaders,GeForce 3 4 Ti FX 6 7
+Unified shaders,GeForce 8 9 100 200 300 400 500
+Unified shaders & NUMA,GeForce 600 700 800M 900 10 16
+Ray tracing & Tensor cores,GeForce 20 30 40

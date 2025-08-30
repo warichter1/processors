@@ -1,0 +1,5 @@
+category,Features
+Multimedia acceleration,NVENC (video encoding) NVDEC (video decoding) PureVideo (video decoding)
+Software,Cg (shading language) CUDA Nvidia GameWorks OptiX (ray tracing API) PhysX (physics SDK) Nvidia Omniverse (3D graphics) Nvidia RTX (ray tracing platform) Nvidia System Tools VDPAU (video decode API)
+Technologies,Nvidia 3D Vision (stereo 3D) Nvidia G-Sync (variable refresh rate) Nvidia Optimus (GPU switching) Nvidia Surround (multi-monitor) MXM (module/socket) SXM (module/socket) NVLink (protocol) Scalable Link Interface (multi-GPU) TurboCache (framebuffer in system memory) Video Super Resolution (live video upscaling)
+GPU microarchitectures,Fahrenheit Celsius Kelvin Rankine Curie Tesla Fermi Kepler Maxwell Pascal Volta Turing Ampere Hopper Ada Lovelace

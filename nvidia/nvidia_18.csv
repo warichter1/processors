@@ -1,0 +1,8 @@
+hw_model,Launch,Code name,Fab (nm),Transistors (million),Die size (mm2),Bus interface,Core config,Clock rate Core (MHz),Clock rate Shader (MHz),Clock rate Memory (MHz),Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory configuration Size (MB),Memory configuration Bandwidth (GB/s),Memory configuration DRAM type,Memory configuration Bus width (bit),Processing power (GFLOPS) Single precision,TDP (Watts),Comments
+GeForce 310,"November 27, 2009",GT218,TSMC 40 nm,260,57,PCIe 2.0 x16,16:8:4,589,1402,1000.0,2.356,4.712,512,8.0,DDR2,64,44.8,30.5,"OEM Card, similar to Geforce 210"
+GeForce 315,February 2010,GT216,TSMC 40 nm,486,100,PCIe 2.0 x16,48:16:4,475,1100,1580.0,3.8,7.6,512,12.6,DDR3,64,105.6,33.0,"OEM Card, similar to Geforce GT220"
+GeForce GT 320,February 2010,GT215,TSMC 40 nm,727,144,PCIe 2.0 x16,72:24:8,540,1302,1580.0,4.32,12.96,1024,25.3,GDDR3,128,187.5,43.0,OEM Card
+GeForce GT 330[56],February 2010,GT215-301-A3[57],TSMC 40 nm,727,144,PCIe 2.0 x16,96:32:8,550,1350,0.0,4.4,17.6,512,32.0,GDDR3,128,257.3,75.0,"Specifications vary depending on OEM, similar to GT230 v2."
+GeForce GT 330[56],February 2010,G92[58],TSMC 40 nm,727,144,PCIe 2.0 x16,96:32:8,500,1250,0.0,4.0,24.0,256,51.2,GDDR3,256,240.0,75.0,"Specifications vary depending on OEM, similar to GT230 v2."
+GeForce GT 330[56],February 2010,G92B[59],TSMC 40 nm,727,144,PCIe 2.0 x16,96:32:16,500,1250,0.0,8.0,24.0,1024,16.32,DDR2,128,240.0,75.0,"Specifications vary depending on OEM, similar to GT230 v2."
+GeForce GT 340,February 2010,GT215,TSMC 40 nm,727,144,PCIe 2.0 x16,96:32:8,550,1340,3400.0,0.0,0.0,5121024,54.4,GDDR5[60],128,257.3,69.0,"OEM Card, similar to GT240"

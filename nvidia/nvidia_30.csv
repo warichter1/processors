@@ -1,0 +1,4 @@
+hw_model,Launch,Code name,Bus interface,clock,Memory clock (MHz),Core config,Fillrate MOperations/s,Fillrate MPixels/s,Fillrate MTexels/s,Fillrate MVertices/s,Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit)
+GeForce2 Go 100,"February 6, 2001",NV11M,AGP 4x,125,332,2:0:4:2,250,250,500,0,"8, 16",1.328,DDR,32
+GeForce2 Go,"November 11, 2000",NV11M,AGP 4x,143,166332,2:0:4:2,286,286,572,0,"16, 32",2.656,SDRDDR,12864
+GeForce2 Go 200,"February 6, 2001",NV11M,AGP 4x,143,332,2:0:4:2,286,286,572,0,"16, 32",2.656,DDR,64

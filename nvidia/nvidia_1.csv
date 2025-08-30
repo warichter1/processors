@@ -1,0 +1,3 @@
+hw_model,Launch,Code name,Transistors (million),Die size (mm2),Bus interface,clock,Memory clock (MHz),Core config,Fillrate MOperations/s,Fillrate MPixels/s,Fillrate MTexels/s,Fillrate MVertices/s,Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),MFLOPSFP32
+GeForce 256 SDR[8],"Oct 11, 1999",NV10,17,139,"AGP 4x, PCI",120,166,4:4:4,480,480,480,0,3264,2.656,SDR,128,960
+GeForce 256 DDR[9],"Dec 13, 1999",NV10,17,139,"AGP 4x, PCI",120,150,4:4:4,480,480,480,0,3264,4.8,DDR,128,960

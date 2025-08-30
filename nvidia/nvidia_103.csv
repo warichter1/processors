@@ -1,0 +1,10 @@
+category,Features
+GPU,Desktop Intel Arc GT Nvidia GeForce Quadro Tesla Tegra AMD Radeon Radeon Pro Radeon Instinct Matrox InfiniteReality NEC µPD7220 3dfx Voodoo S3 Glaze3D Apple silicon Mobile Adreno Apple silicon Mali PowerVR VideoCore Vivante Imageon Intel 2700G
+Desktop,Intel Arc GT Nvidia GeForce Quadro Tesla Tegra AMD Radeon Radeon Pro Radeon Instinct Matrox InfiniteReality NEC µPD7220 3dfx Voodoo S3 Glaze3D Apple silicon
+Mobile,Adreno Apple silicon Mali PowerVR VideoCore Vivante Imageon Intel 2700G
+Architecture,Compute kernel Fabrication CMOS FinFET MOSFET Graphics pipeline Geometry Vertex HDR rendering MAC Rasterisation Shading Ray-tracing SIMD SIMT Tessellation T&L Tiled rendering Unified shader model
+Components,Blitter Geometry processor Input–output memory management unit Render output unit Shader unit Stream processor Tensor unit Texture mapping unit Video display controller Video processing unit
+Memory,DMA Framebuffer SGRAM GDDR GDDR2 GDDR3 GDDR4 GDDR5 GDDR6 GDDR7 HBM HBM2 HBM2E HBM3 HBM-PIM HBM3E Memory bandwidth Memory controller Shared graphics memory Texture memory VRAM
+Form factor,IP core Discrete graphics Clustering Switching External graphics Integrated graphics System on a chip
+Performance,Clock rate Display resolution Fillrate Pixel/s Texel/s FLOP/s Frame rate Performance per watt Transistor count
+Misc,2D Scrolling Sprite Tile 3D GI Texture ASIC GPGPU Graphics library Hardware acceleration Image processing Compression Parallel computing Vector processor Video coding Codec VLIW

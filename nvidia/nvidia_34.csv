@@ -1,0 +1,14 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Features
+GeForce 7000M,"February 1, 2006",MCP67MV,90,Hyper Transport,350,System memory,1:2:2:2,0.7,0.7,Up to 256 from system memory,System memory,DDR2,64/128,9.0c,2.1,Un­known,0
+GeForce 7150M,"February 1, 2006",MCP67M,90,Hyper Transport,425,System memory,1:2:2:2,0.85,0.85,Up to 256 from system memory,System memory,DDR2,64/128,9.0c,2.1,Un­known,0
+GeForce Go 72002,January 2006,G72M,90,PCIe x16,450,700,3:4:4:1,0.45,1.8,64,2.8,GDDR3,32,9.0c,2.1,Un­known,Transparency Anti-Aliasing
+GeForce Go 73002,January 2006,G72M,90,PCIe x16,350,700,3:4:4:2,0.7,1.4,"128, 256, 512",5.60,GDDR3,64,9.0c,2.1,Un­known,Transparency Anti-Aliasing
+GeForce Go 74002,January 2006,G72M,90,PCIe x16,450,900,3:4:4:2,0.9,1.8,"64, 256",7.20,GDDR3,64,9.0c,2.1,Un­known,Transparency Anti-Aliasing
+GeForce Go 7600,March 2006,G73M,90,PCIe x16,450,1000,5:8:8:8,3.6,3.6,"256, 512",16,GDDR3,128,9.0c,2.1,Un­known,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7600 GT,2006,G73M,90,PCIe x16,500,1200,5:12:12:8,4.0,6.0,256,19.2,GDDR3,128,9.0c,2.1,Un­known,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7700,2006,G73-N-B1,80,PCIe x16,450,1000,5:12:12:8,3.6,5.4,512,16,GDDR3,128,9.0c,2.1,Un­known,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7800,"March 3, 2006",G70M,110,PCIe x16,400,1100,6:16:16:8,3.2,6.4,256,35.2,GDDR3,256,9.0c,2.1,35,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7800 GTX,October 2005,G70M,110,PCIe x16,400,1100,8:24:24:16,6.4,9.6,256,35.2,GDDR3,256,9.0c,2.1,65,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7900 GS,April 2006,G71M,90,PCIe x16,375,1000,7:20:20:16,6.0,7.5,256,32.0,GDDR3,256,9.0c,2.1,20,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7900 GTX,April 2006,G71M,90,PCIe x16,500,1200,8:24:24:16,8.0,12.0,256 512,38.4,GDDR3,256,9.0c,2.1,45,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"
+GeForce Go 7950 GTX,October 2006,G71M,90,PCIe x16,575,1400,8:24:24:16,9.2,13.8,512,44.8,GDDR3,256,9.0c,2.1,45,"Scalable Link Interface (SLI), Transparency Anti-Aliasing"

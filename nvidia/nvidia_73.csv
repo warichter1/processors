@@ -1,0 +1,5 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Shader clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro FX 360M,"May 9, 2007",G86M,80,PCIe 1.0 x16,400,800,1200,16:8:4,1.6,3.2,256,9.6,DDR2,64,38.4,10.0,3.3,17,Based on the GeForce 8400M GS
+Quadro FX 560M,"Apr 20, 2006",G73GLM,90,PCIe 1.0 x16,500,500,1200,5:12:12:8,4.0,6.0,512,19.2,GDDR3,128,0.0,9.0c,2.1,35?,7600GS based?
+Quadro FX 1600M,"Jun 1, 2007",G84M,80,PCIe 1.0 x16,625,1250,1600,32:16:8,5.0,10.0,512,25.6,GDDR3,128,120.0,10.0,3.3,50?,0
+Quadro FX 3600M,"Feb 23, 2008",G92M,65,PCIe 1.0 x16,500,1250,1600,64:32:1696:48:16,88.0,1624.0,512,51.2,GDDR3,256,240360.0,10.0,3.3,70,Based on the GeForce 8800M GTX. Dell Precision M6300 uses 64 shader version of the FX 3600M

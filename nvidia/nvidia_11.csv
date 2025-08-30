@@ -1,0 +1,19 @@
+hw_model,Launch,Code name,Fab (nm),Transistors (million),Die size (mm2),Bus interface,Core config,Clock rate Core (MHz),Clock rate Shader (MHz),Clock rate Memory (MHz),Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,Processing power (GFLOPS) Single precision,TDP (Watts),Comments
+GeForce 8100 mGPU[45],2008,MCP78,TSMC 80 nm,Un­known,Un­known,PCIe 2.0 x16,8:8:4,500,1200,400(system memory),2,4,Up to 512 from system memory,6.412.8,DDR2,64128,10.0,3.3,28.8,Un­known,The block of decoding of HD-video PureVideo HD is disconnected
+GeForce 8200 mGPU[45],2008,MCP78,TSMC 80 nm,Un­known,Un­known,PCIe 2.0 x16,8:8:4,500,1200,400(system memory),2,4,gt,6.412.8,DDR2,64128,10.0,3.3,28.8,Un­known,PureVideo 3 with VP3
+GeForce 8300 mGPU[45],2008,MCP78,TSMC 80 nm,Un­known,Un­known,PCIe 2.0 x16,8:8:4,500,1500,400(system memory),2,4,Up to 512 from system memory,6.412.8,DDR2,64128,10.0,3.3,36,Un­known,PureVideo 3 with VP3
+GeForce 8300 GS[46],July 2007,G86,TSMC 80 nm,210,127,PCIe 1.0 x16,8:8:4,450,900,400,1.8,3.6,128512,6.4,DDR2,64,10.0,3.3,14.4,40,OEM only
+GeForce 8400 GS,"June 15, 2007",G86,TSMC 80 nm,210,127,PCIe 1.0 x16PCI,16:8:4,450,900,400,1.8,3.6,128256512,6.4,DDR2,64,10.0,3.3,28.8,40,0
+GeForce 8400 GS rev.2,"December 10, 2007",G98,TSMC 65 nm,210,86,PCIe 2.0 x16PCIe x1PCI,8:8:4,567,1400,400,2.268,4.536,128256512,6.4,DDR2,64,10.0,3.3,22.4,25,0
+GeForce 8400 GS rev.3,"July 12, 2010",GT218,TSMC 40 nm,260,57,PCIe 2.0 x16,8:4:4,520589,1230,400 (DDR2)600 (DDR3),2.082.356,2.082.356,5121024,4.86.49.6,DDR2DDR3,3264,10.1,3.3,19.7,25,0
+GeForce 8500 GT,"April 17, 2007",G86,TSMC 80 nm,210,127,PCIe 1.0 x16PCI,16:8:4,450,900,400,1.8,3.6,2565121024,12.8,DDR2,128,10.0,3.3,28.8,45,0
+GeForce 8600 GS,April 2007,G84,TSMC 80 nm,289,169,PCIe 1.0 x16,16:8:8,540,1180,400,4.32,4.32,256512,12.8,DDR2,128,10.0,3.3,75.5,47,OEM only
+GeForce 8600 GT,"April 17, 2007",G84,TSMC 80 nm,289,169,PCIe 1.0 x16PCI,32:16:8,540,1188,400700,4.32,8.64,2565121024,12.822.4,DDR2GDDR3,128,10.0,3.3,76,47,0
+GeForce 8600 GTS,"April 17, 2007",G84,TSMC 80 nm,289,169,PCIe 1.0 x16,32:16:8,675,1450,1000,5.4,10.8,256512,32,GDDR3,128,10.0,3.3,92.8,71,0
+GeForce 8800 GS,January 2008,G92,TSMC 65 nm,754,324,PCIe 2.0 x16,96:48:12,550,1375,800,6.6,26.4,384768,38.4,GDDR3,192,10.0,3.3,264,105,0
+GeForce 8800 GTS (G80),"February 12, 2007 (320) November 8, 2006 (640)",G80,TSMC 90 nm,681,484,PCIe 1.0 x16,96:24:20,513,1188,800,10.3,12.3,320640,64,GDDR3,320,10.0,3.3,228,146,0
+GeForce 8800 GTS 112 (G80),"November 19, 2007",G80,TSMC 90 nm,681,484,PCIe 1.0 x16,112:28:[c]20,500,1200,800,10,14,640,64,GDDR3,320,10.0,3.3,268.8,150,"only XFX, EVGA and BFG models, very short-lived[49]"
+GeForce 8800 GT,"October 29, 2007 (512)December 11, 2007 (256, 1024)",G92,TSMC 65 nm,754,324,PCIe 2.0 x16,112:56:16,600,1500,"700 (256)900 (512, 1024)",9.6,33.6,2565121024,57.6,GDDR3,256,10.0,3.3,336,125,0
+GeForce 8800 GTS (G92),"December 11, 2007",G92,TSMC 65 nm,754,324,PCIe 2.0 x16,128:64:16,650,1625,970,10.4,41.6,512,62.1,GDDR3,256,10.0,3.3,416,135,0
+GeForce 8800 GTX,"November 8, 2006",G80,TSMC 90 nm,681,484,PCIe 1.0 x16,128:32:[c]24,575,1350,900,13.8,18.4,768,86.4,GDDR3,384,10.0,3.3,345.6,145,0
+GeForce 8800 Ultra,"May 2, 2007",G80,TSMC 90 nm,681,484,PCIe 1.0 x16,128:32:[c]24,612,1500,1080,14.7,19.6,768,103.7,GDDR3,384,10.0,3.3,384,175,0

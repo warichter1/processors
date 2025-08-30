@@ -1,0 +1,11 @@
+hw_model,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1*,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro FX 500,NV34GL,150,AGP 8x,270,480,2:4:4:4,1.08,1.08,128,7.687,DDR,128,9.0,2.0,0.0,Stereo display
+Quadro FX 600,NV34GL,150,PCI,350,800,2:4:4:4,1.0,1.0,256,7.8,DDR,128,9.0,2.0,0.0,Stereo display
+Quadro FX 700,NV35GL,150,AGP 8x,275,550,3:4:8:4,1.1,2.2,128,8.8,DDR,128,9.0,2.0,0.0,Stereo display
+Quadro FX 1000,NV30GL,130,AGP 8x,300,600,2:4:8:4,1.2,2.4,128,9.6,GDDR2,128,9.0,2.0,0.0,Stereo display
+Quadro FX 1100,NV36GL,130,AGP 8x,425,648,3:4:4:4,1.7,1.7,128,10.1,DDR,128,9.0,2.0,0.0,Stereo display
+Quadro FX 2000,NV30GL,130,AGP 8x,400,800,2:4:8:4,1.6,3.2,128,12.8,GDDR2,128,9.0,2.0,0.0,Stereo display
+Quadro FX 3000,NV35GL,130,AGP 8x,400,850,3:4:8:4,1.6,3.2,256,27.2,DDR,256,9.0,2.0,0.0,Stereo display
+Quadro FX 3000G,NV35GL,130,AGP 8x,400,850,3:4:8:4,1.6,3.2,256,27.2,DDR,256,9.0,2.0,0.0,"Stereo display, Genlock"
+Quadro FX 4000,NV40GL,130,AGP 8x,375,1000,6:12:12:12,4.5,4.5,256,32.0,GDDR3,256,9.0c,2.1,142.0,Stereo display
+Quadro FX 4000 SDI,NV40GL,130,AGP 8x,375,1000,6:12:12:12,4.5,4.5,256,32.0,GDDR3,256,9.0c,2.1,0.0,"Stereo display, Genlock"

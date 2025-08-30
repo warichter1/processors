@@ -1,0 +1,11 @@
+hw_model,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro FX 350,G72,90,PCIe x16,550,400,3:4:4:2,1.1,2.2,128,6.4,DDR2,64,9.0c,2.1,21,0
+Quadro FX 550,NV43,110,PCIe x16,360,400,4:8:8:8,2.88,2.88,128,12.8,GDDR3,128,9.0c,2.1,30,0
+Quadro FX 1500,G71,90,PCIe x16,325,625,6:16:16:16,5.2,5.2,256,40.0,GDDR3,256,9.0c,2.1,65,0
+Quadro FX 3500,G71,90,PCIe x16,450,660,7:20:20:16,7.2,9,256,42.2,GDDR3,256,9.0c,2.1,80,"Stereo display, SLI"
+Quadro FX 4500,G70,110,PCIe x16,430,525,8:24:24:16,6.88,10.3,512,33.6,GDDR3,256,9.0c,2.1,109,"Stereo display, SLI"
+Quadro FX 4500 SDI,G70,110,PCIe x16,430,525,8:24:24:16,6.88,10.3,512,33.6,GDDR3,256,9.0c,2.1,116,"Stereo display, Genlock"
+Quadro FX 4500X2,G71,90,PCIe x16,500,605,2x 8:24:24:16,2x 8,2x 12,2x 512,2x 38.7,GDDR3,2x 256,9.0c,2.1,145,"Stereo display, SLI, Genlock"
+Quadro FX 4500 rev. A2,G71,90,PCIe x16,650,800,8:24:24:16,10.4,15.6,512,51.2,GDDR3,256,9.0c,2.1,105,"Stereo display, SLI, Genlock"
+Quadro FX 5500,G71,90,PCIe x16,650,505,8:24:24:16,10.4,15.6,1024,32.3,DDR2,256,9.0c,2.1,96,"Stereo display, SLI, Genlock"
+Quadro FX 5500 SDI,G71,90,PCIe x16,650,505,8:24:24:16,10.4,15.6,1024,32.3,DDR2,256,9.0c,2.1,104,"Stereo display, SLI, Genlock"

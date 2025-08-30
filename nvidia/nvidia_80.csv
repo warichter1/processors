@@ -1,0 +1,8 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Boost clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Processing power (GFLOPS) Double precision,Supported API version Direct3D,Supported API version OpenGL,Supported API version Vulkan,Nvidia Optimustechnology,TDP (Watts)
+Quadro M500M,"Apr 27, 2016",GM108,28,PCIe 3.0 x16,1029,1124.0,900 (1800),384:24:8(3 SMM),8.992,17.98,2048,14.4,DDR3,64,863.2,26.98,12.1,4.5,1.0,Yes,25
+Quadro M600M,"Aug 18, 2015",GM107,28,PCIe 3.0 x16,837,876.0,1253(5012),384:24:16(3 SMM),7.008,14.02,2048,80.2,GDDR5,128,672.8,21.02,12.1,4.5,1.0,Yes,30
+Quadro M1000M,"Aug 18, 2015",GM107,28,PCIe 3.0 x16,993,0.0,1253(5012),512:32:16(4 SMM),15.89,31.78,2048,80.2,GDDR5,128,1017.0,31.78,12.1,4.5,1.0,Yes,40
+Quadro M2000M,"Dec 3, 2015",GM107,28,PCIe 3.0 x16,1029,1098.0,1253(5012),640:40:16(5 SMM),17.57,43.92,4096,80.2,GDDR5,128,1405.0,43.92,12.1,4.5,1.0,Yes,55
+Quadro M3000M,"Aug 18, 2015",GM204,28,PCIe 3.0 x16,1050,0.0,1253(5012),1024:64:32(8 SMM),33.6,67.2,4096,160.4,GDDR5,256,2150.0,67.2,12.1,4.5,1.0,Yes,75
+Quadro M4000M,"Aug 18, 2015",GM204,28,PCIe 3.0 x16,975,0.0,1253(5012),1280:80:48(10 SMM),62.4,78.0,4096,160.4,GDDR5,256,2496.0,78.0,12.1,4.5,1.0,Yes,100
+Quadro M5000M,"Aug 18, 2015",GM204,28,PCIe 3.0 x16,962,0.0,1253(5012),1536:96:64(12 SMM),62.4,93.6,8192,160.4,GDDR5,256,2955.3,93.6,12.1,4.5,1.0,Yes,100

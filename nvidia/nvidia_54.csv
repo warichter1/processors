@@ -1,0 +1,3 @@
+hw_model,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts)
+Quadro FX 330,NV37GL,150,PCIe x16,250,400,2:4:4:4,1.0,1.0,64,3.2,DDR,128,9.0,2.0,21
+Quadro FX 1300,NV38,130,PCIe x16,350,550,3:4:8:4,1.4,2.8,128,17.6,DDR,256,9.0,2.1,55

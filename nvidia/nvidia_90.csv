@@ -1,0 +1,5 @@
+hw_model,architecture,Chips,Thread processors(total),Bus interface,Memory Bus type,Memory Size (GB),TDP (Watts),Features
+GRID K1[353],Kepler,4x GK107,4x 192,PCIe 3.0 x16,DDR3,4x 4 GB,130,Yes
+GRID K2[354],Kepler,2x GK104-895,2x 1536,PCIe 3.0 x16,GDDR5,2x 4 GB,225,Yes
+GRID K340,Kepler,4x GK107,4x 384,PCIe 3.0 x16,GDDR5,4x 1 GB,225,Yes
+GRID K520,Kepler,2x GK104,2x 1536,PCIe 3.0 x16,GDDR5,2x 4 GB,225,Yes

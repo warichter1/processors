@@ -1,0 +1,4 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Boost clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Supported API version Direct3D,Supported API version OpenGL,Nvidia Optimustechnology,TDP (Watts)
+Quadro P3200,"Feb 21, 2018",GP104,16,PCIe 3.0 x16,0.0,0.0,0.0,1792:112:64:14,0.0,0.0,6144,168,GDDR5,192,5300,12.1,4.5,Yes,78
+Quadro P4200,"Feb 21, 2018",GP104,16,PCIe 3.0 x16,0.0,0.0,0.0,2304:144:64:18,0.0,0.0,8192,168,GDDR5,256,7600,12.1,4.5,Yes,115
+Quadro P5200,"Feb 21, 2018",GP104,16,PCIe 3.0 x16,0.0,0.0,0.0,2560:160:64:20,0.0,0.0,16384,230,GDDR5,256,8900,12.1,4.5,Yes,150

@@ -1,0 +1,11 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Boost clock (MHz),Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (GB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Processing power (GFLOPS) Double precision,Supported API version Direct3D,Supported API version OpenGL,Supported API version Vulkan,Supported API version OpenCL,Supported API version CUDA,TDP (Watts),Notes
+Quadro P400,"Feb 7, 2017",GP107-825,14,PCIe 3.0 x16,1228,1252,1003(4012),256:16:16:2,17.1,17.1,2,32,GDDR5,64,641,20.0,12.1,4.6,1.3,1.2,6.1,30,Three Mini-DisplayPort 1.4
+Quadro P600,"Feb 7, 2017",GP107-850,14,PCIe 3.0 x16,1329,1557,1003(4012),384:24:16:3,21.7,32.5,2,64,GDDR5,128,1195,37.3,12.1,4.6,1.3,1.2,6.1,40,Four Mini-DisplayPort 1.4
+Quadro P620,"Feb 1, 2018",GP107-855,14,PCIe 3.0 x16,1266,1354,1003(4012),512:32:16:4,23.3,46.6,2,64,GDDR5,128,1490,46.6,12.1,4.6,1.3,1.2,6.1,40,Four Mini-DisplayPort 1.4
+Quadro P1000,"Feb 7, 2017",GP107-860,14,PCIe 3.0 x16,1266,1481,1752(7008),640:40:32:5,43.3,54.2,4,82,GDDR5,128,1894,59.2,12.1,4.6,1.3,1.2,6.1,47,Four Mini-DisplayPort 1.4
+Quadro P2000,"Feb 6, 2017",GP106-875,16,PCIe 3.0 x16,1076,1480,2002(8008),1024:64:40:8,54.8,87.7,5,140,GDDR5,160,3010,93.8,12.1,4.6,1.3,1.2,6.1,75,Four DisplayPort 1.4
+Quadro P2200,"Jun 10, 2019",GP106-880-K1-A1[301],16,PCIe 3.0 x16,1000,1493,1251 (10008),1280:80:40:9,59.7,119.4,5,200,GDDR5X,160,3822,121.3,12.1,4.6,1.3,1.2,6.1,75,Four DisplayPort 1.4
+Quadro P4000,"Feb 6, 2017",GP104-850-A1,16,PCIe 3.0 x16,1202,1480,1901(7604),1792:112:64:14,78.5,137.4,8,243,GDDR5,256,5300,165.6,12.1,4.6,1.3,1.2,6.1,105,Four DisplayPort 1.4
+Quadro P5000,"Oct 1, 2016",GP104-875-A1,16,PCIe 3.0 x16,1607,1733,1126(9008),2560:160:64:20,102.8,257.1,16,288,GDDR5X,256,8873,277.3,12.1,4.6,1.3,1.2,6.1,180,"Four DisplayPort 1.4, One DVI-D"
+Quadro P6000,"Oct 1, 2016",GP102-875-A1,16,PCIe 3.0 x16,1506,1645,1126(9008),3840:240:96:30,136.0,340.0,24,432,GDDR5X,384,10882 (11758),~340,12.1,4.6,1.3,1.2,6.1,250,"Four DisplayPort 1.4, One DVI-D"
+Quadro GP100,"Oct 1, 2016",GP100-876-A1,16,PCIe 3.0 x16,1304,1442,703 (1406),3584:224:128:56,184.7,323.0,16,720,HBM2,4096,10336,5168,12.1,4.6,1.3,1.2,6.0,235,NVLINK support

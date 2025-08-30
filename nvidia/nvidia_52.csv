@@ -1,0 +1,15 @@
+hw_model,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro,NV10GL,220,AGP 4x,135,166,0:4:4:4,0.54,0.54,64,2.66,SDR,128,7,1.2,0,0
+Quadro DDR,NV10GL,220,AGP 4x,135,333,0:4:4:4,0.54,0.54,64,5.312,DDR,128,7,1.2,0,0
+Quadro2 MXR,NV11GL,180,AGP 4x,200,183,0:2:4:2,0.4,0.4,64,2.93,SDR,128,7,1.2,0,0
+Quadro2 EX,NV11GL,180,AGP 4x,175,166,0:2:4:2,0.35,0.35,64,2.7,SDR,128,7,1.2,0,0
+Quadro2 PRO,NV15GL,150,AGP 4x,250,400,0:4:8:4,1,2,64,6.4,DDR,128,7,1.2,0,0
+Quadro DCC,NV20GL,180,AGP 4x,200,460,1:4:8:4,0.8,1.6,128,7.4,DDR,128,8,1.4,0,0
+Quadro4 380XGL,NV18GL,150,AGP 8x,275,513,0:2:4:2,0.55,1.1,128,8.2,DDR,128,7,1.4,0,0
+Quadro4 500XGL,NV17GL,150,AGP 4x,250,166,0:2:4:2,0.5,1,128,2.7,SDR,128,7,1.4,0,0
+Quadro4 550XGL,NV17GL,150,AGP 4x,270,400,0:2:4:2,0.59,1.08,64,6.4,DDR,128,7,1.4,0,0
+Quadro4 580XGL,NV18GL,150,AGP 8x,300,400,0:2:4:2,0.6,1.2,64,6.4,DDR,128,7,1.4,0,0
+Quadro4 700XGL,NV25,150,AGP 4x,275,550,2:4:8:4,1.1,2.2,64,8.8,DDR,128,8,1.4,0,0
+Quadro4 750XGL,NV25,150,AGP 4x,275,550,2:4:8:4,1.1,2.2,128,8.8,DDR,128,8,1.5,0,Stereo display
+Quadro4 900XGL,NV25,150,AGP 4x,300,650,2:4:8:4,1.2,2.4,128,10.4,DDR,128,8,1.4,0,Stereo display
+Quadro4 980XGL,NV28GL,150,AGP 8x,300,650,2:4:8:4,1.2,2.4,128,10.4,DDR,128,8,1.4,0,Stereo display

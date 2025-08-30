@@ -1,0 +1,5 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Memory clock (MHz),Core config1,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Supported API version Direct3D,Supported API version OpenGL,TDP (Watts)
+Quadro FX 350M,"Mar 13, 2006",G72GLM,90,PCIe 1.0 x16,450,900,3:4:4:2,0.9,1.8,256,14.4,GDDR3,128,9.0c,2.1,15
+Quadro FX 1500M,"Apr 18, 2006",G71GLM,90,PCIe 1.0 x16,375,1000,8:24:24:16,6.0,9.0,512,32.0,GDDR3,256,9.0c,2.1,15
+Quadro FX 2500M,"Sep 29, 2005",G71GLM,90,PCIe 1.0 x16,500,1200,8:24:24:16,8.0,12.0,512,38.4,GDDR3,256,9.0c,2.1,15
+Quadro FX 3500M,"Mar 1, 2007",G71GLM,90,PCIe 1.0 x16,575,1200,8:24:24:16,9.2,13.8,512,38.4,GDDR3,256,9.0c,2.1,15

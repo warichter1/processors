@@ -1,0 +1,11 @@
+hw_model,Launch,Code name,Fab (nm),Bus interface,clock,Shader clock (MHz),Memory clock (MHz),Core config12,Fillrate Pixel (GP/s),Fillrate Texture (GT/s),Memory Size (MB),Memory Bandwidth (GB/s),Memory Bus type,Memory Bus width (bit),Processing power (GFLOPS) Single precision,Supported API version Direct3D,Supported API version OpenGL,TDP (Watts),Notes
+Quadro NVS 110M,"Jun 1, 2006",G72M,90,PCIe 1.0 x16,300,300,600,3:4:4:2,0.6,1.2,Up to 512,4.8,DDR,64,0.0,9.0c,2.1,10,0
+Quadro NVS 120M,"Jun 1, 2006",G72GLM,90,PCIe 1.0 x16,450,450,700,3:4:4:2,0.9,1.8,Up to 512,5.6,DDR2,64,0.0,9.0c,2.1,10,0
+Quadro NVS 130M,"May 9, 2007",G86M,80,PCIe 2.0 x16,400?,800?,700,8:4:4,1.6?,1.6?,Up to 256,6.4?,DDR2,64,19.2,10.0,3.3,10,0
+Quadro NVS 135M,"May 9, 2007",G86M,80,PCIe 2.0 x16,400,800,1188,16:8:4,1.6,3.2,Up to 256,9.504,GDDR3,64,38.4,10.0,3.3,10,0
+Quadro NVS 140M,"May 9, 2007",G86M,80,PCIe 2.0 x16,400,800,1200,16:8:4,1.6,3.2,Up to 512,9.6,GDDR3,64,38.4,10.0,3.3,10,0
+Quadro NVS 150M,"Aug 15, 2008",G98M,65,PCIe 2.0 x16,530,1300,1400,8:4:4,2.12,2.12,Up to 256,11.2,GDDR3,64,31.2,10.0,3.3,10,0
+Quadro NVS 160M,"Aug 15, 2008",G98M,65,PCIe 2.0 x16,580,1450,1400,8:8:4,2.12,4.24,256,11.2,GDDR3,64,34.8,10.0,3.3,12,0
+Quadro NVS 300M,"May 24, 2006",G72GLM,90,PCIe 1.0 x16,450,450,1000,3:4:4:2,0.9,1.8,Up to 512,8,DDR2,64,0.0,9.0c,2.1,16,0
+Quadro NVS 320M,"Jun 9, 2007",G84M,65,PCIe 2.0 x16,575,1150,1400,32:16:8,4.6,9.2,Up to 512,22.4,GDDR3,128,110.4,10.0,3.3,20,0
+Quadro NVS 510M,"Aug 21, 2006",G72GLM,90,PCIe 1.0 x16,500,500,1200,8:24:24:16,8,12,Up to 1024,38.4,GDDR3,256,0.0,9.0c,2.1,45?,based on Go 7900 GTX
