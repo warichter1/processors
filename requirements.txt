@@ -17,7 +17,7 @@ click
 configobj
 constantly
 contourpy
-cryptography==43.0.1
+cryptography==44.0.1
 cssselect
 cycler
 Cython==3.0.8
@@ -147,7 +147,7 @@ SciPy==1.11.4
 scour==0.38.2
 screen-resolution-extra==0.0.0
 service-identity==24.1.0
-setuptools==70.0.0
+setuptools==78.1.1
 simplejson==3.19.2
 six==1.16.0
 smartypants==2.0.0
