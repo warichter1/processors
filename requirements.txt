@@ -17,7 +17,7 @@ click
 configobj
 constantly
 contourpy
-cryptography==43.0.1
+cryptography==44.0.1
 cssselect
 cycler
 Cython==3.0.8
