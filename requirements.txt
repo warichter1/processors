@@ -166,7 +166,7 @@ toml==0.10.2
 tornado==6.5
 traitlets==5.5.0
 translate-toolkit==3.12.2
-Twisted==24.3.0
+Twisted==25.5.0
 types-aiofiles==23.2
 types-aws-xray-sdk==2.12
 types-beautifulsoup4==4.12
