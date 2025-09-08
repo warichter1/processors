@@ -25,7 +25,7 @@ df = nvidiaLoader('nvidia', columns=nvidiaSelect)
 df[' index'] = range(1, len(df) + 1)
 nHeader = nvidiaHeader('nvidia')
 
-armTest = armLoader('ARM')
+# armTest = armLoader('ARM')
 armDf = armLoader('ARM', columns=armSelect)
 # arm.process()
 # armDf = arm.df['merged']
@@ -55,7 +55,7 @@ def tableTemplate(tableDf, className, header):
             page_current=0,
             page_size=conf['psize'],
             page_action=conf['paction'],
-
+            virtualization=True,
             column_selectable=conf['col_select'],
             row_selectable=conf["row_select"],
             row_deletable=conf['row_delete'],
@@ -74,7 +74,7 @@ def tableTemplate(tableDf, className, header):
     )
 
 table1 = tableTemplate(df, 'one', nHeader)
-table2 = tableTemplate(df, 'two', armHeader)
+table2 = tableTemplate(armDf, 'two', armHeader)
 
 
 
@@ -93,7 +93,7 @@ app.layout = dcc.Loading(html.Div([
                 selected_className='custom-tab--selected'
             ),
             dcc.Tab(
-                label='Tab two',
+                label='ARM',
                 value='tab-2',
                 className='custom-tab',
                 selected_className='custom-tab--selected'
@@ -179,7 +179,7 @@ def update_styles(selected_columns):
     Input('two-datatable-interactivity', "derived_virtual_data"),
     Input('one-datatable-interactivity', "derived_virtual_selected_rows"),
     Input('two-datatable-interactivity', "derived_virtual_selected_rows"))
-def update_graphs(rows, derived_virtual_selected_rows):
+def update_graphsupdate_graphs(rows, derived_virtual_selected_rows):
     # When the table is first rendered, `derived_virtual_data` and
     # `derived_virtual_selected_rows` will be `None`. This is due to an
     # idiosyncrasy in Dash (unsupplied properties are always None and Dash
