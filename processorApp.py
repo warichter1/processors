@@ -51,6 +51,7 @@ def tableTemplate(tableDf, className, header):
             style_cell=style['cell'],
             style_data=style['data'],
             style_data_conditional=style['data_conditional'],
+            # style_header=header,
             style_header=style['header'],
             page_current=0,
             page_size=conf['psize'],
@@ -189,6 +190,7 @@ def update_graphsupdate_graphs(rows, derived_virtual_selected_rows):
     # Instead of setting `None` in here, you could also set
     # `derived_virtual_data=df.to_rows('dict')` when you initialize
     # the component.
+    app.logger(f'{rows}, {derived_virtual_selected_rows}')
     if derived_virtual_selected_rows is None:
         derived_virtual_selected_rows = []
 
