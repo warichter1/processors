@@ -13,8 +13,8 @@ import pandas as pd
 import copy
 
 from cpuConf import amdRename, amdDrop, intelRename, intelDrop
-sourceDir = 'cpudb'
-dateCol = ['date', 'hw_avail.spec_int95']
+# sourceDir = 'cpudb'
+# dateCol = ['date', 'hw_avail.spec_int95']
 
 class Processors:
     def __init__(self):
@@ -104,6 +104,7 @@ class Processors:
             else:
                 df = pd.concat([df, self.processIntelFile(file, len(df))], join='outer', ignore_index=True)
         df = df.assign(test_sponsor='Intel')
+        df['manufactuer'] = 'Intel'
         df.fillna(0, inplace=True)
         df = self.getFamilyId(df, manufacturerId, label='hw_model')
         df['date'] = [self.fixDate(cell) for cell in df['date']]
@@ -115,6 +116,7 @@ class Processors:
         df.rename(columns=amdRename, inplace=True)
         df.assign(manufacturer_id=manufacturerId, inplace=True)
         df['processor_id'] = [4000 + i for i in range(len(df))]
+        df['manufactuer'] = 'AMD'
         df = df.assign(test_sponsor='AMD')
         df.fillna(0, inplace=True)
         df['date'] = [self.fixDate(cell) for cell in df['date']]
@@ -175,7 +177,7 @@ class Processors:
                       suffixes=(".spec_int2k0", ".spec_int95"))
         df = df.merge(specint92, on="processor_id", how='outer',
                       suffixes=(".spec_int95", ".spec_int92"))
-        for field in dateCol:
+        for field in self.dateCol:
             df[field] = self.datetime_to_epoch(pd.to_datetime(pd.Series(df[field])))
         df["max_clock"] = df["max_clock"].fillna("clock")
         df.max_clock = df.clock.where(df.max_clock == 'clock', df.max_clock)
