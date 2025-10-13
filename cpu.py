@@ -17,21 +17,30 @@ from cpuConf import amdRename, amdDrop, intelRename, intelDrop
 # dateCol = ['date', 'hw_avail.spec_int95']
 
 class Processors:
-    def __init__(self):
+    def __init__(self, debug=False):
+        self.debug = debug
         self.sourceDir = 'cpudb'
         self.dateCol = ['date', 'hw_avail.spec_int95']
         self.filter = {'q1': '1/1/', 'q2': '4/1/', '2q': '4/1/', 'q3': '9/1/', '3q': '9/1/', 'q4': '10/1/',
                         'september': '9/1/', '0416': '4/1/16'}
         self.normalize = [' Intel®', 'Intel® ', ' Processors', ' Processor', ' (AF)', '®', ' Series', ' Scalable',
                           ' Family', ' Product', '™']
+        self.lookupTables = dict(processor_family='processor_family_id', microarchitecture='microarchitecture_id',
+                                 manufacturer='manufacturer_id', technology='technology_id', code_name='code_name_id',
+                                 gate_delay='gate_delay_id', mips_est='mips_est_id', core_mark='core_mark_id',
+                                 power='power_id', die_photo='die_photo_id')
         self.lookup = {}
         self.loadtables()
 
+    def isDebug(self, text):
+        if self.debug:
+            print(f"DEBUG: {text}")
+            
     def loadtables(self):
-        names = ['processor_family', 'microarchitecture', 'manufacturer', 'technology', 'code_name', 'gate_delay', 'mips_est']
-
-        for name in names:
+        for name, colName in self.lookupTables.items():
             self.lookup[name] = self.loadFile(f'./{self.sourceDir}/{name}.csv').fillna(0)
+            self.lookup[name].set_index(colName, inplace=True)
+            self.lookup[name].sort_index(inplace=True)
 
     def datetime_to_epoch(self, ser):
         """Don't convert NaT to large negative values."""
@@ -82,7 +91,7 @@ class Processors:
                     return model['processor_family_id']
                 if 'AMD' not in cell and model['name'] in self.getASeries(cell):
                     return model['processor_family_id']
-        print('Not found: ', row[field], '-', cell)
+            print('Not found: ', row[field], '-', cell)
         return None
 
     def getFamilyId(self, df, manufacturerId, family="./cpudb/processor_family.csv", label='hw_model.spec_int2k6'):
@@ -98,7 +107,7 @@ class Processors:
         with open(f"{folder}/{filename}", "r") as f:
             intelFiles = f.readlines()
         for file in intelFiles[0].replace('\n', '').split(','):
-            print('Processing', file)
+            print('Processing Intel file:', file)
             if df is None:
                 df = self.processIntelFile(file)
             else:
@@ -112,11 +121,12 @@ class Processors:
 
     def importAmd(self, filename, manufacturerId=1, family="./cpudb/processor_family.csv"):
         """Process AMD records."""
+        print('Processing AMD file:', filename)
         df = self.loadFile(f'./{self.sourceDir}/{filename}').drop(columns=amdDrop)
         df.rename(columns=amdRename, inplace=True)
         df.assign(manufacturer_id=manufacturerId, inplace=True)
         df['processor_id'] = [4000 + i for i in range(len(df))]
-        df['manufactuer'] = 'AMD'
+        df['manufacturer'] = 'AMD'
         df = df.assign(test_sponsor='AMD')
         df.fillna(0, inplace=True)
         df['date'] = [self.fixDate(cell) for cell in df['date']]
@@ -170,24 +180,44 @@ class Processors:
         specint95 = self.loadFile(f"./{self.sourceDir}/spec_int1995.csv")
         specint92 = self.loadFile(f"./{self.sourceDir}/spec_int1992.csv")
 
-        df = processor.merge(specint2k6, on="processor_id", suffixes=(".proc", ".spec_int2k6"), how='outer')
-        df = df.merge(specint2k0, on="processor_id", how='outer',
+        baseDf = processor.merge(specint2k6, on="processor_id", suffixes=(".proc", ".spec_int2k6"), how='outer')
+        baseDf = baseDf.merge(specint2k0, on="processor_id", how='outer',
                       suffixes=(".spec_int2k6", ".spec_int2k0"))
-        df = df.merge(specint95, on="processor_id", how='outer',
+        baseDf = baseDf.merge(specint95, on="processor_id", how='outer',
                       suffixes=(".spec_int2k0", ".spec_int95"))
-        df = df.merge(specint92, on="processor_id", how='outer',
+        baseDf = baseDf.merge(specint92, on="processor_id", how='outer',
                       suffixes=(".spec_int95", ".spec_int92"))
         for field in self.dateCol:
-            df[field] = self.datetime_to_epoch(pd.to_datetime(pd.Series(df[field])))
-        df["max_clock"] = df["max_clock"].fillna("clock")
-        df.max_clock = df.clock.where(df.max_clock == 'clock', df.max_clock)
-        df["perfnorm"] = df["basemean.spec_int2k6"] / df["tdp"]
-        df = df.fillna(0)
-        return df
+            baseDf[field] = self.datetime_to_epoch(pd.to_datetime(pd.Series(baseDf[field])))
+        baseDf["max_clock"] = baseDf["max_clock"].fillna("clock")
+        baseDf.max_clock = baseDf.clock.where(baseDf.max_clock == 'clock', baseDf.max_clock)
+        baseDf["perfnorm"] = baseDf["basemean.spec_int2k6"] / baseDf["tdp"]
+        self.baseDf = baseDf.fillna(0)
+        self.getColumnName('manufacturer_id', 'manufacturer', 'manufacturer_name')
+        self.getColumnName('processor_family_id', 'processor_family', 'processor_family')
+        # self.getColumnName('microarchitecture_id', 'microarchitecture', 'microarchitecture')
+        return self.baseDf
 
+    def getIdName(self, table, colName, baseName):
+        column = []
+        for inx in range(len(self.baseDf)):
+            cid = self.baseDf.iloc[inx]['manufacturer_id']-1
+            print(self.lookup['manufacturer'].loc[cid]['name'])
+            
+    def getColumnName(self, dfID, lookupName, columnName, offset=0, nameLabel='name'):
+        column = []
+        for inx in range(len(self.baseDf)):
+            cid = int(self.baseDf.iloc[inx][dfID]-offset)
+            self.isDebug(f"{lookupName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid}")
+            try:
+                column.append(self.lookup[lookupName].loc[cid][nameLabel])
+            except KeyError:
+                self.isDebug(f"{lookupName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid} not found.")
+                column.append('Unknown')
+        self.baseDf[columnName] = column
 
 if __name__ == "__main__":
-    processors = Processors()
+    processors = Processors(debug=True)
     specIntel2k23 = processors.importIntel('intel.txt')
     specAmd2k23 = processors.importAmd("AMDcpu.csv")
     baseDf = processors.loadBaseProcessors()
