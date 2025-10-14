@@ -193,9 +193,15 @@ class Processors:
         baseDf.max_clock = baseDf.clock.where(baseDf.max_clock == 'clock', baseDf.max_clock)
         baseDf["perfnorm"] = baseDf["basemean.spec_int2k6"] / baseDf["tdp"]
         self.baseDf = baseDf.fillna(0)
-        self.getColumnName('manufacturer_id', 'manufacturer', 'manufacturer_name')
-        self.getColumnName('processor_family_id', 'processor_family', 'processor_family')
-        # self.getColumnName('microarchitecture_id', 'microarchitecture', 'microarchitecture')
+        self.getColumnName('manufacturer')
+        self.getColumnName('processor_family')
+        self.getColumnName('microarchitecture')
+        self.getColumnName('code_name')
+        # self.getColumnName('gate_delay')
+        # self.getColumnName('mips_est')
+        # self.getColumnName('core_mark')
+        # self.getColumnName('power', label='power')
+        # self.getColumnName('die_photo', label='photo_file_name')
         return self.baseDf
 
     def getIdName(self, table, colName, baseName):
@@ -204,15 +210,17 @@ class Processors:
             cid = self.baseDf.iloc[inx]['manufacturer_id']-1
             print(self.lookup['manufacturer'].loc[cid]['name'])
             
-    def getColumnName(self, dfID, lookupName, columnName, offset=0, nameLabel='name'):
+    # def getColumnName(self, dfID, lookupName, columnName, offset=0, nameLabel='name'):
+    def getColumnName(self, columnName, offset=0, label='name'):
         column = []
+        dfID = self.lookupTables[columnName]
         for inx in range(len(self.baseDf)):
             cid = int(self.baseDf.iloc[inx][dfID]-offset)
-            self.isDebug(f"{lookupName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid}")
+            self.isDebug(f"{columnName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid}")
             try:
-                column.append(self.lookup[lookupName].loc[cid][nameLabel])
+                column.append(self.lookup[columnName].loc[cid][label])
             except KeyError:
-                self.isDebug(f"{lookupName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid} not found.")
+                self.isDebug(f"{columnName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid} not found.")
                 column.append('Unknown')
         self.baseDf[columnName] = column
 
