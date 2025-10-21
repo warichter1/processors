@@ -197,12 +197,14 @@ class Processors:
         self.getColumnName('processor_family')
         self.getColumnName('microarchitecture')
         self.getColumnName('code_name')
+        self.getColumnName('technology')
         # self.getColumnName('gate_delay')
         # self.getColumnName('mips_est')
         # self.getColumnName('core_mark')
         # self.getColumnName('power', label='power')
         # self.getColumnName('die_photo', label='photo_file_name')
         return self.baseDf
+
 
     def getIdName(self, table, colName, baseName):
         column = []
@@ -229,6 +231,10 @@ if __name__ == "__main__":
     specIntel2k23 = processors.importIntel('intel.txt')
     specAmd2k23 = processors.importAmd("AMDcpu.csv")
     baseDf = processors.loadBaseProcessors()
+    fullDf = baseDf.copy()
+    fullDf.merge(specAmd2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
+    fullDf.merge(specIntel2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
+    fullDf.drop(columns=['processor_family_id', 'manufacturer_id', 'microarchitecture_id', 'code_name_id', 'technology_id'], inplace=True)
     # baseSpec = dict(spec=dict(s95to2k0=baseDf[['basemean.spec_int2k0', 'basemean.spec_int95']].mean(axis=1),
     #                           s2k0to2k6=baseDf[['basemean.spec_int2k6', 'basemean.spec_int2k0']].mean(axis=1),
     #                           no95=baseDf["basemean.spec_int95"].isna(), no2k0=baseDf["basemean.spec_int2k0"].isna(),
