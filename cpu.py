@@ -19,6 +19,7 @@ from cpuConf import amdRename, amdDrop, intelRename, intelDrop
 class Processors:
     def __init__(self, debug=False):
         self.debug = debug
+        self.fullDf = None
         self.sourceDir = 'cpudb'
         self.dateCol = ['date', 'hw_avail.spec_int95']
         self.filter = {'q1': '1/1/', 'q2': '4/1/', '2q': '4/1/', 'q3': '9/1/', '3q': '9/1/', 'q4': '10/1/',
@@ -203,7 +204,7 @@ class Processors:
         # self.getColumnName('core_mark')
         # self.getColumnName('power', label='power')
         # self.getColumnName('die_photo', label='photo_file_name')
-        return self.baseDf
+        # return self.baseDf
 
 
     def getIdName(self, table, colName, baseName):
@@ -226,15 +227,24 @@ class Processors:
                 column.append('Unknown')
         self.baseDf[columnName] = column
 
+    def process(self):
+        self.loadBaseProcessors()
+        specIntel2k23 = self.importIntel('intel.txt')
+        specAmd2k23 = self.importAmd("AMDcpu.csv")
+        fullDf = self.baseDf.copy()
+        fullDf.merge(specAmd2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
+        fullDf.merge(specIntel2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
+        fullDf.drop(
+            columns=['processor_family_id', 'manufacturer_id', 'microarchitecture_id', 'code_name_id', 'technology_id'],
+            inplace=True)
+        self.fullDf = fullDf
+
+
+
 if __name__ == "__main__":
     processors = Processors(debug=True)
-    specIntel2k23 = processors.importIntel('intel.txt')
-    specAmd2k23 = processors.importAmd("AMDcpu.csv")
-    baseDf = processors.loadBaseProcessors()
-    fullDf = baseDf.copy()
-    fullDf.merge(specAmd2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
-    fullDf.merge(specIntel2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
-    fullDf.drop(columns=['processor_family_id', 'manufacturer_id', 'microarchitecture_id', 'code_name_id', 'technology_id'], inplace=True)
+    processors.process()
+    # baseDf = processors.loadBaseProcessors()
     # baseSpec = dict(spec=dict(s95to2k0=baseDf[['basemean.spec_int2k0', 'basemean.spec_int95']].mean(axis=1),
     #                           s2k0to2k6=baseDf[['basemean.spec_int2k6', 'basemean.spec_int2k0']].mean(axis=1),
     #                           no95=baseDf["basemean.spec_int95"].isna(), no2k0=baseDf["basemean.spec_int2k0"].isna(),
