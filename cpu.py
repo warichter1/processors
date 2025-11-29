@@ -7,12 +7,14 @@ Created on Mon Dec 25 17:37:51 2023
 """
 
 import pandas as pd
-# import numpy as np
+import numpy as np
 # import datetime
 # import time
 import copy
 
 from cpuConf import amdRename, amdDrop, intelRename, intelDrop
+
+
 # sourceDir = 'cpudb'
 # dateCol = ['date', 'hw_avail.spec_int95']
 
@@ -23,20 +25,20 @@ class Processors:
         self.sourceDir = 'cpudb'
         self.dateCol = ['date', 'hw_avail.spec_int95']
         self.filter = {'q1': '1/1/', 'q2': '4/1/', '2q': '4/1/', 'q3': '9/1/', '3q': '9/1/', 'q4': '10/1/',
-                        'september': '9/1/', '0416': '4/1/16'}
+                       'september': '9/1/', '0416': '4/1/16'}
         self.normalize = [' Intel®', 'Intel® ', ' Processors', ' Processor', ' (AF)', '®', ' Series', ' Scalable',
                           ' Family', ' Product', '™']
         self.lookupTables = dict(processor_family='processor_family_id', microarchitecture='microarchitecture_id',
                                  manufacturer='manufacturer_id', technology='technology_id', code_name='code_name_id',
                                  gate_delay='gate_delay_id', mips_est='mips_est_id', core_mark='core_mark_id',
-                                 power='power_id', die_photo='die_photo_id')
+                                 power='power_id', die_photo='die_photo_id', cache='cache_id')
         self.lookup = {}
         self.loadtables()
 
     def isDebug(self, text):
         if self.debug:
             print(f"DEBUG: {text}")
-            
+
     def loadtables(self):
         for name, colName in self.lookupTables.items():
             self.lookup[name] = self.loadFile(f'./{self.sourceDir}/{name}.csv').fillna(0)
@@ -49,7 +51,7 @@ class Processors:
             res = ser.dropna().astype('int64').astype('Int64').reindex(index=ser.index)
         else:
             res = ser.astype('int64')
-        return res // 10**9
+        return res // 10 ** 9
 
     def fixDate(self, cell):
         """Normalize the date format to allow conversion to EPOCH format."""
@@ -173,7 +175,7 @@ class Processors:
         return df
 
     def loadBaseProcessors(self):
-        """Load base processors."""
+        """Load base processors. Mostly older manufacturers with some early Intel and AMD processors."""
         # pd.set_option('future.no_silent_downcasting', True)
         processor = self.loadFile(f"./{self.sourceDir}/processor.csv")
         specint2k6 = self.loadFile(f"./{self.sourceDir}/spec_int2006.csv")
@@ -183,11 +185,11 @@ class Processors:
 
         baseDf = processor.merge(specint2k6, on="processor_id", suffixes=(".proc", ".spec_int2k6"), how='outer')
         baseDf = baseDf.merge(specint2k0, on="processor_id", how='outer',
-                      suffixes=(".spec_int2k6", ".spec_int2k0"))
+                              suffixes=(".spec_int2k6", ".spec_int2k0"))
         baseDf = baseDf.merge(specint95, on="processor_id", how='outer',
-                      suffixes=(".spec_int2k0", ".spec_int95"))
+                              suffixes=(".spec_int2k0", ".spec_int95"))
         baseDf = baseDf.merge(specint92, on="processor_id", how='outer',
-                      suffixes=(".spec_int95", ".spec_int92"))
+                              suffixes=(".spec_int95", ".spec_int92"))
         for field in self.dateCol:
             baseDf[field] = self.datetime_to_epoch(pd.to_datetime(pd.Series(baseDf[field])))
         baseDf["max_clock"] = baseDf["max_clock"].fillna("clock")
@@ -206,19 +208,19 @@ class Processors:
         # self.getColumnName('die_photo', label='photo_file_name')
         # return self.baseDf
 
-
     def getIdName(self, table, colName, baseName):
         column = []
         for inx in range(len(self.baseDf)):
-            cid = self.baseDf.iloc[inx]['manufacturer_id']-1
+            cid = self.baseDf.iloc[inx]['manufacturer_id'] - 1
             print(self.lookup['manufacturer'].loc[cid]['name'])
-            
+
     # def getColumnName(self, dfID, lookupName, columnName, offset=0, nameLabel='name'):
     def getColumnName(self, columnName, offset=0, label='name'):
+        """Add a column to the baseDf with the name from the lookup table."""
         column = []
         dfID = self.lookupTables[columnName]
         for inx in range(len(self.baseDf)):
-            cid = int(self.baseDf.iloc[inx][dfID]-offset)
+            cid = int(self.baseDf.iloc[inx][dfID] - offset)
             self.isDebug(f"{columnName}: Index: {inx} - DFID: {dfID}: lookup ID: {cid}")
             try:
                 column.append(self.lookup[columnName].loc[cid][label])
@@ -228,27 +230,69 @@ class Processors:
         self.baseDf[columnName] = column
 
     def process(self):
+        """Process CPU data from multiple sources."""
         self.loadBaseProcessors()
         specIntel2k23 = self.importIntel('intel.txt')
         specAmd2k23 = self.importAmd("AMDcpu.csv")
         fullDf = self.baseDf.copy()
         fullDf.merge(specAmd2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
         fullDf.merge(specIntel2k23, on="processor_id", how='outer', suffixes=(".spec_int2k6", ".spec_int2k6"))
+        fullDf = fullDf.join(self.lookup['cache'], on=None, how='left')
+        fullDf = pd.merge(fullDf, self.lookup['die_photo'], left_on="die_photo_id", right_on="code_name_id",
+                          how='outer',
+                          suffixes=(".spec", ".photo"))
+        fullDf = pd.merge(fullDf, self.lookup['power'], on="processor_id", how='outer')
         fullDf.drop(
-            columns=['processor_family_id', 'manufacturer_id', 'microarchitecture_id', 'code_name_id', 'technology_id'],
-            inplace=True)
-        self.fullDf = fullDf
+            columns=['processor_family_id.spec', 'manufacturer_id', 'microarchitecture_id', 'code_name_id.spec',
+                     'technology_id', 'source_y', 'die_photo_id', 'cache_on_id', 'cache_off_id', 'processor_id',
+                     'hw_avail.spec_int2k6', 'spec_int2006_id', 'test_sponsor.spec_int2k6','hw_model.spec_int2k6',
+                     'bus.spec_int2k6', 'sw_auto_parallel.spec_int2k6', 'basemean.spec_int2k6', 'peakmean.spec_int2k6',
+                     'x400_perlbench', 'link.spec_int2k6', 'spec_int2000_id', 'hw_avail.spec_int2k0',
+                     'test_sponsor.spec_int2k0', 'hw_model.spec_int2k0', 'bus.spec_int2k0',
+                     'sw_auto_parallel.spec_int2k0', 'basemean.spec_int2k0', 'peakmean.spec_int2k0', '164_gzip',
+                     '175_vpr', '176_gcc', '181_mcf', '186_crafty', '197_parser', '252_eon', '253_perlbmk',
+                     '254_gap', '255_vortex', '256_bzip2', '300_twolf', 'link.spec_int2k0', 'spec_int1995_id',
+                     'hw_avail.spec_int95', 'test_sponsor.spec_int95', 'hw_model.spec_int95',
+                     'basemean.spec_int95', 'peakmean.spec_int95', '099_go', '124_m88ksim', '126_gcc', '129_compress',
+                     '130_li', '132_ijpeg', '134_perl', '147_vortex', 'link.spec_int95', 'spec_int1992_id', 'hw_avail.spec_int92',
+                     'test_sponsor.spec_int92', 'hw_model.spec_int92',
+                     'basemean.spec_int92', 'peakmean.spec_int92', '008_espresso', '022_li', '023_eqntott',
+                     '026_compress','072_sc', '085_gcc', 'link.spec_int92', 'code_name_id.photo',
+                     'processor_family_id.photo'],
+                     inplace=True)
+        fullDf = fullDf.dropna(how='all')
+        fullDf = fullDf.dropna(how='all', axis=1)
+        self.fullDf = fullDf.drop(fullDf.tail(21).index)
 
+    def selectManufacturer(self, manufacturer):
+        """Select processors by manufacturer. AMD and Intel are the majority.
+           Filter out AMD and Intel with manufacturer = 'notintelamd'."""
+        filter = list(self.getManufacturers())
+        if manufacturer.lower() == 'notintelamd':
+            filter.remove('Intel')
+            filter.remove('AMD')
+            return self.fullDf.loc[self.fullDf['manufacturer'].isin(filter)]
+        if manufacturer not in filter:
+            return None
+        return self.fullDf.loc[self.fullDf['manufacturer'] == manufacturer]
 
+    def getManufacturers(self):
+        """Return a list of unique manufacturer names."""
+        return self.fullDf['manufacturer'].unique()
+
+    def getProcessorFamilyList(self):
+        return self.fullDf['processor_family'].unique()
+
+    def getMicroarchitectureList(self):
+        """Return a list of unique microarchitecture names."""
+        return self.fullDf['microarchitecture'].unique()
+
+def loadProcessors(debug=False):
+    """Load and process CPU data."""
+    processors = Processors(debug=debug)
+    processors.process()
+    return processors
 
 if __name__ == "__main__":
-    processors = Processors(debug=True)
-    processors.process()
-    # baseDf = processors.loadBaseProcessors()
-    # baseSpec = dict(spec=dict(s95to2k0=baseDf[['basemean.spec_int2k0', 'basemean.spec_int95']].mean(axis=1),
-    #                           s2k0to2k6=baseDf[['basemean.spec_int2k6', 'basemean.spec_int2k0']].mean(axis=1),
-    #                           no95=baseDf["basemean.spec_int95"].isna(), no2k0=baseDf["basemean.spec_int2k0"].isna(),
-    #                           no2k6 = baseDf["basemean.spec_int2k6"].isna()),
-    #                 scale=dict(scaleclk=min(baseDf["max_clock"].values), scaletrans=baseStats["transistors"]['min'],
-    #                            scaletdp=baseStats["tdp"]['min'], scaleperf=baseStats["basemean.spec_int2k6"]['min'],
-    #                            scaleperfnorm=baseStats["perfnorm"]['min']))
+    processors =loadProcessors(debug=False)
+

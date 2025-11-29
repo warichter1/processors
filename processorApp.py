@@ -19,8 +19,9 @@ from numpy import random
 from nvidia import nvidiaLoader, nvidiaHeader, nvidiaSelect
 from arm import armLoader, armSelect # ArmDataProcessor
 from dashConf import dashConfig as conf, dashStyles as style
+from cpu import loadProcessors
 
-
+processors = loadProcessors(debug=False)
 df = nvidiaLoader('nvidia', columns=nvidiaSelect)
 df[' index'] = range(1, len(df) + 1)
 nHeader = nvidiaHeader('nvidia')
