@@ -35,7 +35,7 @@ executing==2.0.1
 fasteners==0.18
 filelock==3.13.1
 Flask==3.1.1
-fonttools==4.46.0
+fonttools==4.61.0
 fs==2.4.16
 fuse-python
 greenlet==3.0.3
