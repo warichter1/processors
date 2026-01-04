@@ -1,10 +1,10 @@
-requests==2.32.3
+requests==2.32.4
 dash
 plotly
 cryptography==44.0.1
 scipy
 spyder==6.1.1
-urllib3==2.2.3
+urllib3==2.6.0
 pandas==2.3.2
 numpy==2.3.2
 ipython==8.28.0
