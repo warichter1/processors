@@ -26,7 +26,9 @@ nvidiaSelect = ['hw_model', 'launch', 'Code name', 'Transistors (million)', 'bus
 
 def nvidiaLoader(folder, key='full', fileTemplate='nvidia', columns=None):
     source = f'{folder}/{fileTemplate}_{key}.csv'
-    return pd.read_csv(source) if columns is None else pd.read_csv(source, usecols=columns)
+    df = pd.read_csv(source) if columns is None else pd.read_csv(source, usecols=columns)
+    df.columns = [col.replace('_', ' ').title() for col in df.columns]
+    return df
 
 
 def nvidiaHeader(folder, key='full', fileTemplate='nvidia'):
@@ -36,6 +38,7 @@ def nvidiaHeader(folder, key='full', fileTemplate='nvidia'):
             header = row
             break
     return header
+
 
 class NvidiaImport:
     """Export Nvidia data from wikipedia and import into a pandas dataframe."""

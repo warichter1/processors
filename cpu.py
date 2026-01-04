@@ -107,10 +107,11 @@ class Processors:
     def importIntel(self, filename, folder='Intel', manufacturerId=9):
         """Import and process Intel processor specs."""
         df = None
+        print('Processing Intel files.')
         with open(f"{folder}/{filename}", "r") as f:
             intelFiles = f.readlines()
         for file in intelFiles[0].replace('\n', '').split(','):
-            print('Processing Intel file:', file)
+            # print('Processing Intel file:', file)
             if df is None:
                 df = self.processIntelFile(file)
             else:
@@ -271,10 +272,16 @@ class Processors:
         if manufacturer.lower() == 'notintelamd':
             filter.remove('Intel')
             filter.remove('AMD')
-            return self.fullDf.loc[self.fullDf['manufacturer'].isin(filter)]
+            buf = self.fullDf.loc[self.fullDf['manufacturer'].isin(filter)].dropna(axis=1, how='all')
+            # buf.columns = [col.replace('_', ' ').title() for col in buf.columns]
+            return buf
         if manufacturer not in filter:
             return None
-        return self.fullDf.loc[self.fullDf['manufacturer'] == manufacturer]
+        else:
+            df = self.fullDf.loc[self.fullDf['manufacturer'] == manufacturer].dropna(axis=1, how='all')
+            # buf = [col.replace('_', ' ').title() for col in buf.columns]
+        df.columns = [col.replace('_', ' ').title() for col in df.columns]
+        return df
 
     def getManufacturers(self):
         """Return a list of unique manufacturer names."""
@@ -294,5 +301,5 @@ def loadProcessors(debug=False):
     return processors
 
 if __name__ == "__main__":
-    processors =loadProcessors(debug=False)
+    processors = loadProcessors(debug=False)
 

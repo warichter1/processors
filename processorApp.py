@@ -22,20 +22,26 @@ from dashConf import dashConfig as conf, dashStyles as style
 from cpu import loadProcessors
 
 processors = loadProcessors(debug=False)
-df = nvidiaLoader('nvidia', columns=nvidiaSelect)
-df[' index'] = range(1, len(df) + 1)
-nHeader = nvidiaHeader('nvidia')
-
-# armTest = armLoader('ARM')
+amdDf = processors.selectManufacturer('AMD')
+amdDf[' index'] = range(1, len(amdDf) + 1)
+amdHeader = list(amdDf.columns)
+intelDf = processors.selectManufacturer('Intel')
+intelDf[' index'] = range(1, len(intelDf) + 1)
+intelHeader = list(intelDf.columns)
+otherDf = processors.selectManufacturer('notintelamd')
+otherDf[' index'] = range(1, len(otherDf) + 1)
+otherHeader = list(otherDf.columns)
+nvidiaDf = nvidiaLoader('nvidia', columns=nvidiaSelect)
+nvidiaDf[' index'] = range(1, len(nvidiaDf) + 1)
+nvidiaHeader = list(nvidiaDf.columns)
 armDf = armLoader('ARM', columns=armSelect)
-# arm.process()
-# armDf = arm.df['merged']
 armDf[' index'] = range(1, len(armDf) + 1)
-armHeader = list(armDf.keys())
+armHeader = list(armDf.columns)
 
 app = Dash(__name__, title='Processors', suppress_callback_exceptions=True)
 
 PAGE_SIZE = 10
+
 
 
 def tableTemplate(tableDf, className, header):
@@ -63,10 +69,8 @@ def tableTemplate(tableDf, className, header):
             row_deletable=conf['row_delete'],
             selected_columns=[],
             selected_rows=[],
-
             filter_action=conf['fil_action'],
             filter_query='',
-
             sort_action=conf['sort_action'],
             sort_mode=conf['sort_mode'],
             sort_by=[]
@@ -75,8 +79,13 @@ def tableTemplate(tableDf, className, header):
         className=f'{className}-datatable-interactivity-container'
     )
 
-table1 = tableTemplate(df, 'one', nHeader)
-table2 = tableTemplate(armDf, 'two', armHeader)
+tables = {
+          'nvidia': tableTemplate(nvidiaDf, 'one', nvidiaHeader),
+          'arm': tableTemplate(armDf, 'two', armHeader),
+          'intel': tableTemplate(intelDf, 'three', intelHeader),
+          'other': tableTemplate(otherDf, 'four', otherHeader),
+          'amd': tableTemplate(amdDf, 'five', amdHeader),
+}
 
 
 
@@ -100,6 +109,24 @@ app.layout = dcc.Loading(html.Div([
                 className='custom-tab',
                 selected_className='custom-tab--selected'
             ),
+dcc.Tab(
+                label='Intel',
+                value='tab-3',
+                className='custom-tab',
+                selected_className='custom-tab--selected'
+            ),
+            dcc.Tab(
+                label='AMD',
+                value='tab-4',
+                className='custom-tab',
+                selected_className='custom-tab--selected'
+            ),
+            dcc.Tab(
+                label='Other',
+                value='tab-5',
+                className='custom-tab',
+                selected_className='custom-tab--selected'
+            )
         ]),
     html.Div(id='tabs-content-classes')
 ]))
@@ -107,18 +134,37 @@ app.layout = dcc.Loading(html.Div([
 @callback(Output('tabs-content-classes', 'children'),
               Input('tabs-with-classes', 'value'))
 def render_content(tab):
-    if tab == 'tab-1':
-        return html.Div([
-            html.H3('Nvidia'),
-            table1,
-            html.Div(id='one-datatable-interactivity-container')
-        ])
-    elif tab == 'tab-2':
-        return html.Div([
-            html.H3('ARM'),
-            table2,
+    match tab:
+        case 'tab-1':
+            return html.Div([
+                html.H3('Nvidia'),
+                tables['nvidia'],
+                html.Div(id='one-datatable-interactivity-container')
+            ])
+        case 'tab-2':
+            return html.Div([
+                html.H3('ARM'),
+                tables['arm'],
             html.Div(id='two-datatable-interactivity-container')
+            ])
+        case 'tab-3':
+            return html.Div([
+                html.H3('Intel'),
+                tables['intel'],
+                html.Div(id='three-datatable-interactivity-container')
+            ])
+        case 'tab-4':
+            return html.Div([
+                html.H3('AMD'),
+                tables['amd'],
+                html.Div(id='four-datatable-interactivity-container')
         ])
+        case 'tab-5':
+            return html.Div([
+                html.H3('Other'),
+                tables['other'],
+                html.Div(id='five-datatable-interactivity-container')
+            ])
 
 
 # app.layout = html.Div(
