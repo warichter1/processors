@@ -9,10 +9,13 @@ pandas==2.3.2
 numpy==2.3.2
 ipython==8.28.0
 Flask==3.0.3
-matplotlib
-# sklearn-learn
+matplotlib==3.10.8
+scikit-learn
 beautifulsoup4
 GitPython
 psutil
 prettytable
 PyQt5
+langchain
+langchain-ollama
+langchain-chroma
