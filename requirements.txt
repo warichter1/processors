@@ -19,3 +19,6 @@ PyQt5
 langchain
 langchain-ollama
 langchain-chroma
+langchain-core
+langchain-text-splitter
+langchain_community

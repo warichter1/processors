@@ -6,12 +6,12 @@ Created on Mon Dec 25 17:37:51 2023
 @author: wrichter
 """
 
-import base64
+# import base64
 from dash import Dash, dash_table, html, dcc, callback
 from dash.dependencies import Input, Output, State #, Event
-import plotly.graph_objs as go
-from flask import Flask, redirect, render_template, request, session, abort, url_for, json, make_response
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
+# import plotly.graph_objs as go
+# from flask import Flask, redirect, render_template, request, session, abort, url_for, json, make_response
+# from werkzeug.middleware.dispatcher import DispatcherMiddleware
 import pandas as pd
 import numpy as np
 from numpy import random
