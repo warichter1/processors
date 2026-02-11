@@ -1,7 +1,7 @@
 requests==2.32.4
 dash
 plotly
-cryptography==44.0.1
+cryptography==46.0.5
 scipy
 spyder==6.1.1
 urllib3==2.6.2
