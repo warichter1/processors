@@ -10,7 +10,6 @@ from langchain_community.document_loaders import DirectoryLoader, TextLoader, Py
 from langchain_ollama import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_ollama.llms import OllamaLLM as Ollama
-# from langchain_community.llms import Ollama
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
@@ -39,10 +38,81 @@ from langchain_core.prompts import ChatPromptTemplate
 codeDir = '/home/wrichter/Documents/Code/Projects/Python/processors'
 dbLocation = "./AI/chromeLangChainCodeDb"
 
+class AICodeLoader:
+    def __init__(self, codeDir, ragType="code", model="llama3", dbLocation="./AI/chromeLangChainCodeDb"):
+        self.codeDir = codeDir
+        self.ragType = ragType
+        self.model = model
+        self.dbLocation = dbLocation
+        self.docs = dict(docs=None, ids=None)
+        self.loadCodebase()
+        self.splitDocs()
+
+    def loadCodebase(self):
+        loader = DirectoryLoader(
+            self.codeDir,
+            glob="**/*.py", # Targets only .py files
+            loader_cls=TextLoader,
+            loader_kwargs={"encoding": "utf-8", "autodetect_encoding": True}
+        )
+        docs = loader.load()
+        self.splitDocs(docs)
+
+    def splitDocs(self, docs):
+        """Splits documents into smaller, manageable chunks."""
+        # RecursiveCharacterTextSplitter is good for maintaining context in code
+        text_splitter = RecursiveCharacterTextSplitter.from_language(
+            language="python",
+            chunk_size=1000,
+            chunk_overlap=200
+        )
+        chunks = text_splitter.split_documents(self.docs)
+        self.docs['docs'] = chunks
+
+
+class AIDfLoader:
+    """
+        Loads a DataFrame as documents for the vector storage.
+        Used as a Data import for the RAG vector.
+    """
+    def __init__(self, df, ragType="dataframe", model="llama3", keys=None, metadata=None,
+                 dbLocation = "./AI/chromeLangChainDb2"):
+        self.docs = dict(docs=None, ids=None)
+        self.ragType = ragType
+        self.model = model
+        self.dbLocation = dbLocation
+        self.dbExists = not os.path.exists(dbLocation)
+        self.keys = keys if keys else ['manufacturer', 'processor_family', 'microarchitecture', 'code_name', 'model']
+        self.metadata = metadata if metadata else {'cores': 'hw_ncores', 'threadspercore': 'hw_nthreadspercore',
+                                          'date': 'created_at'}
+        if self.dbExists:
+            self.loadDocuments(df)
+
+    def loadDocuments(self, df):
+        """Loads a DataFrame as  if the vector store does not exist."""
+        documents = []
+        ids = []
+        for i, row in df.iterrows():
+            # print(i)
+            content = ""
+            for key in self.keys:
+                content += str(row[key]) + " "
+            metadata = {entry: str(row[self.metadata[entry]]) for entry in self.metadata}
+            document = Document(page_content=content,
+                                metadata=metadata,
+                                id=str(i)
+                                )
+            documents.append(document)
+            ids.append(str(i))
+        self.docs['docs'] = documents
+        self.docs['ids'] = ids
+
 class AICodeVector:
-    def __init__(self, codeDir, dbLocation, model="llama3"):
+    def __init__(self, codeDir, dbLocation, collectionName="codebase", ragType="code", model="llama3"):
         self.codeDir = codeDir
         self.dbLocation = dbLocation
+        self.collectionName = collectionName
+        self.ragType = ragType
         self.docs = None
         self.vectorStore = None
         self.ragChain = None
@@ -53,22 +123,30 @@ class AICodeVector:
     def setupPrompt(self, system_prompt=None):
         """Sets up the prompt for the LLM. Use a default if none provided."""
         if system_prompt is None:
-            system_prompt = (
-                "You are an expert Python software engineer. Use only the provided python codebase "
-                "and your Python pep-8 language knowledge to answer the questions asked."
-                "The context provided is included within the Python codebase."
-                "Use any and available, except AI* references, in the Python codebase to answer the question"
-                "The use of data references in the codebase are also allowed."
-                "Do not make up information. If the answer is not in the above context."
-                "\n\n"
-                "{context}"
-            )
+            if self.ragType == "code":
+                system_prompt = (
+                    "You are an expert Python software engineer. Use only the provided python codebase "
+                    "and your Python pep-8 language knowledge to answer the questions asked."
+                    "The context provided is included within the Python codebase."
+                    "Use any and available, except AI* references, in the Python codebase to answer the question"
+                    "The use of data references in the codebase are also allowed."
+                    "Do not make up information. If the answer is not in the above context."
+                    "\n\n"
+                    "{context}"
+                )
+            else:
+                system_prompt = (
+                    "You are an expert in answering questions about processors and Python Dash apps. Answer as concisely as possible."
+                    "Models: {models}"
+                    "Question: {question}"
+                )
         self.prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", system_prompt),
                 ("human", "{input}"),
             ]
         )
+
 
     def loadCodebase(self):
         print("Loading codebase...")
@@ -116,34 +194,18 @@ class AICodeVector:
         embeddings = OllamaEmbeddings(model="nomic-embed-text")
         # Use Chroma as the vector store
         self.vectorstore = Chroma.from_documents(
+            collection_name=self.collectionName,
             documents=self.chunks,
             embedding=embeddings,
             persist_directory=dbLocation
         )
+        # vectorStore = Chroma(collection_name="processors", embedding_function=embeddings, persist_directory=dbLocation)
 
     def setupRagChain(self):
         """Sets up the RAG chain using Ollama and LangChain."""
         # Initialize the local LLM
         llm = Ollama(model=self.model)
         retriever = self.vectorstore.as_retriever()
-
-        # Prompt template to instruct the LLM
-        # system_prompt = (
-        #     "You are an expert Python software engineer. Use only the provided python codebase"
-        #     "and your Python pep-8 language knowledge to answer the questions asked."
-        #     "The context provided is included within the Python codebase."
-        #     "Use any and available, except AI* references, in the Python codebase to answer the question"
-        #     "The use of data references in the codebase are also allowed."
-        #     "Do not make up information. If the answer is not in the above context."
-        #     "\n\n"
-        #     "{context}"
-        # )
-        # prompt = ChatPromptTemplate.from_messages(
-        #     [
-        #         ("system", system_prompt),
-        #         ("human", "{input}"),
-        #     ]
-        # )
         # Create the chains
         question_answer_chain = create_stuff_documents_chain(llm, self.prompt)
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
