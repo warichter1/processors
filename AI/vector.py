@@ -30,7 +30,6 @@ embeddings = OllamaEmbeddings(model='mxbai-embed-large')
 dbLocation = "./AI/chromeLangChainDb"
 addDocuments = not os.path.exists(dbLocation)
 vectorStore = Chroma(collection_name="processors", embedding_function=embeddings, persist_directory=dbLocation)
-
 if addDocuments:
     df = importProcessors(debug=False)
     documents = []

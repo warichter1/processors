@@ -300,6 +300,7 @@ def loadProcessors(debug=False):
     processors.process()
     return processors
 
+
 if __name__ == "__main__":
     processors = loadProcessors(debug=False)
 
