@@ -121,7 +121,11 @@ class AiCodeVector:
         self.vectorStore = None
         self.model = inputRag.model
         self.prompt = inputRag.prompt
+        setupVector = dict(code=self.setupVectorStoreCode, dataframe=self.setupVectorStoreData)
         self.setupPrompt()
+        setupVector[self.ragType]()
+
+
 
     def setupPrompt(self):
         """Sets up the prompt for the LLM. Use a default if none provided."""
