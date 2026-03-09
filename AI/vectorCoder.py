@@ -164,18 +164,19 @@ class AiCodeVector:
     def setupVectorStoreData(self):
         """Creates embeddings and stores them in ChromaDB."""
         embeddings = OllamaEmbeddings(model='mxbai-embed-large')
-        vectorStore = Chroma(collection_name=self.collectionName, embedding_function=embeddings,
+        self.vectorStore = Chroma(collection_name=self.collectionName, embedding_function=embeddings,
                              persist_directory=self.dbLocation)
         if self.dbExists:
             # self.docs = dict(docs=None, ids=None)
-            vectorStore.add_documents(documents=self.docs['docs'], ids=self.docs['ids'])
-        retriever = vectorStore.as_retriever(search__kwargs={'k': 5})
+            self.vectorStore.add_documents(documents=self.docs['docs'], ids=self.docs['ids'])
+        # retriever = vectorStore.as_retriever(search__kwargs={'k': 5})
+        # self.vectorStore = vectorStore
 
     def setupRagChain(self):
         """Sets up the RAG chain using Ollama and LangChain."""
         # Initialize the local LLM
         llm = Ollama(model=self.model)
-        retriever = self.vectorstore.as_retriever()
+        retriever = self.vectorstore.as_retriever(search__kwargs={'k': 5})
         # Create the chains
         question_answer_chain = create_stuff_documents_chain(llm, self.prompt)
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
