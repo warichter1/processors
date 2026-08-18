@@ -2,14 +2,14 @@
 
 from datetime import datetime
 
-from AI.vectorCoder import AICodeVector
+from AI.vectorCoder import AiCodeVector
 
 
 
 codeDir = '/home/wrichter/Documents/Code/Projects/Python/processors'
 dbLocation = "./AI/chromeLangChainCodeDb"
 startTime = datetime.now()
-vector = AICodeVector(codeDir, dbLocation, "llama3.2")
+vector = AiCodeVector(codeDir, dbLocation, "llama3.2")
 ragChain = vector.loadCodebase()
 endTime = datetime.now()
 print(f"Load Time: {endTime - startTime}")
