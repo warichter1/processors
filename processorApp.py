@@ -241,7 +241,7 @@ def update_graphsupdate_graphs(rows, derived_virtual_selected_rows):
     if derived_virtual_selected_rows is None:
         derived_virtual_selected_rows = []
 
-    dff = df if rows is None else pd.DataFrame(rows)
+    dff = pd.DataFrame() if rows is None else pd.DataFrame(rows)
 
     colors = ['#7FDBFF' if i in derived_virtual_selected_rows else '#0074D9'
               for i in range(len(dff))]
