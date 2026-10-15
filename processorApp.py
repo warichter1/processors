@@ -214,11 +214,18 @@ def split_filter_part(filter_part):
     Input('one-datatable-interactivity', 'selected_columns'),
     Input('two-datatable-interactivity', 'selected_columns')
 )
-def update_styles(selected_columns):
-    return [{
-        'if': { 'column_id': i },
-        'background_color': '#D2F3FF'
-    } for i in selected_columns]
+# def update_styles(selected_columns):
+#     return [{
+#         'if': { 'column_id': i },
+#         'background_color': '#D2F3FF'
+#     } for i in selected_columns]
+def update_styles(one_selected_columns, two_selected_columns):
+    def styles(selected_columns):
+        return [
+            {'if': {'column_id': column}, 'background_color': '#D2F3FF'}
+            for column in (selected_columns or [])
+        ]
+    return styles(one_selected_columns), styles(two_selected_columns)
 
 @callback(
     Output('two-datatable-interactivity-container', "children"),
@@ -227,7 +234,7 @@ def update_styles(selected_columns):
     Input('two-datatable-interactivity', "derived_virtual_data"),
     Input('one-datatable-interactivity', "derived_virtual_selected_rows"),
     Input('two-datatable-interactivity', "derived_virtual_selected_rows"))
-def update_graphsupdate_graphs(rows, derived_virtual_selected_rows):
+def update_graphs(one_rows, two_rows, one_derived_virtual_selected_rows, two_derived_virtual_selected_rows):
     # When the table is first rendered, `derived_virtual_data` and
     # `derived_virtual_selected_rows` will be `None`. This is due to an
     # idiosyncrasy in Dash (unsupplied properties are always None and Dash
@@ -237,44 +244,48 @@ def update_graphsupdate_graphs(rows, derived_virtual_selected_rows):
     # Instead of setting `None` in here, you could also set
     # `derived_virtual_data=df.to_rows('dict')` when you initialize
     # the component.
-    app.logger(f'{rows}, {derived_virtual_selected_rows}')
-    if derived_virtual_selected_rows is None:
-        derived_virtual_selected_rows = []
+    def graphs(rows, derived_virtual_selected_rows):
+        app.logger.info(f'{rows}, {derived_virtual_selected_rows}')
+        if derived_virtual_selected_rows is None:
+            derived_virtual_selected_rows = []
 
-    dff = pd.DataFrame() if rows is None else pd.DataFrame(rows)
+        dff = pd.DataFrame() if rows is None else pd.DataFrame(rows)
 
-    colors = ['#7FDBFF' if i in derived_virtual_selected_rows else '#0074D9'
-              for i in range(len(dff))]
-
-    return [
-        dcc.Graph(
-            id=column,
-            figure={
-                "data": [
-                    {
-                        "x": dff["country"],
-                        "y": dff[column],
-                        "type": "bar",
-                        "marker": {"color": colors},
-                    }
-                ],
-                "layout": {
-                    "xaxis": {"automargin": True},
-                    "yaxis": {
-                        "automargin": True,
-                        "title": {"text": column}
+        colors = ['#7FDBFF' if i in derived_virtual_selected_rows else '#0074D9'
+                  for i in range(len(dff))]
+        columns = 'name'
+        return [
+            dcc.Graph(
+                id=column,
+                figure={
+                    "data": [
+                        {
+                            "x": dff["Model"],
+                            "y": dff[column],
+                            "type": "bar",
+                            "marker": {"color": colors},
+                        }
+                    ],
+                    "layout": {
+                        "xaxis": {"automargin": True},
+                        "yaxis": {
+                            "automargin": True,
+                            "title": {"text": column}
+                        },
+                        "height": 250,
+                        "margin": {"t": 10, "l": 10, "r": 10},
                     },
-                    "height": 250,
-                    "margin": {"t": 10, "l": 10, "r": 10},
                 },
-            },
-        )
-        # check if column exists - user may have deleted it
-        # If `column.deletable=False`, then you don't
-        # need to do this check.
-        for column in ["pop", "lifeExp", "gdpPercap"] if column in dff
-    ]
-
+            )
+            # check if column exists - user may have deleted it
+            # If `column.deletable=False`, then you don't
+            # need to do this check.
+            for column in ["Clock", "Launch", "name"] if column in dff
+        ]
+    return (
+        graphs(two_rows, two_derived_virtual_selected_rows),
+        graphs(one_rows, one_derived_virtual_selected_rows),
+    )
 
 
 if __name__ == '__main__':
