@@ -1,0 +1,15 @@
+# Pull from your locally cached 32B model weighs
+FROM qwen2.5-coder:32b-instruct-q4_K_M
+
+# Caps context to 16k tokens to preserve the remaining ~4.5GB VRAM for KV Cache
+PARAMETER num_ctx 16384
+
+# Stop token generation if it hits a massive runaway code block
+PARAMETER num_predict 8192
+
+# Establish strict adherence to instructions and system persona limits
+PARAMETER temperature 0.1
+PARAMETER top_p 0.9
+
+# Lock in the Lead Architect persona at the engine level
+SYSTEM "You are a development box assistant. Keep descriptions compact and write out complete code blocks when requested."

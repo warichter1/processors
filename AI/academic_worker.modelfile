@@ -1,0 +1,11 @@
+# 1. Pull directly from your locally installed base model weights
+FROM qwen2.5-coder:14b-instruct-q4_K_M
+
+# 2. Pin resource execution limits natively to your Ryzen 5950X
+PARAMETER num_thread 16
+PARAMETER num_ctx 16384
+PARAMETER temperature 0.2
+
+# 3. Bake the persona rules permanently into the model's core system loop
+
+SYSTEM "You are a development box assistant. Keep descriptions compact and write out complete code blocks when requested."

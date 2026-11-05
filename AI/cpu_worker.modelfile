@@ -1,0 +1,4 @@
+FROM qwen2.5-coder:14b-instruct-q4_K_M
+# Restrict to 16 threads (8 physical cores) to prevent L3 cache thrashing on AMD CCXs
+PARAMETER num_thread 16
+PARAMETER num_ctx 16384
