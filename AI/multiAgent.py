@@ -48,6 +48,8 @@ import uuid
 import argparse
 import requests
 import sys
+from html.parser import HTMLParser
+from urllib.parse import parse_qs, urljoin, urlsplit
 from datetime import datetime
 import time
 from crewai import Agent, Crew, Process, Task, LLM
@@ -96,7 +98,23 @@ RESEARCH_TASK_PROMPT = (
 )
 RESEARCH_MODEL = "ollama/academic-worker"
 ARCHITECT_MODEL = "ollama/gpu-reasoner"
-CACHE_SCHEMA_VERSION = 1
+CACHE_SCHEMA_VERSION = 2
+WORKFLOW_CACHE_MAX_AGE_SECONDS = 3600
+RESEARCH_AGENT_INSTRUCTIONS = {
+    "role": "Senior Academic Research Fellow",
+    "goal": "Examine file system specifications and use current public web sources when relevant.",
+    "backstory": "A precise text processing module configured on the local Ryzen CPU layout.",
+    "expected_output": "A structured markdown report reviewing local codebase health.",
+}
+ARCHITECT_AGENT_INSTRUCTIONS = {
+    "role": "Lead Software Architect",
+    "goal": "Review system layouts and generate robust, ready-to-execute Python scripts.",
+    "backstory": "Advanced code generation matrix utilizing dual-GPU compute engines for clean logical generation.",
+    "expected_output": (
+        "A complete, self-contained python script file that logs tracked file operations "
+        "with performance timestamps."
+    ),
+}
 
 CONCISE_ARCHITECT_TASK_PROMPT = (
     "Using the preceding research findings, generate output_system.py as a self-contained Python file-operation monitor. "
@@ -107,11 +125,61 @@ CONCISE_ARCHITECT_TASK_PROMPT = (
 )
 
 
+class _DuckDuckGoResultParser(HTMLParser):
+    _void_tags = {
+        "area", "base", "br", "col", "embed", "hr", "img", "input",
+        "link", "meta", "param", "source", "track", "wbr",
+    }
+
+    def __init__(self):
+        super().__init__()
+        self.titles = []
+        self.snippets = []
+        self._capture = None
+        self._depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        classes = set(attributes.get("class", "").split())
+        if self._capture is None:
+            if tag == "a" and "result__a" in classes:
+                self._capture = ("title", attributes.get("href"), [])
+                self._depth = 1
+            elif "result__snippet" in classes:
+                self._capture = ("snippet", None, [])
+                self._depth = 1
+        elif tag not in self._void_tags:
+            self._depth += 1
+
+    def handle_endtag(self, tag):
+        if self._capture is None or tag in self._void_tags:
+            return
+        self._depth -= 1
+        if self._depth == 0:
+            kind, href, content = self._capture
+            text = " ".join("".join(content).split())
+            if text:
+                if kind == "title":
+                    self.titles.append({"title": text, "href": href})
+                else:
+                    self.snippets.append(text)
+            self._capture = None
+
+    def handle_data(self, data):
+        if self._capture is not None:
+            self._capture[2].append(data)
+
+
 
 class MultiAgent:
     """Multi-agent model leveraging native file execution bypass strings"""
 
-    def __init__(self, targetDir="/home/wrichter/Documents/Code/Projects/Python/processors/AI", debug=True):
+    def __init__(
+        self,
+        targetDir="/home/wrichter/Documents/Code/Projects/Python/processors/AI",
+        debug=True,
+        web_search=True,
+    ):
         print("Initializing Multi-agent environment configuration...")
         self.TARGET_DIR = targetDir
         os.makedirs(self.TARGET_DIR, exist_ok=True)
@@ -120,6 +188,7 @@ class MultiAgent:
         os.makedirs(self.log_dir, exist_ok=True)
         self.cache_path = os.path.join(self.log_dir, "multiAgent-cache.sqlite3")
         self.debug = debug
+        self.web_search_enabled = web_search
         self.run_id = uuid.uuid4().hex[:12]
         self._run_perf_start = time.perf_counter()
         self._last_time_marker = None
@@ -144,6 +213,71 @@ class MultiAgent:
         self._llm_request_count = 0
         self._llm_request_starts = {}
         self._llm_event_handlers = []
+        self.internet_search_tool = self._create_internet_search_tool() if web_search else None
+
+    def _create_internet_search_tool(self):
+        @tool("internet_search")
+        def internet_search(query: str, max_results: int = 5) -> str:
+            """Search public web pages for non-sensitive information. Never include private data or secrets in a query."""
+            query = query.strip()
+            if not query:
+                raise ValueError("Search query must not be empty.")
+            if len(query) > 500:
+                raise ValueError("Search query must be 500 characters or fewer.")
+            if not 1 <= max_results <= 10:
+                raise ValueError("max_results must be between 1 and 10.")
+
+            started_at = time.perf_counter()
+            try:
+                response = requests.get(
+                    "https://html.duckduckgo.com/html/",
+                    params={"q": query},
+                    headers={"User-Agent": "Mozilla/5.0 (compatible; MultiAgentResearch/1.0)"},
+                    timeout=(5, 15),
+                )
+                response.raise_for_status()
+            except requests.RequestException as exc:
+                duration_s = round(time.perf_counter() - started_at, 6)
+                self._log_profile(
+                    "internet_search_failed",
+                    duration_s=duration_s,
+                    error_type=type(exc).__name__,
+                    error=str(exc),
+                )
+                raise RuntimeError(f"Internet search failed: {exc}") from exc
+
+            parser = _DuckDuckGoResultParser()
+            parser.feed(response.text)
+            results = []
+            for index, item in enumerate(parser.titles[:max_results]):
+                href = urljoin("https://html.duckduckgo.com/html/", item["href"] or "")
+                query_values = parse_qs(urlsplit(href).query).get("uddg")
+                if query_values:
+                    href = query_values[0]
+                if urlsplit(href).scheme not in {"http", "https"}:
+                    continue
+                snippet = parser.snippets[index] if index < len(parser.snippets) else "No summary available."
+                results.append(f"{index + 1}. {item['title']}\n   URL: {href}\n   {snippet}")
+
+            if not results:
+                self._log_profile(
+                    "internet_search_failed",
+                    duration_s=round(time.perf_counter() - started_at, 6),
+                    query_length=len(query),
+                    error="No parseable search results.",
+                )
+                raise RuntimeError(
+                    "Internet search returned no parseable results; the provider may be unavailable or have changed its page format."
+                )
+            self._log_profile(
+                "internet_search_complete",
+                duration_s=round(time.perf_counter() - started_at, 6),
+                result_count=len(results),
+                query_length=len(query),
+            )
+            return "\n".join(results)
+
+        return internet_search
 
     def _log_profile(self, event, **fields):
         if not self.debug:
@@ -200,18 +334,29 @@ class MultiAgent:
             if name not in generated_entries
         )
 
-    def _workflow_cache_inputs(self):
-        files = self._input_file_manifest()
+    def _research_task_description(self, files):
         research_prompt = RESEARCH_TASK_PROMPT.format(
             target_dir=self.TARGET_DIR,
             files=", ".join(files) if files else "No files currently exist (Empty directory).",
         )
+        if self.web_search_enabled:
+            research_prompt += (
+                "\nUse internet_search only for current, relevant public best practices; cite result URLs "
+                "and never include private project content, credentials, or personal data in a search query."
+            )
+        return research_prompt
+
+    def _workflow_cache_inputs(self):
+        files = self._input_file_manifest()
+        research_prompt = self._research_task_description(files)
         return {
             "schema_version": CACHE_SCHEMA_VERSION,
             "target_dir": self.TARGET_DIR,
             "files": files,
             "research_prompt": research_prompt,
             "architect_prompt": ARCHITECT_TASK_PROMPT,
+            "web_search_enabled": self.web_search_enabled,
+            "web_search_provider": "DuckDuckGo HTML",
             "research_model": self._model_cache_identity(
                 RESEARCH_MODEL,
                 "academic_worker.modelfile"
@@ -221,18 +366,8 @@ class MultiAgent:
                 "gpu_reasoner.modelfile"
             ),
             "agent_instructions": {
-                "research": {
-                    "role": "Senior Academic Research Fellow",
-                    "goal": "Examine file system specifications and compile clear structural markdown parameters.",
-                    "backstory": "A precise text processing module configured on the local Ryzen CPU layout.",
-                    "expected_output": "A structured markdown report reviewing local codebase health.",
-                },
-                "architect": {
-                    "role": "Lead Software Architect",
-                    "goal": "Review system layouts and generate robust, ready-to-execute Python scripts.",
-                    "backstory": "Advanced code generation matrix utilizing dual-GPU compute engines for clean logical generation.",
-                    "expected_output": "A complete, self-contained python script file that logs tracked file operations with performance timestamps.",
-                },
+                "research": RESEARCH_AGENT_INSTRUCTIONS,
+                "architect": ARCHITECT_AGENT_INSTRUCTIONS,
             },
         }
 
@@ -253,12 +388,12 @@ class MultiAgent:
         serialized = json.dumps(inputs, sort_keys=True, separators=(",", ":"))
         return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
 
-    def _load_workflow_cache(self, cache_key):
+    def _load_workflow_cache(self, cache_key, max_age_seconds=WORKFLOW_CACHE_MAX_AGE_SECONDS):
         self._initialize_cache()
         with sqlite3.connect(self.cache_path) as connection:
             row = connection.execute(
                 """
-                SELECT inputs_json, research_output, architect_output, generated_code
+                SELECT created_at, inputs_json, research_output, architect_output, generated_code
                 FROM workflow_cache
                 WHERE cache_key = ?
                 """,
@@ -266,11 +401,21 @@ class MultiAgent:
             ).fetchone()
         if row is None:
             return None
+        created_at = datetime.fromisoformat(row[0])
+        age_seconds = (datetime.now().astimezone() - created_at.astimezone()).total_seconds()
+        if age_seconds > max_age_seconds or age_seconds < 0:
+            self._log_profile(
+                "workflow_cache_expired",
+                cache_key=cache_key,
+                age_seconds=round(age_seconds, 3),
+                max_age_seconds=max_age_seconds,
+            )
+            return None
         return {
-            "inputs_json": row[0],
-            "research_output": row[1],
-            "architect_output": row[2],
-            "generated_code": row[3],
+            "inputs_json": row[1],
+            "research_output": row[2],
+            "architect_output": row[3],
+            "generated_code": row[4],
         }
 
     def _store_workflow_cache(self, cache_key, inputs, research_output, architect_output, generated_code):
@@ -640,20 +785,22 @@ class MultiAgent:
 
         # 1. Define crisp, lightweight personas without complex framework tools parameters
         self.getTime('Agent Construction Start')
+        research_tools = [self.internet_search_tool] if self.internet_search_tool else []
         self.agents['research_agent'] = Agent(
-            role="Senior Academic Research Fellow",
-            goal="Examine file system specifications and compile clear structural markdown parameters.",
-            backstory="A precise text processing module configured on the local Ryzen CPU layout.",
+            role=RESEARCH_AGENT_INSTRUCTIONS["role"],
+            goal=RESEARCH_AGENT_INSTRUCTIONS["goal"],
+            backstory=RESEARCH_AGENT_INSTRUCTIONS["backstory"],
             llm=cpu_academic_llm,
+            tools=research_tools,
             allow_delegation=False,
             verbose=self.debug,
             step_callback=self._create_agent_step_callback("research_agent")
         )
 
         self.agents['lead_architect'] = Agent(
-            role="Lead Software Architect",
-            goal="Review system layouts and generate robust, ready-to-execute Python scripts.",
-            backstory="Advanced code generation matrix utilizing dual-GPU compute engines for clean logical generation.",
+            role=ARCHITECT_AGENT_INSTRUCTIONS["role"],
+            goal=ARCHITECT_AGENT_INSTRUCTIONS["goal"],
+            backstory=ARCHITECT_AGENT_INSTRUCTIONS["backstory"],
             llm=gpu_reasoner_llm,
             allow_delegation=False,
             verbose=self.debug,
@@ -665,14 +812,11 @@ class MultiAgent:
         # Pass your directory file list directly into the task context string to bypass the list_dir loop entirely
         self.getTime('Task Construction Start')
         existing_files = self._input_file_manifest()
-        files_str = ", ".join(existing_files) if existing_files else "No files currently exist (Empty directory)."
+        research_prompt = self._research_task_description(existing_files)
 
         task_research = Task(
-            description=RESEARCH_TASK_PROMPT.format(
-                target_dir=self.TARGET_DIR,
-                files=files_str,
-            ),
-            expected_output="A structured markdown report reviewing local codebase health.",
+            description=research_prompt,
+            expected_output=RESEARCH_AGENT_INSTRUCTIONS["expected_output"],
             agent=self.agents['research_agent'],
             callback=self._create_task_callback("Research", next_agent="lead_architect")
         )
@@ -680,7 +824,7 @@ class MultiAgent:
         # Task 2: Hard-constrained to generate self-contained, high-fidelity monitoring code
         task_architect_build = Task(
             description=ARCHITECT_TASK_PROMPT,
-            expected_output="A complete, self-contained python script file that logs tracked file operations with performance timestamps.",
+            expected_output=ARCHITECT_AGENT_INSTRUCTIONS["expected_output"],
             agent=self.agents['lead_architect'],
             callback=self._create_task_callback("Architect")
         )
@@ -696,6 +840,11 @@ class MultiAgent:
         )
         self.getTime('Crew Construction Complete')
         print('Workstation Initialization Complete.')
+
+    def resetAgents(self):
+        """Reset agent to clear cache"""
+        for agent in self.agents.key():
+            command = ['ollama', ]
 
     def initialize_local_rag(self):
         """Loads bge-large embeddings locally using your Ollama CPU endpoint on port 11435"""
@@ -946,9 +1095,14 @@ if __name__ == "__main__":
         action="store_true",
         help="Clear cached workflow results before running."
     )
+    parser.add_argument(
+        "--offline",
+        action="store_true",
+        help="Disable the Research agent's internet search tool."
+    )
     args = parser.parse_args()
 
-    aiAgents = MultiAgent(debug=True)
+    aiAgents = MultiAgent(debug=True, web_search=not args.offline)
     aiAgents._log_profile("run_started", profile_path=aiAgents.profile_path)
     if args.benchmark:
         aiAgents.benchmark_ollama(
