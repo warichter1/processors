@@ -13,11 +13,13 @@ expire after one hour, including results produced with web research. For the
 latest web results, disable the cache.
 
 The Research agent can search public web pages through DuckDuckGo when current
-external best practices are relevant. Search results are limited to ten and
-requests have a timeout. Do not put credentials, private project content, or
-personal data in search queries. Select **Offline** in the web interface to
-disable web search. The workflow options can also be supplied directly when
-constructing `WorkflowRunner`.
+external best practices are relevant. Chat requests that explicitly ask for
+research or concern changing facts are searched before the response is
+generated, so the model receives source results directly rather than needing
+to invoke a tool call. Search results are limited and requests have a timeout.
+Do not put credentials, private project content, or personal data in search
+queries. Select **Offline** in the web interface to disable web search. The
+workflow options can also be supplied directly when constructing `WorkflowRunner`.
 
 ```bash
 python AI/multiAgent.py
@@ -47,12 +49,19 @@ and web-search behavior; benchmark repetitions and token limits are set in the
 numeric fields. A startup notice appears while the page initializes and points
 to the cache and offline settings. Sending a request displays a spinner until
 the assistant completes or reports a generic failure.
+Chat turns are stored in `AI/logs/conversation-history.sqlite3` and associated
+with the browser's signed session, so they can be restored after a page reload
+or server restart. The assistant receives the recent conversation context;
+**View saved history** opens the full transcript, and **Clear saved history**
+removes that session's transcript and latency records.
+Response-time records include the history context size. The UI warns when
+context exceeds 12,000 characters, and flags responses over 30 seconds when
+large history may have contributed; clear history to reduce the context.
 Chat uses a single response agent on the faster academic worker instead of
-waiting for the sequential research-and-architect pipeline; optional web search
-remains available when enabled. Current releases, model catalogs, and other
-changing facts should trigger a search without requiring the user to provide a
-URL; answers should cite the source URLs. Script generation continues to use
-both agents.
+waiting for the sequential research-and-architect pipeline. Research and
+current-information queries are searched directly when web search is enabled;
+the results are passed to the response agent, which should cite their URLs.
+Script generation continues to use both agents.
 
 Web requests are type- and size-validated before reaching the workflow. Backend
 exceptions are written to `AI/logs/webserver.log` and clients receive a generic
