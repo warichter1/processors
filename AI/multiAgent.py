@@ -183,8 +183,13 @@ CHAT_ARCHITECT_AGENT_INSTRUCTIONS = {
 }
 CHAT_ARCHITECT_TASK_PROMPT = (
     "Answer the user's latest request directly using your knowledge and conversation context. "
+    "For questions about current releases, product or model catalogs, versions, features, compatibility, "
+    "or other changing facts, you MUST use internet_search when it is available, even if the user did not "
+    "provide a URL. Search by the product or topic name, prioritize official sources, and include source URLs "
+    "in your answer. Do not ask the user to provide a URL just to find public information. If search is "
+    "unavailable or returns no useful results, say what you could not verify rather than guessing; ask for "
+    "clarification only when the request itself is ambiguous. "
     "Do not create or modify files unless the user explicitly asks for code or file operations. "
-    "Use internet_search only when current public information is useful. "
     "Be concise; if code is requested, provide a complete, relevant answer and explain important assumptions."
 )
 

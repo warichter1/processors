@@ -49,7 +49,10 @@ to the cache and offline settings. Sending a request displays a spinner until
 the assistant completes or reports a generic failure.
 Chat uses a single response agent on the faster academic worker instead of
 waiting for the sequential research-and-architect pipeline; optional web search
-remains available when enabled. Script generation continues to use both agents.
+remains available when enabled. Current releases, model catalogs, and other
+changing facts should trigger a search without requiring the user to provide a
+URL; answers should cite the source URLs. Script generation continues to use
+both agents.
 
 Web requests are type- and size-validated before reaching the workflow. Backend
 exceptions are written to `AI/logs/webserver.log` and clients receive a generic
