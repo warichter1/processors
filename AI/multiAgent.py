@@ -45,9 +45,11 @@ import subprocess
 import logging
 import warnings
 import uuid
-import argparse
+import threading
 import requests
 import sys
+from contextvars import ContextVar
+from contextlib import contextmanager
 from html.parser import HTMLParser
 from urllib.parse import parse_qs, urljoin, urlsplit
 from datetime import datetime
@@ -58,7 +60,61 @@ from crewai.tools import tool
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import OllamaEmbeddings
+if __package__:
+    from .logging_config import get_queued_logger
+    from .request_validation import validate_chat_payload
+else:
+    from logging_config import get_queued_logger
+    from request_validation import validate_chat_payload
 # from langchain_openai import ChatOpenAI
+
+
+_ACTIVE_CALLBACK_AGENT = ContextVar("active_multi_agent_callback_agent", default=None)
+
+
+def _active_callback_agent():
+    return _ACTIVE_CALLBACK_AGENT.get()
+
+
+def _research_agent_step_callback(step_output):
+    agent = _active_callback_agent()
+    if agent is not None:
+        agent._record_agent_step("research_agent", step_output)
+
+
+def _lead_architect_agent_step_callback(step_output):
+    agent = _active_callback_agent()
+    if agent is not None:
+        agent._record_agent_step("lead_architect", step_output)
+
+
+def _academic_researcher_agent_step_callback(step_output):
+    agent = _active_callback_agent()
+    if agent is not None:
+        agent._record_agent_step("academic_researcher", step_output)
+
+
+def _technical_writer_agent_step_callback(step_output):
+    agent = _active_callback_agent()
+    if agent is not None:
+        agent._record_agent_step("technical_writer", step_output)
+
+
+def _research_task_callback(task_output):
+    agent = _active_callback_agent()
+    if agent is not None:
+        agent._record_task_complete("Research", task_output, "lead_architect")
+
+
+def _architect_task_callback(task_output):
+    agent = _active_callback_agent()
+    if agent is not None:
+        agent._record_task_complete("Architect", task_output)
+
+
+def _local_token_counter(text: str) -> int:
+    return len(text.split())
+
 
 # from AI.runDebugCrew import MultiAgentDebugWorkstation
 
@@ -115,6 +171,22 @@ ARCHITECT_AGENT_INSTRUCTIONS = {
         "with performance timestamps."
     ),
 }
+CHAT_RESEARCH_AGENT_INSTRUCTIONS = {
+    "role": "Research Assistant",
+    "goal": "Find reliable, relevant information that helps answer the user's latest request.",
+    "backstory": "A careful researcher who uses relevant project context and current public information.",
+}
+CHAT_ARCHITECT_AGENT_INSTRUCTIONS = {
+    "role": "Conversational Assistant",
+    "goal": "Give a clear, accurate, direct answer to the user's latest request.",
+    "backstory": "A helpful assistant who uses research and conversation context without assuming every request is for code.",
+}
+CHAT_ARCHITECT_TASK_PROMPT = (
+    "Answer the user's latest request directly using your knowledge and conversation context. "
+    "Do not create or modify files unless the user explicitly asks for code or file operations. "
+    "Use internet_search only when current public information is useful. "
+    "Be concise; if code is requested, provide a complete, relevant answer and explain important assumptions."
+)
 
 CONCISE_ARCHITECT_TASK_PROMPT = (
     "Using the preceding research findings, generate output_system.py as a self-contained Python file-operation monitor. "
@@ -296,15 +368,12 @@ class MultiAgent:
         if self.profile_logger is not None:
             return
         self.profile_path = os.path.join(self.log_dir, "multiAgent-profile.jsonl")
-        self.profile_logger = logging.getLogger(f"multiAgent.profile.{self.run_id}")
-        self.profile_logger.setLevel(logging.INFO)
-        self.profile_logger.propagate = False
-        profile_handler = logging.FileHandler(
-            self.profile_path,
-            encoding="utf-8"
+        self.profile_logger = get_queued_logger(
+            f"multiAgent.profile.{self.run_id}",
+            self.log_dir,
+            "multiAgent-profile.jsonl",
+            "%(message)s",
         )
-        profile_handler.setFormatter(logging.Formatter("%(message)s"))
-        self.profile_logger.addHandler(profile_handler)
 
     def _initialize_cache(self):
         with sqlite3.connect(self.cache_path) as connection:
@@ -470,67 +539,69 @@ class MultiAgent:
             elapsed_since_marker_s=elapsed
         )
 
-    def _create_agent_step_callback(self, agent_name):
-        def log_agent_step(_step_output):
-            now = time.perf_counter()
-            previous = self._agent_step_times.get(
-                agent_name,
-                self._agent_step_baselines.get(agent_name, self._kickoff_started_at)
+    @contextmanager
+    def _callback_context(self):
+        token = _ACTIVE_CALLBACK_AGENT.set(self)
+        try:
+            yield
+        finally:
+            _ACTIVE_CALLBACK_AGENT.reset(token)
+
+    def _record_agent_step(self, agent_name, step_output):
+        now = time.perf_counter()
+        previous = self._agent_step_times.get(
+            agent_name,
+            self._agent_step_baselines.get(agent_name, self._kickoff_started_at),
+        )
+        self._agent_step_times[agent_name] = now
+        step_number = self._agent_step_counts.get(agent_name, 0) + 1
+        self._agent_step_counts[agent_name] = step_number
+
+        if isinstance(step_output, dict):
+            candidate = step_output.get("tool_name", step_output.get("tool"))
+        else:
+            candidate = getattr(
+                step_output,
+                "tool_name",
+                getattr(step_output, "tool", None),
             )
-            self._agent_step_times[agent_name] = now
-            step_number = self._agent_step_counts.get(agent_name, 0) + 1
-            self._agent_step_counts[agent_name] = step_number
-
-            tool_name = None
-            if isinstance(_step_output, dict):
-                candidate = _step_output.get("tool_name", _step_output.get("tool"))
-                tool_name = candidate if isinstance(candidate, str) else None
-            else:
-                candidate = getattr(
-                    _step_output,
-                    "tool_name",
-                    getattr(_step_output, "tool", None)
-                )
-                tool_name = candidate if isinstance(candidate, str) else None
-            if tool_name:
-                self._agent_tool_counts[agent_name] = self._agent_tool_counts.get(agent_name, 0) + 1
-
-            interval = None if previous is None else round(now - previous, 6)
-            self.getTime(f"{agent_name} Step {step_number}")
-            self._log_profile(
-                "agent_step",
-                agent=agent_name,
-                step=step_number,
-                interval_since_previous_step_s=interval,
-                output_type=type(_step_output).__name__,
-                tool_name=tool_name,
+        tool_name = candidate if isinstance(candidate, str) else None
+        if tool_name:
+            self._agent_tool_counts[agent_name] = (
+                self._agent_tool_counts.get(agent_name, 0) + 1
             )
 
-        return log_agent_step
+        interval = None if previous is None else round(now - previous, 6)
+        self.getTime(f"{agent_name} Step {step_number}")
+        self._log_profile(
+            "agent_step",
+            agent=agent_name,
+            step=step_number,
+            interval_since_previous_step_s=interval,
+            output_type=type(step_output).__name__,
+            tool_name=tool_name,
+        )
 
-    def _create_task_callback(self, task_name, next_agent=None):
-        def log_task_complete(task_output):
-            now = time.perf_counter()
-            started_at = self._task_last_completed_at
-            self._task_last_completed_at = now
-            duration = round(now - started_at, 6) if started_at is not None else None
-            if next_agent:
-                self._agent_step_baselines[next_agent] = now
-                self._active_task_name = "Architect"
-            self.getTime(f"{task_name} Task Complete")
+    def _record_task_complete(self, task_name, task_output, next_agent=None):
+        now = time.perf_counter()
+        started_at = self._task_last_completed_at
+        self._task_last_completed_at = now
+        duration = round(now - started_at, 6) if started_at is not None else None
+        if next_agent:
+            self._agent_step_baselines[next_agent] = now
+            self._active_task_name = "Architect"
+        self.getTime(f"{task_name} Task Complete")
 
-            raw_output = getattr(task_output, "raw", "") or ""
-            agent = getattr(task_output, "agent", None)
-            self._log_profile(
-                "task_complete",
-                task=task_name,
-                task_duration_s=duration,
-                duration_basis="kickoff_or_previous_task_callback_to_this_task_callback",
-                output_chars=len(raw_output),
-                agent=str(agent) if agent else None,
-            )
-
-        return log_task_complete
+        raw_output = getattr(task_output, "raw", "") or ""
+        agent = getattr(task_output, "agent", None)
+        self._log_profile(
+            "task_complete",
+            task=task_name,
+            task_duration_s=duration,
+            duration_basis="kickoff_or_previous_task_callback_to_this_task_callback",
+            output_chars=len(raw_output),
+            agent=str(agent) if agent else None,
+        )
 
     def install_llm_request_metrics(self):
         """Record request latency and token usage from CrewAI LLM lifecycle events."""
@@ -661,6 +732,7 @@ class MultiAgent:
             model_candidates=[{"model": model, "endpoint": url} for model, url in candidates],
             prompt_variants=list(benchmark_prompts),
         )
+        benchmark_results = []
         for model, base_url in candidates:
             for prompt_name, prompt in benchmark_prompts.items():
                 for repetition in range(1, repetitions + 1):
@@ -692,10 +764,12 @@ class MultiAgent:
                             error_type=type(exc).__name__,
                             error=str(exc),
                         )
-                        print(
+                        result_line = (
                             f"[BENCHMARK] model={model}, prompt={prompt_name}, "
                             f"run={repetition}, failed={type(exc).__name__}: {exc}"
                         )
+                        benchmark_results.append(result_line)
+                        print(result_line)
                         continue
 
                     generated = result.get("response", "")
@@ -761,7 +835,7 @@ class MultiAgent:
                         success=True,
                         **metrics,
                     )
-                    print(
+                    result_line = (
                         f"[BENCHMARK] model={model}, prompt={prompt_name}, "
                         f"run={repetition}, wall={wall_duration:.3f}s, "
                         f"load={metrics['load_duration_s']}s, "
@@ -770,11 +844,16 @@ class MultiAgent:
                         f"tokens_per_second={metrics['generation_tokens_per_second']}, "
                         f"code_fence={metrics['has_python_code_fence']}"
                     )
+                    benchmark_results.append(result_line)
+                    print(result_line)
         self._log_profile("ollama_benchmark_finished")
+        return benchmark_results
 
-    def initializeAgents(self):
+    def initializeAgents(self, user_prompt=None, conversation=None):
         """Sequential hardware and agent bootstrap lifecycle"""
         print("Configuring local hardware execution tiers...")
+        self.agents = {}
+        self.tasks = []
 
         # Port 11434 = Dual GPU Instance Profile (32B Quantized Model)
         self.getTime('LLM Configuration Start')
@@ -786,25 +865,38 @@ class MultiAgent:
         # 1. Define crisp, lightweight personas without complex framework tools parameters
         self.getTime('Agent Construction Start')
         research_tools = [self.internet_search_tool] if self.internet_search_tool else []
+        research_instructions = (
+            CHAT_RESEARCH_AGENT_INSTRUCTIONS
+            if user_prompt is not None
+            else RESEARCH_AGENT_INSTRUCTIONS
+        )
+        architect_instructions = (
+            CHAT_ARCHITECT_AGENT_INSTRUCTIONS
+            if user_prompt is not None
+            else ARCHITECT_AGENT_INSTRUCTIONS
+        )
+        architect_agent_options = {"max_iter": 2} if user_prompt is not None else {}
         self.agents['research_agent'] = Agent(
-            role=RESEARCH_AGENT_INSTRUCTIONS["role"],
-            goal=RESEARCH_AGENT_INSTRUCTIONS["goal"],
-            backstory=RESEARCH_AGENT_INSTRUCTIONS["backstory"],
+            role=research_instructions["role"],
+            goal=research_instructions["goal"],
+            backstory=research_instructions["backstory"],
             llm=cpu_academic_llm,
             tools=research_tools,
             allow_delegation=False,
             verbose=self.debug,
-            step_callback=self._create_agent_step_callback("research_agent")
+            step_callback=_research_agent_step_callback
         )
 
         self.agents['lead_architect'] = Agent(
-            role=ARCHITECT_AGENT_INSTRUCTIONS["role"],
-            goal=ARCHITECT_AGENT_INSTRUCTIONS["goal"],
-            backstory=ARCHITECT_AGENT_INSTRUCTIONS["backstory"],
-            llm=gpu_reasoner_llm,
+            role=architect_instructions["role"],
+            goal=architect_instructions["goal"],
+            backstory=architect_instructions["backstory"],
+            llm=cpu_academic_llm if user_prompt is not None else gpu_reasoner_llm,
+            tools=research_tools if user_prompt is not None else [],
             allow_delegation=False,
             verbose=self.debug,
-            step_callback=self._create_agent_step_callback("lead_architect")
+            step_callback=_lead_architect_agent_step_callback,
+            **architect_agent_options,
         )
         self.getTime('Agent Construction Complete')
 
@@ -813,28 +905,56 @@ class MultiAgent:
         self.getTime('Task Construction Start')
         existing_files = self._input_file_manifest()
         research_prompt = self._research_task_description(existing_files)
+        architect_prompt = ARCHITECT_TASK_PROMPT
+        research_expected_output = RESEARCH_AGENT_INSTRUCTIONS["expected_output"]
+        architect_expected_output = ARCHITECT_AGENT_INSTRUCTIONS["expected_output"]
+        if user_prompt is not None:
+            conversation_text = "\n".join(
+                f"{item['role']}: {item['content']}"
+                for item in (conversation or [])[-12:]
+                if item.get("role") in {"user", "assistant"} and item.get("content")
+            )
+            research_prompt = (
+                "Research information that will help answer the user's latest request. "
+                "Use the local file list only when it is relevant. Use public web search "
+                "when current external information is useful, and never include private "
+                "project content, credentials, or personal data in a search query.\n\n"
+                f"Relevant local files: {', '.join(existing_files) or 'None listed.'}\n\n"
+                f"Conversation context:\n{conversation_text or 'No previous messages.'}\n\n"
+                f"Latest user request:\n{user_prompt}"
+            )
+            architect_prompt = (
+                f"{CHAT_ARCHITECT_TASK_PROMPT}\n\n"
+                f"Conversation context:\n{conversation_text or 'No previous messages.'}\n\n"
+                f"Latest user request:\n{user_prompt}"
+            )
+            research_expected_output = "Relevant research notes for answering the user's latest request."
+            architect_expected_output = "A clear answer to the user's latest request."
 
-        task_research = Task(
-            description=research_prompt,
-            expected_output=RESEARCH_AGENT_INSTRUCTIONS["expected_output"],
-            agent=self.agents['research_agent'],
-            callback=self._create_task_callback("Research", next_agent="lead_architect")
-        )
-
-        # Task 2: Hard-constrained to generate self-contained, high-fidelity monitoring code
         task_architect_build = Task(
-            description=ARCHITECT_TASK_PROMPT,
-            expected_output=ARCHITECT_AGENT_INSTRUCTIONS["expected_output"],
+            description=architect_prompt,
+            expected_output=architect_expected_output,
             agent=self.agents['lead_architect'],
-            callback=self._create_task_callback("Architect")
+            callback=_architect_task_callback
         )
-        self.tasks.extend([task_research, task_architect_build])
+        if user_prompt is None:
+            task_research = Task(
+                description=research_prompt,
+                expected_output=research_expected_output,
+                agent=self.agents['research_agent'],
+                callback=_research_task_callback
+            )
+            self.tasks.extend([task_research, task_architect_build])
+            crew_agents = [self.agents['research_agent'], self.agents['lead_architect']]
+        else:
+            self.tasks.append(task_architect_build)
+            crew_agents = [self.agents['lead_architect']]
         self.getTime('Task Construction Complete')
 
         print("Constructing multi-agent crew execution framework...")
         self.getTime('Crew Construction Start')
         self.my_local_crew = Crew(
-            agents=[self.agents['research_agent'], self.agents['lead_architect']],
+            agents=crew_agents,
             tasks=self.tasks,
             process=Process.sequential
         )
@@ -982,9 +1102,6 @@ class MultiAgent:
         """Factory function to build real validated Agent instances from registry blueprints"""
         print("Instantiating validated CrewAI Agent instances...")
 
-        def local_token_counter(text: str) -> int:
-            return len(text.split())
-
         for persona_key, config in self.PERSONA_REGISTRY.items():
             print(f"\tConstructing Agent Object: {persona_key}")
 
@@ -1002,11 +1119,16 @@ class MultiAgent:
                 "allow_delegation": False,
                 "verbose": self.debug,
                 "tools": config["tools"],
-                "token_counter": local_token_counter,
+                "token_counter": _local_token_counter,
                 "max_iter": 12,
                 "cache": False,
                 "system_template": raw_system_prompt,
-                "step_callback": self._create_agent_step_callback(persona_key)
+                "step_callback": {
+                    "lead_architect": _lead_architect_agent_step_callback,
+                    "research_agent": _research_agent_step_callback,
+                    "academic_researcher": _academic_researcher_agent_step_callback,
+                    "technical_writer": _technical_writer_agent_step_callback,
+                }[persona_key]
             }
             if "temperature" in config:
                 agent_kwargs["temperature"] = config["temperature"]
@@ -1030,7 +1152,7 @@ class MultiAgent:
             ),
             expected_output="A brief, bulleted markdown summary listing missing logging structures.",
             agent=self.agents['research_agent'],
-            callback=self._create_task_callback("Research", next_agent="lead_architect")
+            callback=_research_task_callback
         )
 
         # Task 2: Refactored to force zero-dependency configuration setups
@@ -1052,7 +1174,7 @@ class MultiAgent:
             ),
             expected_output="A valid python code block containing a ready-to-run system module.",
             agent=self.agents['lead_architect'],
-            callback=self._create_task_callback("Architect")
+            callback=_architect_task_callback
         )
 
         self.tasks.extend([task_research, task_architect_build])
@@ -1064,111 +1186,229 @@ class MultiAgent:
             process=Process.sequential
         )
 
+class MultiAgentWorkflow:
+    """Reusable interface for the multi-agent workflow and web chat."""
+
+    def __init__(self, target_dir=None, debug=True, web_search=True):
+        if target_dir is None:
+            self.agent = MultiAgent(debug=debug, web_search=web_search)
+        else:
+            self.agent = MultiAgent(
+                targetDir=target_dir,
+                debug=debug,
+                web_search=web_search,
+            )
+        self._request_lock = threading.Lock()
+
+    def respond(self, prompt, conversation=None, offline=False):
+        """Run the research and architect agents for one conversational turn."""
+        prompt, conversation = validate_chat_payload(prompt, conversation)
+        if not isinstance(offline, bool):
+            raise ValueError("Invalid request.")
+        if not prompt:
+            raise ValueError("A non-empty message is required.")
+
+        with self._request_lock:
+            ai_agents = self.agent
+            ai_agents.web_search_enabled = not offline
+            ai_agents.internet_search_tool = (
+                None if offline else ai_agents._create_internet_search_tool()
+            )
+            ai_agents._log_profile(
+                "chat_request_started",
+                prompt_chars=len(prompt),
+            )
+            ai_agents._agent_step_times.clear()
+            ai_agents._agent_step_baselines.clear()
+            ai_agents._agent_step_counts.clear()
+            ai_agents._agent_tool_counts.clear()
+            ai_agents.initializeAgents(user_prompt=prompt, conversation=conversation)
+            ai_agents.install_llm_request_metrics()
+
+            started_at = time.perf_counter()
+            ai_agents._kickoff_started_at = started_at
+            ai_agents._task_last_completed_at = started_at
+            ai_agents._active_task_name = "Research"
+            ai_agents._agent_step_baselines["research_agent"] = started_at
+            try:
+                with ai_agents._callback_context():
+                    result = ai_agents.my_local_crew.kickoff()
+            except Exception as exc:
+                ai_agents._log_profile(
+                    "chat_request_failed",
+                    duration_s=round(time.perf_counter() - started_at, 6),
+                    error_type=type(exc).__name__,
+                    error=str(exc),
+                )
+                raise
+
+            answer = str(getattr(result, "raw", result)).strip()
+            if not answer:
+                raise RuntimeError("The multi-agent workflow returned an empty response.")
+            ai_agents._log_profile(
+                "chat_request_completed",
+                duration_s=round(time.perf_counter() - started_at, 6),
+                response_chars=len(answer),
+            )
+            return answer
+
+    @staticmethod
+    def run_cli(**options):
+        """Run the workflow with explicit options instead of parsing process arguments."""
+        return WorkflowRunner(**options).run()
+
+
 # Main Native Driver Scope
-# Launch the execution pipeline natively on your system
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the multi-agent workflow or benchmark Ollama models.")
-    parser.add_argument(
-        "--benchmark",
-        action="store_true",
-        help="Compare the Architect model candidates using current and concise prompt variants."
-    )
-    parser.add_argument(
-        "--benchmark-repetitions",
-        type=int,
-        default=1,
-        help="Number of requests per model/prompt pair (default: 1)."
-    )
-    parser.add_argument(
-        "--benchmark-max-tokens",
-        type=int,
-        default=1024,
-        help="Maximum generated tokens per benchmark request (default: 1024)."
-    )
-    parser.add_argument(
-        "--no-cache",
-        action="store_true",
-        help="Always run the agents and do not read or write the workflow cache."
-    )
-    parser.add_argument(
-        "--clear-cache",
-        action="store_true",
-        help="Clear cached workflow results before running."
-    )
-    parser.add_argument(
-        "--offline",
-        action="store_true",
-        help="Disable the Research agent's internet search tool."
-    )
-    args = parser.parse_args()
+class WorkflowRunner:
+    """Run benchmark or script-generation workflows with explicit configuration."""
 
-    aiAgents = MultiAgent(debug=True, web_search=not args.offline)
-    aiAgents._log_profile("run_started", profile_path=aiAgents.profile_path)
-    if args.benchmark:
-        aiAgents.benchmark_ollama(
-            repetitions=args.benchmark_repetitions,
-            max_tokens=args.benchmark_max_tokens
+    def __init__(
+        self,
+        *,
+        benchmark=False,
+        benchmark_repetitions=1,
+        benchmark_max_tokens=1024,
+        no_cache=False,
+        clear_cache=False,
+        offline=False,
+        target_dir=None,
+        debug=True,
+    ):
+        self.benchmark = bool(benchmark)
+        self.benchmark_repetitions = benchmark_repetitions
+        self.benchmark_max_tokens = benchmark_max_tokens
+        self.no_cache = bool(no_cache)
+        self.clear_cache = bool(clear_cache)
+        self.offline = bool(offline)
+        self.target_dir = target_dir
+        self.debug = bool(debug)
+        self.agent = (
+            MultiAgent(debug=self.debug, web_search=not self.offline)
+            if target_dir is None
+            else MultiAgent(
+                targetDir=target_dir,
+                debug=self.debug,
+                web_search=not self.offline,
+            )
         )
-        raise SystemExit(0)
+        self.cache_inputs = None
+        self.cache_key = None
+        self.cache_entry = None
+        self.crew_output = None
+        self.output_text = ""
+        self.research_output = ""
+        self.architect_output = ""
+        self.combined_context_pool = []
+        self.extracted_code = None
+        self.output_filepath = None
+        self.execution_check = None
+        self.execution_timed_out = False
+        self.started_at = self.agent.starttime
+        self.result = None
 
-    if args.clear_cache:
-        aiAgents.clear_workflow_cache()
-    cache_inputs = aiAgents._workflow_cache_inputs()
-    cache_key = aiAgents._workflow_cache_key(cache_inputs)
-    cache_entry = None if args.no_cache else aiAgents._load_workflow_cache(cache_key)
-    aiAgents._log_profile(
-        "workflow_cache",
-        enabled=not args.no_cache,
-        hit=cache_entry is not None,
-        cache_key=cache_key,
-        cache_path=aiAgents.cache_path,
-    )
-    crew_output = None
-    output_text = ""
+    def run(self):
+        if self.benchmark:
+            return self.run_benchmark()
+        return self.run_generation()
 
-    if cache_entry is not None:
-        print(f"[CACHE] Reusing validated generated work from {aiAgents.cache_path}")
-        research_output = cache_entry["research_output"]
-        architect_output = cache_entry["architect_output"]
-        extracted_code = cache_entry["generated_code"]
-    else:
-        aiAgents.getTime('Start Time', aiAgents.starttime)
-        aiAgents.getTime('Initialize Agents Start')
-        aiAgents.initializeAgents()
-        aiAgents.install_llm_request_metrics()
-        aiAgents.getTime('Initialize Agents Complete')
-        aiAgents._agent_step_times.clear()
-        aiAgents._agent_step_baselines.clear()
-        aiAgents._agent_step_counts.clear()
-        aiAgents._agent_tool_counts.clear()
-        aiAgents._task_last_completed_at = time.perf_counter()
+    def prepare_cache(self):
+        if self.clear_cache:
+            self.agent.clear_workflow_cache()
+        self.cache_inputs = self.agent._workflow_cache_inputs()
+        self.cache_key = self.agent._workflow_cache_key(self.cache_inputs)
+        self.cache_entry = (
+            None if self.no_cache else self.agent._load_workflow_cache(self.cache_key)
+        )
+        self.agent._log_profile(
+            "workflow_cache",
+            enabled=not self.no_cache,
+            hit=self.cache_entry is not None,
+            cache_key=self.cache_key,
+            cache_path=self.agent.cache_path,
+        )
+
+    def run_benchmark(self):
+        self.agent._log_profile("run_started", profile_path=self.agent.profile_path)
+        results = self.agent.benchmark_ollama(
+            repetitions=self.benchmark_repetitions,
+            max_tokens=self.benchmark_max_tokens,
+        )
+        self.result = {
+            "mode": "benchmark",
+            "message": "\n".join(results) or "No benchmark results were produced.",
+            "results": results,
+        }
+        return self.result
+
+    def run_generation(self):
+        self.agent._log_profile("run_started", profile_path=self.agent.profile_path)
+        self.prepare_cache()
+        self._reset_generation_state()
+        self._run_agents()
+        self._collect_context()
+        self._extract_generated_code()
+        self._write_and_validate()
+        self._finish_generation()
+        return self.result
+
+    def _reset_generation_state(self):
+        self.crew_output = None
+        self.output_text = ""
+        self.research_output = ""
+        self.architect_output = ""
+        self.combined_context_pool = []
+        self.extracted_code = None
+        self.output_filepath = None
+        self.execution_check = None
+        self.execution_timed_out = False
+
+    def _run_agents(self):
+        ai_agents = self.agent
+        if self.cache_entry is not None:
+            print(f"[CACHE] Reusing validated generated work from {ai_agents.cache_path}")
+            self.research_output = self.cache_entry["research_output"]
+            self.architect_output = self.cache_entry["architect_output"]
+            self.extracted_code = self.cache_entry["generated_code"]
+            return
+
+        ai_agents.getTime('Start Time', ai_agents.starttime)
+        ai_agents.getTime('Initialize Agents Start')
+        ai_agents.initializeAgents()
+        ai_agents.install_llm_request_metrics()
+        ai_agents.getTime('Initialize Agents Complete')
+        ai_agents._agent_step_times.clear()
+        ai_agents._agent_step_baselines.clear()
+        ai_agents._agent_step_counts.clear()
+        ai_agents._agent_tool_counts.clear()
+        ai_agents._task_last_completed_at = time.perf_counter()
         kickoff_started_at = time.perf_counter()
-        aiAgents._kickoff_started_at = kickoff_started_at
-        aiAgents._active_task_name = "Research"
-        aiAgents._agent_step_baselines["research_agent"] = kickoff_started_at
-        aiAgents.getTime('Crew Kickoff Start')
+        ai_agents._kickoff_started_at = kickoff_started_at
+        ai_agents._active_task_name = "Research"
+        ai_agents._agent_step_baselines["research_agent"] = kickoff_started_at
+        ai_agents.getTime('Crew Kickoff Start')
         try:
-            crew_output = aiAgents.my_local_crew.kickoff()
+            with ai_agents._callback_context():
+                self.crew_output = ai_agents.my_local_crew.kickoff()
         except Exception as exc:
-            kickoff_duration = time.perf_counter() - kickoff_started_at
-            aiAgents._log_profile(
+            ai_agents._log_profile(
                 "crew_failed",
-                duration_s=round(kickoff_duration, 6),
+                duration_s=round(time.perf_counter() - kickoff_started_at, 6),
                 error_type=type(exc).__name__,
                 error=str(exc),
-                agent_steps=aiAgents._agent_step_counts,
-                agent_tool_calls=aiAgents._agent_tool_counts,
+                agent_steps=ai_agents._agent_step_counts,
+                agent_tool_calls=ai_agents._agent_tool_counts,
             )
             raise
+
         kickoff_duration = time.perf_counter() - kickoff_started_at
-        aiAgents.getTime('Crew Kickoff Complete')
-        aiAgents._log_profile(
+        ai_agents.getTime('Crew Kickoff Complete')
+        ai_agents._log_profile(
             "crew_complete",
             duration_s=round(kickoff_duration, 6),
-            agent_steps=aiAgents._agent_step_counts,
-            agent_tool_calls=aiAgents._agent_tool_counts,
+            agent_steps=ai_agents._agent_step_counts,
+            agent_tool_calls=ai_agents._agent_tool_counts,
         )
-        token_usage = getattr(crew_output, "token_usage", None)
+        token_usage = getattr(self.crew_output, "token_usage", None)
         if token_usage is not None:
             usage_fields = (
                 "prompt_tokens",
@@ -1182,141 +1422,186 @@ if __name__ == "__main__":
                 if getattr(token_usage, field, None) is not None
             }
             if usage:
-                aiAgents._log_profile("token_usage", **usage)
-        aiAgents.getTime('Crew Output Conversion Start')
-        output_text = str(crew_output)
-        aiAgents.getTime('Crew Output Conversion Complete')
-        task_outputs = getattr(aiAgents.my_local_crew, "tasks_output", [])
-        research_output = str(getattr(task_outputs[0], "raw", "")) if task_outputs else ""
-        architect_output = str(getattr(task_outputs[-1], "raw", "")) if task_outputs else output_text
-        extracted_code = None
+                ai_agents._log_profile("token_usage", **usage)
 
-    print("\n" + "=" * 80)
-    print("█████████████████████ BARE-METAL AUTOMATED COMPILER █████████████████████")
-    print("=" * 80)
+        ai_agents.getTime('Crew Output Conversion Start')
+        self.output_text = str(self.crew_output)
+        ai_agents.getTime('Crew Output Conversion Complete')
+        task_outputs = getattr(ai_agents.my_local_crew, "tasks_output", [])
+        self.research_output = (
+            str(getattr(task_outputs[0], "raw", "")) if task_outputs else ""
+        )
+        self.architect_output = (
+            str(getattr(task_outputs[-1], "raw", ""))
+            if task_outputs
+            else self.output_text
+        )
 
-    # Gather context strings from text pools
-    aiAgents.getTime('Context Collection Start')
-    combined_context_pool = [research_output, architect_output] if cache_entry else []
-    if cache_entry is None:
-        if hasattr(crew_output, 'raw'):
-            combined_context_pool.append(str(crew_output.raw))
-        combined_context_pool.append(output_text)
-        if hasattr(aiAgents.my_local_crew, 'tasks_output'):
-            for task_out in aiAgents.my_local_crew.tasks_output:
-                combined_context_pool.append(str(task_out.raw))
-    aiAgents.getTime('Context Collection Complete')
-    aiAgents._log_profile(
-        "context_collected",
-        block_count=len(combined_context_pool),
-        total_chars=sum(len(block) for block in combined_context_pool)
-    )
-    aiAgents.getTime('Code Extraction Start')
-    if cache_entry is None:
-        for text_block in combined_context_pool:
-            code_block_match = re.search(r"```python\n(.*?)\n```", text_block, re.DOTALL)
-            if code_block_match:
-                extracted_code = code_block_match.group(1)
-                break
-    else:
-        print("[CACHE] Loaded generated code; skipping model research and generation.")
-    aiAgents.getTime('Code Extraction Complete')
-    aiAgents._log_profile("code_extracted", output_chars=len(extracted_code) if extracted_code else 0)
+    def _collect_context(self):
+        ai_agents = self.agent
+        print("\n" + "=" * 80)
+        print("█████████████████████ BARE-METAL AUTOMATED COMPILER █████████████████████")
+        print("=" * 80)
+        ai_agents.getTime('Context Collection Start')
+        if self.cache_entry is not None:
+            self.combined_context_pool = [self.research_output, self.architect_output]
+        else:
+            if hasattr(self.crew_output, 'raw'):
+                self.combined_context_pool.append(str(self.crew_output.raw))
+            self.combined_context_pool.append(self.output_text)
+            if hasattr(ai_agents.my_local_crew, 'tasks_output'):
+                self.combined_context_pool.extend(
+                    str(task_out.raw)
+                    for task_out in ai_agents.my_local_crew.tasks_output
+                )
+        ai_agents.getTime('Context Collection Complete')
+        ai_agents._log_profile(
+            "context_collected",
+            block_count=len(self.combined_context_pool),
+            total_chars=sum(len(block) for block in self.combined_context_pool),
+        )
 
-    # 2. Hardened In-Memory Patching System
-    if extracted_code:
-        aiAgents.getTime('Code Hardening Start')
-        # Check if the model hallucinated the fileConfig call despite constraints
+    def _extract_generated_code(self):
+        ai_agents = self.agent
+        ai_agents.getTime('Code Extraction Start')
+        if self.cache_entry is None:
+            for text_block in self.combined_context_pool:
+                code_block_match = re.search(
+                    r"```python\n(.*?)\n```", text_block, re.DOTALL
+                )
+                if code_block_match:
+                    self.extracted_code = code_block_match.group(1)
+                    break
+        else:
+            print("[CACHE] Loaded generated code; skipping model research and generation.")
+        ai_agents.getTime('Code Extraction Complete')
+        ai_agents._log_profile(
+            "code_extracted",
+            output_chars=len(self.extracted_code) if self.extracted_code else 0,
+        )
+
+    def _write_and_validate(self):
+        ai_agents = self.agent
+        extracted_code = self.extracted_code
+        if not extracted_code:
+            print(
+                "\033[91m[X] PARSING MISMATCH: The local models failed to output a cleanly extractable code block structure.\033[0m"
+            )
+            return
+
+        ai_agents.getTime('Code Hardening Start')
         if "fileConfig(" in extracted_code:
             print(
-                "[!] HARDWARE PARSER WARNING: Hallucinated fileConfig caught in memory. Injecting self-contained array...")
-
-            # Use regex to strip the crashing external file lines out
+                "[!] HARDWARE PARSER WARNING: Hallucinated fileConfig caught in memory. Injecting self-contained array..."
+            )
             extracted_code = re.sub(
                 r"logging\.config\.fileConfig\(.*?\)",
                 "logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', filename='ai.log', filemode='a')",
-                extracted_code
+                extracted_code,
             )
-
-            # Clean up potential dangling config module imports to ensure pristine execution namespaces
             extracted_code = extracted_code.replace("import logging.config", "import logging")
-        aiAgents.getTime('Code Hardening Complete')
+        ai_agents.getTime('Code Hardening Complete')
 
         script_filename = "output_system.py"
-        output_filepath = os.path.join(aiAgents.TARGET_DIR, script_filename)
-        print(f"[✓] SUCCESS: Extracted code matrix block. Deploying to: {output_filepath}")
-        aiAgents.getTime('Output File Write Start')
-        with open(output_filepath, "w", encoding="utf-8") as f:
-            f.write(extracted_code)
-        aiAgents.getTime('Output File Write Complete')
+        self.output_filepath = os.path.join(ai_agents.TARGET_DIR, script_filename)
+        self.extracted_code = extracted_code
+        print(f"[✓] SUCCESS: Extracted code matrix block. Deploying to: {self.output_filepath}")
+        ai_agents.getTime('Output File Write Start')
+        with open(self.output_filepath, "w", encoding="utf-8") as output_file:
+            output_file.write(extracted_code)
+        ai_agents.getTime('Output File Write Complete')
 
         print(f"[!] Launching native subprocess check loop for: {script_filename}...")
         subprocess_started_at = time.perf_counter()
-        aiAgents.getTime('Subprocess Validation Start')
-        execution_check = None
+        ai_agents.getTime('Subprocess Validation Start')
         try:
-            execution_check = subprocess.run(
-                [sys.executable, output_filepath],
+            self.execution_check = subprocess.run(
+                [sys.executable, self.output_filepath],
                 capture_output=True,
                 text=True,
                 timeout=15,
-                cwd=aiAgents.TARGET_DIR
+                cwd=ai_agents.TARGET_DIR,
             )
-
-            if execution_check.returncode == 0:
+            if self.execution_check.returncode == 0:
                 print("\033[92m[✓] EXECUTION SUCCESS (Exit Code 0):\033[0m")
-                print(
-                    f"--- STDOUT LOGS ---\n{execution_check.stdout if execution_check.stdout else '[Empty Output - Script Executed Silently]'}")
+                stdout = self.execution_check.stdout or '[Empty Output - Script Executed Silently]'
+                print(f"--- STDOUT LOGS ---\n{stdout}")
             else:
                 print(
-                    "\033[91m[X] RUNTIME COMPILATION FAILURE (Exit Code {}):\033[0m".format(execution_check.returncode))
-                print(f"--- STDERR ERROR TRACEBACK ---\n{execution_check.stderr}")
-
+                    "\033[91m[X] RUNTIME COMPILATION FAILURE (Exit Code {}):\033[0m".format(
+                        self.execution_check.returncode
+                    )
+                )
+                print(f"--- STDERR ERROR TRACEBACK ---\n{self.execution_check.stderr}")
         except subprocess.TimeoutExpired:
+            self.execution_timed_out = True
             print("\033[91m[X] RUNTIME ERROR: Execution process timed out (exceeded 15s sandbox limit).\033[0m")
         finally:
             subprocess_duration = time.perf_counter() - subprocess_started_at
-            aiAgents.getTime('Subprocess Validation Complete')
-            if execution_check is not None:
-                aiAgents._log_profile(
+            ai_agents.getTime('Subprocess Validation Complete')
+            if self.execution_check is not None:
+                ai_agents._log_profile(
                     "subprocess_complete",
                     duration_s=round(subprocess_duration, 6),
-                    exit_code=execution_check.returncode,
-                    stdout_chars=len(execution_check.stdout),
-                    stderr_chars=len(execution_check.stderr)
+                    exit_code=self.execution_check.returncode,
+                    stdout_chars=len(self.execution_check.stdout),
+                    stderr_chars=len(self.execution_check.stderr),
                 )
             else:
-                aiAgents._log_profile(
+                ai_agents._log_profile(
                     "subprocess_complete",
                     duration_s=round(subprocess_duration, 6),
-                    timed_out=True
+                    timed_out=True,
                 )
             if (
-                execution_check is not None
-                and execution_check.returncode == 0
-                and not args.no_cache
-                and cache_entry is None
+                self.execution_check is not None
+                and self.execution_check.returncode == 0
+                and not self.no_cache
+                and self.cache_entry is None
             ):
-                aiAgents._store_workflow_cache(
-                    cache_key,
-                    cache_inputs,
-                    research_output,
-                    architect_output,
+                ai_agents._store_workflow_cache(
+                    self.cache_key,
+                    self.cache_inputs,
+                    self.research_output,
+                    self.architect_output,
                     extracted_code,
                 )
-                aiAgents._log_profile(
+                ai_agents._log_profile(
                     "workflow_cache_stored",
-                    cache_key=cache_key,
+                    cache_key=self.cache_key,
                     generated_code_chars=len(extracted_code),
                 )
-    else:
-        print(
-            "\033[91m[X] PARSING MISMATCH: The local models failed to output a cleanly extractable code block structure.\033[0m")
-    endtime = time.time()
-    start_dt = datetime.fromtimestamp(aiAgents.starttime)
-    end_dt = datetime.fromtimestamp(endtime)
-    time_difference = end_dt - start_dt
-    aiAgents.getTime('End Time', timestamp=endtime)
-    aiAgents._log_profile("run_finished", total_duration_s=round(time_difference.total_seconds(), 6))
-    print(f"Total Minutes: {round(time_difference.total_seconds()/60, 3)}")
-    print("=" * 80 + "\n")
+
+    def _finish_generation(self):
+        endtime = time.time()
+        start_dt = datetime.fromtimestamp(self.agent.starttime)
+        end_dt = datetime.fromtimestamp(endtime)
+        time_difference = end_dt - start_dt
+        self.agent.getTime('End Time', timestamp=endtime)
+        self.agent._log_profile(
+            "run_finished",
+            total_duration_s=round(time_difference.total_seconds(), 6),
+        )
+        print(f"Total Minutes: {round(time_difference.total_seconds()/60, 3)}")
+        print("=" * 80 + "\n")
+        self.result = {
+            "mode": "generate",
+            "message": self.architect_output or (
+                "Generated code was not found in the agent response."
+            ),
+            "research_output": self.research_output,
+            "architect_output": self.architect_output,
+            "generated_code": self.extracted_code,
+            "output_filepath": self.output_filepath,
+            "return_code": (
+                self.execution_check.returncode
+                if self.execution_check is not None
+                else None
+            ),
+            "timed_out": self.execution_timed_out,
+            "cache_hit": self.cache_entry is not None,
+        }
+
+
+if __name__ == "__main__":
+    MultiAgentWorkflow.run_cli()
