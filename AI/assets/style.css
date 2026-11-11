@@ -132,30 +132,17 @@ body {
     font: inherit;
 }
 
+.prompt-input:read-only {
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: wait;
+}
+
 .button-row {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
     margin-top: 10px;
-}
-
-.history-controls {
-    justify-content: flex-start;
-    margin: 0 0 12px;
-}
-
-.history-controls button:last-child {
-    background: #b91c1c;
-}
-
-.history-view {
-    max-height: 45vh;
-    margin: 0 0 16px;
-    padding: 12px;
-    overflow-y: auto;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    background: #f8fafc;
 }
 
 .message-time {
@@ -177,6 +164,12 @@ button {
 
 button:hover {
     background: #4338ca;
+}
+
+button:disabled {
+    background: #94a3b8;
+    cursor: wait;
+    opacity: 0.8;
 }
 
 #speech-button {

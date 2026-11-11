@@ -64,6 +64,7 @@ class AIServer:
             "webserver.log",
             "%(asctime)s %(levelname)s %(message)s",
         )
+        self.workflow.logger = self.logger
         self.history = ConversationHistory(
             os.path.join(log_directory, "conversation-history.sqlite3")
         )
@@ -125,28 +126,6 @@ class AIServer:
                         ),
                         html.Div(
                             [
-                                html.Button(
-                                    "View saved history",
-                                    id="view-history-button",
-                                    n_clicks=0,
-                                    type="button",
-                                ),
-                                html.Button(
-                                    "Clear saved history",
-                                    id="clear-history-button",
-                                    n_clicks=0,
-                                    type="button",
-                                ),
-                            ],
-                            className="button-row history-controls",
-                        ),
-                        html.Div(
-                            id="history-view",
-                            className="history-view",
-                            style={"display": "none"},
-                        ),
-                        html.Div(
-                            [
                                 html.Label("Run settings"),
                                 html.Label("Action", htmlFor="workflow-mode"),
                                 dcc.Dropdown(
@@ -155,6 +134,8 @@ class AIServer:
                                         {"label": "Chat", "value": "chat"},
                                         {"label": "Generate script", "value": "generate"},
                                         {"label": "Benchmark models", "value": "benchmark"},
+                                        {"label": "View saved history", "value": "view-history"},
+                                        {"label": "Clear saved history", "value": "clear-history"},
                                     ],
                                     value="chat",
                                     clearable=False,
@@ -200,6 +181,7 @@ class AIServer:
                                     placeholder="Write a message...",
                                     className="prompt-input",
                                     rows=4,
+                                    readOnly=False,
                                 ),
                                 html.Div(
                                     [
@@ -222,9 +204,9 @@ class AIServer:
                                 dcc.Loading(
                                     html.Div(id="request-status", role="status"),
                                     custom_spinner=self._loading_indicator(
-                                        "Please wait while the assistant responds..."
+                                        "Searching public sources when needed and preparing your response..."
                                     ),
-                                    delay_show=150,
+                                    delay_show=0,
                                     delay_hide=150,
                                     parent_className="request-loading",
                                 ),
@@ -373,61 +355,60 @@ class AIServer:
 
         @self.dash_app.callback(
             Output("conversation-view", "children"),
+            Output("workflow-mode", "value"),
             Output("prompt-input", "value", allow_duplicate=True),
             Output("response-chart", "figure"),
             Output("request-status", "children"),
-            Output("history-view", "children"),
-            Output("history-view", "style"),
             Input("send-button", "n_clicks"),
-            Input("view-history-button", "n_clicks"),
-            Input("clear-history-button", "n_clicks"),
+            Input("workflow-mode", "value"),
             Input("startup-ready-check", "n_intervals"),
             State("prompt-input", "value"),
-            State("workflow-mode", "value"),
             State("workflow-options", "value"),
             State("benchmark-repetitions", "value"),
             State("benchmark-max-tokens", "value"),
-            State("history-view", "style"),
             prevent_initial_call=True,
+            running=[
+                (Output("send-button", "disabled"), True, False),
+                (Output("prompt-input", "readOnly"), True, False),
+            ],
         )
         def send_message(
             _clicks,
-            _view_clicks,
-            _clear_clicks,
+            mode,
             _startup_intervals,
             prompt,
-            mode,
             options,
             benchmark_repetitions,
             benchmark_max_tokens,
-            history_style,
         ):
             session_id = self._get_conversation_id()
+            triggered_properties = ctx.triggered_prop_ids
             triggered_id = ctx.triggered_id
-            if triggered_id == "clear-history-button":
+            if (
+                "send-button.n_clicks" in triggered_properties
+                and mode in ALLOWED_MODES
+            ):
+                triggered_id = "send-button"
+            if triggered_id == "workflow-mode" and mode == "clear-history":
                 self.history.clear(session_id)
                 return (
                     self._render_conversation([]),
+                    "chat",
                     no_update,
                     self._response_figure([]),
                     "Saved conversation history cleared.",
-                    html.P("No saved conversation history.", className="empty-state"),
-                    {"display": "block"},
                 )
-            if triggered_id == "view-history-button":
+            if triggered_id == "workflow-mode" and mode == "view-history":
                 saved_history = self.history.get_messages(session_id)
-                currently_visible = (
-                    isinstance(history_style, dict)
-                    and history_style.get("display") != "none"
-                )
                 return (
                     self._render_conversation(trim_conversation(saved_history)),
+                    "chat",
                     no_update,
                     self._response_figure(trim_conversation(saved_history)),
                     f"Loaded {len(saved_history)} saved messages.",
-                    self._render_conversation(saved_history),
-                    {"display": "none"} if currently_visible else {"display": "block"},
                 )
+            if triggered_id == "workflow-mode":
+                return (no_update,) * 5
             if triggered_id == "startup-ready-check":
                 saved_history = self.history.get_messages(session_id)
                 status = (
@@ -438,13 +419,12 @@ class AIServer:
                 return (
                     self._render_conversation(trim_conversation(saved_history)),
                     no_update,
+                    no_update,
                     self._response_figure(trim_conversation(saved_history)),
                     status,
-                    no_update,
-                    no_update,
                 )
             if triggered_id != "send-button":
-                return (no_update,) * 6
+                return (no_update,) * 5
 
             try:
                 prompt, _ = validate_chat_payload(prompt, [])
@@ -593,11 +573,10 @@ class AIServer:
             active_conversation = trim_conversation(conversation)
             return (
                 self._render_conversation(active_conversation),
+                no_update,
                 "",
                 self._response_figure(active_conversation),
                 status,
-                no_update,
-                no_update,
             )
 
     @staticmethod
@@ -641,10 +620,9 @@ class AIServer:
         return (
             self._render_conversation(conversation),
             no_update,
+            no_update,
             self._response_figure(conversation),
             status,
-            no_update,
-            no_update,
         )
 
     @staticmethod

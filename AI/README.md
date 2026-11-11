@@ -15,8 +15,18 @@ latest web results, disable the cache.
 The Research agent can search public web pages through DuckDuckGo when current
 external best practices are relevant. Chat requests that explicitly ask for
 research or concern changing facts are searched before the response is
-generated, so the model receives source results directly rather than needing
-to invoke a tool call. Search results are limited and requests have a timeout.
+generated, including version lists and tables. Research follow-ups reuse the
+preceding research question so a request such as “add applications” retains its
+product context. The assistant is instructed to distinguish model variants,
+quantizations, file sizes, and release versions, reason about claims against the
+returned evidence, cite sources, and explain which requested details cannot be
+verified while still providing supported partial results. Search failures
+return a clear verification error instead of silently claiming current facts.
+Saved history remains available to the user, but factual research requests do
+not send earlier assistant responses back as evidence; follow-ups retain only
+the relevant earlier user requests.
+Search attempts and outcomes are logged without logging prompt text. Search
+results are limited and requests have a timeout.
 Do not put credentials, private project content, or personal data in search
 queries. Select **Offline** in the web interface to disable web search. The
 workflow options can also be supplied directly when constructing `WorkflowRunner`.
@@ -44,16 +54,19 @@ transcribe speech with the browser's Web Speech API; microphone input requires
 browser permission and a supported browser. The Flask health endpoint is
 available at `/healthz`. The imported `MultiAgentWorkflow` class provides the
 same chat workflow to other Python entry points. The **Action** menu selects
-chat, script generation, or model benchmarking. The checkboxes control cache
-and web-search behavior; benchmark repetitions and token limits are set in the
-numeric fields. A startup notice appears while the page initializes and points
-to the cache and offline settings. Sending a request displays a spinner until
-the assistant completes or reports a generic failure.
+chat, script generation, model benchmarking, viewing saved history, or clearing
+saved history. History actions are selected directly in this menu; selecting
+**View saved history** loads the transcript into the chat, while **Clear saved
+history** deletes it and returns the action to Chat. The checkboxes control
+cache and web-search behavior; benchmark repetitions and token limits are set
+in the numeric fields. A startup notice appears while the page initializes and
+points to the cache and offline settings. Sending a request displays a
+processing indicator and temporarily disables Send while making the prompt
+read-only until the assistant responds.
 Chat turns are stored in `AI/logs/conversation-history.sqlite3` and associated
 with the browser's signed session, so they can be restored after a page reload
-or server restart. The assistant receives the recent conversation context;
-**View saved history** opens the full transcript, and **Clear saved history**
-removes that session's transcript and latency records.
+or server restart. The assistant receives the recent conversation context.
+Clearing history removes that session's transcript and latency records.
 Response-time records include the history context size. The UI warns when
 context exceeds 12,000 characters, and flags responses over 30 seconds when
 large history may have contributed; clear history to reduce the context.
