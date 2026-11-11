@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from time import perf_counter
 import math
 import os
+import re
 import threading
 import uuid
 
@@ -136,6 +137,7 @@ class AIServer:
                                         {"label": "Benchmark models", "value": "benchmark"},
                                         {"label": "View saved history", "value": "view-history"},
                                         {"label": "Clear saved history", "value": "clear-history"},
+                                        {"label": "View ranked research memory", "value": "view-memory"},
                                     ],
                                     value="chat",
                                     clearable=False,
@@ -407,6 +409,15 @@ class AIServer:
                     self._response_figure(trim_conversation(saved_history)),
                     f"Loaded {len(saved_history)} saved messages.",
                 )
+            if triggered_id == "workflow-mode" and mode == "view-memory":
+                memories = self.history.get_research_memory()
+                return (
+                    self._render_research_memory(memories),
+                    "chat",
+                    no_update,
+                    self._response_figure([]),
+                    f"Loaded {len(memories)} ranked research memories.",
+                )
             if triggered_id == "workflow-mode":
                 return (no_update,) * 5
             if triggered_id == "startup-ready-check":
@@ -458,6 +469,51 @@ class AIServer:
 
             started_at = perf_counter()
             saved_history = self.history.get_messages(session_id)
+            request_id = uuid.uuid4().hex
+            feedback_outcome = self._research_feedback_outcome(prompt)
+            memory_topic = self._previous_research_topic(saved_history)
+            memory_update_warning = False
+            if feedback_outcome and memory_topic:
+                prior_answer = next(
+                    (
+                        item["content"]
+                        for item in reversed(saved_history)
+                        if item.get("role") == "assistant"
+                    ),
+                    "",
+                )
+                lesson = (
+                    f"User marked the previous answer {feedback_outcome}. "
+                    f"User feedback: {prompt[:700]}"
+                )
+                if prior_answer:
+                    lesson += (
+                        "\nRejected/validated answer excerpt: "
+                        + prior_answer[:500]
+                    )
+                try:
+                    self.history.record_research_memory(
+                        session_id,
+                        memory_topic,
+                        lesson,
+                        feedback_outcome,
+                        datetime.now().astimezone().isoformat(timespec="seconds"),
+                    )
+                except Exception:
+                    self.logger.exception(
+                        "Failed to update ranked research memory",
+                        extra={"request_id": request_id},
+                    )
+                    memory_update_warning = True
+            research_memories = (
+                self.history.recall_research_memory(
+                    session_id,
+                    memory_topic if feedback_outcome and memory_topic else prompt,
+                    datetime.now().astimezone().isoformat(timespec="seconds"),
+                )
+                if mode == "chat"
+                else []
+            )
             if mode == "chat":
                 model_context = trim_conversation(
                     saved_history,
@@ -474,7 +530,7 @@ class AIServer:
             user_message = prompt or (
                 "Run script generation." if mode == "generate" else "Run model benchmark."
             )
-            request_id = uuid.uuid4().hex
+            workflow_succeeded = False
             try:
                 with self._request_lock:
                     if mode == "chat":
@@ -482,6 +538,7 @@ class AIServer:
                             prompt,
                             model_context,
                             offline="offline" in options,
+                            research_memories=research_memories,
                         )
                     else:
                         workflow_result = WorkflowRunner(
@@ -499,6 +556,7 @@ class AIServer:
                     "", [{"role": "assistant", "content": answer}]
                 )
                 answer = validated_response[0]["content"]
+                workflow_succeeded = True
             except Exception:
                 duration = round(perf_counter() - started_at, 3)
                 self.logger.exception(
@@ -524,6 +582,28 @@ class AIServer:
                 status = f"Response received in {duration:.2f} seconds."
 
             created_at = datetime.now().astimezone().isoformat(timespec="seconds")
+            try:
+                if (
+                    workflow_succeeded
+                    and mode == "chat"
+                    and self._is_research_review_request(prompt)
+                ):
+                    self.history.record_research_memory(
+                        session_id,
+                        memory_topic or prompt,
+                        "A review was requested. Assistant review: " + answer[:1200],
+                        "review",
+                        created_at,
+                    )
+            except Exception:
+                self.logger.exception(
+                    "Failed to update ranked research memory",
+                    extra={"request_id": request_id},
+                )
+                memory_update_warning = True
+            if memory_update_warning:
+                status += " Warning: ranked research memory could not be updated."
+
             conversation = list(saved_history)
             conversation.extend(
                 [
@@ -623,6 +703,122 @@ class AIServer:
             no_update,
             self._response_figure(conversation),
             status,
+        )
+
+    @staticmethod
+    def _research_feedback_outcome(prompt):
+        text = prompt.lower()
+        if re.search(
+            r"\b(?:that|this|your|the)\s+"
+            r"(?:answers?|responses?|results?|conclusions?)"
+            r"\s+(?:is|are|was|were|seems|looks)?\s*"
+            r"(?:wrong|incorrect|false|inaccurate)\b"
+            r"|\b(?:wrong|incorrect|false|inaccurate)\s+"
+            r"(?:answers?|responses?|results?|conclusions?)\b"
+            r"|\b(?:that|this)\s+(?:is|was)\s+"
+            r"(?:wrong|incorrect|false|inaccurate)\b"
+            r"|\b(?:answers?|responses?|results?|conclusions?)\b.{0,30}"
+            r"\b(?:is|are|was|were)\s+not\s+(?:correct|accurate|true)\b",
+            text,
+        ):
+            return "incorrect"
+        if re.search(
+            r"\b(?:that|this|your|the)\s+"
+            r"(?:answers?|responses?|results?|conclusions?)"
+            r"\s+(?:is|are|was|were)?\s*(?:correct|accurate|right|verified)\b"
+            r"|\b(?:that|this)\s+(?:is|was)\s+"
+            r"(?:correct|right|accurate)\b",
+            text,
+        ):
+            return "correct"
+        return None
+
+    @staticmethod
+    def _is_research_review_request(prompt):
+        return bool(
+            re.search(
+                r"\b(?:review|check|fact[\s-]?check|validate|verify)\b"
+                r".{0,80}\b(?:results?|answer|response|claims?|query|sources?)\b"
+                r"|\b(?:results?|answer|response|claims?)\b"
+                r".{0,80}\b(?:review|check|fact[\s-]?check|validate|verify)\b",
+                prompt,
+                flags=re.IGNORECASE,
+            )
+        )
+
+    @classmethod
+    def _previous_research_topic(cls, history):
+        for item in reversed(history):
+            if item.get("role") != "user":
+                continue
+            content = item.get("content", "")
+            if (
+                not cls._research_feedback_outcome(content)
+                and not cls._is_research_review_request(content)
+                and MultiAgentWorkflow._should_search_prompt(content)
+            ):
+                return content
+        return ""
+
+    @staticmethod
+    def _render_research_memory(memories):
+        if not memories:
+            return html.P(
+                "No ranked research memories have been recorded.",
+                className="empty-state",
+            )
+        rows = [
+            html.Tr(
+                [
+                    html.Td(memory["category"]),
+                    html.Td(memory["topic"]),
+                    html.Td(f"{memory['rank']:+d}"),
+                    html.Td(
+                        f"{memory['correct_count']} correct / "
+                        f"{memory['incorrect_count']} incorrect / "
+                        f"{memory['review_count']} reviewed"
+                    ),
+                    html.Td(
+                        html.Ul(
+                            [
+                                html.Li(
+                                    f"{event['outcome']}: {event['feedback']}"
+                                )
+                                for event in memory["events"]
+                            ]
+                        )
+                    ),
+                    html.Td(memory["lesson"]),
+                ]
+            )
+            for memory in memories
+        ]
+        return html.Div(
+            [
+                html.H2("Ranked research memory"),
+                html.P(
+                    "Ranks reflect explicit user feedback, not verified truth. "
+                    "Memory is never a substitute for current source evidence."
+                ),
+                html.Table(
+                    [
+                        html.Thead(
+                            html.Tr(
+                                [
+                                    html.Th("Category"),
+                                    html.Th("Topic"),
+                                    html.Th("Rank"),
+                                    html.Th("Feedback"),
+                                    html.Th("Recent feedback events"),
+                                    html.Th("Lesson"),
+                                ]
+                            )
+                        ),
+                        html.Tbody(rows),
+                    ],
+                    className="research-memory-table",
+                ),
+            ]
         )
 
     @staticmethod

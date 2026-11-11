@@ -55,7 +55,8 @@ browser permission and a supported browser. The Flask health endpoint is
 available at `/healthz`. The imported `MultiAgentWorkflow` class provides the
 same chat workflow to other Python entry points. The **Action** menu selects
 chat, script generation, model benchmarking, viewing saved history, or clearing
-saved history. History actions are selected directly in this menu; selecting
+saved history, or viewing ranked research memory. History actions are selected
+directly in this menu; selecting
 **View saved history** loads the transcript into the chat, while **Clear saved
 history** deletes it and returns the action to Chat. The checkboxes control
 cache and web-search behavior; benchmark repetitions and token limits are set
@@ -70,6 +71,17 @@ Clearing history removes that session's transcript and latency records.
 Response-time records include the history context size. The UI warns when
 context exceeds 12,000 characters, and flags responses over 30 seconds when
 large history may have contributed; clear history to reduce the context.
+Explicit statements that a prior answer was correct or incorrect update shared,
+category-deduplicated research memory in the same SQLite database. A request to
+review results records a neutral review event. Ranks are clamped from -20 to 20;
+corrections lower the rank, validations raise it, and neutral reviews do not
+change it. **View ranked research memory** shows each topic, rank, feedback
+counts, and latest lesson. Clearing conversation history also clears that
+browser session's short-term memory cache, but does not erase shared long-term
+memory. Relevant ranked lessons can be recalled quickly from the session cache
+and are passed to the assistant only as fallible feedback—not as factual
+evidence or instructions. Current factual claims must still be checked against
+fresh search results.
 Chat uses a single response agent on the faster academic worker instead of
 waiting for the sequential research-and-architect pipeline. Research and
 current-information queries are searched directly when web search is enabled;
