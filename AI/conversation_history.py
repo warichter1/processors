@@ -65,6 +65,9 @@ class ConversationHistory:
                     duration_s REAL NOT NULL,
                     context_messages INTEGER NOT NULL,
                     context_chars INTEGER NOT NULL,
+                    history_context_messages INTEGER NOT NULL DEFAULT 0,
+                    history_context_chars INTEGER NOT NULL DEFAULT 0,
+                    prompt_chars INTEGER NOT NULL DEFAULT 0,
                     created_at TEXT NOT NULL
                 );
                 CREATE INDEX IF NOT EXISTS conversation_latency_session_id
@@ -115,6 +118,22 @@ class ConversationHistory:
                     ON recent_memory_cache(session_id, accessed_at DESC);
                 """
             )
+            columns = {
+                row["name"]
+                for row in connection.execute(
+                    "PRAGMA table_info(conversation_latency)"
+                )
+            }
+            for name in (
+                "history_context_messages",
+                "history_context_chars",
+                "prompt_chars",
+            ):
+                if name not in columns:
+                    connection.execute(
+                        f"ALTER TABLE conversation_latency "
+                        f"ADD COLUMN {name} INTEGER NOT NULL DEFAULT 0"
+                    )
 
     def get_secret_key(self):
         """Return a persistent Flask cookie-signing key stored in this database."""
@@ -164,6 +183,9 @@ class ConversationHistory:
         context_messages,
         context_chars,
         created_at,
+        history_context_messages=0,
+        history_context_chars=0,
+        prompt_chars=0,
     ):
         with self._lock, self._connect() as connection:
             connection.executemany(
@@ -186,14 +208,21 @@ class ConversationHistory:
             connection.execute(
                 """
                 INSERT INTO conversation_latency
-                    (session_id, duration_s, context_messages, context_chars, created_at)
-                VALUES (?, ?, ?, ?, ?)
+                    (
+                        session_id, duration_s, context_messages, context_chars,
+                        history_context_messages, history_context_chars,
+                        prompt_chars, created_at
+                    )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     session_id,
                     duration_s,
                     context_messages,
                     context_chars,
+                    history_context_messages,
+                    history_context_chars,
+                    prompt_chars,
                     created_at,
                 ),
             )

@@ -19,9 +19,14 @@ generated, including version lists and tables. Research follow-ups reuse the
 preceding research question so a request such as “add applications” retains its
 product context. The assistant is instructed to distinguish model variants,
 quantizations, file sizes, and release versions, reason about claims against the
-returned evidence, cite sources, and explain which requested details cannot be
-verified while still providing supported partial results. Search failures
-return a clear verification error instead of silently claiming current facts.
+returned evidence, cite only the supplied `[S#]` sources, and explain which
+requested details cannot be verified while still providing supported partial
+results. Search results are treated as discovery snippets; the assistant fetches
+up to two public source pages (prioritizing links supplied by the user) and
+provides bounded page excerpts for verification. Fetched pages are treated as
+untrusted text, and private-network, credential-bearing, unsupported, or oversized
+URLs/pages are not fetched. Search failures return a clear verification error
+instead of silently claiming current facts.
 Saved history remains available to the user, but factual research requests do
 not send earlier assistant responses back as evidence; follow-ups retain only
 the relevant earlier user requests.
@@ -56,8 +61,7 @@ available at `/healthz`. The imported `MultiAgentWorkflow` class provides the
 same chat workflow to other Python entry points. The **Action** menu selects
 chat, script generation, model benchmarking, viewing saved history, or clearing
 saved history, or viewing ranked research memory. History actions are selected
-directly in this menu; selecting
-**View saved history** loads the transcript into the chat, while **Clear saved
+directly in this menu; **View saved history** loads the transcript into the chat, while **Clear saved
 history** deletes it and returns the action to Chat. The checkboxes control
 cache and web-search behavior; benchmark repetitions and token limits are set
 in the numeric fields. A startup notice appears while the page initializes and
@@ -66,7 +70,11 @@ processing indicator and temporarily disables Send while making the prompt
 read-only until the assistant responds.
 Chat turns are stored in `AI/logs/conversation-history.sqlite3` and associated
 with the browser's signed session, so they can be restored after a page reload
-or server restart. The assistant receives the recent conversation context.
+or server restart. The assistant receives recent conversation context when
+relevant; latency records retain overall context size and separately record
+prior history and current-prompt sizes for new rows. Older latency rows retain
+their combined counts and have zero in the newly added split fields. History
+warnings use only prior history.
 Clearing history removes that session's transcript and latency records.
 Response-time records include the history context size. The UI warns when
 context exceeds 12,000 characters, and flags responses over 30 seconds when
@@ -85,7 +93,9 @@ fresh search results.
 Chat uses a single response agent on the faster academic worker instead of
 waiting for the sequential research-and-architect pipeline. Research and
 current-information queries are searched directly when web search is enabled;
-the results are passed to the response agent, which should cite their URLs.
+source counts, fetched-page counts, and search duration are logged without
+storing the search query or source URLs. The results are passed to the response agent,
+which should cite their `[S#]` IDs and URLs.
 Script generation continues to use both agents.
 
 Web requests are type- and size-validated before reaching the workflow. Backend

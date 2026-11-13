@@ -519,14 +519,18 @@ class AIServer:
                     saved_history,
                     max_chars=MAX_CONVERSATION_CHARS - len(prompt),
                 )[-12:]
-                context_chars = (
-                    sum(len(item["content"]) for item in model_context) + len(prompt)
+                context_chars = sum(
+                    len(item["content"]) for item in model_context
                 )
-                context_message_count = len(model_context) + int(bool(prompt))
+                context_message_count = len(model_context)
+                request_context_messages = context_message_count + int(bool(prompt))
+                request_context_chars = context_chars + len(prompt)
             else:
                 model_context = []
                 context_chars = 0
                 context_message_count = 0
+                request_context_messages = 0
+                request_context_chars = 0
             user_message = prompt or (
                 "Run script generation." if mode == "generate" else "Run model benchmark."
             )
@@ -568,15 +572,18 @@ class AIServer:
             else:
                 duration = round(perf_counter() - started_at, 3)
                 self.logger.info(
-                    "Workflow request completed in %.3f seconds (history context: %d messages, %d characters)",
+                    "Workflow request completed in %.3f seconds "
+                    "(history: %d messages, %d characters; current prompt: %d characters)",
                     duration,
                     context_message_count,
                     context_chars,
+                    len(prompt),
                     extra={
                         "request_id": request_id,
                         "mode": mode,
                         "history_context_messages": context_message_count,
                         "history_context_chars": context_chars,
+                        "conversation_and_prompt_chars": request_context_chars,
                     },
                 )
                 status = f"Response received in {duration:.2f} seconds."
@@ -626,9 +633,12 @@ class AIServer:
                     user_message,
                     answer,
                     duration,
-                    context_message_count,
-                    context_chars,
+                    request_context_messages,
+                    request_context_chars,
                     created_at,
+                    history_context_messages=context_message_count,
+                    history_context_chars=context_chars,
+                    prompt_chars=len(prompt),
                 )
                 conversation = self.history.get_messages(session_id)
             except Exception:
