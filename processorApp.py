@@ -245,23 +245,27 @@ def update_graphs(one_rows, two_rows, one_derived_virtual_selected_rows, two_der
     # `derived_virtual_data=df.to_rows('dict')` when you initialize
     # the component.
     def graphs(rows, derived_virtual_selected_rows):
-        app.logger.info(f'{rows}, {derived_virtual_selected_rows}')
         if derived_virtual_selected_rows is None:
             derived_virtual_selected_rows = []
 
         dff = pd.DataFrame() if rows is None else pd.DataFrame(rows)
+        model_column = next(
+            (column for column in ('Hw Model', 'hw_model', 'Model') if column in dff),
+            None,
+        )
+        if model_column is None:
+            return []
 
         colors = ['#7FDBFF' if i in derived_virtual_selected_rows else '#0074D9'
                   for i in range(len(dff))]
-        columns = 'name'
         return [
             dcc.Graph(
                 id=column,
                 figure={
                     "data": [
                         {
-                            "x": dff["Model"],
-                            "y": dff[column],
+                            "x": dff[model_column],
+                            "y": pd.to_numeric(dff[column], errors='coerce'),
                             "type": "bar",
                             "marker": {"color": colors},
                         }
@@ -280,7 +284,7 @@ def update_graphs(one_rows, two_rows, one_derived_virtual_selected_rows, two_der
             # check if column exists - user may have deleted it
             # If `column.deletable=False`, then you don't
             # need to do this check.
-            for column in ["Clock", "Launch", "name"] if column in dff
+            for column in ('Clock', 'clock') if column in dff
         ]
     return (
         graphs(two_rows, two_derived_virtual_selected_rows),

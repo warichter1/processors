@@ -12,12 +12,12 @@ amdRename = {'Model': 'hw_model', 'Unnamed: 0': 'processor_id',
              'Line': 'hw_model.spec_int2k6', 'L1 Cache': 'l1_cache',
              'L2 Cache': 'l2_cache', 'L3 Cache': 'l3_cache', 'Launch Date': 'date',
              'Family': 'test_sponsor.spec_int2k6', 'Total Cores': 'hw_ncores', 'Total Threads': 'hw_threads',
-             '# of CPU Cores': 'hw_ncores', 'Memory Channels': 'memory channels',
+             '# of academic_worker.modelfile Cores': 'hw_ncores', 'Memory Channels': 'memory channels',
              '# of Threads': 'hw_nthreadspercore', 'Graphics Core Count': 'hw_gcores',
              'Base Clock': 'clock', 'Max. Boost Clock ¹ ²': 'max_clock', 'System Memory Type': 'memory types',
              'Default TDP': 'tdp', 'AMD Configurable TDP (cTDP)': 'ctdp', '*OS Support': 'os Support'}
 amdDrop = ['Thermal Solution PIB', 'Recommended Cooler', 'Thermal Solution MPK',
-           'PCI Express® Version', 'CPU Socket', 'Socket Count', '1kU Pricing',
+           'PCI Express® Version', 'academic_worker.modelfile Socket', 'Socket Count', '1kU Pricing',
            'Unlocked for Overclocking', 'All Core Boost Speed', 'Unnamed: 1',
            'Product ID Tray', 'Product ID Boxed', 'Product ID MPK']
 
