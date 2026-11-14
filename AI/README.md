@@ -90,15 +90,34 @@ memory. Relevant ranked lessons can be recalled quickly from the session cache
 and are passed to the assistant only as fallible feedback—not as factual
 evidence or instructions. Current factual claims must still be checked against
 fresh search results.
+Successfully fetched public-page excerpts are also stored separately with their
+source URLs and verification timestamps. Identical URL/excerpt pairs are saved
+once and have their verification timestamp refreshed; recent topic-matched
+findings may be supplied as discovery leads, never as current evidence, and
+findings older than 30 days are not recalled.
 Chat uses a single response agent on the faster academic worker instead of
 waiting for the sequential research-and-architect pipeline. Research and
 current-information queries are searched directly when web search is enabled;
 source counts, fetched-page counts, and search duration are logged without
 storing the search query or source URLs. The results are passed to the response agent,
 which should cite their `[S#]` IDs and URLs.
+Factual tables must cite every row from supplied evidence; the assistant must not
+infer a model's intended use, performance, API availability, or capabilities from
+its name or parameter count. Recommendations should be identified as
+recommendations rather than sourced facts, and related product families must
+remain distinct.
+The response pipeline rejects researched Markdown tables with missing or unknown
+row citations rather than presenting them as verified facts. Hardware-fit
+recommendations must state supported quantization and context assumptions or
+mark them unknown.
 Script generation continues to use both agents.
 
 Web requests are type- and size-validated before reaching the workflow. Backend
 exceptions are written to `AI/logs/webserver.log` and clients receive a generic
 failure message. Server and profiling logs use a queued single-writer handler
 and rotate daily at midnight UTC, retaining at most seven daily files.
+Chat model calls have a 120-second timeout and generation calls have a
+600-second timeout. The web server rejects a concurrent workflow request after
+one second rather than leaving it queued behind an in-progress request. LLM call
+start events are recorded in the profiler when debug profiling is enabled; the
+web server logs workflow request starts and concurrent-request rejections.

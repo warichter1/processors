@@ -39,6 +39,7 @@ MAX_BENCHMARK_REPETITIONS = 10
 MAX_BENCHMARK_TOKENS = 8192
 HISTORY_LATENCY_WARNING_CHARS = 12_000
 SLOW_RESPONSE_WARNING_SECONDS = 30
+REQUEST_LOCK_WAIT_SECONDS = 1
 
 
 class AIServer:
@@ -470,6 +471,10 @@ class AIServer:
             started_at = perf_counter()
             saved_history = self.history.get_messages(session_id)
             request_id = uuid.uuid4().hex
+            self.logger.info(
+                "Workflow request started",
+                extra={"request_id": request_id, "mode": mode},
+            )
             feedback_outcome = self._research_feedback_outcome(prompt)
             memory_topic = self._previous_research_topic(saved_history)
             memory_update_warning = False
@@ -514,6 +519,12 @@ class AIServer:
                 if mode == "chat"
                 else []
             )
+            factual_results = (
+                self.history.recall_source_findings(prompt)
+                if mode == "chat"
+                and MultiAgentWorkflow._should_search_prompt(prompt)
+                else []
+            )
             if mode == "chat":
                 model_context = trim_conversation(
                     saved_history,
@@ -535,27 +546,37 @@ class AIServer:
                 "Run script generation." if mode == "generate" else "Run model benchmark."
             )
             workflow_succeeded = False
+            if not self._request_lock.acquire(timeout=REQUEST_LOCK_WAIT_SECONDS):
+                self.logger.warning(
+                    "Workflow request rejected because another request is still running",
+                    extra={"request_id": request_id, "mode": mode},
+                )
+                return self._safe_callback_result(
+                    saved_history,
+                    "Another request is still running. Please wait for it to finish.",
+                )
             try:
-                with self._request_lock:
-                    if mode == "chat":
-                        answer = self.workflow.respond(
-                            prompt,
-                            model_context,
-                            offline="offline" in options,
-                            research_memories=research_memories,
-                        )
-                    else:
-                        workflow_result = WorkflowRunner(
-                            benchmark=mode == "benchmark",
-                            benchmark_repetitions=benchmark_repetitions,
-                            benchmark_max_tokens=benchmark_max_tokens,
-                            no_cache="no-cache" in options,
-                            clear_cache="clear-cache" in options,
-                            offline="offline" in options,
-                            target_dir=self.workflow.agent.TARGET_DIR,
-                            debug=self.workflow.agent.debug,
-                        ).run()
-                        answer = workflow_result["message"]
+                if mode == "chat":
+                    answer = self.workflow.respond(
+                        prompt,
+                        model_context,
+                        offline="offline" in options,
+                        research_memories=research_memories,
+                        factual_results=factual_results,
+                        source_finding_callback=self._record_source_findings,
+                    )
+                else:
+                    workflow_result = WorkflowRunner(
+                        benchmark=mode == "benchmark",
+                        benchmark_repetitions=benchmark_repetitions,
+                        benchmark_max_tokens=benchmark_max_tokens,
+                        no_cache="no-cache" in options,
+                        clear_cache="clear-cache" in options,
+                        offline="offline" in options,
+                        target_dir=self.workflow.agent.TARGET_DIR,
+                        debug=self.workflow.agent.debug,
+                    ).run()
+                    answer = workflow_result["message"]
                 _, validated_response = validate_chat_payload(
                     "", [{"role": "assistant", "content": answer}]
                 )
@@ -587,6 +608,8 @@ class AIServer:
                     },
                 )
                 status = f"Response received in {duration:.2f} seconds."
+            finally:
+                self._request_lock.release()
 
             created_at = datetime.now().astimezone().isoformat(timespec="seconds")
             try:
@@ -742,6 +765,18 @@ class AIServer:
         ):
             return "correct"
         return None
+
+    def _record_source_findings(self, evidence):
+        try:
+            inserted = self.history.record_source_findings(
+                evidence,
+                datetime.now().astimezone().isoformat(timespec="seconds"),
+            )
+        except Exception:
+            self.logger.exception("Failed to store sourced research findings")
+            return
+        if inserted:
+            self.logger.info("Saved %d new sourced research findings", inserted)
 
     @staticmethod
     def _is_research_review_request(prompt):
