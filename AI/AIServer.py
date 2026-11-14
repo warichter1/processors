@@ -11,7 +11,10 @@ import uuid
 
 from dash import Dash, Input, Output, State, ctx, dcc, html, no_update
 from docx import Document
-from docx.shared import Inches
+from docx.enum.section import WD_ORIENT
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.shared import Inches, Pt
 from flask import Flask, jsonify, session
 import plotly.graph_objects as go
 from werkzeug.exceptions import HTTPException
@@ -110,18 +113,19 @@ class AIServer:
                     [
                         html.H1("Multi-Agent Assistant"),
                         html.P("Ask a question by typing or using speech input."),
+                        html.Div(
+                            id="sleep-notice",
+                            role="status",
+                            **{"aria-live": "polite"},
+                        ),
+                        dcc.Interval(
+                            id="sleep-state-check",
+                            interval=1000,
+                            n_intervals=0,
+                            disabled=True,
+                        ),
                     ],
                     className="page-header",
-                ),
-                html.Div(
-                    id="sleep-notice",
-                    role="status",
-                    **{"aria-live": "polite"},
-                ),
-                dcc.Interval(
-                    id="sleep-state-check",
-                    interval=500,
-                    n_intervals=0,
                 ),
                 html.Div(
                     [
@@ -403,10 +407,22 @@ class AIServer:
             Output("send-button", "disabled"),
             Output("speech-button", "disabled"),
             Output("sleep-notice", "children"),
+            Output("sleep-state-check", "disabled"),
             Input("sleep-state-check", "n_intervals"),
         )
         def update_sleep_status(_interval_count):
             return self._sleep_ui_state()
+
+        @self.dash_app.callback(
+            Output("sleep-state-check", "disabled", allow_duplicate=True),
+            Input("workflow-mode", "value"),
+            Input("send-button", "n_clicks"),
+            prevent_initial_call=True,
+        )
+        def resume_sleep_status_polling(mode, send_clicks):
+            if mode in {"nap", "wake"} or (send_clicks or 0) > 0:
+                return False
+            return no_update
 
         @self.dash_app.callback(
             Output("response-download", "data"),
@@ -935,13 +951,15 @@ class AIServer:
             sleep_pending = self._sleep_pending
             sleeping = self._sleeping
             sleep_status = self._sleep_status
-        disabled = sleep_pending or sleeping or self._request_lock.locked()
+        workflow_busy = self._request_lock.locked()
+        active = sleep_pending or sleeping or workflow_busy
+        disabled = sleep_pending or sleeping or workflow_busy
         notice = (
             html.P(sleep_status, className="sleep-notice")
             if sleep_pending or sleeping
             else None
         )
-        return disabled, disabled, notice
+        return disabled, disabled, notice, not active
 
     def _start_sleep(self, reason):
         with self._sleep_state_lock:
@@ -1063,6 +1081,16 @@ class AIServer:
         document.core_properties.title = "Assistant response"
         document.core_properties.subject = "Latest assistant response"
         section = document.sections[0]
+        has_markdown_table = any(
+            line.strip().startswith("|") and line.strip().endswith("|")
+            for line in content.splitlines()
+        )
+        if has_markdown_table:
+            section.orientation = WD_ORIENT.LANDSCAPE
+            section.page_width, section.page_height = (
+                section.page_height,
+                section.page_width,
+            )
         section.top_margin = section.bottom_margin = Inches(0.7)
         section.left_margin = section.right_margin = Inches(0.8)
         document.add_heading("Assistant response", level=0)
@@ -1126,6 +1154,23 @@ class AIServer:
                 if column_count:
                     table = document.add_table(rows=1, cols=column_count)
                     table.style = "Light Shading Accent 1"
+                    table.autofit = False
+                    available_width = (
+                        section.page_width
+                        - section.left_margin
+                        - section.right_margin
+                    )
+                    header_weights = [
+                        min(max(len(header), 8), 36)
+                        for header in rows[0]
+                    ]
+                    weight_total = sum(header_weights)
+                    column_widths = [
+                        int(available_width * weight / weight_total)
+                        for weight in header_weights
+                    ]
+                    for column, width in zip(table.columns, column_widths):
+                        column.width = width
                     for row_index, cells in enumerate(rows):
                         target_cells = (
                             table.rows[0].cells
@@ -1135,11 +1180,19 @@ class AIServer:
                         for cell_index, cell_text in enumerate(cells):
                             if cell_index < column_count:
                                 target_cell = target_cells[cell_index]
+                                target_cell.width = column_widths[cell_index]
                                 target_cell.text = ""
                                 add_text_runs(
                                     target_cell.paragraphs[0],
                                     cell_text,
                                 )
+                                if row_index == 0:
+                                    target_cell._tc.get_or_add_tcPr().append(
+                                        OxmlElement("w:noWrap")
+                                    )
+                                    for run in target_cell.paragraphs[0].runs:
+                                        run.bold = True
+                                        run.font.size = Pt(8)
                 continue
             elif re.match(r"^#{1,6}\s+", stripped):
                 heading = re.match(r"^(#{1,6})\s+(.*)$", stripped)

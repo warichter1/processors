@@ -10,6 +10,8 @@ from unittest.mock import Mock, patch
 from AI.AIServer import AIServer
 from AI.conversation_history import ConversationHistory
 from docx import Document
+from docx.enum.section import WD_ORIENT
+from docx.oxml.ns import qn
 from AI.multiAgent import (
     CHAT_ARCHITECT_TASK_PROMPT,
     CHAT_FACTUAL_EXPECTED_OUTPUT,
@@ -479,10 +481,16 @@ class FactualResearchMemoryTests(unittest.TestCase):
         self.assertFalse(server._sleeping)
         self.assertIsNone(server._sleep_thread)
         self.assertEqual(server._sleep_status, "")
-        send_disabled, microphone_disabled, notice = server._sleep_ui_state()
+        (
+            send_disabled,
+            microphone_disabled,
+            notice,
+            polling_disabled,
+        ) = server._sleep_ui_state()
         self.assertFalse(send_disabled)
         self.assertFalse(microphone_disabled)
         self.assertIsNone(notice)
+        self.assertTrue(polling_disabled)
 
     def test_sleeping_ui_disables_buttons_and_displays_notice(self):
         server = object.__new__(AIServer)
@@ -492,11 +500,34 @@ class FactualResearchMemoryTests(unittest.TestCase):
         server._sleeping = True
         server._sleep_status = "The agent is sleeping."
 
-        send_disabled, microphone_disabled, notice = server._sleep_ui_state()
+        (
+            send_disabled,
+            microphone_disabled,
+            notice,
+            polling_disabled,
+        ) = server._sleep_ui_state()
 
         self.assertTrue(send_disabled)
         self.assertTrue(microphone_disabled)
         self.assertEqual(notice.children, "The agent is sleeping.")
+        self.assertFalse(polling_disabled)
+
+    def test_idle_sleep_ui_disables_polling(self):
+        server = object.__new__(AIServer)
+        server._sleep_state_lock = threading.Lock()
+        server._request_lock = threading.Lock()
+        server._sleep_pending = False
+        server._sleeping = False
+        server._sleep_status = ""
+
+        send_disabled, microphone_disabled, notice, polling_disabled = (
+            server._sleep_ui_state()
+        )
+
+        self.assertFalse(send_disabled)
+        self.assertFalse(microphone_disabled)
+        self.assertIsNone(notice)
+        self.assertTrue(polling_disabled)
 
     def test_sleep_waits_for_active_workflow_and_shows_ready_notice(self):
         server = object.__new__(AIServer)
@@ -517,11 +548,17 @@ class FactualResearchMemoryTests(unittest.TestCase):
             args=("test",),
         )
         sleep_thread.start()
-        send_disabled, microphone_disabled, notice = server._sleep_ui_state()
+        (
+            send_disabled,
+            microphone_disabled,
+            notice,
+            polling_disabled,
+        ) = server._sleep_ui_state()
 
         self.assertTrue(send_disabled)
         self.assertTrue(microphone_disabled)
         self.assertIn("Ready to sleep", notice.children)
+        self.assertFalse(polling_disabled)
         server.history.get_source_findings_for_sleep.assert_not_called()
 
         server._request_lock.release()
@@ -554,6 +591,10 @@ class FactualResearchMemoryTests(unittest.TestCase):
         self.assertEqual(len(document.tables), 1)
         self.assertEqual(document.tables[0].rows[1].cells[0].text, "Qwen")
         self.assertEqual(document.tables[0].rows[1].cells[1].text, "9B")
+        self.assertEqual(document.sections[0].orientation, WD_ORIENT.LANDSCAPE)
+        for header_cell in document.tables[0].rows[0].cells:
+            self.assertIsNotNone(header_cell._tc.tcPr.find(qn("w:noWrap")))
+            self.assertTrue(all(run.bold for run in header_cell.paragraphs[0].runs))
 
 
 if __name__ == "__main__":
