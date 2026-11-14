@@ -1,6 +1,7 @@
 requests==2.33.0
 dash
 plotly
+python-docx==1.2.0
 cryptography==50.0.0
 scipy
 # spyder==6.1.1

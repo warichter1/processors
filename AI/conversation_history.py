@@ -1,6 +1,8 @@
-"""SQLite persistence for per-browser chat history and latency measurements."""
+"""SQLite persistence for chat history, research memory, and latency measurements."""
 
 from contextlib import contextmanager
+from datetime import datetime
+import hashlib
 import os
 import re
 import secrets
@@ -92,6 +94,17 @@ class ConversationHistory:
                     ON research_memory(category, rank DESC, updated_at DESC);
                 CREATE INDEX IF NOT EXISTS research_memory_updated
                     ON research_memory(updated_at DESC);
+                CREATE TABLE IF NOT EXISTS research_facts (
+                    fact_key TEXT PRIMARY KEY,
+                    topic TEXT NOT NULL,
+                    source_title TEXT NOT NULL,
+                    excerpt TEXT NOT NULL,
+                    source_url TEXT NOT NULL,
+                    verified_at TEXT NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'active'
+                );
+                CREATE INDEX IF NOT EXISTS research_facts_verified_at
+                    ON research_facts(verified_at DESC);
                 CREATE TABLE IF NOT EXISTS research_memory_events (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     memory_id INTEGER NOT NULL REFERENCES research_memory(id)
@@ -117,6 +130,19 @@ class ConversationHistory:
                 CREATE INDEX IF NOT EXISTS recent_memory_cache_session_access
                     ON recent_memory_cache(session_id, accessed_at DESC);
                 """
+            )
+            fact_columns = {
+                row["name"]
+                for row in connection.execute("PRAGMA table_info(research_facts)")
+            }
+            if "status" not in fact_columns:
+                connection.execute(
+                    "ALTER TABLE research_facts ADD COLUMN status "
+                    "TEXT NOT NULL DEFAULT 'active'"
+                )
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS research_facts_status_verified "
+                "ON research_facts(status, verified_at DESC)"
             )
             columns = {
                 row["name"]
@@ -454,6 +480,240 @@ class ConversationHistory:
                 )
             connection.commit()
         return [dict(row) for row in selected]
+
+    def record_source_findings(self, evidence, verified_at):
+        """Store fetched source excerpts with provenance, inserting only new findings."""
+        if not isinstance(evidence, str) or not evidence.strip():
+            return 0
+        if not isinstance(verified_at, str) or not verified_at.strip():
+            raise ValueError("A verification timestamp is required.")
+        try:
+            datetime.fromisoformat(verified_at)
+        except ValueError as exc:
+            raise ValueError("The verification timestamp must be ISO formatted.") from exc
+
+        findings = []
+        for block in re.split(r"(?m)(?=^\[S\d+\])", evidence):
+            if not re.match(r"^\[S\d+\]", block):
+                continue
+            lines = block.splitlines()
+            source_title = re.sub(r"^\[S\d+\]\s*", "", lines[0]).strip()[:300]
+            source_url = next(
+                (
+                    line.partition(":")[2].strip()
+                    for line in lines[1:]
+                    if line.startswith("URL:")
+                ),
+                "",
+            )
+            excerpt_match = re.search(
+                r"(?m)^Fetched page excerpt:\s*(.+)$", block
+            )
+            if not source_url or excerpt_match is None:
+                continue
+
+            excerpt = " ".join(excerpt_match.group(1).split())[:2000]
+            if not excerpt:
+                continue
+            key_material = f"{source_url}\n{excerpt.casefold()}"
+            fact_key = hashlib.sha256(key_material.encode("utf-8")).hexdigest()
+            findings.append(
+                (
+                    fact_key,
+                    source_title or source_url,
+                    source_title,
+                    excerpt,
+                    source_url,
+                    verified_at,
+                )
+            )
+
+        if not findings:
+            return 0
+
+        with self._lock, self._connect() as connection:
+            inserted = 0
+            for finding in findings:
+                connection.execute(
+                    """
+                    UPDATE research_facts
+                    SET status = 'superseded'
+                    WHERE source_url = ? AND fact_key != ? AND status = 'active'
+                    """,
+                    (finding[4], finding[0]),
+                )
+                cursor = connection.execute(
+                    """
+                    INSERT OR IGNORE INTO research_facts
+                        (fact_key, topic, source_title, excerpt, source_url, verified_at)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    finding,
+                )
+                inserted += max(cursor.rowcount, 0)
+                if cursor.rowcount == 0:
+                    connection.execute(
+                        """
+                        UPDATE research_facts
+                        SET verified_at = ?, topic = ?, source_title = ?, status = 'active'
+                        WHERE fact_key = ?
+                        """,
+                        (verified_at, finding[1], finding[2], finding[0]),
+                    )
+            connection.commit()
+        return inserted
+
+    def get_source_findings_for_sleep(self, older_than_days=7, limit=25):
+        """Return active sourced findings old enough for background rechecking."""
+        cutoff = datetime.now().astimezone().timestamp() - older_than_days * 86400
+        with self._lock, self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT fact_key, topic, source_title, excerpt, source_url, verified_at
+                FROM research_facts
+                WHERE status = 'active'
+                ORDER BY verified_at ASC
+                LIMIT 500
+                """
+            ).fetchall()
+
+        due = []
+        for row in rows:
+            try:
+                verified_timestamp = datetime.fromisoformat(
+                    row["verified_at"]
+                ).timestamp()
+            except (TypeError, ValueError, OverflowError):
+                continue
+            if verified_timestamp <= cutoff:
+                due.append(dict(row))
+        return due[:limit]
+
+    def refresh_source_finding(self, finding, fetched_source, verified_at):
+        """Refresh one source-backed finding, superseding it if the excerpt changed."""
+        if not isinstance(verified_at, str) or not verified_at.strip():
+            raise ValueError("A verification timestamp is required.")
+        try:
+            datetime.fromisoformat(verified_at)
+        except ValueError as exc:
+            raise ValueError("The verification timestamp must be ISO formatted.") from exc
+        if not isinstance(fetched_source, dict):
+            raise ValueError("Fetched source data must be a mapping.")
+
+        excerpt = " ".join(str(fetched_source.get("text", "")).split())[:2000]
+        if not excerpt:
+            raise ValueError("Fetched source text must not be empty.")
+        source_title = (
+            " ".join(str(fetched_source.get("title", "")).split())[:300]
+            or finding["source_title"]
+        )
+        fact_key = hashlib.sha256(
+            f"{finding['source_url']}\n{excerpt.casefold()}".encode("utf-8")
+        ).hexdigest()
+
+        with self._lock, self._connect() as connection:
+            current = connection.execute(
+                """
+                SELECT fact_key FROM research_facts
+                WHERE fact_key = ? AND status = 'active'
+                """,
+                (finding["fact_key"],),
+            ).fetchone()
+            if current is None:
+                return False
+
+            changed = fact_key != finding["fact_key"]
+            if changed:
+                connection.execute(
+                    """
+                    UPDATE research_facts
+                    SET status = 'superseded'
+                    WHERE source_url = ? AND fact_key != ? AND status = 'active'
+                    """,
+                    (finding["source_url"], fact_key),
+                )
+                connection.execute(
+                    """
+                    INSERT INTO research_facts
+                        (fact_key, topic, source_title, excerpt, source_url,
+                         verified_at, status)
+                    VALUES (?, ?, ?, ?, ?, ?, 'active')
+                    ON CONFLICT(fact_key) DO UPDATE SET
+                        topic = excluded.topic,
+                        source_title = excluded.source_title,
+                        excerpt = excluded.excerpt,
+                        verified_at = excluded.verified_at,
+                        status = 'active'
+                    """,
+                    (
+                        fact_key,
+                        finding["topic"],
+                        source_title,
+                        excerpt,
+                        finding["source_url"],
+                        verified_at,
+                    ),
+                )
+                connection.execute(
+                    """
+                    UPDATE research_facts
+                    SET status = 'superseded'
+                    WHERE fact_key = ?
+                    """,
+                    (finding["fact_key"],),
+                )
+            else:
+                connection.execute(
+                    """
+                    UPDATE research_facts
+                    SET source_title = ?, verified_at = ?
+                    WHERE fact_key = ?
+                    """,
+                    (source_title, verified_at, fact_key),
+                )
+            connection.commit()
+        return changed
+
+    def recall_source_findings(self, query, limit=3, max_age_days=30):
+        """Recall recent source excerpts as discovery leads, not current evidence."""
+        terms = self._memory_terms(query)
+        if not terms:
+            return []
+
+        with self._lock, self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT topic, source_title, excerpt, source_url, verified_at
+                FROM research_facts
+                WHERE status = 'active'
+                ORDER BY verified_at DESC
+                LIMIT 500
+                """
+            ).fetchall()
+
+        ranked = []
+        now = datetime.now().astimezone()
+        for row in rows:
+            try:
+                age = now - datetime.fromisoformat(row["verified_at"]).astimezone()
+            except (TypeError, ValueError):
+                continue
+            if age.days > max_age_days or age.total_seconds() < 0:
+                continue
+            overlap = len(
+                terms.intersection(
+                    self._memory_terms(
+                        f"{row['topic']} {row['source_title']} {row['excerpt']}"
+                    )
+                )
+            )
+            if overlap:
+                ranked.append((overlap, dict(row)))
+        ranked.sort(
+            key=lambda item: (item[0], item[1]["verified_at"]),
+            reverse=True,
+        )
+        return [row for _, row in ranked[:limit]]
 
     def get_research_memory(self, limit=100):
         """Return ranked lessons and counts for the memory review screen."""

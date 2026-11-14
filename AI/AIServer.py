@@ -1,6 +1,7 @@
 """Flask-hosted Dash interface for the multi-agent assistant."""
 
 from datetime import datetime, timedelta
+from io import BytesIO
 from time import perf_counter
 import math
 import os
@@ -9,6 +10,8 @@ import threading
 import uuid
 
 from dash import Dash, Input, Output, State, ctx, dcc, html, no_update
+from docx import Document
+from docx.shared import Inches
 from flask import Flask, jsonify, session
 import plotly.graph_objects as go
 from werkzeug.exceptions import HTTPException
@@ -40,6 +43,9 @@ MAX_BENCHMARK_TOKENS = 8192
 HISTORY_LATENCY_WARNING_CHARS = 12_000
 SLOW_RESPONSE_WARNING_SECONDS = 30
 REQUEST_LOCK_WAIT_SECONDS = 1
+SLEEP_SCHEDULE_INTERVAL_SECONDS = 24 * 60 * 60
+SLEEP_SOURCE_AGE_DAYS = 7
+SLEEP_MAX_FINDINGS_PER_CYCLE = 25
 
 
 class AIServer:
@@ -73,6 +79,14 @@ class AIServer:
         self.server.secret_key = self.history.get_secret_key()
         self.server.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=365)
         self._request_lock = threading.Lock()
+        self._sleep_state_lock = threading.Lock()
+        self._sleep_wake_event = threading.Event()
+        self._scheduler_stop_event = threading.Event()
+        self._sleep_pending = False
+        self._sleeping = False
+        self._sleep_status = ""
+        self._sleep_thread = None
+        self._scheduler_thread = None
         self._configure_routes()
         self._configure_layout()
         self._configure_callbacks()
@@ -98,6 +112,16 @@ class AIServer:
                         html.P("Ask a question by typing or using speech input."),
                     ],
                     className="page-header",
+                ),
+                html.Div(
+                    id="sleep-notice",
+                    role="status",
+                    **{"aria-live": "polite"},
+                ),
+                dcc.Interval(
+                    id="sleep-state-check",
+                    interval=500,
+                    n_intervals=0,
                 ),
                 html.Div(
                     [
@@ -139,6 +163,8 @@ class AIServer:
                                         {"label": "View saved history", "value": "view-history"},
                                         {"label": "Clear saved history", "value": "clear-history"},
                                         {"label": "View ranked research memory", "value": "view-memory"},
+                                        {"label": "Nap (review older memories)", "value": "nap"},
+                                        {"label": "Wake from sleep or nap", "value": "wake"},
                                     ],
                                     value="chat",
                                     clearable=False,
@@ -189,6 +215,21 @@ class AIServer:
                                 html.Div(
                                     [
                                         html.Button(
+                                            html.Span(
+                                                "\u2b07",
+                                                **{"aria-hidden": "true"},
+                                            ),
+                                            id="download-button",
+                                            n_clicks=0,
+                                            type="button",
+                                            title="Download latest response as a Word document",
+                                            **{
+                                                "aria-label": (
+                                                    "Download latest response as a Word document"
+                                                )
+                                            },
+                                        ),
+                                        html.Button(
                                             "Use microphone",
                                             id="speech-button",
                                             n_clicks=0,
@@ -204,6 +245,8 @@ class AIServer:
                                     className="button-row",
                                 ),
                                 html.Div(id="speech-status", role="status"),
+                                dcc.Download(id="response-download"),
+                                html.Div(id="download-status", role="status"),
                                 dcc.Loading(
                                     html.Div(id="request-status", role="status"),
                                     custom_spinner=self._loading_indicator(
@@ -357,6 +400,53 @@ class AIServer:
         )
 
         @self.dash_app.callback(
+            Output("send-button", "disabled"),
+            Output("speech-button", "disabled"),
+            Output("sleep-notice", "children"),
+            Input("sleep-state-check", "n_intervals"),
+        )
+        def update_sleep_status(_interval_count):
+            return self._sleep_ui_state()
+
+        @self.dash_app.callback(
+            Output("response-download", "data"),
+            Output("download-status", "children"),
+            Input("download-button", "n_clicks"),
+            prevent_initial_call=True,
+        )
+        def download_latest_response(clicks):
+            if not isinstance(clicks, int) or clicks < 1:
+                return no_update, no_update
+            latest_response = next(
+                (
+                    item["content"]
+                    for item in reversed(
+                        self.history.get_messages(self._get_conversation_id())
+                    )
+                    if item.get("role") == "assistant"
+                    and isinstance(item.get("content"), str)
+                    and item["content"].strip()
+                ),
+                None,
+            )
+            if latest_response is None:
+                return no_update, "There is no assistant response to download yet."
+
+            filename = (
+                "assistant-response-"
+                + datetime.now().astimezone().strftime("%Y%m%d-%H%M%S")
+                + ".docx"
+            )
+            return (
+                dcc.send_bytes(
+                    self._build_word_document(latest_response),
+                    filename,
+                    type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ),
+                "Latest response downloaded as a Word document.",
+            )
+
+        @self.dash_app.callback(
             Output("conversation-view", "children"),
             Output("workflow-mode", "value"),
             Output("prompt-input", "value", allow_duplicate=True),
@@ -371,7 +461,6 @@ class AIServer:
             State("benchmark-max-tokens", "value"),
             prevent_initial_call=True,
             running=[
-                (Output("send-button", "disabled"), True, False),
                 (Output("prompt-input", "readOnly"), True, False),
             ],
         )
@@ -392,6 +481,33 @@ class AIServer:
                 and mode in ALLOWED_MODES
             ):
                 triggered_id = "send-button"
+            if triggered_id == "workflow-mode" and mode == "nap":
+                started = self._start_sleep("manual nap")
+                return (
+                    no_update,
+                    "chat",
+                    no_update,
+                    no_update,
+                    "The agent is starting a nap."
+                    if started
+                    else "The agent is already sleeping.",
+                )
+            if triggered_id == "workflow-mode" and mode == "wake":
+                woke = self._wake_sleep()
+                return (
+                    no_update,
+                    "chat",
+                    no_update,
+                    no_update,
+                    "Waking the agent."
+                    if woke
+                    else "The agent is already awake.",
+                )
+            if triggered_id == "send-button" and self._is_sleeping():
+                return self._safe_callback_result(
+                    self.history.get_messages(session_id),
+                    "The agent is sleeping. Choose Wake before sending another message.",
+                )
             if triggered_id == "workflow-mode" and mode == "clear-history":
                 self.history.clear(session_id)
                 return (
@@ -556,6 +672,11 @@ class AIServer:
                     "Another request is still running. Please wait for it to finish.",
                 )
             try:
+                if self._is_sleeping():
+                    return self._safe_callback_result(
+                        saved_history,
+                        "The agent is ready to sleep. Choose Wake before sending another message.",
+                    )
                 if mode == "chat":
                     answer = self.workflow.respond(
                         prompt,
@@ -805,6 +926,261 @@ class AIServer:
                 return content
         return ""
 
+    def _is_sleeping(self):
+        with self._sleep_state_lock:
+            return self._sleep_pending or self._sleeping
+
+    def _sleep_ui_state(self):
+        with self._sleep_state_lock:
+            sleep_pending = self._sleep_pending
+            sleeping = self._sleeping
+            sleep_status = self._sleep_status
+        disabled = sleep_pending or sleeping or self._request_lock.locked()
+        notice = (
+            html.P(sleep_status, className="sleep-notice")
+            if sleep_pending or sleeping
+            else None
+        )
+        return disabled, disabled, notice
+
+    def _start_sleep(self, reason):
+        with self._sleep_state_lock:
+            if self._sleep_pending or self._sleeping:
+                return False
+            self._sleep_pending = True
+            self._sleep_status = (
+                "The agent is ready to sleep and waiting for the current workflow "
+                "to finish. Send and microphone are disabled; choose Wake to cancel."
+            )
+            self._sleep_wake_event.clear()
+            self._sleep_thread = threading.Thread(
+                target=self._run_sleep_cycle,
+                args=(reason,),
+                name="research-memory-sleep",
+                daemon=True,
+            )
+            self._sleep_thread.start()
+        self.logger.info("Research-memory sleep requested (%s)", reason)
+        return True
+
+    def _wake_sleep(self):
+        with self._sleep_state_lock:
+            if not self._sleep_pending and not self._sleeping:
+                return False
+            self._sleep_status = (
+                "Canceling the pending sleep."
+                if self._sleep_pending
+                else "The agent is waking and will finish its current source check."
+            )
+            self._sleep_wake_event.set()
+        self.logger.info("Research-memory sleep wake requested")
+        return True
+
+    def _run_sleep_cycle(self, reason):
+        checked = 0
+        updated = 0
+        failed = 0
+        acquired = False
+        try:
+            while not self._sleep_wake_event.is_set():
+                if self._request_lock.acquire(timeout=0.5):
+                    acquired = True
+                    break
+            if not acquired or self._sleep_wake_event.is_set():
+                return
+
+            with self._sleep_state_lock:
+                self._sleep_pending = False
+                self._sleeping = True
+                self._sleep_status = (
+                    "The agent is sleeping and reviewing older sourced memories. "
+                    "Send and microphone are disabled; choose Wake to stop."
+                )
+            self.logger.info("Research-memory sleep started (%s)", reason)
+            findings = self.history.get_source_findings_for_sleep(
+                older_than_days=SLEEP_SOURCE_AGE_DAYS,
+                limit=SLEEP_MAX_FINDINGS_PER_CYCLE,
+            )
+            total = len(findings)
+            for index, finding in enumerate(findings, start=1):
+                if self._sleep_wake_event.is_set():
+                    break
+                try:
+                    fetched_source, fetch_error = self.workflow.agent._fetch_public_page(
+                        finding["source_url"]
+                    )
+                    if fetched_source is None:
+                        failed += 1
+                        self.logger.warning(
+                            "Sleep could not refresh a source finding (%s)",
+                            fetch_error,
+                        )
+                    else:
+                        changed = self.history.refresh_source_finding(
+                            finding,
+                            fetched_source,
+                            datetime.now().astimezone().isoformat(timespec="seconds"),
+                        )
+                        checked += 1
+                        updated += int(changed)
+                    with self._sleep_state_lock:
+                        self._sleep_status = (
+                            "The agent is sleeping and integrating sourced memories "
+                            f"({index}/{total} checked, {updated} updated, {failed} unavailable). "
+                            "Send and microphone are disabled; choose Wake to stop."
+                        )
+                except Exception:
+                    failed += 1
+                    self.logger.exception(
+                        "Sleep failed while refreshing a source finding"
+                    )
+                if self._sleep_wake_event.wait(0.25):
+                    break
+        except Exception:
+            self.logger.exception("Research-memory sleep cycle failed")
+            with self._sleep_state_lock:
+                self._sleep_status = "The agent's sleep cycle ended with an error."
+        finally:
+            self.logger.info(
+                "Research-memory sleep completed (%d checked, %d updated, %d unavailable)",
+                checked,
+                updated,
+                failed,
+                extra={"reason": reason},
+            )
+            if acquired:
+                self._request_lock.release()
+            with self._sleep_state_lock:
+                self._sleep_pending = False
+                self._sleeping = False
+                self._sleep_status = ""
+                self._sleep_thread = None
+
+    @staticmethod
+    def _build_word_document(content):
+        """Create a styled Word document from the latest Markdown response."""
+        document = Document()
+        document.core_properties.title = "Assistant response"
+        document.core_properties.subject = "Latest assistant response"
+        section = document.sections[0]
+        section.top_margin = section.bottom_margin = Inches(0.7)
+        section.left_margin = section.right_margin = Inches(0.8)
+        document.add_heading("Assistant response", level=0)
+
+        def add_text_runs(paragraph, text, code=False):
+            if code:
+                run = paragraph.add_run(text)
+                run.font.name = "Consolas"
+                return
+            tokens = re.split(r"(\*\*.+?\*\*|__.+?__|`.+?`|\*.+?\*)", text)
+            for token in tokens:
+                if not token:
+                    continue
+                if token.startswith("**") and token.endswith("**"):
+                    paragraph.add_run(token[2:-2]).bold = True
+                elif token.startswith("__") and token.endswith("__"):
+                    paragraph.add_run(token[2:-2]).bold = True
+                elif token.startswith("`") and token.endswith("`"):
+                    run = paragraph.add_run(token[1:-1])
+                    run.font.name = "Consolas"
+                elif token.startswith("*") and token.endswith("*"):
+                    paragraph.add_run(token[1:-1]).italic = True
+                else:
+                    paragraph.add_run(token)
+
+        lines = content.splitlines()
+        index = 0
+        in_code_block = False
+        while index < len(lines):
+            stripped = lines[index].strip()
+            if stripped.startswith("```"):
+                in_code_block = not in_code_block
+                index += 1
+                continue
+            if in_code_block:
+                paragraph = document.add_paragraph()
+                paragraph.paragraph_format.space_after = 0
+                add_text_runs(paragraph, lines[index], code=True)
+            elif not stripped:
+                index += 1
+                continue
+            elif stripped.startswith("|") and stripped.endswith("|"):
+                table_lines = []
+                while (
+                    index < len(lines)
+                    and lines[index].strip().startswith("|")
+                    and lines[index].strip().endswith("|")
+                ):
+                    table_lines.append(lines[index].strip())
+                    index += 1
+                rows = [
+                    [cell.strip() for cell in row.strip("|").split("|")]
+                    for row in table_lines
+                ]
+                if len(rows) > 1 and all(
+                    re.fullmatch(r":?-{3,}:?", cell.replace(" ", ""))
+                    for cell in rows[1]
+                ):
+                    rows.pop(1)
+                column_count = max((len(row) for row in rows), default=0)
+                if column_count:
+                    table = document.add_table(rows=1, cols=column_count)
+                    table.style = "Light Shading Accent 1"
+                    for row_index, cells in enumerate(rows):
+                        target_cells = (
+                            table.rows[0].cells
+                            if row_index == 0
+                            else table.add_row().cells
+                        )
+                        for cell_index, cell_text in enumerate(cells):
+                            if cell_index < column_count:
+                                target_cell = target_cells[cell_index]
+                                target_cell.text = ""
+                                add_text_runs(
+                                    target_cell.paragraphs[0],
+                                    cell_text,
+                                )
+                continue
+            elif re.match(r"^#{1,6}\s+", stripped):
+                heading = re.match(r"^(#{1,6})\s+(.*)$", stripped)
+                paragraph = document.add_heading(
+                    level=min(len(heading.group(1)), 4)
+                )
+                add_text_runs(paragraph, heading.group(2))
+            elif re.match(r"^[-*+]\s+", stripped):
+                paragraph = document.add_paragraph(style="List Bullet")
+                add_text_runs(paragraph, re.sub(r"^[-*+]\s+", "", stripped))
+            elif re.match(r"^\d+[.)]\s+", stripped):
+                paragraph = document.add_paragraph(style="List Number")
+                add_text_runs(paragraph, re.sub(r"^\d+[.)]\s+", "", stripped))
+            else:
+                paragraph = document.add_paragraph()
+                add_text_runs(paragraph, stripped)
+            index += 1
+
+        output = BytesIO()
+        document.save(output)
+        return output.getvalue()
+
+    def _start_sleep_scheduler(self):
+        with self._sleep_state_lock:
+            if self._scheduler_thread and self._scheduler_thread.is_alive():
+                return
+            self._scheduler_stop_event.clear()
+            self._scheduler_thread = threading.Thread(
+                target=self._run_sleep_scheduler,
+                name="research-memory-sleep-scheduler",
+                daemon=True,
+            )
+            self._scheduler_thread.start()
+        self.logger.info("Research-memory sleep scheduled every 24 hours")
+
+    def _run_sleep_scheduler(self):
+        while not self._scheduler_stop_event.wait(
+            SLEEP_SCHEDULE_INTERVAL_SECONDS
+        ):
+            self._start_sleep("scheduled")
+
     @staticmethod
     def _render_research_memory(memories):
         if not memories:
@@ -877,6 +1253,7 @@ class AIServer:
 
     def run(self, host="127.0.0.1", port=8050):
         """Start the Flask development server hosting the Dash application."""
+        self._start_sleep_scheduler()
         self.server.run(host=host, port=port, debug=False, threaded=True)
 
 

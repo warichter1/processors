@@ -94,7 +94,19 @@ Successfully fetched public-page excerpts are also stored separately with their
 source URLs and verification timestamps. Identical URL/excerpt pairs are saved
 once and have their verification timestamp refreshed; recent topic-matched
 findings may be supplied as discovery leads, never as current evidence, and
-findings older than 30 days are not recalled.
+findings older than 30 days are not recalled. The web server runs a memory
+review cycle every 24 hours and also offers **Nap** and **Wake from sleep or
+nap** in the Action menu. Sleep re-fetches source pages for findings at least
+seven days old, refreshes unchanged findings, and supersedes old excerpts when
+the fetched source has changed. Only active findings are recalled; unavailable
+pages remain historical rather than being treated as disproven. While sleeping,
+the page displays progress and disables Send and microphone; Wake stops after
+the current bounded page fetch. If a workflow is active when sleep is requested,
+the page displays that the agent is ready to sleep and waiting for the workflow
+to finish before it begins checking sources. The download icon beside the
+composer buttons exports the latest saved assistant response as a formatted
+Word document, retaining Markdown headings, lists, inline emphasis, code, and
+tables.
 Chat uses a single response agent on the faster academic worker instead of
 waiting for the sequential research-and-architect pipeline. Research and
 current-information queries are searched directly when web search is enabled;

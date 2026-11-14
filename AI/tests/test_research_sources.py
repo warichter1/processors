@@ -1,11 +1,15 @@
 import sqlite3
+import threading
 import unittest
 from datetime import datetime, timedelta
+from io import BytesIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import Mock, patch
 
+from AI.AIServer import AIServer
 from AI.conversation_history import ConversationHistory
+from docx import Document
 from AI.multiAgent import (
     CHAT_ARCHITECT_TASK_PROMPT,
     CHAT_FACTUAL_EXPECTED_OUTPUT,
@@ -282,6 +286,46 @@ class LatencyHistoryTests(unittest.TestCase):
 
 
 class FactualResearchMemoryTests(unittest.TestCase):
+    def test_sleep_state_migrates_existing_source_memory_table(self):
+        with TemporaryDirectory() as directory:
+            database_path = Path(directory) / "conversation-history.sqlite3"
+            with sqlite3.connect(database_path) as connection:
+                connection.execute(
+                    """
+                    CREATE TABLE research_facts (
+                        fact_key TEXT PRIMARY KEY,
+                        topic TEXT NOT NULL,
+                        source_title TEXT NOT NULL,
+                        excerpt TEXT NOT NULL,
+                        source_url TEXT NOT NULL,
+                        verified_at TEXT NOT NULL
+                    )
+                    """
+                )
+                connection.execute(
+                    """
+                    INSERT INTO research_facts
+                    VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        "legacy-key",
+                        "Qwen",
+                        "Model card",
+                        "Qwen details.",
+                        "https://example.com/qwen",
+                        datetime.now().astimezone().isoformat(timespec="seconds"),
+                    ),
+                )
+
+            history = ConversationHistory(str(database_path))
+
+            with history._connect() as connection:
+                row = connection.execute(
+                    "SELECT status FROM research_facts WHERE fact_key = ?",
+                    ("legacy-key",),
+                ).fetchone()
+            self.assertEqual(row["status"], "active")
+
     def test_only_new_fetched_source_excerpts_are_saved_and_recalled(self):
         with TemporaryDirectory() as directory:
             history = ConversationHistory(
@@ -359,6 +403,157 @@ class FactualResearchMemoryTests(unittest.TestCase):
                 len(history.recall_source_findings("Qwen 3.5 model")),
                 1,
             )
+
+    def test_sleep_replaces_changed_excerpts_and_only_recalls_current_version(self):
+        with TemporaryDirectory() as directory:
+            history = ConversationHistory(
+                str(Path(directory) / "conversation-history.sqlite3")
+            )
+            finding_text = (
+                "[S1] Official Qwen model card\n"
+                "URL: https://example.com/qwen\n"
+                "Fetched page excerpt: Qwen 3.5 has a 128K context."
+            )
+            old_timestamp = (
+                datetime.now().astimezone() - timedelta(days=8)
+            ).isoformat(timespec="seconds")
+            history.record_source_findings(finding_text, old_timestamp)
+            [finding] = history.get_source_findings_for_sleep()
+
+            updated = history.refresh_source_finding(
+                finding,
+                {
+                    "title": "Updated Qwen model card",
+                    "text": "Qwen 3.5 has a 256K context.",
+                },
+                datetime.now().astimezone().isoformat(timespec="seconds"),
+            )
+
+            self.assertTrue(updated)
+            recalled = history.recall_source_findings("Qwen 3.5 context")
+            self.assertEqual(len(recalled), 1)
+            self.assertIn("256K context", recalled[0]["excerpt"])
+            self.assertEqual(
+                history.get_source_findings_for_sleep(),
+                [],
+            )
+            with history._connect() as connection:
+                statuses = [
+                    row[0]
+                    for row in connection.execute(
+                        "SELECT status FROM research_facts ORDER BY verified_at"
+                    )
+                ]
+            self.assertEqual(statuses, ["superseded", "active"])
+
+    def test_sleep_cycle_refreshes_sources_and_exits_awake(self):
+        finding = {
+            "fact_key": "existing-key",
+            "topic": "Qwen 3.5 model",
+            "source_title": "Qwen model card",
+            "excerpt": "Older excerpt.",
+            "source_url": "https://example.com/qwen",
+            "verified_at": "2026-01-01T00:00:00+00:00",
+        }
+        server = object.__new__(AIServer)
+        server._sleep_state_lock = threading.Lock()
+        server._sleep_wake_event = threading.Event()
+        server._request_lock = threading.Lock()
+        server._sleep_pending = False
+        server._sleeping = True
+        server._sleep_status = "Sleeping."
+        server._sleep_thread = object()
+        server.history = Mock()
+        server.history.get_source_findings_for_sleep.return_value = [finding]
+        server.history.refresh_source_finding.return_value = True
+        server.workflow = Mock()
+        server.workflow.agent._fetch_public_page.return_value = (
+            {"title": "Qwen model card", "text": "New excerpt."},
+            None,
+        )
+        server.logger = Mock()
+
+        server._run_sleep_cycle("test")
+
+        server.history.refresh_source_finding.assert_called_once()
+        self.assertFalse(server._sleeping)
+        self.assertIsNone(server._sleep_thread)
+        self.assertEqual(server._sleep_status, "")
+        send_disabled, microphone_disabled, notice = server._sleep_ui_state()
+        self.assertFalse(send_disabled)
+        self.assertFalse(microphone_disabled)
+        self.assertIsNone(notice)
+
+    def test_sleeping_ui_disables_buttons_and_displays_notice(self):
+        server = object.__new__(AIServer)
+        server._sleep_state_lock = threading.Lock()
+        server._request_lock = threading.Lock()
+        server._sleep_pending = False
+        server._sleeping = True
+        server._sleep_status = "The agent is sleeping."
+
+        send_disabled, microphone_disabled, notice = server._sleep_ui_state()
+
+        self.assertTrue(send_disabled)
+        self.assertTrue(microphone_disabled)
+        self.assertEqual(notice.children, "The agent is sleeping.")
+
+    def test_sleep_waits_for_active_workflow_and_shows_ready_notice(self):
+        server = object.__new__(AIServer)
+        server._sleep_state_lock = threading.Lock()
+        server._sleep_wake_event = threading.Event()
+        server._request_lock = threading.Lock()
+        server._request_lock.acquire()
+        server._sleep_pending = True
+        server._sleeping = False
+        server._sleep_status = "Ready to sleep; waiting for the current workflow."
+        server._sleep_thread = None
+        server.history = Mock()
+        server.history.get_source_findings_for_sleep.return_value = []
+        server.logger = Mock()
+
+        sleep_thread = threading.Thread(
+            target=server._run_sleep_cycle,
+            args=("test",),
+        )
+        sleep_thread.start()
+        send_disabled, microphone_disabled, notice = server._sleep_ui_state()
+
+        self.assertTrue(send_disabled)
+        self.assertTrue(microphone_disabled)
+        self.assertIn("Ready to sleep", notice.children)
+        server.history.get_source_findings_for_sleep.assert_not_called()
+
+        server._request_lock.release()
+        sleep_thread.join(timeout=2)
+
+        self.assertFalse(sleep_thread.is_alive())
+        server.history.get_source_findings_for_sleep.assert_called_once()
+        self.assertFalse(server._sleep_pending)
+        self.assertFalse(server._sleeping)
+        self.assertFalse(server._request_lock.locked())
+
+    def test_word_export_formats_markdown_headings_lists_and_tables(self):
+        content = (
+            "# Results\n"
+            "A **bold** claim and `inline code`.\n\n"
+            "- First item\n\n"
+            "| Model | Parameters |\n"
+            "|---|---:|\n"
+            "| Qwen | 9B |"
+        )
+
+        document = Document(BytesIO(AIServer._build_word_document(content)))
+
+        self.assertEqual(document.paragraphs[0].text, "Assistant response")
+        self.assertEqual(document.paragraphs[1].text, "Results")
+        self.assertEqual(document.paragraphs[1].style.name, "Heading 1")
+        self.assertEqual(document.paragraphs[2].text, "A bold claim and inline code.")
+        self.assertTrue(any(run.bold for run in document.paragraphs[2].runs))
+        self.assertEqual(document.paragraphs[3].style.name, "List Bullet")
+        self.assertEqual(len(document.tables), 1)
+        self.assertEqual(document.tables[0].rows[1].cells[0].text, "Qwen")
+        self.assertEqual(document.tables[0].rows[1].cells[1].text, "9B")
 
 
 if __name__ == "__main__":
