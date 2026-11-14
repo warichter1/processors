@@ -1,6 +1,6 @@
 """Flask-hosted Dash interface for the multi-agent assistant."""
 
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta, timezone
 from io import BytesIO
 from time import perf_counter
 import math
@@ -38,25 +38,41 @@ else:
         validate_chat_payload,
     )
 
-
 ALLOWED_MODES = {"chat", "generate", "benchmark"}
+MENU_WORKFLOW_MODES = {
+    "menu-generate-script": "generate",
+    "menu-benchmark-models": "benchmark",
+    "menu-view-history": "view-history",
+    "menu-clear-history": "clear-history",
+    "menu-view-memory": "view-memory",
+    "menu-nap": "nap",
+    "menu-wake": "wake",
+}
 ALLOWED_OPTIONS = {"no-cache", "clear-cache", "offline"}
 MAX_BENCHMARK_REPETITIONS = 10
 MAX_BENCHMARK_TOKENS = 8192
 HISTORY_LATENCY_WARNING_CHARS = 12_000
 SLOW_RESPONSE_WARNING_SECONDS = 30
 REQUEST_LOCK_WAIT_SECONDS = 1
-SLEEP_SCHEDULE_INTERVAL_SECONDS = 24 * 60 * 60
 SLEEP_SOURCE_AGE_DAYS = 7
 SLEEP_MAX_FINDINGS_PER_CYCLE = 25
+DEFAULT_SLEEP_SCHEDULE_TIME = "04:00"
+DEFAULT_SLEEP_MAX_CYCLE_MINUTES = 30
+MAX_SLEEP_CYCLE_MINUTES = 24 * 60
 
 
 class AIServer:
     """Create the Flask server and its Dash-based text and speech chat UI."""
 
+    VERSION = datetime.fromtimestamp(
+        os.path.getmtime(__file__),
+        tz=timezone.utc,
+    ).isoformat(timespec="seconds")
+
     def __init__(self, target_dir=None, debug=False, web_search=True):
         self.server = Flask(__name__)
         self.server.config["MAX_CONTENT_LENGTH"] = 1_048_576
+        self._instance_id = uuid.uuid4().hex
         self.dash_app = Dash(
             __name__,
             server=self.server,
@@ -79,12 +95,28 @@ class AIServer:
         self.history = ConversationHistory(
             os.path.join(log_directory, "conversation-history.sqlite3")
         )
+        self.sleep_schedule_time = self._validated_sleep_time(
+            self.history.get_config("sleep_schedule_time", DEFAULT_SLEEP_SCHEDULE_TIME)
+        )
+        self.sleep_max_cycle_minutes = self._validated_sleep_cycle_minutes(
+            self.history.get_config(
+                "sleep_max_cycle_minutes",
+                str(DEFAULT_SLEEP_MAX_CYCLE_MINUTES),
+            )
+        )
+        self.history.set_config("sleep_schedule_time", self.sleep_schedule_time)
+        self.history.set_config(
+            "sleep_max_cycle_minutes", str(self.sleep_max_cycle_minutes)
+        )
         self.server.secret_key = self.history.get_secret_key()
         self.server.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=365)
+        self.started_at = datetime.now().astimezone()
+        self._started_monotonic = perf_counter()
         self._request_lock = threading.Lock()
         self._sleep_state_lock = threading.Lock()
         self._sleep_wake_event = threading.Event()
         self._scheduler_stop_event = threading.Event()
+        self._scheduler_wake_event = threading.Event()
         self._sleep_pending = False
         self._sleeping = False
         self._sleep_status = ""
@@ -97,7 +129,11 @@ class AIServer:
     def _configure_routes(self):
         @self.server.get("/healthz")
         def health_check():
-            return jsonify({"status": "ok"})
+            response = jsonify(
+                {"status": "ok", "instance_id": self._instance_id}
+            )
+            response.headers["Cache-Control"] = "no-store"
+            return response
 
         @self.server.errorhandler(Exception)
         def handle_unexpected_error(error):
@@ -113,6 +149,188 @@ class AIServer:
                     [
                         html.H1("Multi-Agent Assistant"),
                         html.P("Ask a question by typing or using speech input."),
+                        html.Nav(
+                            [
+                                self._menu_group(
+                                    "File",
+                                    [
+                                        html.Button(
+                                            "Export current Results",
+                                            id="menu-export-button",
+                                            n_clicks=0,
+                                            type="button",
+                                        )
+                                    ],
+                                ),
+                                self._menu_group(
+                                    "View",
+                                    [
+                                        html.Label(
+                                            "Chat window width",
+                                            htmlFor="chat-width",
+                                        ),
+                                        dcc.Dropdown(
+                                            id="chat-width",
+                                            options=[
+                                                {"label": f"{width} px", "value": width}
+                                                for width in range(1200, 2401, 200)
+                                            ],
+                                            value=1600,
+                                            clearable=False,
+                                            searchable=False,
+                                        ),
+                                    ],
+                                ),
+                                self._menu_group(
+                                    "Options",
+                                    [
+                                        html.Button(
+                                            "Generate Script",
+                                            id="menu-generate-script",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                        html.Button(
+                                            "Benchmark Models",
+                                            id="menu-benchmark-models",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                    ],
+                                ),
+                                self._menu_group(
+                                    "Utilities",
+                                    [
+                                        html.Button(
+                                            "View Saved History",
+                                            id="menu-view-history",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                        html.Button(
+                                            "Clear Saved History",
+                                            id="menu-clear-history",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                        html.Button(
+                                            "View Ranked Research Memory",
+                                            id="menu-view-memory",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                    ],
+                                ),
+                                self._menu_group(
+                                    "Sleep",
+                                    [
+                                        html.Button(
+                                            "Nap",
+                                            id="menu-nap",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                        html.Button(
+                                            "Wake",
+                                            id="menu-wake",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                        html.Button(
+                                            "Set Scheduled Sleep",
+                                            id="menu-sleep-schedule",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                    ],
+                                ),
+                                self._menu_group(
+                                    "Help",
+                                    [
+                                        html.Button(
+                                            "Page Guide",
+                                            id="menu-help",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                        html.Button(
+                                            "About",
+                                            id="menu-about",
+                                            n_clicks=0,
+                                            type="button",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                            className="top-menu",
+                            **{"aria-label": "Main menu"},
+                        ),
+                        dcc.Store(id="workflow-mode", data="chat"),
+                        html.Div(id="chat-width-cookie-status", style={"display": "none"}),
+                        html.Div(
+                            id="help-modal",
+                            className="modal-overlay",
+                            role="presentation",
+                            style={"display": "none"},
+                            children=html.Div(
+                                [
+                                    html.Button(
+                                        "Close",
+                                        id="menu-help-close",
+                                        n_clicks=0,
+                                        type="button",
+                                        className="modal-close",
+                                    ),
+                                    html.Div(id="help-modal-content"),
+                                    html.Div(
+                                        [
+                                            html.H2("Scheduled sleep"),
+                                            html.P(
+                                                "The server runs one memory-integration "
+                                                "cycle each day at the selected local time."
+                                            ),
+                                            html.Label(
+                                                "Scheduled start time",
+                                                htmlFor="sleep-schedule-time",
+                                            ),
+                                            dcc.Input(
+                                                id="sleep-schedule-time",
+                                                type="time",
+                                                value=self.sleep_schedule_time,
+                                            ),
+                                            html.Label(
+                                                "Maximum sleep cycle (minutes)",
+                                                htmlFor="sleep-max-cycle-minutes",
+                                            ),
+                                            dcc.Input(
+                                                id="sleep-max-cycle-minutes",
+                                                type="number",
+                                                min=1,
+                                                max=MAX_SLEEP_CYCLE_MINUTES,
+                                                step=1,
+                                                value=self.sleep_max_cycle_minutes,
+                                            ),
+                                            html.Button(
+                                                "Save Schedule",
+                                                id="menu-sleep-settings-save",
+                                                n_clicks=0,
+                                                type="button",
+                                            ),
+                                            html.Div(
+                                                id="sleep-schedule-status",
+                                                role="status",
+                                            ),
+                                        ],
+                                        id="sleep-schedule-settings",
+                                        className="dialog-section sleep-schedule-settings",
+                                        style={"display": "none"},
+                                    ),
+                                ],
+                                className="modal-content",
+                                role="dialog",
+                                **{"aria-modal": "true"},
+                            ),
+                        ),
                         html.Div(
                             id="sleep-notice",
                             role="status",
@@ -120,7 +338,7 @@ class AIServer:
                         ),
                         dcc.Interval(
                             id="sleep-state-check",
-                            interval=1000,
+                            interval=250,
                             n_intervals=0,
                             disabled=True,
                         ),
@@ -157,22 +375,6 @@ class AIServer:
                         html.Div(
                             [
                                 html.Label("Run settings"),
-                                html.Label("Action", htmlFor="workflow-mode"),
-                                dcc.Dropdown(
-                                    id="workflow-mode",
-                                    options=[
-                                        {"label": "Chat", "value": "chat"},
-                                        {"label": "Generate script", "value": "generate"},
-                                        {"label": "Benchmark models", "value": "benchmark"},
-                                        {"label": "View saved history", "value": "view-history"},
-                                        {"label": "Clear saved history", "value": "clear-history"},
-                                        {"label": "View ranked research memory", "value": "view-memory"},
-                                        {"label": "Nap (review older memories)", "value": "nap"},
-                                        {"label": "Wake from sleep or nap", "value": "wake"},
-                                    ],
-                                    value="chat",
-                                    clearable=False,
-                                ),
                                 dcc.Checklist(
                                     id="workflow-options",
                                     options=[
@@ -219,21 +421,6 @@ class AIServer:
                                 html.Div(
                                     [
                                         html.Button(
-                                            html.Span(
-                                                "\u2b07",
-                                                **{"aria-hidden": "true"},
-                                            ),
-                                            id="download-button",
-                                            n_clicks=0,
-                                            type="button",
-                                            title="Download latest response as a Word document",
-                                            **{
-                                                "aria-label": (
-                                                    "Download latest response as a Word document"
-                                                )
-                                            },
-                                        ),
-                                        html.Button(
                                             "Use microphone",
                                             id="speech-button",
                                             n_clicks=0,
@@ -278,7 +465,18 @@ class AIServer:
                     className="chart-panel",
                 ),
             ],
+            id="app-shell",
             className="app-shell",
+        )
+
+    @staticmethod
+    def _menu_group(title, items):
+        return html.Details(
+            [
+                html.Summary(title),
+                html.Div(items, className="menu-dropdown"),
+            ],
+            className="menu-group",
         )
 
     @staticmethod
@@ -414,20 +612,202 @@ class AIServer:
             return self._sleep_ui_state()
 
         @self.dash_app.callback(
-            Output("sleep-state-check", "disabled", allow_duplicate=True),
-            Input("workflow-mode", "value"),
-            Input("send-button", "n_clicks"),
+            Output("app-shell", "style"),
+            Input("chat-width", "value"),
+        )
+        def set_chat_width(width):
+            return self._chat_width_style(width)
+
+        self.dash_app.clientside_callback(
+            """
+            function(_intervals, currentWidth) {
+                const match = document.cookie.match(/(?:^|; )chat_window_width=(\\d+)/);
+                if (!match) {
+                    return window.dash_clientside.no_update;
+                }
+                const width = Number(match[1]);
+                return width >= 1200 && width <= 2400 && width % 200 === 0
+                    ? width
+                    : currentWidth;
+            }
+            """,
+            Output("chat-width", "value"),
+            Input("startup-ready-check", "n_intervals"),
+            State("chat-width", "value"),
             prevent_initial_call=True,
         )
-        def resume_sleep_status_polling(mode, send_clicks):
-            if mode in {"nap", "wake"} or (send_clicks or 0) > 0:
+
+        self.dash_app.clientside_callback(
+            """
+            function(width) {
+                if (width) {
+                    document.cookie = "chat_window_width=" + width +
+                        "; max-age=31536000; path=/; samesite=lax";
+                }
+                return window.dash_clientside.no_update;
+            }
+            """,
+            Output("chat-width-cookie-status", "children"),
+            Input("chat-width", "value"),
+            prevent_initial_call=True,
+        )
+
+        @self.dash_app.callback(
+            Output("help-modal", "style"),
+            Output("help-modal-content", "children"),
+            Output("sleep-schedule-settings", "style"),
+            Output("sleep-schedule-status", "children"),
+            Input("menu-help", "n_clicks"),
+            Input("menu-about", "n_clicks"),
+            Input("menu-help-close", "n_clicks"),
+            Input("menu-view-memory", "n_clicks"),
+            Input("menu-sleep-schedule", "n_clicks"),
+            Input("menu-sleep-settings-save", "n_clicks"),
+            Input("request-status", "children"),
+            State("workflow-mode", "data"),
+            State("sleep-schedule-time", "value"),
+            State("sleep-max-cycle-minutes", "value"),
+            prevent_initial_call=True,
+        )
+        def show_help_dialog(
+                _help_clicks,
+                _about_clicks,
+                _close_clicks,
+                _memory_clicks,
+                _sleep_schedule_clicks,
+                _sleep_schedule_save_clicks,
+                request_status,
+                workflow_mode,
+                schedule_time,
+                max_cycle_minutes,
+        ):
+            if ctx.triggered_id == "menu-help-close":
+                return {"display": "none"}, no_update, {"display": "none"}, no_update
+            if ctx.triggered_id == "menu-sleep-schedule":
+                return {"display": "flex"}, None, {"display": "grid"}, ""
+            if ctx.triggered_id == "menu-sleep-settings-save":
+                try:
+                    schedule_time = self._validated_sleep_time(schedule_time)
+                    max_cycle_minutes = self._validated_sleep_cycle_minutes(
+                        max_cycle_minutes
+                    )
+                except ValueError as error:
+                    return (
+                        {"display": "flex"},
+                        no_update,
+                        {"display": "grid"},
+                        str(error),
+                    )
+                self.history.set_config("sleep_schedule_time", schedule_time)
+                self.history.set_config(
+                    "sleep_max_cycle_minutes",
+                    str(max_cycle_minutes),
+                )
+                self.sleep_schedule_time = schedule_time
+                self.sleep_max_cycle_minutes = max_cycle_minutes
+                self._scheduler_wake_event.set()
+                return (
+                    {"display": "flex"},
+                    no_update,
+                    {"display": "grid"},
+                    f"Saved: daily at {schedule_time}; maximum cycle "
+                    f"{max_cycle_minutes} minutes.",
+                )
+            if ctx.triggered_id == "menu-about":
+                return (
+                    {"display": "flex"},
+                    self._render_about_dialog(),
+                    {"display": "none"},
+                    no_update,
+                )
+            if ctx.triggered_id == "menu-view-memory":
+                self.history.integrate_conversation_memories()
+                self.history.rank_research_memory()
+                memories = self.history.get_research_memory()
+                return (
+                    {"display": "flex"},
+                    self._render_research_memory(memories),
+                    {"display": "none"},
+                    no_update,
+                )
+            if (
+                    ctx.triggered_id == "request-status"
+                    and isinstance(request_status, str)
+                    and (
+                    request_status.startswith("Response received")
+                    or request_status.startswith(
+                "The assistant could not complete this request."
+            )
+            )
+            ):
+                messages = self.history.get_messages(self._get_conversation_id())
+                latest_user_message = next(
+                    (
+                        item["content"]
+                        for item in reversed(messages)
+                        if item.get("role") == "user"
+                    ),
+                    "",
+                )
+                result_mode = workflow_mode
+                if result_mode not in {"generate", "benchmark"}:
+                    result_mode = {
+                        "Run script generation.": "generate",
+                        "Run model benchmark.": "benchmark",
+                    }.get(latest_user_message)
+                if result_mode in {"generate", "benchmark"}:
+                    latest_answer = next(
+                        (
+                            item["content"]
+                            for item in reversed(messages)
+                            if item.get("role") == "assistant"
+                               and isinstance(item.get("content"), str)
+                        ),
+                        "",
+                    )
+                    title = (
+                        "Generated script"
+                        if result_mode == "generate"
+                        else "Benchmark results"
+                    )
+                    return (
+                        {"display": "flex"},
+                        self._render_workflow_result(
+                            title,
+                            latest_answer or "The workflow returned no output.",
+                        ),
+                        {"display": "none"},
+                        no_update,
+                    )
+            if ctx.triggered_id == "menu-help":
+                return (
+                    {"display": "flex"},
+                    self._render_help_dialog(),
+                    {"display": "none"},
+                    no_update,
+                )
+            return (no_update,) * 4
+
+        @self.dash_app.callback(
+            Output("sleep-state-check", "disabled", allow_duplicate=True),
+            Input("send-button", "n_clicks"),
+            Input("menu-nap", "n_clicks"),
+            Input("menu-wake", "n_clicks"),
+            prevent_initial_call=True,
+        )
+        def resume_sleep_status_polling(send_clicks, nap_clicks, wake_clicks):
+            if (
+                    (send_clicks or 0) > 0
+                    or (nap_clicks or 0) > 0
+                    or (wake_clicks or 0) > 0
+            ):
                 return False
             return no_update
 
         @self.dash_app.callback(
             Output("response-download", "data"),
             Output("download-status", "children"),
-            Input("download-button", "n_clicks"),
+            Input("menu-export-button", "n_clicks"),
             prevent_initial_call=True,
         )
         def download_latest_response(clicks):
@@ -437,11 +817,11 @@ class AIServer:
                 (
                     item["content"]
                     for item in reversed(
-                        self.history.get_messages(self._get_conversation_id())
-                    )
+                    self.history.get_messages(self._get_conversation_id())
+                )
                     if item.get("role") == "assistant"
-                    and isinstance(item.get("content"), str)
-                    and item["content"].strip()
+                       and isinstance(item.get("content"), str)
+                       and item["content"].strip()
                 ),
                 None,
             )
@@ -449,9 +829,9 @@ class AIServer:
                 return no_update, "There is no assistant response to download yet."
 
             filename = (
-                "assistant-response-"
-                + datetime.now().astimezone().strftime("%Y%m%d-%H%M%S")
-                + ".docx"
+                    "assistant-response-"
+                    + datetime.now().astimezone().strftime("%Y%m%d-%H%M%S")
+                    + ".docx"
             )
             return (
                 dcc.send_bytes(
@@ -464,39 +844,62 @@ class AIServer:
 
         @self.dash_app.callback(
             Output("conversation-view", "children"),
-            Output("workflow-mode", "value"),
+            Output("workflow-mode", "data"),
             Output("prompt-input", "value", allow_duplicate=True),
             Output("response-chart", "figure"),
             Output("request-status", "children"),
             Input("send-button", "n_clicks"),
-            Input("workflow-mode", "value"),
             Input("startup-ready-check", "n_intervals"),
+            Input("menu-generate-script", "n_clicks"),
+            Input("menu-benchmark-models", "n_clicks"),
+            Input("menu-view-history", "n_clicks"),
+            Input("menu-clear-history", "n_clicks"),
+            Input("menu-view-memory", "n_clicks"),
+            Input("menu-nap", "n_clicks"),
+            Input("menu-wake", "n_clicks"),
             State("prompt-input", "value"),
             State("workflow-options", "value"),
             State("benchmark-repetitions", "value"),
             State("benchmark-max-tokens", "value"),
+            State("workflow-mode", "data"),
             prevent_initial_call=True,
             running=[
                 (Output("prompt-input", "readOnly"), True, False),
             ],
         )
         def send_message(
-            _clicks,
-            mode,
-            _startup_intervals,
-            prompt,
-            options,
-            benchmark_repetitions,
-            benchmark_max_tokens,
+                _clicks,
+                _startup_intervals,
+                _generate_clicks,
+                _benchmark_clicks,
+                _view_history_clicks,
+                _clear_history_clicks,
+                _view_memory_clicks,
+                _nap_clicks,
+                _wake_clicks,
+                prompt,
+                options,
+                benchmark_repetitions,
+                benchmark_max_tokens,
+                mode,
         ):
             session_id = self._get_conversation_id()
             triggered_properties = ctx.triggered_prop_ids
             triggered_id = ctx.triggered_id
+            menu_workflow_mode = None
             if (
-                "send-button.n_clicks" in triggered_properties
-                and mode in ALLOWED_MODES
+                    "send-button.n_clicks" in triggered_properties
+                    and mode in ALLOWED_MODES
             ):
                 triggered_id = "send-button"
+            elif triggered_id in MENU_WORKFLOW_MODES:
+                mode = MENU_WORKFLOW_MODES[triggered_id]
+                if mode in {"generate", "benchmark"}:
+                    menu_workflow_mode = mode
+                    triggered_id = "send-button"
+                    prompt = ""
+                else:
+                    triggered_id = "workflow-mode"
             if triggered_id == "workflow-mode" and mode == "nap":
                 started = self._start_sleep("manual nap")
                 return (
@@ -504,7 +907,7 @@ class AIServer:
                     "chat",
                     no_update,
                     no_update,
-                    "The agent is starting a nap."
+                    no_update
                     if started
                     else "The agent is already sleeping.",
                 )
@@ -515,9 +918,9 @@ class AIServer:
                     "chat",
                     no_update,
                     no_update,
-                    "Waking the agent."
+                    no_update
                     if woke
-                    else "The agent is already awake.",
+                    else "There is no nap in progress.",
                 )
             if triggered_id == "send-button" and self._is_sleeping():
                 return self._safe_callback_result(
@@ -545,13 +948,26 @@ class AIServer:
             if triggered_id == "workflow-mode" and mode == "view-memory":
                 memories = self.history.get_research_memory()
                 return (
-                    self._render_research_memory(memories),
+                    no_update,
                     "chat",
                     no_update,
-                    self._response_figure([]),
+                    no_update,
                     f"Loaded {len(memories)} ranked research memories.",
                 )
             if triggered_id == "workflow-mode":
+                if mode in ALLOWED_MODES:
+                    mode_label = {
+                        "chat": "Chat",
+                        "generate": "Script generation",
+                        "benchmark": "Model benchmarking",
+                    }[mode]
+                    return (
+                        no_update,
+                        mode,
+                        no_update,
+                        no_update,
+                        f"{mode_label} selected. Enter instructions and click Send.",
+                    )
                 return (no_update,) * 5
             if triggered_id == "startup-ready-check":
                 saved_history = self.history.get_messages(session_id)
@@ -578,7 +994,9 @@ class AIServer:
                     benchmark_repetitions,
                     benchmark_max_tokens,
                 ) = self._validate_workflow_inputs(
-                    _clicks,
+                    max(_clicks or 0, 1)
+                    if menu_workflow_mode
+                    else _clicks,
                     mode,
                     options,
                     benchmark_repetitions,
@@ -625,8 +1043,8 @@ class AIServer:
                 )
                 if prior_answer:
                     lesson += (
-                        "\nRejected/validated answer excerpt: "
-                        + prior_answer[:500]
+                            "\nRejected/validated answer excerpt: "
+                            + prior_answer[:500]
                     )
                 try:
                     self.history.record_research_memory(
@@ -654,7 +1072,7 @@ class AIServer:
             factual_results = (
                 self.history.recall_source_findings(prompt)
                 if mode == "chat"
-                and MultiAgentWorkflow._should_search_prompt(prompt)
+                   and MultiAgentWorkflow._should_search_prompt(prompt)
                 else []
             )
             if mode == "chat":
@@ -751,9 +1169,9 @@ class AIServer:
             created_at = datetime.now().astimezone().isoformat(timespec="seconds")
             try:
                 if (
-                    workflow_succeeded
-                    and mode == "chat"
-                    and self._is_research_review_request(prompt)
+                        workflow_succeeded
+                        and mode == "chat"
+                        and self._is_research_review_request(prompt)
                 ):
                     self.history.record_research_memory(
                         session_id,
@@ -813,8 +1231,8 @@ class AIServer:
                     "increase latency; clear saved history to reduce it."
                 )
             if (
-                duration >= SLOW_RESPONSE_WARNING_SECONDS
-                and context_chars >= HISTORY_LATENCY_WARNING_CHARS
+                    duration >= SLOW_RESPONSE_WARNING_SECONDS
+                    and context_chars >= HISTORY_LATENCY_WARNING_CHARS
             ):
                 status += (
                     f" The {duration:.1f}-second response was slow; the large history "
@@ -831,16 +1249,16 @@ class AIServer:
 
     @staticmethod
     def _validate_workflow_inputs(
-        clicks, mode, options, benchmark_repetitions, benchmark_max_tokens
+            clicks, mode, options, benchmark_repetitions, benchmark_max_tokens
     ):
         if isinstance(clicks, bool) or not isinstance(clicks, int) or clicks < 1:
             raise ValueError("Invalid request.")
         if not isinstance(mode, str) or mode not in ALLOWED_MODES:
             raise ValueError("Invalid request.")
         if (
-            not isinstance(options, list)
-            or any(not isinstance(option, str) for option in options)
-            or not set(options).issubset(ALLOWED_OPTIONS)
+                not isinstance(options, list)
+                or any(not isinstance(option, str) for option in options)
+                or not set(options).issubset(ALLOWED_OPTIONS)
         ):
             raise ValueError("Invalid request.")
         benchmark_repetitions = AIServer._validate_integer(
@@ -854,12 +1272,12 @@ class AIServer:
     @staticmethod
     def _validate_integer(value, minimum, maximum):
         if (
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
         ):
             raise ValueError("Invalid request.")
         if isinstance(value, float) and (
-            not math.isfinite(value) or not value.is_integer()
+                not math.isfinite(value) or not value.is_integer()
         ):
             raise ValueError("Invalid request.")
         if not minimum <= value <= maximum:
@@ -879,26 +1297,35 @@ class AIServer:
     def _research_feedback_outcome(prompt):
         text = prompt.lower()
         if re.search(
-            r"\b(?:that|this|your|the)\s+"
-            r"(?:answers?|responses?|results?|conclusions?)"
-            r"\s+(?:is|are|was|were|seems|looks)?\s*"
-            r"(?:wrong|incorrect|false|inaccurate)\b"
-            r"|\b(?:wrong|incorrect|false|inaccurate)\s+"
-            r"(?:answers?|responses?|results?|conclusions?)\b"
-            r"|\b(?:that|this)\s+(?:is|was)\s+"
-            r"(?:wrong|incorrect|false|inaccurate)\b"
-            r"|\b(?:answers?|responses?|results?|conclusions?)\b.{0,30}"
-            r"\b(?:is|are|was|were)\s+not\s+(?:correct|accurate|true)\b",
-            text,
+                r"\b(?:that|this|your|the)\s+"
+                r"(?:answers?|responses?|results?|conclusions?)"
+                r"\s+(?:is|are|was|were|looks|seems)?\s*"
+                r"(?:wrong|incorrect|false|inaccurate)\b"
+                r"|\b(?:wrong|incorrect|false|inaccurate)\s+"
+                r"(?:answers?|responses?|results?|conclusions?)\b"
+                r"|\b(?:that|this)\s+(?:is|was)\s+"
+                r"(?:wrong|incorrect|false|inaccurate)\b"
+                r"|\b(?:answers?|responses?|results?|conclusions?)\b.{0,30}"
+                r"\b(?:is|are|was|were)\s+not\s+(?:correct|accurate|true)\b"
+                r"|\b(?:you are|you're)\s+(?:wrong|incorrect)\b"
+                r"|\b(?:correction|that's incorrect|not quite right)\b"
+                r"|^\s*(?:no[, ]+)?(?:wrong|incorrect|false|inaccurate)[.! ]*$",
+                text,
         ):
             return "incorrect"
         if re.search(
-            r"\b(?:that|this|your|the)\s+"
-            r"(?:answers?|responses?|results?|conclusions?)"
-            r"\s+(?:is|are|was|were)?\s*(?:correct|accurate|right|verified)\b"
-            r"|\b(?:that|this)\s+(?:is|was)\s+"
-            r"(?:correct|right|accurate)\b",
-            text,
+                r"\b(?:that|this|your|the)\s+"
+                r"(?:answers?|responses?|results?|conclusions?)"
+                r"\s+(?:is|are|was|were|looks|seems)?\s*"
+                r"(?:correct|accurate|right|verified)\b"
+                r"|\b(?:that|this)\s+(?:is|was)\s+"
+                r"(?:correct|right|accurate)\b"
+                r"|\b(?:good|great|accurate|correct)\s+"
+                r"(?:answer|response|result)\b"
+                r"|\b(?:you're|you are)\s+right\b"
+                r"|\bthat'?s\s+(?:exactly\s+)?(?:correct|right|accurate)\b"
+                r"|^\s*(?:yes[, ]+)?(?:correct|right|accurate|verified)[.! ]*$",
+                text,
         ):
             return "correct"
         return None
@@ -935,9 +1362,10 @@ class AIServer:
                 continue
             content = item.get("content", "")
             if (
-                not cls._research_feedback_outcome(content)
-                and not cls._is_research_review_request(content)
-                and MultiAgentWorkflow._should_search_prompt(content)
+                    not cls._research_feedback_outcome(content)
+                    and not cls._is_research_review_request(content)
+                    and isinstance(content, str)
+                    and len(content.strip()) >= 12
             ):
                 return content
         return ""
@@ -945,6 +1373,14 @@ class AIServer:
     def _is_sleeping(self):
         with self._sleep_state_lock:
             return self._sleep_pending or self._sleeping
+
+    @staticmethod
+    def _chat_width_style(width):
+        if isinstance(width, bool) or not isinstance(width, int):
+            raise ValueError("Invalid chat width.")
+        if not 1200 <= width <= 2400 or width % 200:
+            raise ValueError("Invalid chat width.")
+        return {"maxWidth": f"{width}px"}
 
     def _sleep_ui_state(self):
         with self._sleep_state_lock:
@@ -968,7 +1404,9 @@ class AIServer:
             self._sleep_pending = True
             self._sleep_status = (
                 "The agent is ready to sleep and waiting for the current workflow "
-                "to finish. Send and microphone are disabled; choose Wake to cancel."
+                "to finish."
+                if self._request_lock.locked()
+                else "The agent is starting a nap."
             )
             self._sleep_wake_event.clear()
             self._sleep_thread = threading.Thread(
@@ -998,6 +1436,7 @@ class AIServer:
         checked = 0
         updated = 0
         failed = 0
+        integrated_memories = 0
         acquired = False
         try:
             while not self._sleep_wake_event.is_set():
@@ -1010,18 +1449,34 @@ class AIServer:
             with self._sleep_state_lock:
                 self._sleep_pending = False
                 self._sleeping = True
+                self._sleep_status = "The agent is starting a nap."
+            max_cycle_seconds = (
+                    getattr(
+                        self,
+                        "sleep_max_cycle_minutes",
+                        DEFAULT_SLEEP_MAX_CYCLE_MINUTES,
+                    )
+                    * 60
+            )
+            cycle_deadline = perf_counter() + max_cycle_seconds
+            self.logger.info("Research-memory sleep started (%s)", reason)
+            if self._sleep_wake_event.wait(0.5):
+                return
+            with self._sleep_state_lock:
                 self._sleep_status = (
                     "The agent is sleeping and reviewing older sourced memories. "
                     "Send and microphone are disabled; choose Wake to stop."
                 )
-            self.logger.info("Research-memory sleep started (%s)", reason)
             findings = self.history.get_source_findings_for_sleep(
                 older_than_days=SLEEP_SOURCE_AGE_DAYS,
                 limit=SLEEP_MAX_FINDINGS_PER_CYCLE,
             )
             total = len(findings)
             for index, finding in enumerate(findings, start=1):
-                if self._sleep_wake_event.is_set():
+                if (
+                        self._sleep_wake_event.is_set()
+                        or perf_counter() >= cycle_deadline
+                ):
                     break
                 try:
                     fetched_source, fetch_error = self.workflow.agent._fetch_public_page(
@@ -1054,16 +1509,31 @@ class AIServer:
                     )
                 if self._sleep_wake_event.wait(0.25):
                     break
+            if not self._sleep_wake_event.is_set():
+                with self._sleep_state_lock:
+                    self._sleep_status = (
+                        "The agent is sleeping and integrating conversation memories "
+                        "and recalculating feedback ranks."
+                    )
+                integrated_memories = self.history.integrate_conversation_memories()
+                ranked_memories = self.history.rank_research_memory()
+                self.logger.info(
+                    "Integrated %d conversation memories and recalculated %d ranks",
+                    integrated_memories,
+                    ranked_memories,
+                )
         except Exception:
             self.logger.exception("Research-memory sleep cycle failed")
             with self._sleep_state_lock:
                 self._sleep_status = "The agent's sleep cycle ended with an error."
         finally:
             self.logger.info(
-                "Research-memory sleep completed (%d checked, %d updated, %d unavailable)",
+                "Research-memory sleep completed (%d checked, %d updated, "
+                "%d unavailable, %d memories integrated)",
                 checked,
                 updated,
                 failed,
+                integrated_memories,
                 extra={"reason": reason},
             )
             if acquired:
@@ -1135,9 +1605,9 @@ class AIServer:
             elif stripped.startswith("|") and stripped.endswith("|"):
                 table_lines = []
                 while (
-                    index < len(lines)
-                    and lines[index].strip().startswith("|")
-                    and lines[index].strip().endswith("|")
+                        index < len(lines)
+                        and lines[index].strip().startswith("|")
+                        and lines[index].strip().endswith("|")
                 ):
                     table_lines.append(lines[index].strip())
                     index += 1
@@ -1146,8 +1616,8 @@ class AIServer:
                     for row in table_lines
                 ]
                 if len(rows) > 1 and all(
-                    re.fullmatch(r":?-{3,}:?", cell.replace(" ", ""))
-                    for cell in rows[1]
+                        re.fullmatch(r":?-{3,}:?", cell.replace(" ", ""))
+                        for cell in rows[1]
                 ):
                     rows.pop(1)
                 column_count = max((len(row) for row in rows), default=0)
@@ -1156,9 +1626,9 @@ class AIServer:
                     table.style = "Light Shading Accent 1"
                     table.autofit = False
                     available_width = (
-                        section.page_width
-                        - section.left_margin
-                        - section.right_margin
+                            section.page_width
+                            - section.left_margin
+                            - section.right_margin
                     )
                     header_weights = [
                         min(max(len(header), 8), 36)
@@ -1220,32 +1690,105 @@ class AIServer:
             if self._scheduler_thread and self._scheduler_thread.is_alive():
                 return
             self._scheduler_stop_event.clear()
+            self._scheduler_wake_event.clear()
             self._scheduler_thread = threading.Thread(
                 target=self._run_sleep_scheduler,
                 name="research-memory-sleep-scheduler",
                 daemon=True,
             )
             self._scheduler_thread.start()
-        self.logger.info("Research-memory sleep scheduled every 24 hours")
+        self.logger.info(
+            "Research-memory sleep scheduled daily at %s (maximum cycle: %d minutes)",
+            self.sleep_schedule_time,
+            self.sleep_max_cycle_minutes,
+        )
 
     def _run_sleep_scheduler(self):
-        while not self._scheduler_stop_event.wait(
-            SLEEP_SCHEDULE_INTERVAL_SECONDS
-        ):
+        while not self._scheduler_stop_event.is_set():
+            delay = self._seconds_until_next_sleep(self.sleep_schedule_time)
+            self._scheduler_wake_event.wait(delay)
+            if self._scheduler_stop_event.is_set():
+                return
+            if self._scheduler_wake_event.is_set():
+                self._scheduler_wake_event.clear()
+                continue
             self._start_sleep("scheduled")
+
+    @staticmethod
+    def _validated_sleep_time(value):
+        if not isinstance(value, str):
+            raise ValueError("Scheduled sleep time must use HH:MM format.")
+        try:
+            return time.fromisoformat(value).strftime("%H:%M")
+        except ValueError as error:
+            raise ValueError("Scheduled sleep time must use HH:MM format.") from error
+
+    @staticmethod
+    def _validated_sleep_cycle_minutes(value):
+        if isinstance(value, bool):
+            raise ValueError("Maximum sleep cycle must be between 1 and 1440 minutes.")
+        try:
+            minutes = int(value)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                "Maximum sleep cycle must be between 1 and 1440 minutes."
+            ) from error
+        if minutes < 1 or minutes > MAX_SLEEP_CYCLE_MINUTES:
+            raise ValueError("Maximum sleep cycle must be between 1 and 1440 minutes.")
+        if isinstance(value, float) and not value.is_integer():
+            raise ValueError("Maximum sleep cycle must be a whole number of minutes.")
+        return minutes
+
+    @staticmethod
+    def _seconds_until_next_sleep(schedule_time, now=None):
+        schedule = time.fromisoformat(schedule_time)
+        now = now or datetime.now().astimezone()
+        next_sleep = datetime.combine(now.date(), schedule, tzinfo=now.tzinfo)
+        if next_sleep <= now:
+            next_sleep += timedelta(days=1)
+        return (next_sleep - now).total_seconds()
 
     @staticmethod
     def _render_research_memory(memories):
         if not memories:
-            return html.P(
-                "No ranked research memories have been recorded.",
-                className="empty-state",
+            return html.Div(
+                [
+                    html.H2("Ranked research memory"),
+                    html.P(
+                        "No saved conversation turns have been integrated into memory yet.",
+                        className="empty-state",
+                    ),
+                    html.P(
+                        "Opening this view or running Sleep integrates saved "
+                        "conversation turns as unvalidated candidates. They start at "
+                        "rank 0 and are not used to shape the Agent persona until "
+                        "you validate or correct an answer."
+                    ),
+                    html.H3("How to contribute feedback"),
+                    html.Ul(
+                        [
+                            html.Li(
+                                "Check an answer against its cited sources or other "
+                                "reliable evidence."
+                            ),
+                            html.Li(
+                                'Reply "correct", "that is right", or "accurate" to '
+                                "raise the matching memory's rank."
+                            ),
+                            html.Li(
+                                'Reply "incorrect" or "wrong" and explain the correction '
+                                "to lower its rank and record a lesson."
+                            ),
+                        ]
+                    ),
+                ],
+                className="dialog-section",
             )
         rows = [
             html.Tr(
                 [
                     html.Td(memory["category"]),
-                    html.Td(memory["topic"]),
+                    html.Td(AIServer._render_memory_markdown(memory["topic"])),
                     html.Td(f"{memory['rank']:+d}"),
                     html.Td(
                         f"{memory['correct_count']} correct / "
@@ -1256,13 +1799,20 @@ class AIServer:
                         html.Ul(
                             [
                                 html.Li(
-                                    f"{event['outcome']}: {event['feedback']}"
+                                    [
+                                        html.Strong(
+                                            event["outcome"].capitalize() + ": "
+                                        ),
+                                        AIServer._render_memory_markdown(
+                                            event["feedback"]
+                                        ),
+                                    ]
                                 )
                                 for event in memory["events"]
                             ]
                         )
                     ),
-                    html.Td(memory["lesson"]),
+                    html.Td(AIServer._render_memory_markdown(memory["lesson"])),
                 ]
             )
             for memory in memories
@@ -1272,28 +1822,267 @@ class AIServer:
                 html.H2("Ranked research memory"),
                 html.P(
                     "Ranks reflect explicit user feedback, not verified truth. "
-                    "Memory is never a substitute for current source evidence."
+                    "Each validation adds 2 and each correction subtracts 2, bounded "
+                    "to -20..+20. Only feedback-backed lessons are recalled for the "
+                    "Agent persona; unvalidated candidates remain neutral."
                 ),
-                html.Table(
-                    [
-                        html.Thead(
-                            html.Tr(
-                                [
-                                    html.Th("Category"),
-                                    html.Th("Topic"),
-                                    html.Th("Rank"),
-                                    html.Th("Feedback"),
-                                    html.Th("Recent feedback events"),
-                                    html.Th("Lesson"),
-                                ]
-                            )
-                        ),
-                        html.Tbody(rows),
-                    ],
-                    className="research-memory-table",
+                html.Div(
+                    html.Table(
+                        [
+                            html.Thead(
+                                html.Tr(
+                                    [
+                                        html.Th("Category"),
+                                        html.Th("Topic"),
+                                        html.Th("Rank"),
+                                        html.Th("Feedback / reviews"),
+                                        html.Th("Recent memory events"),
+                                        html.Th("Lesson"),
+                                    ]
+                                )
+                            ),
+                            html.Tbody(rows),
+                        ],
+                        className="research-memory-table wide-result-table",
+                    ),
+                    className="research-memory-table-wrapper",
                 ),
             ]
         )
+
+    @staticmethod
+    def _render_memory_markdown(content):
+        return dcc.Markdown(str(content), className="memory-markdown")
+
+    @staticmethod
+    def _render_workflow_result(title, answer):
+        return html.Div(
+            [
+                html.H2(title),
+                dcc.Markdown(answer, className="workflow-result"),
+            ],
+            className="dialog-section",
+        )
+
+    @staticmethod
+    def _render_help_dialog():
+        return html.Div(
+            [
+                html.H2("Page guide"),
+                html.Section(
+                    [
+                        html.H3("Chat page"),
+                        html.Ul(
+                            [
+                                html.Li(
+                                    [
+                                        html.Strong("Conversation: "),
+                                        "Displays your prompts and assistant responses.",
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Message box: "),
+                                        "Type a prompt, or choose Use microphone to dictate it; "
+                                        "select Send to submit.",
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Run settings: "),
+                                        "Disable cache or web search as needed. Benchmark "
+                                        "repetitions and token limits configure benchmark runs.",
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Response-time chart: "),
+                                        "Shows the duration of completed assistant turns.",
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Sleep notice: "),
+                                        "Shows when the agent is waiting to sleep or "
+                                        "reviewing saved sources. Send and microphone are "
+                                        "disabled until it wakes.",
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Research memory: "),
+                                        "Sleep and View Ranked Research Memory integrate saved "
+                                        "turns as neutral candidates. Explicit validations and "
+                                        "corrections rank lessons; ranked lessons are not verified "
+                                        "truth. Saved source excerpts are discovery leads and must "
+                                        "be checked against current sources.",
+                                    ]
+                                ),
+                            ]
+                        ),
+                    ]
+                ),
+                html.Section(
+                    [
+                        html.H3("Menus"),
+                        html.Ul(
+                            [
+                                html.Li(
+                                    [
+                                        html.Strong("File: "),
+                                        html.Ul(
+                                            [
+                                                html.Li(
+                                                    "Export current results as a formatted "
+                                                    "Word document."
+                                                )
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("View: "),
+                                        html.Ul(
+                                            [
+                                                html.Li(
+                                                    "Chat window width selects a width and "
+                                                    "saves it in a browser cookie."
+                                                )
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Options: "),
+                                        html.Ul(
+                                            [
+                                                html.Li(
+                                                    "Generate Script starts the script-generation "
+                                                    "workflow and displays its result in a dialog."
+                                                ),
+                                                html.Li(
+                                                    "Benchmark Models starts the benchmark and "
+                                                    "displays results in a dialog."
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Utilities: "),
+                                        html.Ul(
+                                            [
+                                                html.Li(
+                                                    "View Saved History loads the saved transcript "
+                                                    "into the conversation."
+                                                ),
+                                                html.Li(
+                                                    "Clear Saved History deletes the saved "
+                                                    "transcript."
+                                                ),
+                                                html.Li(
+                                                    "View Ranked Research Memory opens a dialog "
+                                                    "with feedback-derived lessons."
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Sleep: "),
+                                        html.Ul(
+                                            [
+                                                html.Li(
+                                                    "Nap requests a memory-review sleep after any "
+                                                    "active workflow finishes."
+                                                ),
+                                                html.Li(
+                                                    "Set Scheduled Sleep stores the daily local "
+                                                    "start time and maximum cycle duration."
+                                                ),
+                                                html.Li(
+                                                    "Defaults are 4:00 AM and a maximum cycle "
+                                                    "of 30 minutes."
+                                                ),
+                                                html.Li(
+                                                    "Wake cancels a pending nap or stops sleep "
+                                                    "after the current source check."
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                                html.Li(
+                                    [
+                                        html.Strong("Help: "),
+                                        html.Ul(
+                                            [
+                                                html.Li(
+                                                    "Page Guide explains the page and menu items."
+                                                ),
+                                                html.Li(
+                                                    "About displays the code version, server "
+                                                    "start time, and uptime."
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                            ]
+                        ),
+                    ]
+                ),
+            ]
+        )
+
+    def _render_about_dialog(self):
+        return html.Div(
+            [
+                html.H2("About"),
+                html.P(html.Strong("Multi-Agent Assistant")),
+                html.P(
+                    [
+                        html.Strong("Version: "),
+                        self.VERSION,
+                    ]
+                ),
+                html.P(
+                    [
+                        html.Strong("Web server started: "),
+                        self.started_at.isoformat(timespec="seconds"),
+                    ]
+                ),
+                html.P(
+                    [
+                        html.Strong("Uptime: "),
+                        self._format_uptime(
+                            perf_counter() - self._started_monotonic
+                        ),
+                    ]
+                ),
+            ],
+            className="dialog-section",
+        )
+
+    @staticmethod
+    def _format_uptime(seconds):
+        total_seconds = max(0, int(seconds))
+        days, remainder = divmod(total_seconds, 86_400)
+        hours, remainder = divmod(remainder, 3_600)
+        minutes, seconds = divmod(remainder, 60)
+        parts = []
+        if days:
+            parts.append(f"{days}d")
+        if hours or days:
+            parts.append(f"{hours}h")
+        if minutes or hours or days:
+            parts.append(f"{minutes}m")
+        parts.append(f"{seconds}s")
+        return " ".join(parts)
 
     @staticmethod
     def _get_conversation_id():

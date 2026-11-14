@@ -58,14 +58,18 @@ Open `http://127.0.0.1:8050`. Enter a message or use **Use microphone** to
 transcribe speech with the browser's Web Speech API; microphone input requires
 browser permission and a supported browser. The Flask health endpoint is
 available at `/healthz`. The imported `MultiAgentWorkflow` class provides the
-same chat workflow to other Python entry points. The **Action** menu selects
-chat, script generation, model benchmarking, viewing saved history, or clearing
-saved history, or viewing ranked research memory. History actions are selected
-directly in this menu; **View saved history** loads the transcript into the chat, while **Clear saved
-history** deletes it and returns the action to Chat. The checkboxes control
-cache and web-search behavior; benchmark repetitions and token limits are set
-in the numeric fields. A startup notice appears while the page initializes and
-points to the cache and offline settings. Sending a request displays a
+same chat workflow to other Python entry points. The top menu provides **File**
+export, **View** selectable chat width (saved in a browser cookie), **Options** script generation and model benchmarking, **Utilities**
+for saved history and ranked research memory, **Sleep** nap/wake controls, and
+**Help** page guide and About dialog with the code-file version timestamp,
+server start time, and live uptime.
+Selecting **Generate Script** or **Benchmark Models** starts the workflow
+immediately using the current run settings; results appear in a dialog.
+**View Saved History** loads the
+transcript into the chat, while **Clear Saved History** deletes it. The
+checkboxes control cache and web-search behavior; benchmark repetitions and
+token limits are set in the numeric fields. A startup notice appears while the
+page initializes and points to the cache and offline settings. Sending a request displays a
 processing indicator and temporarily disables Send while making the prompt
 read-only until the assistant responds.
 Chat turns are stored in `AI/logs/conversation-history.sqlite3` and associated
@@ -83,20 +87,29 @@ Explicit statements that a prior answer was correct or incorrect update shared,
 category-deduplicated research memory in the same SQLite database. A request to
 review results records a neutral review event. Ranks are clamped from -20 to 20;
 corrections lower the rank, validations raise it, and neutral reviews do not
-change it. **View ranked research memory** shows each topic, rank, feedback
-counts, and latest lesson. Clearing conversation history also clears that
+change it. **View ranked research memory** opens a dialog showing each topic, rank, feedback
+counts, and latest lesson. Opening the dialog or running Sleep integrates saved
+conversation turns once as neutral, unvalidated candidates. The daily sleep
+cycle also recalculates bounded ranks from feedback events. Only explicit
+correct/incorrect feedback affects rank or allows a lesson to be recalled for
+the assistant persona; unvalidated turns are never treated as evidence. Clearing conversation history also clears that
 browser session's short-term memory cache, but does not erase shared long-term
 memory. Relevant ranked lessons can be recalled quickly from the session cache
 and are passed to the assistant only as fallible feedback—not as factual
 evidence or instructions. Current factual claims must still be checked against
 fresh search results.
+Validate an answer against its citations or other reliable evidence, then say it
+was correct/right/accurate or incorrect/wrong and explain any correction.
+Validated memories raise their rank; corrections lower it. The Sleep menu's
+**Set Scheduled Sleep** dialog persists the daily local start time and maximum
+cycle duration. Defaults are 4:00 AM and 30 minutes.
 Successfully fetched public-page excerpts are also stored separately with their
 source URLs and verification timestamps. Identical URL/excerpt pairs are saved
 once and have their verification timestamp refreshed; recent topic-matched
 findings may be supplied as discovery leads, never as current evidence, and
 findings older than 30 days are not recalled. The web server runs a memory
-review cycle every 24 hours and also offers **Nap** and **Wake from sleep or
-nap** in the Action menu. Sleep re-fetches source pages for findings at least
+review cycle daily at the configured time and also offers **Nap** and **Wake** in the Sleep
+menu. Sleep re-fetches source pages for findings at least
 seven days old, refreshes unchanged findings, and supersedes old excerpts when
 the fetched source has changed. Only active findings are recalled; unavailable
 pages remain historical rather than being treated as disproven. While sleeping,

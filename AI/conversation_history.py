@@ -9,7 +9,6 @@ import secrets
 import sqlite3
 import threading
 
-
 MEMORY_CATEGORIES = {
     "ai_models": {"ai", "llm", "model", "models", "ollama", "qwen", "gpt", "claude"},
     "software": {"software", "code", "coding", "python", "package", "library", "api"},
@@ -115,6 +114,12 @@ class ConversationHistory:
                     feedback TEXT NOT NULL,
                     created_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS research_memory_integrations (
+                    assistant_message_id INTEGER PRIMARY KEY,
+                    memory_id INTEGER REFERENCES research_memory(id)
+                        ON DELETE CASCADE,
+                    integrated_at TEXT NOT NULL
+                );
                 CREATE INDEX IF NOT EXISTS research_memory_events_memory
                     ON research_memory_events(memory_id, id DESC);
                 CREATE TABLE IF NOT EXISTS recent_memory_cache (
@@ -151,9 +156,9 @@ class ConversationHistory:
                 )
             }
             for name in (
-                "history_context_messages",
-                "history_context_chars",
-                "prompt_chars",
+                    "history_context_messages",
+                    "history_context_chars",
+                    "prompt_chars",
             ):
                 if name not in columns:
                     connection.execute(
@@ -174,6 +179,29 @@ class ConversationHistory:
                 "SELECT value FROM app_config WHERE key = 'flask_secret_key'"
             ).fetchone()
             return row["value"]
+
+    def get_config(self, key, default=None):
+        with self._lock, self._connect() as connection:
+            row = connection.execute(
+                "SELECT value FROM app_config WHERE key = ?",
+                (key,),
+            ).fetchone()
+        return row["value"] if row else default
+
+    def set_config(self, key, value):
+        if not isinstance(key, str) or not key:
+            raise ValueError("A configuration key is required.")
+        if not isinstance(value, str):
+            raise ValueError("Configuration values must be strings.")
+        with self._lock, self._connect() as connection:
+            connection.execute(
+                """
+                INSERT INTO app_config (key, value) VALUES (?, ?)
+                ON CONFLICT(key) DO UPDATE SET value = excluded.value
+                """,
+                (key, value),
+            )
+            connection.commit()
 
     def get_messages(self, session_id):
         with self._lock, self._connect() as connection:
@@ -201,17 +229,17 @@ class ConversationHistory:
         ]
 
     def append_turn(
-        self,
-        session_id,
-        user_content,
-        assistant_content,
-        duration_s,
-        context_messages,
-        context_chars,
-        created_at,
-        history_context_messages=0,
-        history_context_chars=0,
-        prompt_chars=0,
+            self,
+            session_id,
+            user_content,
+            assistant_content,
+            duration_s,
+            context_messages,
+            context_chars,
+            created_at,
+            history_context_messages=0,
+            history_context_chars=0,
+            prompt_chars=0,
     ):
         with self._lock, self._connect() as connection:
             connection.executemany(
@@ -299,13 +327,13 @@ class ConversationHistory:
         return " ".join(sorted(cls._memory_terms(topic))) or "general"
 
     def record_research_memory(
-        self,
-        session_id,
-        topic,
-        lesson,
-        outcome,
-        created_at,
-        memory_type=None,
+            self,
+            session_id,
+            topic,
+            lesson,
+            outcome,
+            created_at,
+            memory_type=None,
     ):
         """Store a deduplicated, ranked research lesson and its feedback event."""
         if outcome not in {"incorrect", "review", "correct"}:
@@ -438,6 +466,11 @@ class ConversationHistory:
                 FROM recent_memory_cache c
                 JOIN research_memory m ON m.id = c.memory_id
                 WHERE c.session_id = ? AND c.category IN ({placeholders})
+                  AND EXISTS (
+                      SELECT 1 FROM research_memory_events e
+                      WHERE e.memory_id = m.id
+                        AND e.outcome IN ('correct', 'incorrect')
+                  )
                 ORDER BY c.accessed_at DESC
                 LIMIT 32
                 """,
@@ -447,6 +480,11 @@ class ConversationHistory:
                 f"""
                 SELECT * FROM research_memory
                 WHERE category IN ({placeholders})
+                  AND EXISTS (
+                      SELECT 1 FROM research_memory_events e
+                      WHERE e.memory_id = research_memory.id
+                        AND e.outcome IN ('correct', 'incorrect')
+                  )
                 ORDER BY category, rank DESC, updated_at DESC
                 LIMIT 200
                 """,
@@ -604,8 +642,8 @@ class ConversationHistory:
         if not excerpt:
             raise ValueError("Fetched source text must not be empty.")
         source_title = (
-            " ".join(str(fetched_source.get("title", "")).split())[:300]
-            or finding["source_title"]
+                " ".join(str(fetched_source.get("title", "")).split())[:300]
+                or finding["source_title"]
         )
         fact_key = hashlib.sha256(
             f"{finding['source_url']}\n{excerpt.casefold()}".encode("utf-8")
@@ -714,6 +752,144 @@ class ConversationHistory:
             reverse=True,
         )
         return [row for _, row in ranked[:limit]]
+
+    def integrate_conversation_memories(self, created_at=None, limit=2000):
+        """Integrate saved turns as unvalidated memory candidates exactly once."""
+        created_at = created_at or datetime.now().astimezone().isoformat(
+            timespec="seconds"
+        )
+        feedback_pattern = re.compile(
+            r"\b(?:that|this|the|your)\s+(?:answer|response|result|conclusion)"
+            r"\s+(?:is|was|looks|seems)?\s*"
+            r"(?:correct|right|accurate|verified|wrong|incorrect|false|inaccurate)\b"
+            r"|\b(?:correct|right|wrong|incorrect|false|inaccurate)\s+"
+            r"(?:answer|response|result|conclusion)\b"
+            r"|\b(?:please\s+)?(?:review|validate|verify|fact[\s-]?check)\b",
+            flags=re.IGNORECASE,
+        )
+        integrated = 0
+        with self._lock, self._connect() as connection:
+            turns = connection.execute(
+                """
+                SELECT user_turn.id AS user_message_id,
+                       user_turn.session_id,
+                       user_turn.content AS prompt,
+                       assistant_turn.id AS assistant_message_id,
+                       assistant_turn.content AS answer,
+                       assistant_turn.created_at
+                FROM conversation_messages AS user_turn
+                JOIN conversation_messages AS assistant_turn
+                  ON assistant_turn.session_id = user_turn.session_id
+                 AND assistant_turn.id = (
+                     SELECT MIN(next_turn.id)
+                     FROM conversation_messages AS next_turn
+                     WHERE next_turn.session_id = user_turn.session_id
+                       AND next_turn.id > user_turn.id
+                 )
+                WHERE user_turn.role = 'user'
+                  AND assistant_turn.role = 'assistant'
+                  AND NOT EXISTS (
+                      SELECT 1 FROM research_memory_integrations i
+                      WHERE i.assistant_message_id = assistant_turn.id
+                  )
+                ORDER BY assistant_turn.id
+                LIMIT ?
+                """,
+                (limit,),
+            ).fetchall()
+            for turn in turns:
+                prompt = turn["prompt"].strip()
+                if len(prompt) < 12 or feedback_pattern.search(prompt):
+                    connection.execute(
+                        """
+                        INSERT OR IGNORE INTO research_memory_integrations
+                            (assistant_message_id, memory_id, integrated_at)
+                        VALUES (?, NULL, ?)
+                        """,
+                        (turn["assistant_message_id"], created_at),
+                    )
+                    continue
+                category = self._memory_category(prompt)
+                memory_key = self._memory_key(prompt)
+                if not memory_key:
+                    continue
+                connection.execute(
+                    """
+                    INSERT INTO research_memory (
+                        category, memory_key, topic, lesson, memory_type, rank,
+                        correct_count, incorrect_count, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, 'review', 0, 0, 0, ?, ?)
+                    ON CONFLICT(category, memory_key) DO NOTHING
+                    """,
+                    (
+                        category,
+                        memory_key,
+                        prompt[:500],
+                        "Awaiting user validation; this interaction is not a verified fact.",
+                        turn["created_at"],
+                        turn["created_at"],
+                    ),
+                )
+                memory = connection.execute(
+                    """
+                    SELECT id FROM research_memory
+                    WHERE category = ? AND memory_key = ?
+                    """,
+                    (category, memory_key),
+                ).fetchone()
+                connection.execute(
+                    """
+                    INSERT INTO research_memory_events
+                        (memory_id, outcome, feedback, created_at)
+                    VALUES (?, 'review', ?, ?)
+                    """,
+                    (
+                        memory["id"],
+                        "Unvalidated conversation candidate. Question: "
+                        + prompt[:350]
+                        + " Answer excerpt: "
+                        + turn["answer"][:350],
+                        turn["created_at"],
+                    ),
+                )
+                connection.execute(
+                    """
+                    INSERT INTO research_memory_integrations
+                        (assistant_message_id, memory_id, integrated_at)
+                    VALUES (?, ?, ?)
+                    """,
+                    (turn["assistant_message_id"], memory["id"], created_at),
+                )
+                integrated += 1
+            connection.commit()
+        return integrated
+
+    def rank_research_memory(self):
+        """Recalculate bounded rankings from explicit validation and correction events."""
+        with self._lock, self._connect() as connection:
+            cursor = connection.execute(
+                """
+                UPDATE research_memory
+                SET rank = MAX(
+                    -20,
+                    MIN(
+                        20,
+                        2 * (
+                            SELECT
+                                SUM(CASE outcome
+                                    WHEN 'correct' THEN 1
+                                    WHEN 'incorrect' THEN -1
+                                    ELSE 0
+                                END)
+                            FROM research_memory_events
+                            WHERE memory_id = research_memory.id
+                        )
+                    )
+                )
+                """
+            )
+            connection.commit()
+            return cursor.rowcount
 
     def get_research_memory(self, limit=100):
         """Return ranked lessons and counts for the memory review screen."""
