@@ -222,6 +222,18 @@ body {
     margin-bottom: 0;
 }
 
+.memory-event-feedback,
+.memory-answer-excerpt {
+    display: grid;
+    gap: 6px;
+}
+
+.memory-answer-excerpt {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #e2e8f0;
+}
+
 .message {
     max-width: 90%;
     padding: 12px 16px;

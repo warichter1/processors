@@ -18,7 +18,7 @@
     OLLAMA_HOST=127.0.0.1:11434 ollama create gpu-reasoner -f ./gpu_reasoner.modelfile
     OLLAMA_HOST=127.0.0.1:11434 ollama create gpu_reasoner38 -f ./gpu_reasoner38.modelfile
     CUDA_VISIBLE_DEVICES="" OLLAMA_HOST=127.0.0.1:11435 ollama serve
-    Clear cache before rub:
+    Clear cache before run:
     ollama stop gpu-reasoner
     ollama stop academic-worker
 """
@@ -31,6 +31,8 @@
     1. Primary Daemon (Dual GPU - Port 11434):
        sudo systemctl restart ollama
        OLLAMA_HOST=127.0.0.1:11434 ollama create gpu-reasoner -f ./gpu_reasoner.modelfile
+       Cline:
+           OLLAMA_HOST=127.0.0.1:11434 ollama create qwen38-cline27b -f qwen38-cline27b.modelfile
 
     2. Secondary Instance (Ryzen CPU - Port 11435):
        CUDA_VISIBLE_DEVICES="" OLLAMA_HOST=127.0.0.1:11435 ollama serve

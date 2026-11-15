@@ -351,6 +351,11 @@ class FactualResearchMemoryTests(unittest.TestCase):
                         {
                             "outcome": "correct",
                             "feedback": (
+                                "User marked the previous answer correct.\n"
+                                "- Answer excerpt: ### Table of Qwen 3.8 "
+                                "Versions, Options, Applications, Highlights, "
+                                "and Features\n"
+                                "**Options**\n"
                                 "| Package | License |\n"
                                 "| ------- | ------- |\n"
                                 "| Alpha | MIT |"
@@ -372,8 +377,16 @@ class FactualResearchMemoryTests(unittest.TestCase):
         self.assertIn("wide-result-table", table.className.split())
         event_markdown = row.children[4].children.children[0].children[1]
         lesson_markdown = row.children[5].children
-        self.assertEqual(event_markdown.__class__.__name__, "Markdown")
-        self.assertIn("| ------- |", event_markdown.children)
+        self.assertEqual(event_markdown.__class__.__name__, "Div")
+        feedback_markdown = event_markdown.children[0]
+        excerpt_section = event_markdown.children[1]
+        excerpt_markdown = excerpt_section.children[1]
+        self.assertEqual(feedback_markdown.__class__.__name__, "Markdown")
+        self.assertEqual(excerpt_section.children[0].children, "Answer excerpt")
+        self.assertEqual(excerpt_markdown.__class__.__name__, "Markdown")
+        self.assertNotIn("- Answer excerpt:", self._component_text(event_markdown))
+        self.assertIn("### Table of Qwen 3.8", excerpt_markdown.children)
+        self.assertIn("| ------- |", excerpt_markdown.children)
         self.assertEqual(lesson_markdown.__class__.__name__, "Markdown")
         self.assertIn("| -------------- |", lesson_markdown.children)
 

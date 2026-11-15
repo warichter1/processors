@@ -1803,7 +1803,7 @@ class AIServer:
                                         html.Strong(
                                             event["outcome"].capitalize() + ": "
                                         ),
-                                        AIServer._render_memory_markdown(
+                                        AIServer._render_memory_event_feedback(
                                             event["feedback"]
                                         ),
                                     ]
@@ -1852,7 +1852,50 @@ class AIServer:
 
     @staticmethod
     def _render_memory_markdown(content):
-        return dcc.Markdown(str(content), className="memory-markdown")
+        text = str(content or "").replace("\r\n", "\n").replace("\r", "\n").strip()
+        lines = []
+        for line in text.split("\n"):
+            heading = re.search(r"(?<!#)(#{1,6}\s+)(?=[A-Z0-9])", line)
+            if heading and line[: heading.start()].strip():
+                lines.append(line[: heading.start()].rstrip())
+                lines.append("")
+                line = line[heading.start():]
+            if (
+                    line.lstrip().startswith("|")
+                    and lines
+                    and lines[-1].strip()
+            ):
+                lines.append("")
+            lines.append(line)
+        return dcc.Markdown("\n".join(lines), className="memory-markdown")
+
+    @staticmethod
+    def _render_memory_event_feedback(feedback):
+        text = str(feedback or "").strip()
+        excerpt_marker = re.search(
+            r"(?:^|\n)[ \t]*(?:[-*][ \t]*)?"
+            r"(?:(?:rejected/validated)[ \t]+)?answer excerpt[ \t]*:[ \t]*",
+            text,
+            flags=re.IGNORECASE,
+        )
+        if not excerpt_marker:
+            return AIServer._render_memory_markdown(text)
+
+        feedback_text = text[: excerpt_marker.start()].strip()
+        excerpt = text[excerpt_marker.end():].strip()
+        parts = []
+        if feedback_text:
+            parts.append(AIServer._render_memory_markdown(feedback_text))
+        parts.append(
+            html.Div(
+                [
+                    html.Strong("Answer excerpt"),
+                    AIServer._render_memory_markdown(excerpt),
+                ],
+                className="memory-answer-excerpt",
+            )
+        )
+        return html.Div(parts, className="memory-event-feedback")
 
     @staticmethod
     def _render_workflow_result(title, answer):
