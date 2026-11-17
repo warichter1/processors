@@ -54,3 +54,15 @@ def get_queued_logger(name, log_directory, filename, formatter):
         logger.addHandler(QueueHandler(log_queue))
         _loggers[logger_key] = logger
         return logger
+
+
+def shutdown_logging():
+    """Flush pending records and stop every queued log listener."""
+    with _configuration_lock:
+        for log_queue, listener in _listeners.values():
+            listener.stop()
+        _listeners.clear()
+        for logger in _loggers.values():
+            for handler in list(logger.handlers):
+                logger.removeHandler(handler)
+        _loggers.clear()

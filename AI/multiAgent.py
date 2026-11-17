@@ -1515,7 +1515,13 @@ class MultiAgentWorkflow:
                 web_search=web_search,
             )
         self._request_lock = threading.Lock()
-        self.logger = logging.getLogger(__name__)
+        log_directory = os.path.join(self.agent.TARGET_DIR, "logs")
+        self.logger = get_queued_logger(
+            "MultiAgentWorkflow",
+            log_directory,
+            "webserver.log",
+            "%(asctime)s %(levelname)s %(message)s",
+        )
 
     def respond(
         self,
