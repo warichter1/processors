@@ -1,0 +1,6 @@
+# Block system and model directories
+**/ollama/**
+**/.ollama/**
+**/models/**
+*.gguf
+*.bin
