@@ -1,0 +1,6 @@
+# Execution Rules
+- NEVER output <think> tags, internal monologues, or step-by-step preambles before calling a tool.
+- Call the appropriate Cline tool (`read_file`, `write_to_file`, `replace_in_file`, `execute_command`, `search_files`) immediately on your first token.
+- Do not summarize what you are about to do before invoking a tool.
+- When editing existing files, prefer `replace_in_file` with exact search/replace blocks over rewriting entire files.
+- Keep final task completion summaries to 1–2 short bullet points.
