@@ -70,9 +70,23 @@ from langchain_ollama import OllamaEmbeddings
 if __package__:
     from .logging_config import get_queued_logger
     from .request_validation import validate_chat_payload
+    from .config.agent_config import (
+        ACADEMIC_WORKER_MODEL,
+        EMBEDDING_MODEL,
+        GPU_REASONER_MODEL,
+        OLLAMA_CPU_URL,
+        OLLAMA_GPU_URL,
+    )
 else:
     from logging_config import get_queued_logger
     from request_validation import validate_chat_payload
+    from config.agent_config import (
+        ACADEMIC_WORKER_MODEL,
+        EMBEDDING_MODEL,
+        GPU_REASONER_MODEL,
+        OLLAMA_CPU_URL,
+        OLLAMA_GPU_URL,
+    )
 # from langchain_openai import ChatOpenAI
 
 
@@ -1279,7 +1293,7 @@ class MultiAgent:
 
     def resetAgents(self):
         """Reset agent to clear cache"""
-        for agent in self.agents.key():
+        for agent in self.agents.keys():
             command = ['ollama', ]
 
     def initialize_local_rag(self):
