@@ -11,8 +11,7 @@ PARAMETER repeat_penalty 1.05
 
 # Inject /no_think directive to suppress <think> blocks
 SYSTEM """/no_think
-You are an expert Python software engineer integrated into PyCharm. Follow all project-specific architectural rules and coding standards provided in the workspace context."""
-
+..."""
 # Override template to pre-fill an empty think block while preserving native tool calling
 TEMPLATE """{{- if .Messages }}
 {{- if or .System .Tools }}<|im_start|>system
