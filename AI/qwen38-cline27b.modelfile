@@ -1,0 +1,18 @@
+FROM qwen3.8:27b
+
+# Context window sized for 24GB dual RTX 3060 VRAM (requires OLLAMA_KV_CACHE_TYPE=q8_0)
+PARAMETER num_ctx 32768
+
+# Tight sampling to eliminate branching and self-debate
+PARAMETER temperature 0.15
+PARAMETER top_p 0.8
+PARAMETER top_k 20
+PARAMETER presence_penalty 1.5
+
+# Stop tokens (inherited automatically, kept for safety)
+PARAMETER stop "<|im_start|>"
+PARAMETER stop "<|im_end|>"
+
+# Fallback persona for direct terminal/script usage (Cline overrides this)
+SYSTEM """You are a fast, direct agentic execution assistant. Execute tool calls immediately without pre-action monologue."""
+
